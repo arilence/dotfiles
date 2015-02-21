@@ -5,7 +5,7 @@ vimrc                         ~/.vimrc
 
 zshrc                         ~/.zshrc
 
-vim/                          ~/.vim/
+vim/*                         ~/.vim/
 
 oh-my-zsh/alias.zsh           ~/.oh-my-zsh/custom/
 oh-my-zsh/themes/             ~/.oh-my-zsh/custom/
