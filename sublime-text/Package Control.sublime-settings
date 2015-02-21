@@ -1,0 +1,31 @@
+{
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AdvancedNewFile",
+		"Colorsublime",
+		"Emmet",
+		"Gist",
+		"GitGutter",
+		"Kulture",
+		"Laravel Blade Highlighter",
+		"OmniSharp",
+		"Package Control",
+		"Predawn",
+		"Sass",
+		"SideBarEnhancements",
+		"Sublime-CSS3",
+		"SublimeGit",
+		"TernJS",
+		"Theme - Flatland",
+		"Theme - Spacegray",
+		"WakaTime",
+		"Zen Tabs"
+	],
+	"repositories":
+	[
+		"https://github.com/i-akhmadullin/Sublime-CSS3"
+	]
+}
