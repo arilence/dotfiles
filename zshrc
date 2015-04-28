@@ -21,8 +21,10 @@ plugins=(git sublime)
 
 source $ZSH/oh-my-zsh.sh
 
+# Android SDK location
+export ANDROID_HOME=/Users/anthony/Dev/android-sdk-macosx
 # User configuration
-export PATH="~/Dev/sdk-flex4-macosx/bin:~/.composer/vendor/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin"
+export PATH="$ANDROID_HOME:~/Dev/sdk-flex4-macosx/bin:~/.composer/vendor/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
