@@ -20,6 +20,7 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab     " use 4 Space ch
 set nowrap
 set list                                                        " show trailing whitespace
 set listchars=tab:▸\ ,trail:.
+set clipboard=unnamed
 
 " Key map settings
 nnoremap <leader>q :NERDTree<cr>
