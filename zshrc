@@ -21,12 +21,15 @@ plugins=(git sublime)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-export PATH="~/.composer/vendor/bin:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin"
+# Default PATH
+export PATH="/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin"
 
 # Android SDK Location
 export ANDROID_HOME=/Users/anthony/Dev/android-sdk-macosx
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+# Composer applications
+export PATH=${PATH}:~/.composer/vendor/bin
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

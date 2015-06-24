@@ -2,6 +2,7 @@
 	"caret_extra_width": 1,
 	"caret_style": "phase",
 	"close_windows_when_empty": false,
+	"color_scheme": "Packages/Colorsublime - Themes/Birds_of_Paradise.tmTheme",
 	"copy_with_empty_selection": false,
 	"drag_text": false,
 	"draw_minimap_border": true,
@@ -16,8 +17,13 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Markdown",
-		"Vintage"
+		"Vintage",
+		"Markdown"
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
 	],
 	"match_brackets_content": false,
 	"match_selection": false,
@@ -31,7 +37,7 @@
 	"sidebar_default": true,
 	"tab_size": 2,
 	"tabs_medium": true,
-	"theme": "predawn.sublime-theme",
+	"theme": "Hero Dark.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": false

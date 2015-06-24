@@ -24,6 +24,9 @@ defaults write com.apple.screencapture type -string "png"
 # Enable subpixel font rendering on non-Apple LCDs
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
+# Enable upward two-finger swipe to show app windows
+defaults write com.apple.dock scroll-to-open -bool TRUE; killall Dock
+
 
 ######################
 #### SSD Specific ####
