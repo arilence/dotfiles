@@ -13,7 +13,7 @@ CWD=$(pwd)
 
 ln -s ${CWD}/vim/vimrc ~/.vimrc
 ln -s ${CWD}/vim/* ~/.vim/
-#rm ~/.vim/vimrc
+rm ~/.vim/vimrc
 
 ln -s ${CWD}/oh-my-zsh/zshenv ~/.zshenv
 ln -s ${CWD}/oh-my-zsh/zshrc ~/.zshrc
