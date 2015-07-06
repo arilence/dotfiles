@@ -11,6 +11,7 @@
 	[
 		"no_round"
 	],
+	"font_face": "DROID SANS MONO",
 	"font_size": 13,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
