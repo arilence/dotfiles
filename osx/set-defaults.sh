@@ -28,8 +28,9 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 2
 defaults write com.apple.dock scroll-to-open -bool TRUE; killall Dock
 
 # Disables the slight delay when hoving to show the dock in "Auto-Hide" mode
-defaults write com.apple.Dock autohide-delay -float 0 && killall Dock
-
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+killall Dock
 
 ######################
 #### SSD Specific ####

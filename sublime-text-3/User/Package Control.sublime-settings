@@ -1,4 +1,5 @@
 {
+	"bootstrapped": true,
 	"in_process_packages":
 	[
 	],
@@ -6,6 +7,7 @@
 	[
 		"AdvancedNewFile",
 		"BracketHighlighter",
+		"CodeComplice",
 		"Colorsublime",
 		"Emmet",
 		"Gist",
@@ -18,7 +20,6 @@
 		"Sass",
 		"SideBarEnhancements",
 		"Sublime-CSS3",
-		"SublimeCodeIntel",
 		"Theme - Flatland",
 		"Theme - Hero",
 		"Theme - Spacegray",

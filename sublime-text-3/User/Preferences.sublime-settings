@@ -1,4 +1,6 @@
 {
+	"always_show_minimap_viewport": true,
+	"bold_folder_labels": true,
 	"caret_extra_width": 1,
 	"caret_style": "phase",
 	"close_windows_when_empty": false,
@@ -10,15 +12,15 @@
 	"font_face": "DROID SANS MONO",
 	"font_options":
 	[
-		"no_round"
+		"gray_antialias"
 	],
 	"font_size": 13,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Vintage",
-		"Markdown"
+		"Markdown",
+		"Vintage"
 	],
 	"indent_guide_options":
 	[
@@ -40,8 +42,5 @@
 	"theme": "Material-Theme.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
-	"word_wrap": false,
-	"font_options": [ "gray_antialias" ],
-  "always_show_minimap_viewport": true,
-  "bold_folder_labels": true,
+	"word_wrap": false
 }
