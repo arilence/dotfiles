@@ -19,6 +19,8 @@ Plugin 'mattn/emmet-vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'valloric/YouCompleteMe'
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -44,16 +46,26 @@ set nowrap
 set list                                                        " show trailing whitespace
 set listchars=tab:▸\ ,trail:.
 set clipboard=unnamed
+set history=1000                                                " remember more commands and search history
+set undolevels=1000                                             " remembers many levels of undo
+set wildignore+=*.swp,*.bak,*.pyc,*.class
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor
+set title
 
 " Key map settings
 nnoremap <leader>q :NERDTree<cr>
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 " Disable the arrow keys to force me to use HJKL
-"noremap <Up> <NOP>
-"noremap <Down> <NOP>
-"noremap <Left> <NOP>
-"noremap <Right> <NOP>
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+" Easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 " -------------------
 " PLUGIN CONFIGURATION
@@ -76,3 +88,5 @@ let NERDTreeChDirMode=2
 " Emmet Configuration
 let g:user_emmet_leader_key='<leader>w'
 
+" ctrl-p Configuration
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'

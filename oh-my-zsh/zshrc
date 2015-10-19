@@ -42,3 +42,6 @@ if [ -d "$HOME/.bin" ]; then
 fi
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# 'thefuck' configuration
+eval $(thefuck --alias)
