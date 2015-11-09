@@ -19,8 +19,9 @@ Plugin 'mattn/emmet-vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'valloric/YouCompleteMe'
+"Plugin 'valloric/YouCompleteMe'        " Crashes VIM when trying to edit a file in sudo
 Plugin 'kien/ctrlp.vim'
+Plugin 'evidens/vim-twig'
 
 call vundle#end()
 filetype plugin indent on
@@ -41,7 +42,7 @@ colorscheme PaperColor                                          " Set the colour
 set guifont=Inconsolata\ for\ Powerline:h14                     " Set font to work with airline
 set mouse=a                                                     " Enables the ability to use mouse
 set ignorecase                                                  " ignore case when searching
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab     " use 4 Space characters for each indent
+set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab     " use 4 Space characters for each indent
 set nowrap
 set list                                                        " show trailing whitespace
 set listchars=tab:▸\ ,trail:.
@@ -53,7 +54,7 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor
 set title
 
 " Key map settings
-nnoremap <leader>q :NERDTree<cr>
+nnoremap <leader>q :NERDTree<CR>
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 " Disable the arrow keys to force me to use HJKL
@@ -66,6 +67,8 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+" Set ctrl+t to open a new tab
+map <C-t> <Esc>:tabnew<CR>
 
 " -------------------
 " PLUGIN CONFIGURATION
@@ -90,3 +93,4 @@ let g:user_emmet_leader_key='<leader>w'
 
 " ctrl-p Configuration
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_show_hidden = 1
