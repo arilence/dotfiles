@@ -21,6 +21,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'NLKNguyen/papercolor-theme'
 "Plugin 'valloric/YouCompleteMe'        " Crashes VIM when trying to edit a file in sudo
+Plugin 'Shougo/neocomplete.vim'         " Auto completion plugin that doesn't crash in sudo :)
 Plugin 'kien/ctrlp.vim'
 Plugin 'evidens/vim-twig'
 
@@ -95,3 +96,10 @@ let g:user_emmet_leader_key='<leader>w'
 " ctrl-p Configuration
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_show_hidden = 1
+
+" NeoComplete Configuration
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
