@@ -1,8 +1,8 @@
 #!/bin/bash
 
-########################
-# Install Homebrew
-########################
+echo '########################################'
+echo 'Installing Applications with Homebrew...'
+echo '########################################'
 # Check if homebrew is already installed
 if ! brew="$(type -p "brew")" || [ -z "$brew" ]; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -11,9 +11,9 @@ fi
 # Install brew applications
 brew bundle
 
-########################
-# Create symbolic links
-########################
+echo '##########################'
+echo 'Creating Symbolic Links...'
+echo '##########################'
 # Make sure that our symlinks work
 CWD=$(pwd)
 
