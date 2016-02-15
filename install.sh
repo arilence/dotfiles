@@ -1,5 +1,12 @@
 #!/bin/bash
 
+echo '####################'
+echo 'Setting OSX Defaults'
+echo 'This part requires root, so you will be asked for your password'
+echo '####################'
+./osx/set-defaults.sh
+
+
 echo '########################################'
 echo 'Installing Applications with Homebrew...'
 echo '########################################'
@@ -10,6 +17,7 @@ fi
 
 # Install brew applications
 brew bundle
+
 
 echo '##########################'
 echo 'Creating Symbolic Links...'
