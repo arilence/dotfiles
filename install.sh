@@ -17,7 +17,6 @@ rm ~/.vim/vimrc
 
 ln -s ${CWD}/oh-my-zsh/zshenv ~/.zshenv
 ln -s ${CWD}/oh-my-zsh/zshrc ~/.zshrc
-ln -s ${CWD}/oh-my-zsh/alias.zsh ~/.oh-my-zsh/custom/
 ln -s ${CWD}/oh-my-zsh/themes/ ~/.oh-my-zsh/custom/
 
 ln -s ${CWD}/git/gitconfig ~/.gitconfig

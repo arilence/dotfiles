@@ -1,6 +1,38 @@
+##############################
+# Lets make some PATH variables
+##############################
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+# Default PATH
+export PATH="/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin"
+
+# Android SDK Location
+export ANDROID_HOME=$HOME/Dev/android-sdk-macosx
+export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+# Composer applications
+export PATH=${PATH}:~/.composer/vendor/bin
+
+# JAVA HOME
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+
+# devkitARM Development
+export DEVKITPRO=/Users/anthony/devkitPro
+export DEVKITARM=${DEVKITPRO}/devkitARM
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.bin" ]; then
+  PATH="$HOME/.bin:$PATH"
+fi
+
+
+##############################
+# OH MY ZSH Configuration
+##############################
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -15,31 +47,33 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git sublime)
 
 source $ZSH/oh-my-zsh.sh
 
-# Default PATH
-export PATH="/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin"
+##############################
+# Aliases
+##############################
+# Remove all items safely, to Trash (`brew install trash`).
+alias rm='trash'
 
-# Android SDK Location
-export ANDROID_HOME=/Users/anthony/Dev/android-sdk-macosx
-export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+# Enables the use of macvim within the terminal
+alias vim='/usr/local/Cellar/macvim/HEAD/bin/mvim -v'
 
-# Composer applications
-export PATH=${PATH}:~/.composer/vendor/bin
+# Too lazy to type
+alias bcit='cd ~/Dropbox/BCIT/'
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# Lock current session and proceed to the login screen.
+alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
 
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
+# Sniff network info.
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.bin" ]; then
-  PATH="$HOME/.bin:$PATH"
-fi
+
+##############################
+# Various Other Configurations
+##############################
+# Enable rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
@@ -47,4 +81,6 @@ eval "$(rbenv init -)"
 eval $(thefuck --alias)
 
 # added by travis gem
-[ -f /Users/anthony/.travis/travis.sh ] && source /Users/anthony/.travis/travis.sh
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+
+[ -s "$HOME/.dnx/dnvm/dnvm.sh" ] && . "$HOME/.dnx/dnvm/dnvm.sh" # Load dnvm
