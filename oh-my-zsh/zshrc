@@ -55,7 +55,8 @@ source $ZSH/oh-my-zsh.sh
 # Aliases
 ##############################
 # Remove all items safely, to Trash (`brew install trash`).
-alias rm='trash'
+# Doesn't work with symbolic links.
+# alias rm='trash'
 
 # Enables the use of macvim within the terminal
 alias vim='/usr/local/Cellar/macvim/HEAD/bin/mvim -v'

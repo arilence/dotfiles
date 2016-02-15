@@ -1,9 +1,15 @@
 #!/bin/bash
 
 ########################
-# TO-DO
+# Install Homebrew
 ########################
-# - automate installation of applications
+# Check if homebrew is already installed
+if ! brew="$(type -p "brew")" || [ -z "$brew" ]; then
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+# Install brew applications
+brew bundle
 
 ########################
 # Create symbolic links
@@ -11,15 +17,15 @@
 # Make sure that our symlinks work
 CWD=$(pwd)
 
-ln -s ${CWD}/vim/vimrc ~/.vimrc
-ln -s ${CWD}/vim/* ~/.vim/
-rm ~/.vim/vimrc
+ln -sf ${CWD}/vim/vimrc ~/.vimrc
+ln -sf ${CWD}/vim/* ~/.vim/
+#rm ~/.vim/vimrc
 
-ln -s ${CWD}/oh-my-zsh/zshenv ~/.zshenv
-ln -s ${CWD}/oh-my-zsh/zshrc ~/.zshrc
-ln -s ${CWD}/oh-my-zsh/themes/ ~/.oh-my-zsh/custom/
+ln -sf ${CWD}/oh-my-zsh/zshenv ~/.zshenv
+ln -sf ${CWD}/oh-my-zsh/zshrc ~/.zshrc
+ln -sf ${CWD}/oh-my-zsh/themes/ ~/.oh-my-zsh/custom/
 
-ln -s ${CWD}/git/gitconfig ~/.gitconfig
+ln -sf ${CWD}/git/gitconfig ~/.gitconfig
 
 # Because of limitations, we need to create the symbolic link a little
 # differently in side the application support folder
