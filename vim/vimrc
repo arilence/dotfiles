@@ -24,6 +24,7 @@ Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'Shougo/neocomplete.vim'         " Auto completion plugin that doesn't crash in sudo :)
 Plugin 'kien/ctrlp.vim'
 Plugin 'evidens/vim-twig'
+Plugin 'godlygeek/tabular'
 
 call vundle#end()
 filetype plugin indent on
@@ -91,7 +92,7 @@ let g:airline#extensions#tabline#show_buffers = 0
 let NERDTreeChDirMode=2
 
 " Emmet Configuration
-let g:user_emmet_leader_key='<leader>w'
+let g:user_emmet_leader_key='<leader>y'
 
 " ctrl-p Configuration
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
