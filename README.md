@@ -1,8 +1,10 @@
 # dotfiles
 
 My personal configuration files.
-Currently all I have automated are the symbolic links.
+Always a work in progress.
 
-To create the symbolic links:
+To install:
 - Navigate your way to this folder inside of your favourite CLI
 - Run the install script`./install.sh`
+
+NOTE: Please change the user details inside of `git/gitconfig` before using.
