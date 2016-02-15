@@ -19,15 +19,10 @@ CWD=$(pwd)
 
 ln -sf ${CWD}/vim/vimrc ~/.vimrc
 ln -sf ${CWD}/vim/* ~/.vim/
-#rm ~/.vim/vimrc
-
 ln -sf ${CWD}/oh-my-zsh/zshenv ~/.zshenv
 ln -sf ${CWD}/oh-my-zsh/zshrc ~/.zshrc
 ln -sf ${CWD}/oh-my-zsh/themes/ ~/.oh-my-zsh/custom/
-
 ln -sf ${CWD}/git/gitconfig ~/.gitconfig
 
-# Because of limitations, we need to create the symbolic link a little
-# differently in side the application support folder
-cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-ln -s ${CWD}/sublime-text-3/User/
+# For some odd reason, I can't use the ${CWD} variable in this command.
+ln -sf ~/dotfiles/sublime-text-3/* ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
