@@ -16,6 +16,7 @@ brew 'sqlite'
 brew 'thefuck'
 brew 'vim'
 brew 'youtube-dl'
+brew 'mergepbx'
 
 cask 'alfred'
 cask 'atlauncher'
