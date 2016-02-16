@@ -3,6 +3,8 @@ cask_args appdir: '/Applications'
 tap 'caskroom/cask'
 tap 'homebrew/bundle'
 
+brew 'coreutils'
+brew 'node'
 brew 'awscli'
 brew 'git'
 brew 'heroku-toolbelt'
