@@ -84,4 +84,7 @@ eval $(thefuck --alias)
 # added by travis gem
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
+# added by .net framework
 [ -s "$HOME/.dnx/dnvm/dnvm.sh" ] && . "$HOME/.dnx/dnvm/dnvm.sh" # Load dnvm
+
+source /usr/local/lib/dnx/bin/dnvm.sh
