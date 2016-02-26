@@ -18,6 +18,7 @@ brew 'vim'
 brew 'youtube-dl'
 brew 'mergepbx'
 brew 'phpunit'
+brew 'keybase'
 
 cask 'alfred'
 cask 'atlauncher'
