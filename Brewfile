@@ -19,6 +19,7 @@ brew 'youtube-dl'
 brew 'mergepbx'
 brew 'phpunit'
 brew 'keybase'
+brew 'git-lfs'
 
 cask 'alfred'
 cask 'atlauncher'
