@@ -70,6 +70,10 @@ alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resourc
 # Sniff network info.
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 
+# Shows and Hides hidden files
+alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+
 
 ##############################
 # Various Other Configurations
