@@ -37,7 +37,7 @@
 	"scroll_speed": 5.0,
 	"show_full_path": false,
 	"sidebar_default": true,
-	"tab_size": 2,
+	"tab_size": 4,
 	"tabs_medium": true,
 	"theme": "Primer Dark.sublime-theme",
 	"theme_primer_tab_active_red": true,
