@@ -17,12 +17,14 @@ Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'             " Shows the git branch in airline and adds some features
 Plugin 'scrooloose/nerdtree'
 Plugin 'mattn/emmet-vim'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'wakatime/vim-wakatime'
-Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'Shougo/neocomplete.vim'         " Auto completion plugin that doesn't crash in sudo :)
 Plugin 'kien/ctrlp.vim'
 Plugin 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
+
+" Colourschemes
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'scwood/vim-hybrid'
 
 call vundle#end()
 filetype plugin indent on
@@ -39,7 +41,7 @@ syntax on                                                       " Syntax highlig
 set backspace=2                                                 " Fixes some backspace issues
 set t_Co=256                                                    " 256-bit colours
 set background=dark
-colorscheme PaperColor                                          " Set the colour scheme
+colorscheme hybrid                                          " Set the colour scheme
 set guifont=Inconsolata\ for\ Powerline:h14                     " Set font to work with airline
 set mouse=a                                                     " Enables the ability to use mouse
 set ignorecase                                                  " ignore case when searching
