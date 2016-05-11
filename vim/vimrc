@@ -20,11 +20,9 @@ Plugin 'mattn/emmet-vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'NLKNguyen/papercolor-theme'
-"Plugin 'valloric/YouCompleteMe'        " Crashes VIM when trying to edit a file in sudo
 Plugin 'Shougo/neocomplete.vim'         " Auto completion plugin that doesn't crash in sudo :)
 Plugin 'kien/ctrlp.vim'
-Plugin 'evidens/vim-twig'
-Plugin 'godlygeek/tabular'
+Plugin 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
 
 call vundle#end()
 filetype plugin indent on
@@ -97,6 +95,7 @@ let g:user_emmet_leader_key='<leader>y'
 " ctrl-p Configuration
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_working_path_mode = 'ra'
 
 " NeoComplete Configuration
 let g:acp_enableAtStartup = 0
