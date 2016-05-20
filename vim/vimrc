@@ -55,6 +55,8 @@ set undolevels=1000                                             " remembers many
 set wildignore+=*.swp,*.bak,*.pyc,*.class
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor
 set title
+set incsearch
+highlight Normal ctermbg=Black
 
 " Key map settings
 nnoremap <leader>q :NERDTree<CR>
