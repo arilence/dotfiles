@@ -18,6 +18,10 @@ if ! type_exists 'brew'; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+e_header "Make sure Homebrew has writable access to /usr/local (Requires Root)"
+sudo chown -R $(whoami) /usr/local
+brew update
+
 # Install application from Brewfile
 brew bundle
 
