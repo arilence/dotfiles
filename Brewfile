@@ -3,60 +3,93 @@ cask_args appdir: '/Applications'
 tap 'caskroom/cask'
 tap 'homebrew/bundle'
 
-brew 'coreutils'
-brew 'node'
-brew 'awscli'
-brew 'git'
+#==============================================================================
+# Command-Line
+#==============================================================================
+# Unix
+brew 'ctags'
+brew 'openssl'
+brew 'reattach-to-user-namespace'
+brew 'tmux'
+brew 'vim'
+brew 'zsh'
+brew 'keybase'
+
+# Web Services Tools
 brew 'heroku-toolbelt'
+brew 'awscli'
+
+# Git
+brew 'git'
+brew 'git-lfs'
+brew 'hub'
+
+# Programming
+brew 'node'
 brew 'lua'
-brew 'macvim'
 brew 'python'
 brew 'rbenv'
+brew 'ruby-build'
+
+# Misc
+brew 'coreutils'
+brew 'macvim'
 brew 'sqlite'
 brew 'thefuck'
-brew 'vim'
 brew 'youtube-dl'
 brew 'mergepbx'
 brew 'phpunit'
-brew 'keybase'
-brew 'git-lfs'
 
-cask 'dropzone'
-cask 'feed-the-beast'
-cask 'filezilla'
-cask 'firefox'
+#==============================================================================
+# Applications
+#==============================================================================
+# Web Browsers
 cask 'google-chrome-dev'
-cask 'jadengeller-helium'
+cask 'firefox'
+
+# Programming
+cask 'iterm2'
+cask 'sublime-text3'
+cask 'sequel-pro'
+cask 'paw'
+cask 'android-studio'
+cask 'eclipse-installer'
+cask 'filezilla'
+cask 'genymotion'
+#cask 'intellij-idea'
+
+# Communication
 cask 'slack'
+cask 'discord'
+cask 'postbox'
+cask 'skype'
+cask 'textual'
+
+# Audio
+cask 'spotify'
+cask 'vox'
+#cask 'poolside-fm'
+
+# Utilities
 cask 'the-unarchiver'
+cask 'istat-menus'
+cask 'subler'
+cask 'unetbootin'
+cask 'android-file-transfer'
+cask 'keepingyouawake'
+cask 'flux'
+cask 'cleanmymac'
+cask '1password'
+#cask 'dropzone'
+#cask 'liteicon'
+
+# Misc
 cask 'utorrent'
 cask 'vlc'
-cask '1password'
-cask 'android-studio'
-cask 'cleanmymac'
-cask 'discord'
-cask 'eclipse-installer'
-cask 'flux'
 cask 'virtualbox'
-cask 'genymotion'
-cask 'intellij-idea'
-cask 'istat-menus'
-cask 'iterm2'
 cask 'licecap'
-cask 'paw'
 cask 'dropbox'
-cask 'poolside-fm'
-cask 'postbox'
-cask 'sequel-pro'
 cask 'sketch'
-cask 'skype'
-cask 'spotify'
-cask 'subler'
-cask 'sublime-text3'
-cask 'unetbootin'
 cask 'utorrent'
-cask 'vox'
-cask 'android-file-transfer'
-cask 'liteicon'
-cask 'textual'
-cask 'keepingyouawake'
+#cask 'jadengeller-helium'
+#cask 'feed-the-beast'
