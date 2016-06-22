@@ -33,8 +33,24 @@ e_header "Trying to install NodeJS packages..."
 if ! type_exists 'npm'; then
   e_error "Aborting... npm was not found."
 else
-  packages="bower gulp yo"
+  packages="bower gulp yo n"
   npm install $packages --global --quiet
+fi
+
+
+# '####################################'
+# 'Trying to install Python apps...'
+# '####################################'
+e_header "Trying to install Python apps..."
+if ! type_exists 'pip2'; then
+  e_error "Aborting... pip2 was not found."
+else
+  pip2 install -r requirements-2.txt
+fi
+if ! type_exists 'pip3'; then
+  e_error "Aborting... pip3 was not found."
+else
+  pip3 install -r requirements-3.txt
 fi
 
 
@@ -69,4 +85,14 @@ if is_confirmed; then
 
   # For some odd reason, I can't use the ${CWD} variable in this command.
   ln -sf ~/dotfiles/sublime-text-3/* ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
+fi
+
+
+# '##########################'
+# 'Setting up Vim Plugins'
+# '##########################'
+e_header "Setting up Vim Plugins"
+seek_confirmation "This will error if already setup."
+if is_confirmed; then
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi

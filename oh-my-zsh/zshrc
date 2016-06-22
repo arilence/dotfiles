@@ -59,7 +59,7 @@ source $ZSH/oh-my-zsh.sh
 # alias rm='trash'
 
 # Enables the use of macvim within the terminal
-alias vim='/usr/local/Cellar/macvim/HEAD/bin/mvim -v'
+alias vim='/usr/local/Cellar/macvim/7.4-104/bin/mvim -v'
 
 # Too lazy to type
 alias bcit='cd ~/Dropbox/BCIT/'
@@ -86,10 +86,5 @@ eval $(thefuck --alias)
 
 # added by travis gem
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
-
-# added by .net framework
-[ -s "$HOME/.dnx/dnvm/dnvm.sh" ] && . "$HOME/.dnx/dnvm/dnvm.sh" # Load dnvm
-
-source /usr/local/lib/dnx/bin/dnvm.sh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

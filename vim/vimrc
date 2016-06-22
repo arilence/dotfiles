@@ -14,10 +14,10 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'             " Shows the git branch in airline and adds some features
 Plugin 'scrooloose/nerdtree'
 Plugin 'mattn/emmet-vim'
-Plugin 'wakatime/vim-wakatime'
 Plugin 'Shougo/neocomplete.vim'         " Auto completion plugin that doesn't crash in sudo :)
 Plugin 'kien/ctrlp.vim'
 Plugin 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter

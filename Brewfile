@@ -1,6 +1,7 @@
 cask_args appdir: '/Applications'
 
 tap 'caskroom/cask'
+tap 'caskroom/versions'
 tap 'homebrew/bundle'
 
 #==============================================================================
@@ -27,18 +28,17 @@ brew 'hub'
 # Programming
 brew 'node'
 brew 'lua'
+brew 'python3'
 brew 'python'
 brew 'rbenv'
 brew 'ruby-build'
 
 # Misc
 brew 'coreutils'
-brew 'macvim'
 brew 'sqlite'
 brew 'thefuck'
 brew 'youtube-dl'
 brew 'mergepbx'
-brew 'phpunit'
 
 #==============================================================================
 # Applications
@@ -49,7 +49,8 @@ cask 'firefox'
 
 # Programming
 cask 'iterm2'
-cask 'sublime-text3'
+cask 'macvim'
+cask 'sublime-text'
 cask 'sequel-pro'
 cask 'paw'
 cask 'android-studio'
@@ -67,24 +68,23 @@ cask 'textual'
 
 # Audio
 cask 'spotify'
-cask 'vox'
+#cask 'vox'
 #cask 'poolside-fm'
 
 # Utilities
 cask 'the-unarchiver'
 cask 'istat-menus'
 cask 'subler'
-cask 'unetbootin'
 cask 'android-file-transfer'
 cask 'keepingyouawake'
 cask 'flux'
 cask 'cleanmymac'
 cask '1password'
 #cask 'dropzone'
+#cask 'unetbootin'
 #cask 'liteicon'
 
 # Misc
-cask 'utorrent'
 cask 'vlc'
 cask 'virtualbox'
 cask 'licecap'
