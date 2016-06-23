@@ -6,6 +6,7 @@
 	"installed_packages":
 	[
 		"AdvancedNewFile",
+		"Boxy Theme",
 		"BracketHighlighter",
 		"CodeComplice",
 		"Colorsublime",
@@ -27,7 +28,6 @@
 		"Theme - Spacegray",
 		"TypeScript",
 		"TypescriptCompletion",
-		"WakaTime",
 		"Zen Tabs"
 	],
 	"repositories":
