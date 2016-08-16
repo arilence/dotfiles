@@ -57,7 +57,7 @@ suspended_jobs() {
 
 precmd() {
     vcs_info
-    print -P '\n'
+    print -P ''
 }
 
 # Begin a segment

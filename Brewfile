@@ -3,6 +3,7 @@ cask_args appdir: '/Applications'
 tap 'caskroom/cask'
 tap 'caskroom/versions'
 tap 'homebrew/bundle'
+tap 'neovim/neovim'
 
 #==============================================================================
 # Command-Line
@@ -15,6 +16,7 @@ brew 'tmux'
 brew 'vim'
 brew 'zsh'
 brew 'keybase'
+brew 'neovim/neovim/neovim'
 
 # Web Services Tools
 brew 'heroku-toolbelt'

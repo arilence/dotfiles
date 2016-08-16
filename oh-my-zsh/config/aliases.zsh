@@ -1,5 +1,14 @@
-# Too lazy to type
 alias bcit='cd ~/Dropbox/BCIT/'
+alias vim="nvim"
+
+# Many alises inspired by @nicknisi dotfiles
+
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+    colorflag="--color"
+else # OS X `ls`
+    colorflag="-G"
+fi
 
 # Filesystem aliases
 alias ..='cd ..'
@@ -7,16 +16,13 @@ alias ...='cd ../..'
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# Beautiful idea from @nicknisi and http://xkcd.com/530/
+# Mute and Un-Mute
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 10'"
 
 # Remove all items safely, to Trash (`brew install trash`).
 # Doesn't work with symbolic links.
 # alias rm='trash'
-
-# Enables the use of macvim within the terminal
-alias vim='/usr/local/Cellar/macvim/7.4-104/bin/mvim -v'
 
 # Lock current session and proceed to the login screen.
 alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
