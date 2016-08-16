@@ -37,7 +37,7 @@ fi
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="remy-customized"
+#ZSH_THEME="remy-customized"
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="false"
@@ -51,28 +51,6 @@ plugins=(git sublime)
 
 source $ZSH/oh-my-zsh.sh
 
-##############################
-# Aliases
-##############################
-# Remove all items safely, to Trash (`brew install trash`).
-# Doesn't work with symbolic links.
-# alias rm='trash'
-
-# Enables the use of macvim within the terminal
-alias vim='/usr/local/Cellar/macvim/7.4-104/bin/mvim -v'
-
-# Too lazy to type
-alias bcit='cd ~/Dropbox/BCIT/'
-
-# Lock current session and proceed to the login screen.
-alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
-
-# Sniff network info.
-alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-
-# Shows and Hides hidden files
-alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
 ##############################
 # Various Other Configurations

@@ -12,29 +12,39 @@ fi
 # 'Trying to install Applications with Homebrew...'
 # '###############################################'
 e_header "Trying to install Applications with Homebrew..."
-# Check if homebrew is installed
-if ! type_exists 'brew'; then
-  e_header "Homebrew not found, Installing now..."
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+seek_confirmation ""
+if is_confirmed; then
+  # Check if homebrew is installed
+  if ! type_exists 'brew'; then
+    e_header "Homebrew not found, Installing now..."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  e_header "Make sure Homebrew has writable access to /usr/local (Requires Root)"
+  sudo chown -R $(whoami) /usr/local
+  brew update
+
+  # Install application from Brewfile
+  brew bundle
+else
+  printf "Skipped installing applications with Homebrew\n\n"
 fi
-
-e_header "Make sure Homebrew has writable access to /usr/local (Requires Root)"
-sudo chown -R $(whoami) /usr/local
-brew update
-
-# Install application from Brewfile
-brew bundle
 
 
 # '####################################'
 # 'Trying to install NodeJS packages...'
 # '####################################'
 e_header "Trying to install NodeJS packages..."
-if ! type_exists 'npm'; then
-  e_error "Aborting... npm was not found."
+seek_confirmation ""
+if is_confirmed; then
+  if ! type_exists 'npm'; then
+    e_error "Aborting... npm was not found."
+  else
+    packages="bower gulp yo n"
+    npm install $packages --global --quiet
+  fi
 else
-  packages="bower gulp yo n"
-  npm install $packages --global --quiet
+  printf "Skipped installing NodeJS packages\n\n"
 fi
 
 
@@ -42,15 +52,21 @@ fi
 # 'Trying to install Python apps...'
 # '####################################'
 e_header "Trying to install Python apps..."
-if ! type_exists 'pip2'; then
-  e_error "Aborting... pip2 was not found."
+seek_confirmation ""
+if is_confirmed; then
+  if ! type_exists 'pip2'; then
+    e_error "Aborting... pip2 was not found."
+  else
+    pip2 install -r requirements-2.txt
+  fi
+
+  if ! type_exists 'pip3'; then
+    e_error "Aborting... pip3 was not found."
+  else
+    pip3 install -r requirements-3.txt
+  fi
 else
-  pip2 install -r requirements-2.txt
-fi
-if ! type_exists 'pip3'; then
-  e_error "Aborting... pip3 was not found."
-else
-  pip3 install -r requirements-3.txt
+  printf "Skipped installing NodeJS packages\n\n"
 fi
 
 
@@ -80,7 +96,7 @@ if is_confirmed; then
   ln -sf ${CWD}/vim/* ~/.vim/
   ln -sf ${CWD}/oh-my-zsh/zshenv ~/.zshenv
   ln -sf ${CWD}/oh-my-zsh/zshrc ~/.zshrc
-  ln -sf ${CWD}/oh-my-zsh/themes/ ~/.oh-my-zsh/custom/
+  ln -sf ${CWD}/oh-my-zsh/config/* ~/.oh-my-zsh/custom/
   ln -sf ${CWD}/git/gitconfig ~/.gitconfig
 
   # For some odd reason, I can't use the ${CWD} variable in this command.
