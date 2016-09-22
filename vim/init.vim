@@ -1,48 +1,40 @@
-" ------------------------------------------
-" Guide from
-" http://blog.tjll.net/yet-another-vim-setup/
-" -------------------------------------------
-
 " NOTE: DEFAULT LEADER KEY IS '\'
 
 " -------------------
-" ENABLE VUNDLE PLUGINS
+" ENABLE PLUGINS
 " -------------------
 " Setup Vundle package manager
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-fugitive'             " Shows the git branch in airline and adds some features
-Plugin 'scrooloose/nerdtree'
-Plugin 'mattn/emmet-vim'
-Plugin 'Shougo/neocomplete.vim'         " Auto completion plugin that doesn't crash in sudo :)
-Plugin 'kien/ctrlp.vim'
-Plugin 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
+Plug 'Valloric/YouCompleteMe'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'             " Shows the git branch in airline and adds some features
+Plug 'scrooloose/nerdtree'
+Plug 'Shougo/neocomplete.vim'         " Auto completion plugin that doesn't crash in sudo :)
+Plug 'kien/ctrlp.vim'
+Plug 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
 
 " Colourschemes
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'scwood/vim-hybrid'
-Plugin 'gregsexton/Atom'
-Plugin 'juanedi/predawn.vim'
+Plug 'juanedi/predawn.vim'
+Plug 'raphamorim/lucario'
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on
 
 
 " -----------------
 " BASIC SETTINGS
 " ----------------
+colorscheme lucario                                             " Set the colour scheme
+set background=dark
+syntax enable
 set hidden                                                      " Hides buffers
 set nocompatible                                                " Eliminate backwards-compatability
 set number                                                      " Enable line numbers
 set ruler                                                       " Turn on the ruler
 set backspace=2                                                 " Fixes some backspace issues
 set t_Co=256                                                    " 256-bit colours
-set background=dark
-colorscheme predawn                                             " Set the colour scheme
 set guifont=Inconsolata\ for\ Powerline:h14                     " Set font to work with airline
 set mouse=a                                                     " Enables the ability to use mouse
 set ignorecase                                                  " ignore case when searching
@@ -57,8 +49,6 @@ set wildignore+=*.swp,*.bak,*.pyc,*.class
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor
 set title
 set incsearch
-highlight Normal ctermbg=Black
-syntax on                                                       " Syntax highlighting
 
 " Key map settings
 nnoremap <leader>q :NERDTree<CR>

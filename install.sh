@@ -7,6 +7,8 @@ if ! type_exists 'gcc'; then
   exit 1
 fi
 
+git submodule update --init --recursive
+
 
 # '###############################################'
 # 'Trying to install Applications with Homebrew...'
@@ -92,23 +94,16 @@ if is_confirmed; then
   # Make sure that our symlinks work
   CWD=$(pwd)
 
-  ln -sf ${CWD}/vim/vimrc ~/.vimrc
+  ln -sf ${CWD}/vim/* ~/.config/nvim/
   ln -sf ${CWD}/vim/* ~/.vim/
+  ln -sf ${CWD}/vim/init.vim ~/.vimrc
+
   ln -sf ${CWD}/oh-my-zsh/zshenv ~/.zshenv
   ln -sf ${CWD}/oh-my-zsh/zshrc ~/.zshrc
   ln -sf ${CWD}/oh-my-zsh/config/* ~/.oh-my-zsh/custom/
+
   ln -sf ${CWD}/git/gitconfig ~/.gitconfig
 
   # For some odd reason, I can't use the ${CWD} variable in this command.
   ln -sf ~/dotfiles/sublime-text-3/* ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
-fi
-
-
-# '##########################'
-# 'Setting up Vim Plugins'
-# '##########################'
-e_header "Setting up Vim Plugins"
-seek_confirmation "This will error if already setup."
-if is_confirmed; then
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
