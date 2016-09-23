@@ -104,6 +104,8 @@ if is_confirmed; then
 
   ln -sf ${CWD}/git/gitconfig ~/.gitconfig
 
+  ln -sf ${CMD}/tmux/tmux.conf ~/.tmux.conf
+
   # For some odd reason, I can't use the ${CWD} variable in this command.
   ln -sf ~/dotfiles/sublime-text-3/* ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 fi

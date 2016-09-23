@@ -4,3 +4,9 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # Make sure colours work in vim and neovim
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export TERM=xterm-256color
+
+# Fixes some bug in Tmux on MaxOS Sierra
+export EVENT_NOKQUEUE=1
+
+# Sets my default editor
+export EDITOR='vim'
