@@ -100,12 +100,9 @@ if is_confirmed; then
 
   ln -sf ${CWD}/oh-my-zsh/zshenv ~/.zshenv
   ln -sf ${CWD}/oh-my-zsh/zshrc ~/.zshrc
-  ln -sf ${CWD}/oh-my-zsh/config/* ~/.oh-my-zsh/custom/
+  ln -sf ${CWD}/oh-my-zsh/custom/* ~/.oh-my-zsh/custom/
 
   ln -sf ${CWD}/git/gitconfig ~/.gitconfig
 
   ln -sf ${CMD}/tmux/tmux.conf ~/.tmux.conf
-
-  # For some odd reason, I can't use the ${CWD} variable in this command.
-  ln -sf ~/dotfiles/sublime-text-3/* ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 fi

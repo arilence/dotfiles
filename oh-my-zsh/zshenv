@@ -1,12 +1,16 @@
-# Change the default location for Caskroom apps to symlink to
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export LANG=en_US.UTF-8
 
-# Make sure colours work in vim and neovim
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
-export TERM=xterm-256color
+# Default PATH
+export PATH="/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin"
+export PATH=${PATH}:~/.composer/vendor/bin
 
-# Fixes some bug in Tmux on MaxOS Sierra
-export EVENT_NOKQUEUE=1
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.bin" ]; then
+  PATH="$HOME/.bin:$PATH"
+fi
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
 
 # Sets my default editor
 export EDITOR='vim'
