@@ -37,14 +37,14 @@ set backspace=2                                                 " Fixes some bac
 set t_Co=256                                                    " 256-bit colours
 set guifont=Inconsolata\ for\ Powerline:h14                     " Set font to work with airline
 set mouse=a                                                     " Enables the ability to use mouse
-set ignorecase                                                  " ignore case when searching
-set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab     " use 4 Space characters for each indent
+set ignorecase                                                  " Ignore case when searching
+set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab     " Use 4 Space characters for each indent
 set nowrap
-set list                                                        " show trailing whitespace
+set list                                                        " Show trailing whitespace
 set listchars=tab:▸\ ,trail:.
-set clipboard=unnamed
-set history=1000                                                " remember more commands and search history
-set undolevels=1000                                             " remembers many levels of undo
+set clipboard=unnamed                                           " Enables use of system clipboard
+set history=1000                                                " Remember more commands and search history
+set undolevels=1000                                             " Remembers many levels of undo
 set wildignore+=*.swp,*.bak,*.pyc,*.class
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor
 set title
@@ -64,8 +64,10 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-" Set ctrl+t to open a new tab
-map <C-t> <Esc>:tabnew<CR>
+" Make Copypasta work under maxOS and Tmux
+map <F1> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+vmap <F2> :w !pbcopy<CR><CR>
+
 
 " -------------------
 " PLUGIN CONFIGURATION
@@ -81,12 +83,8 @@ let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 
-" NERDTree Configuration:
-" set autochdir
+" NERDTree Configuration
 let NERDTreeChDirMode=2
-
-" Emmet Configuration
-let g:user_emmet_leader_key='<leader>y'
 
 " ctrl-p Configuration
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
@@ -97,6 +95,5 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
-" <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
