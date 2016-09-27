@@ -104,5 +104,5 @@ if is_confirmed; then
 
   ln -sf ${CWD}/git/gitconfig ~/.gitconfig
 
-  ln -sf ${CMD}/tmux/tmux.conf ~/.tmux.conf
+  ln -sf ${CWD}/tmux/tmux.conf ~/.tmux.conf
 fi
