@@ -69,6 +69,11 @@ if [[ $OSTYPE =~ "darwin" ]]; then
 
 elif [[ $OSTYPE == "linux-gnu" ]]; then
 
+  # Linuxbrew
+  export PATH="/home/anthony/.linuxbrew/bin:$PATH" 
+  export MANPATH="/home/anthony/.linuxbrew/share/man:$MANPATH"
+  export INFOPATH="/home/anthony/.linuxbrew/share/info:$INFOPATH"
+
 fi
 
 # Path to your oh-my-zsh installation.
