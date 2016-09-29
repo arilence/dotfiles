@@ -49,6 +49,8 @@ set wildignore+=*.swp,*.bak,*.pyc,*.class
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor
 set title
 set incsearch
+set lazyredraw
+set ttyfast
 
 " Key map settings
 nnoremap <leader>q :NERDTree<CR>
