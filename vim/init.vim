@@ -6,18 +6,13 @@
 " Setup Vundle package manager
 call plug#begin('~/.vim/plugged')
 
-Plug 'Valloric/YouCompleteMe'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'             " Shows the git branch in airline and adds some features
-Plug 'scrooloose/nerdtree'
+Plug 'shougo/unite.vim'               " Dependency for Vimfiler
+Plug 'shougo/vimfiler.vim'
 Plug 'Shougo/neocomplete.vim'         " Auto completion plugin that doesn't crash in sudo :)
 Plug 'kien/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
-
-" Colourschemes
-Plug 'juanedi/predawn.vim'
-Plug 'raphamorim/lucario'
+Plug 'raphamorim/lucario'             " Colorscheme
 
 call plug#end()
 filetype plugin indent on
@@ -53,19 +48,17 @@ set lazyredraw
 set ttyfast
 
 " Key map settings
-nnoremap <leader>q :NERDTree<CR>
-nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
+nnoremap <leader>f :VimFiler<CR>
 " Disable the arrow keys to force me to use HJKL
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 " Easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 " Make Copypasta work under maxOS and Tmux
 map <F1> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 vmap <F2> :w !pbcopy<CR><CR>
@@ -74,20 +67,6 @@ vmap <F2> :w !pbcopy<CR><CR>
 " -------------------
 " PLUGIN CONFIGURATION
 " -------------------
-" Vim-airline configuration
-set laststatus=2
-let g:airline_theme             = 'powerlineish'
-let g:airline_powerline_fonts   = 1
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
-
-" NERDTree Configuration
-let NERDTreeChDirMode=2
-
 " ctrl-p Configuration
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_show_hidden = 1
@@ -99,3 +78,6 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
+" Vimfiler Configuration
+let g:vimfiler_as_default_explorer = 1
+call vimfiler#custom#profile('default', 'context', {'safe' : 0})    " disables safe mode so I can create files
