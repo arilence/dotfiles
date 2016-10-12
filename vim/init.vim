@@ -68,7 +68,7 @@ vmap <F2> :w !pbcopy<CR><CR>
 " PLUGIN CONFIGURATION
 " -------------------
 " ctrl-p Configuration
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|vendor|public)|(\.(swp|ico|git|svn))$'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'ra'
 
