@@ -26,6 +26,7 @@ brew 'rbenv'
 brew 'ruby-build'
 brew 'thefuck'
 brew 'youtube-dl'
+brew 'mas'
 
 #==============================================================================
 # Applications
