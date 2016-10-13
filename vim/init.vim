@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'             " Shows the git branch in airline and adds some features
 Plug 'shougo/unite.vim'               " Dependency for Vimfiler
 Plug 'shougo/vimfiler.vim'
-Plug 'Shougo/neocomplete.vim'         " Auto completion plugin that doesn't crash in sudo :)
+Plug 'valloric/youcompleteme'
 Plug 'kien/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
 Plug 'raphamorim/lucario'             " Colorscheme
