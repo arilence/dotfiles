@@ -4,11 +4,11 @@ tap 'caskroom/cask'
 tap 'caskroom/versions'
 tap 'homebrew/bundle'
 tap 'neovim/neovim'
+tap 'thoughtbot/formulae'
 
 #==============================================================================
 # Command-Line
 #==============================================================================
-brew 'gpg'
 brew 'ctags'
 brew 'coreutils'
 brew 'openssl'
@@ -28,6 +28,11 @@ brew 'ruby-build'
 brew 'thefuck'
 brew 'youtube-dl'
 brew 'mas'
+brew 'liftoff'
+
+# for gnupg
+brew 'pinentry-mac'
+brew 'gnupg2'
 
 #==============================================================================
 # Applications

@@ -67,12 +67,32 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   alias showHiddenFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
   alias hideHiddenFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
+  # Get gpg-agent to work on osx
+  export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+  [ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
+  if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
+      export GPG_AGENT_INFO
+      export SSH_AUTH_SOCK
+      export SSH_AGENT_PID
+  else
+      eval $( gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
+  fi
+
 elif [[ $OSTYPE == "linux-gnu" ]]; then
 
   # Linuxbrew
   export PATH="/home/anthony/.linuxbrew/bin:$PATH" 
   export MANPATH="/home/anthony/.linuxbrew/share/man:$MANPATH"
   export INFOPATH="/home/anthony/.linuxbrew/share/info:$INFOPATH"
+
+  if [ -f "${HOME}/.gpg-agent-info" ]; then
+       source "${HOME}/.gpg-agent-info"
+         export GPG_AGENT_INFO
+         export SSH_AUTH_SOCK
+         export SSH_AGENT_PID
+  else
+      eval $( gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
+  fi
 
 fi
 
