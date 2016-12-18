@@ -69,13 +69,20 @@ if [[ $OSTYPE =~ "darwin" ]]; then
 
   # Get gpg-agent to work on osx
   export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
-  [ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
-  if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
-      export GPG_AGENT_INFO
-      export SSH_AUTH_SOCK
-      export SSH_AGENT_PID
-  else
-      eval $( gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
+  #[ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
+  #if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
+      #export GPG_AGENT_INFO
+      #export SSH_AUTH_SOCK
+      #export SSH_AGENT_PID
+  #else
+      #eval $( gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
+  #fi
+  GPG_TTY=$(tty)
+  export GPG_TTY
+  if [ -f "${HOME}/.gpg-agent-info" ]; then
+    . "${HOME}/.gpg-agent-info"
+    export GPG_AGENT_INFO
+    export SSH_AUTH_SOCK
   fi
 
 elif [[ $OSTYPE == "linux-gnu" ]]; then
@@ -85,14 +92,14 @@ elif [[ $OSTYPE == "linux-gnu" ]]; then
   export MANPATH="/home/anthony/.linuxbrew/share/man:$MANPATH"
   export INFOPATH="/home/anthony/.linuxbrew/share/info:$INFOPATH"
 
-  if [ -f "${HOME}/.gpg-agent-info" ]; then
-       source "${HOME}/.gpg-agent-info"
-         export GPG_AGENT_INFO
-         export SSH_AUTH_SOCK
-         export SSH_AGENT_PID
-  else
-      eval $( gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
-  fi
+  #if [ -f "${HOME}/.gpg-agent-info" ]; then
+       #source "${HOME}/.gpg-agent-info"
+         #export GPG_AGENT_INFO
+         #export SSH_AUTH_SOCK
+         #export SSH_AGENT_PID
+  #else
+      #eval $( gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
+  #fi
 
 fi
 
