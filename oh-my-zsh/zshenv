@@ -1,7 +1,7 @@
 export LANG=en_US.UTF-8
 
 # Default PATH
-export PATH="/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin"
 export PATH=${PATH}:~/.composer/vendor/bin
 
 # set PATH so it includes user's private bin if it exists
