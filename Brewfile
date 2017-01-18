@@ -30,6 +30,7 @@ brew 'youtube-dl'
 brew 'mas'
 brew 'liftoff'
 brew 'yarn'
+brew 'fzf'
 
 # for gnupg
 brew 'pinentry-mac'

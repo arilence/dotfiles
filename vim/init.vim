@@ -9,10 +9,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'             " Shows the git branch in airline and adds some features
 Plug 'shougo/unite.vim'               " Dependency for Vimfiler
 Plug 'shougo/vimfiler.vim'
-Plug 'kien/ctrlp.vim'
+"Plug 'kien/ctrlp.vim' (trying out fzf for the meantime)
 Plug 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
 Plug 'raphamorim/lucario'             " Colorscheme
 Plug 'Valloric/YouCompleteMe'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }   " fzf plugin for (fuzzy file finder)
 
 call plug#end()
 filetype plugin indent on
@@ -67,10 +68,10 @@ vmap <F2> :w !pbcopy<CR><CR>
 " -------------------
 " PLUGIN CONFIGURATION
 " -------------------
-" ctrl-p Configuration
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|vendor|public)|(\.(swp|ico|git|svn))$'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_working_path_mode = 'ra'
+" ctrl-p Configuration (trying out fzf for the meantime)
+"let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|vendor|public)|(\.(swp|ico|git|svn))$'
+"let g:ctrlp_show_hidden = 1
+"let g:ctrlp_working_path_mode = 'ra'
 
 " NeoComplete Configuration
 let g:acp_enableAtStartup = 0
@@ -81,3 +82,6 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " Vimfiler Configuration
 let g:vimfiler_as_default_explorer = 1
 call vimfiler#custom#profile('default', 'context', {'safe' : 0})    " disables safe mode so I can create files
+
+" FZF Shortcut Configuration
+nnoremap <leader>p :FZF<CR>
