@@ -67,6 +67,9 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   alias showHiddenFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
   alias hideHiddenFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
+  # Enable fzf (fuzzy file finder)
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
   # Get gpg-agent to work on osx
   export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
   #[ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
@@ -106,6 +109,3 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-
-# Enable fzf (fuzzy file finder)
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
