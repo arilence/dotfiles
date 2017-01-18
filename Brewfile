@@ -29,6 +29,7 @@ brew 'thefuck'
 brew 'youtube-dl'
 brew 'mas'
 brew 'liftoff'
+brew 'yarn'
 
 # for gnupg
 brew 'pinentry-mac'
