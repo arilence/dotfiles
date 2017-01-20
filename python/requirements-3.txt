@@ -1,3 +1,6 @@
 livestreamer
+neovim
 six
+soundcloud
 soundscrape
+

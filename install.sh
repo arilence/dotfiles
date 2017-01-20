@@ -59,13 +59,13 @@ if is_confirmed; then
   if ! type_exists 'pip2'; then
     e_error "Aborting... pip2 was not found."
   else
-    pip2 install -r requirements-2.txt
+    pip2 install -r ./python/requirements-2.txt
   fi
 
   if ! type_exists 'pip3'; then
     e_error "Aborting... pip3 was not found."
   else
-    pip3 install -r requirements-3.txt
+    pip3 install -r ./python/requirements-3.txt
   fi
 else
   printf "Skipped installing NodeJS packages\n\n"
