@@ -98,7 +98,6 @@ if is_confirmed; then
   ln -sf ${CWD}/vim/* ~/.vim/
   ln -sf ${CWD}/vim/init.vim ~/.vimrc
 
-  ln -sf ${CWD}/oh-my-zsh/zshenv ~/.zshenv
   ln -sf ${CWD}/oh-my-zsh/zshrc ~/.zshrc
   ln -sf ${CWD}/oh-my-zsh/custom/* ~/.oh-my-zsh/custom/
 

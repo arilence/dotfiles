@@ -7,10 +7,6 @@ ENABLE_CORRECTION="false"
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git sublime)
-
 # 'thefuck' configuration
 eval $(thefuck --alias)
 
@@ -18,9 +14,29 @@ eval $(thefuck --alias)
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export TERM=xterm-256color
 
+# Sets my default editor
+export EDITOR='nvim'
+export VISUAL='nvim'
+
 alias vim="nvim"
 
+# Default PATH
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin"
+export PATH=${PATH}:~/.composer/vendor/bin
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.bin" ]; then
+  PATH="$HOME/.bin:$PATH"
+fi
+
+# Language Preferences
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+
 # OS dependent configurations
+# darwin = osx
 if [[ $OSTYPE =~ "darwin" ]]; then
 
   # Android SDK Location
@@ -72,14 +88,6 @@ if [[ $OSTYPE =~ "darwin" ]]; then
 
   # Get gpg-agent to work on osx
   export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
-  #[ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
-  #if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
-      #export GPG_AGENT_INFO
-      #export SSH_AUTH_SOCK
-      #export SSH_AGENT_PID
-  #else
-      #eval $( gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
-  #fi
   GPG_TTY=$(tty)
   export GPG_TTY
   if [ -f "${HOME}/.gpg-agent-info" ]; then
@@ -91,18 +99,9 @@ if [[ $OSTYPE =~ "darwin" ]]; then
 elif [[ $OSTYPE == "linux-gnu" ]]; then
 
   # Linuxbrew
-  export PATH="/home/anthony/.linuxbrew/bin:$PATH" 
-  export MANPATH="/home/anthony/.linuxbrew/share/man:$MANPATH"
-  export INFOPATH="/home/anthony/.linuxbrew/share/info:$INFOPATH"
-
-  #if [ -f "${HOME}/.gpg-agent-info" ]; then
-       #source "${HOME}/.gpg-agent-info"
-         #export GPG_AGENT_INFO
-         #export SSH_AUTH_SOCK
-         #export SSH_AGENT_PID
-  #else
-      #eval $( gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
-  #fi
+  export PATH="${HOME}/.linuxbrew/bin:$PATH" 
+  export MANPATH="${HOME}/.linuxbrew/share/man:$MANPATH"
+  export INFOPATH="${HOME}/.linuxbrew/share/info:$INFOPATH"
 
 fi
 
