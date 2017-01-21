@@ -1,39 +1,32 @@
-# Set name of the theme to load.
-ZSH_THEME="honukai"
-
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="false"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# 'thefuck' configuration
-eval $(thefuck --alias)
-
-# Make sure colours work in vim and neovim
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
-export TERM=xterm-256color
-
-# Sets my default editor
-export EDITOR='nvim'
-export VISUAL='nvim'
-
-alias vim="nvim"
-
-# Default PATH
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin"
-export PATH=${PATH}:~/.composer/vendor/bin
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.bin" ]; then
-  PATH="$HOME/.bin:$PATH"
-fi
+# Oh-My-Zsh Configuration
+ZSH_THEME="honukai"             # Set name of the theme to load.
+COMPLETION_WAITING_DOTS="true"  # Display red dots whilst waiting for completion.
 
 # Language Preferences
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
+
+# Setup PATH
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin"
+export PATH=${PATH}:~/.composer/vendor/bin
+if [ -d "$HOME/.bin" ]; then # Include private bin if exists
+  PATH="$HOME/.bin:$PATH"
+fi
+
+# Set correct TERM for plain shell and tmux
+if [[ -n "$TMUX" ]]; then
+  export TERM='screen-256color'
+else
+  export TERM='xterm-256color'
+fi
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+# Need that neovim love
+export EDITOR='nvim'
+export VISUAL='nvim'
+alias vim="nvim"
 
 # OS dependent configurations
 # darwin = osx
