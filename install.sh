@@ -3,7 +3,11 @@ source ./lib/utils.sh
 
 # Make sure that the command line tools are installed before continuing
 if ! type_exists 'gcc'; then
-  e_error "You must install the Xcode command line tools before continuing"
+  if [[ $OSTYPE =~ "darwin" ]]; then
+    e_error "You must install the Xcode command line tools before continuing"
+  else
+    e_error "Hmm.. gcc was not found on this machine, that's very strange"
+  fi
   exit 1
 fi
 
@@ -19,14 +23,20 @@ if is_confirmed; then
   # Check if homebrew is installed
   if ! type_exists 'brew'; then
     e_header "Homebrew not found, Installing now..."
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    # OS Dependant homebrew installation
+    # darwin == osx
+    if [[ $OSTYPE =~ "darwin" ]]; then
+      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      e_header "Make sure Homebrew has writable access to /usr/local (Requires Root)"
+      sudo chown -R $(whoami) /usr/local
+    elif [[ $OSTYPE == "linux-gnu" ]]; then
+      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
+      PATH="$HOME/.linuxbrew/bin:$PATH"
+    fi
   fi
 
-  e_header "Make sure Homebrew has writable access to /usr/local (Requires Root)"
-  sudo chown -R $(whoami) /usr/local
+  # Install applications
   brew update
-
-  # Install application from Brewfile
   brew bundle
 else
   printf "Skipped installing applications with Homebrew\n\n"
@@ -75,13 +85,17 @@ fi
 # '##########################################'
 # 'Trying to set OSX Defaults (Requires Root)'
 # '##########################################'
-e_header "Trying to set OSX Defaults (Requires Root)..."
-seek_confirmation "Warning: This step may modify your OS X system defaults."
-if is_confirmed; then
-  bash ./osx/set-defaults.sh
-  e_success "Done. Note that some of these changes require a logout/restart to take effect."
-else
-  printf "Skipped setting OSX Defaults\n\n"
+# OS Dependant homebrew installation
+# darwin == osx
+if [[ $OSTYPE =~ "darwin" ]]; then
+  e_header "Trying to set OSX Defaults (Requires Root)..."
+  seek_confirmation "Warning: This step may modify your OS X system defaults."
+  if is_confirmed; then
+    bash ./osx/set-defaults.sh
+    e_success "Done. Note that some of these changes require a logout/restart to take effect."
+  else
+    printf "Skipped setting OSX Defaults\n\n"
+  fi
 fi
 
 
@@ -93,6 +107,11 @@ seek_confirmation "This could overwrite pre-existing dotfiles"
 if is_confirmed; then
   # Make sure that our symlinks work
   CWD=$(pwd)
+
+  # Symlinks require folders to exist first
+  mkdir -p ~/.config/nvim/
+  mkdir -p ~/.vim/
+  mkdir -p ~/.oh-my-zsh/custom/
 
   ln -sf ${CWD}/vim/* ~/.config/nvim/
   ln -sf ${CWD}/vim/* ~/.vim/
