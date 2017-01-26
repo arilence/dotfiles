@@ -14,6 +14,7 @@ Plug 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
 Plug 'raphamorim/lucario'             " Colorscheme
 Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }   " fzf plugin for (fuzzy file finder)
+Plug 'scrooloose/nerdcommenter'       " Enables code commenting
 
 call plug#end()
 filetype plugin indent on
