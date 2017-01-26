@@ -15,6 +15,7 @@ Plug 'raphamorim/lucario'             " Colorscheme
 Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }   " fzf plugin for (fuzzy file finder)
 Plug 'scrooloose/nerdcommenter'       " Enables code commenting
+Plug 'dracula/vim'
 
 call plug#end()
 filetype plugin indent on
@@ -23,8 +24,9 @@ filetype plugin indent on
 " -----------------
 " BASIC SETTINGS
 " ----------------
-colorscheme lucario                                             " Set the colour scheme
-set background=dark
+colorscheme dracula                                             " Set the colour scheme
+"set background=dark
+syntax on
 syntax enable
 set hidden                                                      " Hides buffers
 set nocompatible                                                " Eliminate backwards-compatability
@@ -48,6 +50,7 @@ set title
 set incsearch
 set lazyredraw
 set ttyfast
+
 
 " Key map settings
 nnoremap <leader>f :VimFiler<CR>
