@@ -59,6 +59,7 @@ cask 'vlc'
 cask 'virtualbox'
 cask 'dropbox'
 cask 'imageoptim'
+cask 'vimr'
 
 # for gnupg
 cask 'gpgtools'
