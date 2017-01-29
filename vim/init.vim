@@ -32,6 +32,7 @@ set hidden                                                      " Hides buffers
 set nocompatible                                                " Eliminate backwards-compatability
 set number                                                      " Enable line numbers
 set ruler                                                       " Turn on the ruler
+set nolist                                                      " Disables $ at the end of lines on windows
 set backspace=2                                                 " Fixes some backspace issues
 set t_Co=256                                                    " 256-bit colours
 set guifont=Inconsolata\ for\ Powerline:h14                     " Set font to work with airline
