@@ -16,6 +16,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }   " fzf plugin for (fuzzy file finder)
 Plug 'scrooloose/nerdcommenter'       " Enables code commenting
 Plug 'dracula/vim'
+Plug 'fneu/breezy'
 
 call plug#end()
 filetype plugin indent on
@@ -24,8 +25,8 @@ filetype plugin indent on
 " -----------------
 " BASIC SETTINGS
 " ----------------
-colorscheme dracula                                             " Set the colour scheme
-"set background=dark
+colorscheme breezy                                             " Set the colour scheme
+set background=dark
 syntax on
 syntax enable
 set hidden                                                      " Hides buffers
@@ -51,6 +52,7 @@ set title
 set incsearch
 set lazyredraw
 set ttyfast
+set termguicolors
 
 
 " Key map settings
@@ -73,11 +75,6 @@ vmap <F2> :w !pbcopy<CR><CR>
 " -------------------
 " PLUGIN CONFIGURATION
 " -------------------
-" ctrl-p Configuration (trying out fzf for the meantime)
-"let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|vendor|public)|(\.(swp|ico|git|svn))$'
-"let g:ctrlp_show_hidden = 1
-"let g:ctrlp_working_path_mode = 'ra'
-
 " NeoComplete Configuration
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
