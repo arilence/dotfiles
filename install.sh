@@ -52,7 +52,7 @@ if is_confirmed; then
   if ! type_exists 'npm'; then
     e_error "Aborting... npm was not found."
   else
-    packages="bower gulp yo n"
+    packages="n bower gulp"
     npm install $packages --global --quiet
   fi
 else
