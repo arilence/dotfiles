@@ -29,6 +29,8 @@ colorscheme breezy                                             " Set the colour 
 set background=dark
 syntax on
 syntax enable
+scriptencoding utf-8                                            " Need to set encoding for 'listchars' to work under windows env
+set encoding=utf-8
 set hidden                                                      " Hides buffers
 set nocompatible                                                " Eliminate backwards-compatability
 set number                                                      " Enable line numbers
