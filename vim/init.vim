@@ -6,17 +6,20 @@
 " Setup Vundle package manager
 call plug#begin('~/.vim/plugged')
 
+"Colorschemes
+Plug 'dracula/vim'
+Plug 'fneu/breezy'
+Plug 'raphamorim/lucario'
+
 Plug 'tpope/vim-fugitive'             " Shows the git branch in airline and adds some features
 Plug 'shougo/unite.vim'               " Dependency for Vimfiler
 Plug 'shougo/vimfiler.vim'
-"Plug 'kien/ctrlp.vim' (trying out fzf for the meantime)
 Plug 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
-Plug 'raphamorim/lucario'             " Colorscheme
 Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }   " fzf plugin for (fuzzy file finder)
 Plug 'scrooloose/nerdcommenter'       " Enables code commenting
-Plug 'dracula/vim'
-Plug 'fneu/breezy'
+Plug 'jiangmiao/auto-pairs'           " Auto completes quotations, brackets, parenthesis, etc
+Plug 'easymotion/vim-easymotion'      " Apparently this helps with moving around in vim more *shrugs*
 
 call plug#end()
 filetype plugin indent on
@@ -41,7 +44,7 @@ set t_Co=256                                                    " 256-bit colour
 set guifont=Inconsolata\ for\ Powerline:h14                     " Set font to work with airline
 set mouse=a                                                     " Enables the ability to use mouse
 set ignorecase                                                  " Ignore case when searching
-set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab     " Use 4 Space characters for each indent
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab     " Use 4 Space characters for each indent
 set nowrap
 set list                                                        " Show trailing whitespace
 set listchars=tab:▸\ ,trail:.
@@ -89,3 +92,6 @@ call vimfiler#custom#profile('default', 'context', {'safe' : 0})    " disables s
 
 " FZF Shortcut Configuration
 nnoremap <leader>p :FZF<CR>
+
+" Easymotion Configuration
+map <Leader> <Plug>(easymotion-prefix)
