@@ -59,6 +59,9 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   # Lock current session and proceed to the login screen.
   alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
 
+  # Puts the computer to sleep
+  alias tosleep='pmset sleepnow'
+
   # Flush Directory Service cache
   alias flush="dscacheutil -flushcache"
 
