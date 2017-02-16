@@ -61,5 +61,8 @@ cask 'dropbox'
 cask 'imageoptim'
 cask 'vimr'
 
+# REST client
+cask 'insommnia'
+
 # for gnupg
 cask 'gpgtools'
