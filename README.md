@@ -12,5 +12,6 @@ My personal configuration files. Somehow they work together to make my life easi
 
 ### Comments
 - Ruby, Zsh, Oh-My-Zsh need to be install manually before running this install script
+- Need to install tmux plugin manager beforehand
 - On fedora (not sure about other distros) oh-my-zsh setting zsh as default does not work permanently
 - Might need a seperate .bash-profile for before zsh is installed and reading from zshrc
