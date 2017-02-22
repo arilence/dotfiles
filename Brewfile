@@ -36,8 +36,8 @@ brew 'gnupg2'
 # Applications
 #==============================================================================
 # Web Browsers
-cask 'google-chrome'
-cask 'iterm2'
+cask 'google-chrome-dev'
+cask 'iterm2-nightly'
 cask 'sequel-pro'
 cask 'android-studio'
 cask 'filezilla'
