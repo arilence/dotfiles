@@ -16,9 +16,10 @@ Plug 'shougo/unite.vim'               " Dependency for Vimfiler
 Plug 'shougo/vimfiler.vim'
 Plug 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
 Plug 'Valloric/YouCompleteMe'
+Plug 'ternjs/tern_for_vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }   " fzf plugin for (fuzzy file finder)
 Plug 'scrooloose/nerdcommenter'       " Enables code commenting
-Plug 'jiangmiao/auto-pairs'           " Auto completes quotations, brackets, parenthesis, etc
+"Plug 'jiangmiao/auto-pairs'           " Auto completes quotations, brackets, parenthesis, etc
 Plug 'easymotion/vim-easymotion'      " Apparently this helps with moving around in vim more *shrugs*
 
 call plug#end()
@@ -28,7 +29,10 @@ filetype plugin indent on
 " -----------------
 " BASIC SETTINGS
 " ----------------
+try
 colorscheme breezy                                             " Set the colour scheme
+catch
+endtry
 set background=dark
 syntax on
 syntax enable
@@ -95,3 +99,10 @@ nnoremap <leader>p :FZF<CR>
 
 " Easymotion Configuration
 map <Leader> <Plug>(easymotion-prefix)
+
+" Start vim within my dev folder
+cd /Users/anthony/Dev
+
+" Disable gui options in gVim
+set guioptions-=T  "remove toolbar
+set guioptions-=m  "remove menu bar
