@@ -13,17 +13,17 @@ brew 'coreutils'
 brew 'ctags'
 brew 'git'
 brew 'git-lfs'
-brew 'gnupg2'
-brew 'htop
+brew 'htop'
 brew 'liftoff'
-brew 'neovim/neovim/neovim'
+brew 'neovim'
 brew 'node'
 brew 'openssl'
 brew 'pinentry-mac'
-brew 'python'
-brew 'python3'
 brew 'reattach-to-user-namespace'
 brew 'tmux'
+#brew 'gnupg2'
+#brew 'python'
+#brew 'python3'
 
 #==============================================================================
 # Applications

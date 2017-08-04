@@ -79,9 +79,6 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   alias showHiddenFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
   alias hideHiddenFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
-  # Enable fzf (fuzzy file finder)
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
   # Get gpg-agent to work on osx
   export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
   GPG_TTY=$(tty)
@@ -93,11 +90,6 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   fi
 
 elif [[ $OSTYPE == "linux-gnu" ]]; then
-
-  # Linuxbrew
-  export PATH="${HOME}/.linuxbrew/bin:$PATH" 
-  export MANPATH="${HOME}/.linuxbrew/share/man:$MANPATH"
-  export INFOPATH="${HOME}/.linuxbrew/share/info:$INFOPATH"
 
 fi
 

@@ -4,7 +4,7 @@ My personal configuration files. Somehow they work together to make my life easi
 
 ### Installation
 - Clone repo to your $HOME
-- Run the install script`./install.sh`
+- Run the install script`./start.sh`
 
 ### Notes
 - At the moment, these files are OS X specific. One day I will make them work on *nix platforms.

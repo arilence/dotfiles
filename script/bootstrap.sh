@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # This script acts as a bootstrap for installation.
 # It installs the necessary applications to unpack my dotfiles:
-# - Git
-# - Zsh
 # - Homebrew
+# - Commonly used Applications
+# - Zsh
+# - Oh My Zsh
 source ./script/utils.sh
 
 # Make sure that the command line tools are installed before continuing
@@ -25,7 +26,16 @@ if ! type_exists 'brew'; then
         exit 1
     fi
 else
-    e_warning "You already have Homebrew installed."
+    e_success "You already have Homebrew installed."
+fi
+
+# Install applications
+e_header "Trying to install common applications..."
+brew update
+brew bundle
+if [ $? -ne 0 ]; then
+    e_error "APPLICATION INSTALLATION FAILED!"
+    exit 1
 fi
 
 # Install Zsh and Oh-My-Zsh
@@ -37,7 +47,7 @@ if ! type_exists 'zsh'; then
         exit 1
     fi
 else
-    e_warning "You already have Zsh installed."
+    e_success "You already have Zsh installed."
 fi
 
 e_header "Trying to install Oh-My-Zsh..."
