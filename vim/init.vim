@@ -28,49 +28,51 @@ catch
 endtry
 
 set background=dark
+set nocompatible                                                " Eliminate backwards-compatability
 syntax on
 syntax enable
 scriptencoding utf-8                                            " Need to set encoding for 'listchars' to work under windows env
+
+set autoread                                                    " Automatically reload files when they're changed on disk
+set backspace=2                                                 " Fixes some backspace issues
+set clipboard=unnamed                                           " Enables use of system clipboard
 set encoding=utf-8
 set hidden                                                      " Hides buffers
-set nocompatible                                                " Eliminate backwards-compatability
-set number                                                      " Enable line numbers
-set ruler                                                       " Turn on the ruler
-set nolist                                                      " Disables $ at the end of lines on windows
-set backspace=2                                                 " Fixes some backspace issues
-set t_Co=256                                                    " 256-bit colours
+set history=1000                                                " Remember more commands and search history
 set ignorecase                                                  " Ignore case when searching
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab     " Use 4 Space characters for each indent
-set nowrap
+set incsearch
+set lazyredraw
 set list                                                        " Show trailing whitespace
 set listchars=tab:▸\ ,trail:.
-set clipboard=unnamed                                           " Enables use of system clipboard
-set history=1000                                                " Remember more commands and search history
+set nolist                                                      " Disables $ at the end of lines on windows
+set nowrap
+set number                                                      " Enable line numbers
+set ruler                                                       " Turn on the ruler
+set scrolloff=3
+set smartcase                                                   " Case-insensitive search if any caps
+set t_Co=256                                                    " 256-bit colours
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab     " Use 4 Space characters for each indent
+set termguicolors
+set title
+set ttyfast
 set undolevels=1000                                             " Remembers many levels of undo
 set wildignore+=*.swp,*.bak,*.pyc,*.class
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor
-set title
-set incsearch
-set lazyredraw
-set ttyfast
-set termguicolors
+set wildmenu
+set wildmode=longest,list,full
 
 " Enables the ability to use mouse
 set mouse=a
-if exists('$TMUX')	" Support resizing in tmux
-	set ttymouse=xterm2
+if exists('$TMUX')  " Support resizing in tmux
+    set ttymouse=xterm2
 endif
 
-" Key map settings
+" Keyboard shortcuts
 nnoremap <leader>f :VimFiler<CR>
-
-" Disable the arrow keys to force me to use HJKL
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-
-" Easy window navigation
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
