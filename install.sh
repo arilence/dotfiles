@@ -121,6 +121,7 @@ if is_confirmed; then
   ln -sf ${CWD}/oh-my-zsh/custom/* ~/.oh-my-zsh/custom/
 
   ln -sf ${CWD}/git/gitconfig ~/.gitconfig
+  ln -sf ${CWD}/git/gitignore_global ~/.gitignore_global
 
   ln -sf ${CWD}/tmux/tmux.conf ~/.tmux.conf
 
