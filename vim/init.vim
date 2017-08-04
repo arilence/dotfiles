@@ -6,21 +6,13 @@
 " Setup Vundle package manager
 call plug#begin('~/.vim/plugged')
 
-"Colorschemes
-Plug 'dracula/vim'
+" Colorschemes
 Plug 'fneu/breezy'
-Plug 'raphamorim/lucario'
 
-Plug 'tpope/vim-fugitive'             " Shows the git branch in airline and adds some features
+" Functional plugins
 Plug 'shougo/unite.vim'               " Dependency for Vimfiler
 Plug 'shougo/vimfiler.vim'
 Plug 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
-Plug 'Valloric/YouCompleteMe'
-Plug 'ternjs/tern_for_vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }   " fzf plugin for (fuzzy file finder)
-Plug 'scrooloose/nerdcommenter'       " Enables code commenting
-"Plug 'jiangmiao/auto-pairs'           " Auto completes quotations, brackets, parenthesis, etc
-Plug 'easymotion/vim-easymotion'      " Apparently this helps with moving around in vim more *shrugs*
 
 call plug#end()
 filetype plugin indent on
@@ -29,10 +21,12 @@ filetype plugin indent on
 " -----------------
 " BASIC SETTINGS
 " ----------------
+" Only apply the colorscheme if it's available
 try
-colorscheme breezy                                             " Set the colour scheme
+colorscheme breezy
 catch
 endtry
+
 set background=dark
 syntax on
 syntax enable
@@ -45,8 +39,6 @@ set ruler                                                       " Turn on the ru
 set nolist                                                      " Disables $ at the end of lines on windows
 set backspace=2                                                 " Fixes some backspace issues
 set t_Co=256                                                    " 256-bit colours
-set guifont=Inconsolata\ for\ Powerline:h14                     " Set font to work with airline
-set mouse=a                                                     " Enables the ability to use mouse
 set ignorecase                                                  " Ignore case when searching
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab     " Use 4 Space characters for each indent
 set nowrap
@@ -63,33 +55,31 @@ set lazyredraw
 set ttyfast
 set termguicolors
 
+" Enables the ability to use mouse
+set mouse=a
+if exists('$TMUX')	" Support resizing in tmux
+	set ttymouse=xterm2
+endif
 
 " Key map settings
 nnoremap <leader>f :VimFiler<CR>
+
 " Disable the arrow keys to force me to use HJKL
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
 " Easy window navigation
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-" Make Copypasta work under maxOS and Tmux
-map <F1> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
-vmap <F2> :w !pbcopy<CR><CR>
 
 
 " -------------------
 " PLUGIN CONFIGURATION
 " -------------------
-" NeoComplete Configuration
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
 " Vimfiler Configuration
 let g:vimfiler_as_default_explorer = 1
 call vimfiler#custom#profile('default', 'context', {'safe' : 0})    " disables safe mode so I can create files
