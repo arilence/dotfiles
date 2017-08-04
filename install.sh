@@ -1,15 +1,5 @@
-#!/bin/bash
-source ./lib/utils.sh
-
-# Make sure that the command line tools are installed before continuing
-if ! type_exists 'gcc'; then
-  if [[ $OSTYPE =~ "darwin" ]]; then
-    e_error "You must install the Xcode command line tools before continuing"
-  else
-    e_error "Hmm.. gcc was not found on this machine, that's very strange"
-  fi
-  exit 1
-fi
+#!/usr/bin/env bash
+source ./script/utils.sh
 
 git submodule update --init --recursive
 

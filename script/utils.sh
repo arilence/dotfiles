@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Stolen from Nicolas Gallagher
 # https://github.com/necolas/dotfiles/
 
@@ -19,7 +19,7 @@ e_error() {
 
 # Warning logging
 e_warning() {
-    printf "$(tput setaf 136)! %s$(tput sgr0)\n" "$@"
+    printf "$(tput setaf 3)! %s$(tput sgr0)\n" "$@"
 }
 
 # Ask for confirmation before proceeding
