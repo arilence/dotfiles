@@ -13,6 +13,8 @@ Plug 'fneu/breezy'
 Plug 'shougo/unite.vim'               " Dependency for Vimfiler
 Plug 'shougo/vimfiler.vim'
 Plug 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
+Plug 'jiangmiao/auto-pairs'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 filetype plugin indent on
