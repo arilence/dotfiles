@@ -7,6 +7,7 @@
 call plug#begin('~/.vim/plugged')
 
 " Colorschemes
+Plug 'morhetz/gruvbox'
 Plug 'fneu/breezy'
 
 " Functional plugins
@@ -25,7 +26,7 @@ filetype plugin indent on
 " ----------------
 " Only apply the colorscheme if it's available
 try
-colorscheme breezy
+colorscheme gruvbox
 catch
 endtry
 
