@@ -95,9 +95,6 @@ nnoremap <leader>p :FZF<CR>
 " Easymotion Configuration
 map <Leader> <Plug>(easymotion-prefix)
 
-" Start vim within my dev folder
-cd /Users/anthony/Dev
-
 " Disable gui options in gVim
 set guioptions-=T  "remove toolbar
 set guioptions-=m  "remove menu bar
