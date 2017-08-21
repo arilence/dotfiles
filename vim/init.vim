@@ -66,7 +66,9 @@ set wildmode=longest,list,full
 
 " Enables the ability to use mouse
 set mouse=a
-if exists('$TMUX')  " Support resizing in tmux
+
+" Support resizing in tmux
+if exists('$TMUX') && !has('nvim')
     set ttymouse=xterm2
 endif
 
@@ -88,12 +90,6 @@ nnoremap <C-l> <C-w>l
 " Vimfiler Configuration
 let g:vimfiler_as_default_explorer = 1
 call vimfiler#custom#profile('default', 'context', {'safe' : 0})    " disables safe mode so I can create files
-
-" FZF Shortcut Configuration
-nnoremap <leader>p :FZF<CR>
-
-" Easymotion Configuration
-map <Leader> <Plug>(easymotion-prefix)
 
 " Disable gui options in gVim
 set guioptions-=T  "remove toolbar
