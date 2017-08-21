@@ -79,6 +79,9 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   alias showHiddenFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
   alias hideHiddenFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
+  # Some quick and dirty tmux management
+  alias mux='tmux new -A -s basic'
+
   # Get gpg-agent to work on osx
   export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
   GPG_TTY=$(tty)
