@@ -11,11 +11,12 @@ Plug 'morhetz/gruvbox'
 Plug 'fneu/breezy'
 
 " Functional plugins
+Plug 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
+Plug 'alvan/vim-closetag'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'shougo/unite.vim'               " Dependency for Vimfiler
 Plug 'shougo/vimfiler.vim'
-Plug 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
-Plug 'jiangmiao/auto-pairs'
-Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 filetype plugin indent on
