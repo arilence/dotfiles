@@ -55,7 +55,6 @@ set ruler                                                       " Turn on the ru
 set scrolloff=3
 set smartcase                                                   " Case-insensitive search if any caps
 set t_Co=256                                                    " 256-bit colours
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab     " Use 4 Space characters for each indent
 set termguicolors
 set title
 set ttyfast
@@ -65,8 +64,19 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor
 set wildmenu
 set wildmode=longest,list,full
 
+" Use 4 Space characters for each indent
+set tabstop=4 
+set shiftwidth=4
+set softtabstop=0
+set expandtab
+set smarttab
+
 " Enables the ability to use mouse
 set mouse=a
+
+" Make new split panes appear more naturally
+set splitbelow
+set splitright
 
 " Support resizing in tmux
 if exists('$TMUX') && !has('nvim')
@@ -95,3 +105,6 @@ call vimfiler#custom#profile('default', 'context', {'safe' : 0})    " disables s
 " Disable gui options in gVim
 set guioptions-=T  "remove toolbar
 set guioptions-=m  "remove menu bar
+
+" Configure vim-closetag
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js'
