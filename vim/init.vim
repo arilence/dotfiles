@@ -17,6 +17,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'shougo/unite.vim'               " Dependency for Vimfiler
 Plug 'shougo/vimfiler.vim'
+Plug 'christoomey/vim-tmux-navigator' " smart pane switching with vim and tmux
 
 call plug#end()
 filetype plugin indent on
