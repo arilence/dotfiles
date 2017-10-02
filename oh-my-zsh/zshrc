@@ -83,6 +83,7 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   alias mux='tmux new -A -s basic'
 
   # Get gpg-agent to work on osx
+  eval $(gpg-agent --daemon)
   export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
   GPG_TTY=$(tty)
   export GPG_TTY
