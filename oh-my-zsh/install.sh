@@ -13,4 +13,6 @@ if [ $? -ne 0 ]; then
     e_error "Configuration failed!"
     exit 1
 fi
+
+touch ~/.hushlogin
 e_success "Success."

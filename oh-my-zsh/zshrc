@@ -1,5 +1,5 @@
 # Oh-My-Zsh Configuration
-ZSH_THEME="honukai"             # Set name of the theme to load.
+ZSH_THEME="smith"              # Set name of the theme to load.
 COMPLETION_WAITING_DOTS="true"  # Display red dots whilst waiting for completion.
 
 # Language Preferences
@@ -45,23 +45,6 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   # Change the default location for Caskroom apps to symlink to
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-  # Enable rbenv
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-
-  # Fixes shell integration on iterm2
-  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-  # Mute and Un-Mute
-  alias mute="osascript -e 'set volume output muted true'"
-  alias unmute="osascript -e 'set volume 10'"
-
-  # Lock current session and proceed to the login screen.
-  alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
-
-  # Puts the computer to sleep
-  alias tosleep='pmset sleepnow'
-
   # Flush Directory Service cache
   alias flush="dscacheutil -flushcache"
 
@@ -83,7 +66,7 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   alias mux='tmux new -A -s basic'
 
   # Get gpg-agent to work on osx
-  eval $(gpg-agent --daemon)
+  #eval $(gpg-agent --daemon)
   export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
   GPG_TTY=$(tty)
   export GPG_TTY
