@@ -11,13 +11,14 @@ Plug 'morhetz/gruvbox'
 Plug 'fneu/breezy'
 
 " Functional plugins
-Plug 'airblade/vim-gitgutter'         " Adds git diff icons to the gutter
+Plug 'airblade/vim-gitgutter'               " Adds git diff icons to the gutter
 Plug 'alvan/vim-closetag'
-Plug 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'        " Adds consistent coding styles on a per project basis
 Plug 'jiangmiao/auto-pairs'
-Plug 'shougo/unite.vim'               " Dependency for Vimfiler
+Plug 'shougo/unite.vim'                     " Dependency for Vimfiler
 Plug 'shougo/vimfiler.vim'
-Plug 'christoomey/vim-tmux-navigator' " smart pane switching with vim and tmux
+Plug 'christoomey/vim-tmux-navigator'       " Smart pane switching with vim and tmux
+Plug 'tmux-plugins/vim-tmux-focus-events'   " Makes focus events work in tmux so vim can auto refresh file
 
 call plug#end()
 filetype plugin indent on
