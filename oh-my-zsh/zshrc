@@ -16,7 +16,7 @@ if [ -d "$HOME/.bin" ]; then # Include private bin if exists
 fi
 
 # Set correct TERM for plain shell and tmux
-export TERM='xterm-256color'
+export TERM='screen-256color'
 
 # Need that neovim love
 export EDITOR='nvim'
