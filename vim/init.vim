@@ -10,6 +10,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'cocopon/iceberg.vim'
 Plug 'rakr/vim-one'
+Plug 'thenewvu/vim-colors-sketching'
+Plug 'lifepillar/vim-solarized8'
 
 " Functional plugins
 Plug 'airblade/vim-gitgutter'               " Adds git diff icons to the gutter
@@ -44,8 +46,8 @@ endif
 
 " Only apply the colorscheme if it's available
 try
-colorscheme iceberg
-set background=dark
+colorscheme solarized8
+set background=light
 catch
 endtry
 
