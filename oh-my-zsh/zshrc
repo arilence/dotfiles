@@ -1,6 +1,7 @@
 # Oh-My-Zsh Configuration
 ZSH_THEME="smith"              # Set name of the theme to load.
 COMPLETION_WAITING_DOTS="true"  # Display red dots whilst waiting for completion.
+plugins=(brew docker git node tmuxinator tmux)
 
 # Language Preferences
 export LANG=en_US.UTF-8
@@ -16,7 +17,7 @@ if [ -d "$HOME/.bin" ]; then # Include private bin if exists
 fi
 
 # Set correct TERM for plain shell and tmux
-export TERM='screen-256color'
+export TERM='xterm-256color'
 
 # Need that neovim love
 export EDITOR='nvim'
