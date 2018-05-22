@@ -1,7 +1,7 @@
 # Oh-My-Zsh Configuration
-ZSH_THEME="smith"              # Set name of the theme to load.
+ZSH_THEME="smith"               # Set name of the theme to load.
 COMPLETION_WAITING_DOTS="true"  # Display red dots whilst waiting for completion.
-plugins=(brew docker git node tmuxinator tmux)
+plugins=(brew docker docker-compose git node tmuxinator tmux)
 
 # Language Preferences
 export LANG=en_US.UTF-8
@@ -28,38 +28,25 @@ alias vim="nvim"
 # darwin = osx
 if [[ $OSTYPE =~ "darwin" ]]; then
 
-  # Android SDK Location
+  # Application Specific Variables
   export ANDROID_HOME=$HOME/Library/Android/sdk
   export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-
-  # JAVA HOME
   export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-
-  # Fixes some bug in Tmux on MaxOS Sierra
-  export EVENT_NOKQUEUE=1
-
-  # Change the default location for Caskroom apps to symlink to
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+  export EVENT_NOKQUEUE=1 # Fixes some bug in Tmux on MaxOS Sierra
 
-  # Flush Directory Service cache
-  alias flush="dscacheutil -flushcache"
-
-  # File size
-  alias fs="stat -f \"%z bytes\""
-
-  # Empty the Trash on all mounted volumes and the main HDD
-  alias emptyTrash="sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash"
-
-  # Hide/show all desktop icons (useful when presenting)
+  # Useful system shortcuts
+  alias flush="dscacheutil -flushcache" # Flush Directory Service cache
+  alias fs="stat -f \"%z bytes\""   # Get friendly formatted filesize
+  alias emptyTrash="sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash" # includes mounted volumes
   alias hideDesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
   alias showDesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-
-  # Shows and Hides hidden files
-  alias showHiddenFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
   alias hideHiddenFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+  alias showHiddenFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 
-  # Some quick and dirty tmux management
-  alias mux='tmux new -A -s basic'
+  # Aliases
+  alias ls="ls --color=auto --group-directories-first"
+  alias mux="tmuxinator"
 
   # Get gpg-agent to work on osx
   #eval $(gpg-agent --daemon)
