@@ -5,6 +5,9 @@ e_header "Trying to configure tmux..."
 
 CWD=$(pwd)
 ln -sf ${CWD}/tmux/tmux.conf ~/.tmux.conf
+ln -sf ${CWD}/tmux/tmuxinator ~/.tmuxinator
+
+gem install tmuxinator --silent
 
 if [ $? -ne 0 ]; then
     e_error "Configuration failed!"

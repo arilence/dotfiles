@@ -6,13 +6,13 @@ e_header "Trying to configure Python..."
 if ! type_exists 'pip2'; then
     e_warning "pip2 was not found, skipping."
 else
-    pip2 install -r ./python/requirements-2.txt
+    pip2 install -q -r ./python/requirements-2.txt
 fi
 
 if ! type_exists 'pip3'; then
     e_warning "pip3 was not found, skipping."
 else
-    pip3 install -r ./python/requirements-3.txt
+    pip3 install -q -r ./python/requirements-3.txt
 fi
 
 if [ $? -ne 0 ]; then

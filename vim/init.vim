@@ -12,6 +12,7 @@ Plug 'cocopon/iceberg.vim'
 Plug 'rakr/vim-one'
 Plug 'thenewvu/vim-colors-sketching'
 Plug 'lifepillar/vim-solarized8'
+Plug 'vivkin/flatland.vim'
 
 " Functional plugins
 Plug 'airblade/vim-gitgutter'               " Adds git diff icons to the gutter
@@ -22,6 +23,7 @@ Plug 'shougo/unite.vim'                     " Dependency for Vimfiler
 Plug 'shougo/vimfiler.vim'
 Plug 'christoomey/vim-tmux-navigator'       " Smart pane switching with vim and tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'   " Makes focus events work in tmux so vim can auto refresh file
+Plug 'cloudhead/neovim-fuzzy'               " Companion plugin for Fzy - fuzzy file searching
 
 call plug#end()
 filetype plugin indent on
@@ -46,8 +48,8 @@ endif
 
 " Only apply the colorscheme if it's available
 try
-colorscheme solarized8
-set background=light
+colorscheme flatland 
+set background=dark
 catch
 endtry
 
@@ -127,3 +129,6 @@ set guioptions-=m  "remove menu bar
 
 " Configure vim-closetag
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js'
+
+" Configure neovim-fuzzy
+nnoremap <C-p> :FuzzyOpen<CR>
