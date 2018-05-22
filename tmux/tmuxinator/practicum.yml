@@ -44,14 +44,14 @@ root: ~/Dev/bcit/practicum
 
 windows:
   - editor:
-      layout: cab4,120x39,0,0[120x27,0,0,0,120x11,0,28,2]
+      layout: 6482,120x39,0,0[120x26,0,0,32,120x12,0,27,33]
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
       panes:
         # Eventually I want to be able to have different panes for server and client development :)
         # but I guess we'll have docker running for the server side
-        - vim . 
+        - vim README.md
         - cd server && docker-compose up 
   - console:
       panes:
