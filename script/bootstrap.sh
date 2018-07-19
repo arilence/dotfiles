@@ -51,7 +51,7 @@ else
 fi
 
 e_header "Trying to install Oh-My-Zsh..."
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
 if [ $? -ne 0 ]; then
     e_error "OH-MY-ZSH FAILED!"
     exit 1
