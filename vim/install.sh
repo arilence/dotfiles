@@ -11,6 +11,9 @@ ln -sf ${CWD}/vim/* ~/.config/nvim/
 ln -sf ${CWD}/vim/* ~/.vim/
 ln -sf ${CWD}/vim/init.vim ~/.vimrc
 
+# Install the vim-plug plugins
+vim +PlugInstall +qall
+
 if [ $? -ne 0 ]; then
     e_error "Configuration failed!"
     exit 1
