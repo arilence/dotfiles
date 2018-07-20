@@ -33,9 +33,6 @@ alias vim="nvim"
 # darwin = osx
 if [[ $OSTYPE =~ "darwin" ]]; then
 
-  # JAVA HOME
-  export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-
   # Fixes some bug in Tmux on MaxOS Sierra
   export EVENT_NOKQUEUE=1
 
