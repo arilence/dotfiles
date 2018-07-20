@@ -115,7 +115,14 @@ nnoremap <C-l> <C-w>l
 " -------------------
 " Vimfiler Configuration
 let g:vimfiler_as_default_explorer = 1
-call vimfiler#custom#profile('default', 'context', {'safe' : 0})    " disables safe mode so I can create files
+call vimfiler#custom#profile('default', 'context', {
+						\'safe' : 0
+						\'explorer': 1,
+						\'status': 1,
+						\'find': 1,
+						\'winwidth': 10,
+						\'split': 1
+						\})    " disables safe mode so I can create files
 
 " Disable gui options in gVim
 set guioptions-=T  "remove toolbar
