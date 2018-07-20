@@ -45,7 +45,7 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   alias showHiddenFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 
   # Aliases
-  alias ls="ls --color=auto --group-directories-first"
+  #alias ls="ls --color=auto --group-directories-first"
   alias mux="tmuxinator"
 
   # Get gpg-agent to work on osx
