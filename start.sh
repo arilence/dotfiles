@@ -6,7 +6,7 @@ if [[ $OSTYPE =~ "darwin" ]]; then
 ./script/install-all.sh
 
 # Do this last to set default terminal to oh-my-zsh
-env zsh -l
+chsh -s $(which zsh)
 
 else
 
