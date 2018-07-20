@@ -24,6 +24,11 @@ alias ls="ls -l"
 alias tmux="TERM=screen-256color-bce tmux"
 alias mux="tmux new -A -s default"
 
+# Need that neovim love
+export EDITOR='nvim'
+export VISUAL='nvim'
+alias vim="nvim"
+
 # OS dependent configurations
 # darwin = osx
 if [[ $OSTYPE =~ "darwin" ]]; then
@@ -43,6 +48,10 @@ if [[ $OSTYPE =~ "darwin" ]]; then
 
   # Some quick and dirty tmux management
   alias mux='tmux new -A -s basic'
+
+elif [[ $OSTYPE == "linux-gnu" ]]; then
+
+fi
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
