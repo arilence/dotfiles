@@ -17,8 +17,9 @@ brew 'tmux'
 #==============================================================================
 # Applications
 #==============================================================================
-cask 'spotify'
-cask 'docker'
-cask '1password'
-cask 'atom'
+#cask 'spotify'
+#cask 'docker'
+#cask '1password'
+#cask 'atom'
 cask 'java'
+cask 'iterm2'
