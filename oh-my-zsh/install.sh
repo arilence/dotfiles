@@ -7,7 +7,7 @@ mkdir -p ~/.oh-my-zsh/custom/
 
 CWD=$(pwd)
 ln -sf ${CWD}/oh-my-zsh/zshrc ~/.zshrc
-ln -sf ${CWD}/oh-my-zsh/custom/* ~/.oh-my-zsh/custom/
+ln -sf ${CWD}/oh-my-zsh/custom/* ~/.oh-my-zsh/custom
 
 if [ $? -ne 0 ]; then
     e_error "Configuration failed!"
