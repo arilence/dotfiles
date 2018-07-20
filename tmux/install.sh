@@ -7,6 +7,7 @@ CWD=$(pwd)
 ln -sf ${CWD}/tmux/tmux.conf ~/.tmux.conf
 ln -sf ${CWD}/tmux/tmuxinator ~/.tmuxinator
 
+brew install ruby
 gem install tmuxinator --silent
 
 if [ $? -ne 0 ]; then

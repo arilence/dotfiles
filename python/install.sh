@@ -12,7 +12,7 @@ fi
 if ! type_exists 'pip3'; then
     e_warning "pip3 was not found, skipping."
 else
-    pip3 install -q -r ./python/requirements-3.txt
+    pip3 install -q --user -r ./python/requirements-3.txt
 fi
 
 if [ $? -ne 0 ]; then
