@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 
 " Colorschemes
 Plug 'rakr/vim-one'
+Plug 'AlessandroYorba/Sierra'
 
 " Functional plugins
 Plug 'airblade/vim-gitgutter'               " Adds git diff icons to the gutter
@@ -42,8 +43,7 @@ endif
 
 " Only apply the colorscheme if it's available
 try
-colorscheme one
-set background=light
+colorscheme Sierra
 catch
 endtry
 
