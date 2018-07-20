@@ -1,5 +1,5 @@
 # Oh-My-Zsh Configuration
-ZSH_THEME="smith"              # Set name of the theme to load.
+ZSH_THEME="philips"              # Set name of the theme to load.
 COMPLETION_WAITING_DOTS="true"  # Display red dots whilst waiting for completion.
 
 # Language Preferences
