@@ -31,7 +31,7 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   # Application Specific Variables
   export ANDROID_HOME=$HOME/Library/Android/sdk
   export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-  export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+  #export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
   export EVENT_NOKQUEUE=1 # Fixes some bug in Tmux on MaxOS Sierra
 

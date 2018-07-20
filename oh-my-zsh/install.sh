@@ -3,7 +3,8 @@ source ./script/utils.sh
 
 e_header "Trying to configure Oh My Zsh..."
 
-mkdir -p ~/.oh-my-zsh/custom/
+rm -r ~/.oh-my-zsh/custom
+mkdir -p ~/.oh-my-zsh/custom
 
 CWD=$(pwd)
 ln -sf ${CWD}/oh-my-zsh/zshrc ~/.zshrc
