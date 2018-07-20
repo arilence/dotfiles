@@ -15,7 +15,7 @@ Plug 'alvan/vim-closetag'
 Plug 'editorconfig/editorconfig-vim'        " Adds consistent coding styles on a per project basis
 Plug 'jiangmiao/auto-pairs'
 Plug 'shougo/unite.vim'                     " Dependency for Vimfiler
-Plug 'shougo/vimfiler.vim'
+Plug 'shougo/vimfiler.vim', { 'on': vimfiler#custom#profile' }
 Plug 'christoomey/vim-tmux-navigator'       " Smart pane switching with vim and tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'   " Makes focus events work in tmux so vim can auto refresh file
 
@@ -115,14 +115,7 @@ nnoremap <C-l> <C-w>l
 " -------------------
 " Vimfiler Configuration
 let g:vimfiler_as_default_explorer = 1
-call vimfiler#custom#profile('default', 'context', {
-						\'safe' : 0
-						\'explorer': 1,
-						\'status': 1,
-						\'find': 1,
-						\'winwidth': 10,
-						\'split': 1
-						\})    " disables safe mode so I can create files
+call vimfiler#custom#profile('default', 'context', {'safe' : 0})
 
 " Disable gui options in gVim
 set guioptions-=T  "remove toolbar
