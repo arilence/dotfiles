@@ -32,7 +32,7 @@ if is_confirmed; then
     defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
     # Enable upward two-finger swipe to show app windows
-    defaults write com.apple.dock scroll-to-open -bool TRUE; killall Dock
+    #defaults write com.apple.dock scroll-to-open -bool TRUE; killall Dock
 
     # Disables the slight delay when hoving to show the dock in "Auto-Hide" mode
     defaults write com.apple.dock autohide -bool true

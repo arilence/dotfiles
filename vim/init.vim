@@ -7,8 +7,6 @@
 call plug#begin('~/.vim/plugged')
 
 " Colorschemes
-Plug 'morhetz/gruvbox'
-Plug 'cocopon/iceberg.vim'
 Plug 'rakr/vim-one'
 
 " Functional plugins
@@ -44,8 +42,8 @@ endif
 
 " Only apply the colorscheme if it's available
 try
-colorscheme iceberg
-set background=dark
+colorscheme one
+set background=light
 catch
 endtry
 

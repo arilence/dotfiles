@@ -1,6 +1,0 @@
-livestreamer
-neovim
-six
-soundcloud
-soundscrape
-PyQt5

@@ -18,18 +18,15 @@ fi
 # Set correct TERM for plain shell and tmux
 export TERM='xterm-256color'
 
-# Need that neovim love
-export EDITOR='nvim'
-export VISUAL='nvim'
-alias vim="nvim"
+# QOL Alias's
+alias ll="ls -las"
+alias ls="ls -l"
+alias tmux="TERM=screen-256color-bce tmux"
+alias mux="tmux new -A -s default"
 
 # OS dependent configurations
 # darwin = osx
 if [[ $OSTYPE =~ "darwin" ]]; then
-
-  # Android SDK Location
-  export ANDROID_HOME=$HOME/Library/Android/sdk
-  export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
   # JAVA HOME
   export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
@@ -37,21 +34,8 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   # Fixes some bug in Tmux on MaxOS Sierra
   export EVENT_NOKQUEUE=1
 
-  # Change the default location for Caskroom apps to symlink to
-  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-  # Flush Directory Service cache
-  alias flush="dscacheutil -flushcache"
-
-  # File size
-  alias fs="stat -f \"%z bytes\""
-
   # Empty the Trash on all mounted volumes and the main HDD
   alias emptyTrash="sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash"
-
-  # Hide/show all desktop icons (useful when presenting)
-  alias hideDesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-  alias showDesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
   # Shows and Hides hidden files
   alias showHiddenFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
@@ -59,21 +43,6 @@ if [[ $OSTYPE =~ "darwin" ]]; then
 
   # Some quick and dirty tmux management
   alias mux='tmux new -A -s basic'
-
-  # Get gpg-agent to work on osx
-  #eval $(gpg-agent --daemon)
-  export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
-  GPG_TTY=$(tty)
-  export GPG_TTY
-  if [ -f "${HOME}/.gpg-agent-info" ]; then
-    . "${HOME}/.gpg-agent-info"
-    export GPG_AGENT_INFO
-    export SSH_AUTH_SOCK
-  fi
-
-elif [[ $OSTYPE == "linux-gnu" ]]; then
-
-fi
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
