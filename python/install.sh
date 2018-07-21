@@ -3,12 +3,6 @@ source ./script/utils.sh
 
 e_header "Trying to configure Python..."
 
-if ! type_exists 'pip2'; then
-    e_warning "pip2 was not found, skipping."
-else
-    pip2 install -q -r ./python/requirements-2.txt
-fi
-
 if ! type_exists 'pip3'; then
     e_warning "pip3 was not found, skipping."
 else
