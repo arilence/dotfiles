@@ -8,6 +8,10 @@ ln -sf ${CWD}/tmux/tmux.conf ~/.tmux.conf
 ln -sf ${CWD}/tmux/tmuxinator ~/.tmuxinator
 
 brew install ruby
+
+# Tmux plugin manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 gem install tmuxinator --silent
 
 if [ $? -ne 0 ]; then
