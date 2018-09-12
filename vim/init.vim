@@ -7,18 +7,13 @@
 call plug#begin('~/.vim/plugged')
 
 " Colorschemes
-Plug 'morhetz/gruvbox'
-Plug 'cocopon/iceberg.vim'
 Plug 'rakr/vim-one'
-Plug 'thenewvu/vim-colors-sketching'
-Plug 'lifepillar/vim-solarized8'
 Plug 'vivkin/flatland.vim'
+Plug 'rainglow/vim'
 
 " Functional plugins
 Plug 'airblade/vim-gitgutter'               " Adds git diff icons to the gutter
-Plug 'alvan/vim-closetag'
 Plug 'editorconfig/editorconfig-vim'        " Adds consistent coding styles on a per project basis
-Plug 'jiangmiao/auto-pairs'
 Plug 'shougo/unite.vim'                     " Dependency for Vimfiler
 Plug 'shougo/vimfiler.vim'
 Plug 'christoomey/vim-tmux-navigator'       " Smart pane switching with vim and tmux
@@ -48,7 +43,7 @@ endif
 
 " Only apply the colorscheme if it's available
 try
-colorscheme flatland 
+colorscheme Stasis-contrast
 set background=dark
 catch
 endtry
@@ -126,9 +121,6 @@ call vimfiler#custom#profile('default', 'context', {'safe' : 0})    " disables s
 " Disable gui options in gVim
 set guioptions-=T  "remove toolbar
 set guioptions-=m  "remove menu bar
-
-" Configure vim-closetag
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js'
 
 " Configure neovim-fuzzy
 nnoremap <C-p> :FuzzyOpen<CR>
