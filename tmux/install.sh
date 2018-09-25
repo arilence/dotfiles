@@ -5,7 +5,6 @@ e_header "Trying to configure tmux..."
 
 CWD=$(pwd)
 ln -sf ${CWD}/tmux/tmux.conf ~/.tmux.conf
-ln -sf ${CWD}/tmux/tmuxinator ~/.tmuxinator
 
 brew install ruby
 

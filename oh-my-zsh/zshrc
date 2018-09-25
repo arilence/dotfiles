@@ -34,6 +34,7 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   #export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
   export EVENT_NOKQUEUE=1 # Fixes some bug in Tmux on MaxOS Sierra
+  export PATH="$HOME/.cargo/bin:$PATH" # For Rust / Cargo
 
   # Useful system shortcuts
   alias flush="dscacheutil -flushcache" # Flush Directory Service cache
