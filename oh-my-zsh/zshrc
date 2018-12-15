@@ -70,6 +70,8 @@ if [[ $OSTYPE =~ "darwin" ]]; then
     eval $(gpg-agent --daemon)
   fi
 
+  # Enable rbenv
+  eval "$(rbenv init -)"
 
 elif [[ $OSTYPE == "linux-gnu" ]]; then
 
