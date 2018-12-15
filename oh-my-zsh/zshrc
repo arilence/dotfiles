@@ -70,9 +70,6 @@ if [[ $OSTYPE =~ "darwin" ]]; then
     eval $(gpg-agent --daemon)
   fi
 
-  # Enable Hashicorp Vault
-  autoload -U +X bashcompinit && bashcompinit
-  complete -o nospace -C /usr/local/bin/vault vault
 
 elif [[ $OSTYPE == "linux-gnu" ]]; then
 
@@ -81,3 +78,7 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
+# Enable Hashicorp Vault zshrc plugin
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/vault vault
