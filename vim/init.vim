@@ -14,11 +14,20 @@ Plug 'rainglow/vim'
 " Functional plugins
 Plug 'airblade/vim-gitgutter'               " Adds git diff icons to the gutter
 Plug 'editorconfig/editorconfig-vim'        " Adds consistent coding styles on a per project basis
-Plug 'shougo/unite.vim'                     " Dependency for Vimfiler
-Plug 'shougo/vimfiler.vim'
 Plug 'christoomey/vim-tmux-navigator'       " Smart pane switching with vim and tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'   " Makes focus events work in tmux so vim can auto refresh file
-Plug 'cloudhead/neovim-fuzzy'               " Companion plugin for Fzy - fuzzy file searching
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'terryma/vim-multiple-cursors'
+
+" Installs alternative to vimfiler by Shougo
+if has('nvim')
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/defx.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 call plug#end()
 filetype plugin indent on
@@ -99,8 +108,17 @@ if exists('$TMUX') && !has('nvim')
     set ttymouse=xterm2
 endif
 
-" Keyboard shortcuts
-nnoremap <leader>f :VimFiler<CR>
+" Disable gui options in gVim
+set guioptions-=T  "remove toolbar
+set guioptions-=m  "remove menu bar
+
+
+" -------------------
+" CUSTOM KEYMAPPING
+" -------------------
+" Disable use of arrow keys while in normal mode
+" I did this to force myself to learn better
+" vim locomotion.
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
@@ -110,17 +128,54 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Plugin Keymaps
+nnoremap <leader>f :Defx<CR>
+nnoremap <C-p> :Files<CR>
 
-" -------------------
-" PLUGIN CONFIGURATION
-" -------------------
-" Vimfiler Configuration
-let g:vimfiler_as_default_explorer = 1
-call vimfiler#custom#profile('default', 'context', {'safe' : 0})    " disables safe mode so I can create files
-
-" Disable gui options in gVim
-set guioptions-=T  "remove toolbar
-set guioptions-=m  "remove menu bar
-
-" Configure neovim-fuzzy
-nnoremap <C-p> :FuzzyOpen<CR>
+" Default Key Mappings for Defx
+autocmd FileType defx call s:defx_my_settings()
+function! s:defx_my_settings() abort
+  " Define mappings
+  nnoremap <silent><buffer><expr> <Enter>
+  \ defx#do_action('open')
+  nnoremap <silent><buffer><expr> c
+  \ defx#do_action('copy')
+  nnoremap <silent><buffer><expr> m
+  \ defx#do_action('move')
+  nnoremap <silent><buffer><expr> p
+  \ defx#do_action('paste')
+  nnoremap <silent><buffer><expr> h
+  \ defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> <BS>
+  \ defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> l
+  \ defx#do_action('open')
+  nnoremap <silent><buffer><expr> E
+  \ defx#do_action('open', 'vsplit')
+  nnoremap <silent><buffer><expr> P
+  \ defx#do_action('open', 'pedit')
+  nnoremap <silent><buffer><expr> K
+  \ defx#do_action('new_directory')
+  nnoremap <silent><buffer><expr> N
+  \ defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> M
+  \ defx#do_action('new_multiple_files')
+  nnoremap <silent><buffer><expr> d
+  \ defx#do_action('remove')
+  nnoremap <silent><buffer><expr> r
+  \ defx#do_action('rename')
+  nnoremap <silent><buffer><expr> !
+  \ defx#do_action('execute_command')
+  nnoremap <silent><buffer><expr> yy
+  \ defx#do_action('yank_path')
+  nnoremap <silent><buffer><expr> .
+  \ defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> ;
+  \ defx#do_action('repeat')
+  nnoremap <silent><buffer><expr> q
+  \ defx#do_action('quit')
+  nnoremap <silent><buffer><expr> j
+  \ line('.') == line('$') ? 'gg' : 'j'
+  nnoremap <silent><buffer><expr> k
+  \ line('.') == 1 ? 'G' : 'k'
+endfunction
