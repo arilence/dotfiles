@@ -12,19 +12,20 @@ Plug 'vivkin/flatland.vim'
 Plug 'rainglow/vim'
 
 " Functional plugins
-Plug 'airblade/vim-gitgutter'               " Adds git diff icons to the gutter
-Plug 'editorconfig/editorconfig-vim'        " Adds consistent coding styles on a per project basis
+Plug 'mhinz/vim-signify'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'christoomey/vim-tmux-navigator'       " Smart pane switching with vim and tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'   " Makes focus events work in tmux so vim can auto refresh file
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'terryma/vim-multiple-cursors'
 
-" Installs alternative to vimfiler by Shougo
 if has('nvim')
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'Shougo/defx.nvim'
+  Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
@@ -105,12 +106,33 @@ set splitright
 
 " Support resizing in tmux
 if exists('$TMUX') && !has('nvim')
-    set ttymouse=xterm2
+  set ttymouse=xterm2
 endif
 
 " Disable gui options in gVim
 set guioptions-=T  "remove toolbar
 set guioptions-=m  "remove menu bar
+
+" Deoplete config
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><C-j> pumvisible()? "\<C-n>" : "\<C-j>"
+inoremap <expr><C-k> pumvisible()? "\<C-p>" : "\<C-k>"
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ deoplete#mappings#manual_complete()
+function! s:check_back_space() abort "{{{
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
+" Fixes bug when using multiple cursors and deoplete auto complete
+function g:Multiple_cursors_before()
+  call deoplete#custom#buffer_option('auto_complete', v:false)
+endfunction
+function g:Multiple_cursors_after()
+  call deoplete#custom#buffer_option('auto_complete', v:true)
+endfunction
 
 
 " -------------------
