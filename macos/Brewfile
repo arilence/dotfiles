@@ -1,0 +1,25 @@
+# Brewfile
+cask_args appdir: '/Applications'
+
+tap 'caskroom/cask'
+tap 'caskroom/versions'
+tap 'homebrew/bundle'
+
+#==============================================================================
+# Command-Line
+#==============================================================================
+brew 'openssl'
+brew 'neovim'
+brew 'tmux'
+
+#==============================================================================
+# Applications
+#==============================================================================
+cask 'spotify'
+cask 'docker'
+cask 'discord'
+cask 'google-chrome'
+cask 'vlc'
+cask 'alacritty'
+cask 'dropbox'
+cask 'keepassxc'
