@@ -3,8 +3,6 @@
 # It installs the necessary applications to unpack my dotfiles:
 # - Homebrew
 # - Commonly used Applications
-# - Zsh
-# - Oh My Zsh
 source ./script/utils.sh
 
 # Make sure that the command line tools are installed before continuing
@@ -37,23 +35,3 @@ if [ $? -ne 0 ]; then
     e_error "APPLICATION INSTALLATION FAILED!"
     exit 1
 fi
-
-# Install Zsh and Oh-My-Zsh
-e_header "Trying to install Zsh..."
-if ! type_exists 'zsh'; then
-    brew install zsh
-    if [ $? -ne 0 ]; then
-        e_error "ZSH FAILED!"
-        exit 1
-    fi
-else
-    e_success "You already have Zsh installed."
-fi
-
-e_header "Trying to install Oh-My-Zsh..."
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
-if [ $? -ne 0 ]; then
-    e_error "OH-MY-ZSH FAILED!"
-    exit 1
-fi
-

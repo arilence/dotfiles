@@ -1,17 +1,14 @@
-# Oh-My-Zsh Configuration
-ZSH_THEME="smith"               # Set name of the theme to load.
-COMPLETION_WAITING_DOTS="true"  # Display red dots whilst waiting for completion.
-plugins=(docker docker-compose git node tmuxinator tmux)
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
-# Language Preferences
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
-# Setup PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin:$PATH"
-export PATH=${PATH}:~/.composer/vendor/bin
 if [ -d "$HOME/.bin" ]; then # Include private bin if exists
   PATH="$HOME/.bin:$PATH"
 fi
@@ -28,26 +25,20 @@ alias vim="nvim"
 # darwin = osx
 if [[ $OSTYPE =~ "darwin" ]]; then
 
-  # Application Specific Variables
-  export ANDROID_HOME=$HOME/Library/Android/sdk
-  export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-  #export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-  export EVENT_NOKQUEUE=1 # Fixes some bug in Tmux on MaxOS Sierra
-  export PATH="$HOME/.cargo/bin:$PATH" # For Rust / Cargo
-
-  # Useful system shortcuts
-  alias flush="dscacheutil -flushcache" # Flush Directory Service cache
-  alias fs="stat -f \"%z bytes\""   # Get friendly formatted filesize
-  alias emptyTrash="sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash" # includes mounted volumes
-  alias hideDesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-  alias showDesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+  # Aliases
+  alias flush='dscacheutil -flushcache' # Flush Directory Service cache
+  alias fs='stat -f \"%z bytes\"'   # Get friendly formatted filesize
+  alias emptyTrash='sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash' # includes mounted volumes
+  alias lockScreen='/System/Library/CoreServices/\"Menu Extras\"/User.menu/Contents/Resources/CGSession -suspend'
+  alias hideDesktop='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
+  alias showDesktop='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'
   alias hideHiddenFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
   alias showHiddenFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+  alias mux='tmuxinator'
+  alias cask='brew cask'
 
-  # Aliases
-  #alias ls="ls --color=auto --group-directories-first"
-  alias mux="tmuxinator"
+  # Fixes some bug in Tmux on MaxOS Sierra
+  export EVENT_NOKQUEUE=1 
 
   # This ugly section of code gets GPG and GPG-AGENT to work on MacOS
   unset SSH_AGENT_PID
@@ -70,17 +61,20 @@ if [[ $OSTYPE =~ "darwin" ]]; then
     eval $(gpg-agent --daemon)
   fi
 
-  # Enable rbenv
-  eval "$(rbenv init -)"
+  # Default brew cask install directory
+  export HOMEBREW_CASK_OPTS='--appdir=/Applications'
+ 
+  # Language / SDK Specific
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+  export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+  export PATH="$HOME/.cargo/bin:$PATH"
+
+  # Only use if rbenv is available
+  if [ -r ~/.rbenv/bin ]; then
+    export PATH="${HOME}/.rbenv/bin:${PATH}"
+    eval "$(rbenv init -)"
+  fi
 
 elif [[ $OSTYPE == "linux-gnu" ]]; then
 
 fi
-
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-source $ZSH/oh-my-zsh.sh
-
-# Enable Hashicorp Vault zshrc plugin
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/vault vault
