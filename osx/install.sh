@@ -28,26 +28,35 @@ if is_confirmed; then
     # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
     defaults write com.apple.screencapture type -string "png"
 
+    # Disable screenshot shadows
+    defaults write com.apple.screencapture disable-shadow -bool true
+    defaults write com.apple.screencapture name "Screenshot"
+
     # Enable subpixel font rendering on non-Apple LCDs
     defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
     # Enable upward two-finger swipe to show app windows
     defaults write com.apple.dock scroll-to-open -bool TRUE; killall Dock
 
-    # Disables the slight delay when hoving to show the dock in "Auto-Hide" mode
+    # Automatically hide and show the dock
     defaults write com.apple.dock autohide -bool true
-    defaults write com.apple.dock autohide-delay -float 0
-    killall Dock
 
-    ######################
-    #### SSD Specific ####
-    ######################
+    # Disables the slight delay when hoving to show the dock in "Auto-Hide" mode
+    defaults write com.apple.dock autohide-delay -float 0; killall Dock
 
     # Disable local Time Machine snapshots
-    sudo tmutil disablelocal
+    #sudo tmutil disablelocal
 
     # Disable hibernation (speeds up entering sleep mode)
     sudo pmset -a hibernatemode 0
+
+    # Stop 'Photos.app' from opening automatically when plugging in camera/sd card
+    defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+    # Enable snap-to-grid for icons in Finder
+    /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist >/dev/null 2>/dev/null
+    /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist >/dev/null 2>/dev/null
+    /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist >/dev/null 2>/dev/null
 
 
     ################
@@ -75,11 +84,16 @@ if is_confirmed; then
     # Disable the warning when changing a file extension
     defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
-    # Avoid creating .DS_Store files on network volumes
+    # Avoid creating .DS_Store files on non physical volumes/drives
     defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+    defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
-    # Disable Dashboard
-    defaults write com.apple.dashboard mcx-disabled -bool true
+    # Expand save panel (shows folder explorer instead of just file name) in finder by default
+    defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+    defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+    # Use current folder for search default
+    defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
 
     ##########################
@@ -88,9 +102,6 @@ if is_confirmed; then
 
     # Show the main window when launching Activity Monitor
     defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
-
-    # Visualize CPU usage in the Activity Monitor Dock icon
-    defaults write com.apple.ActivityMonitor IconType -int 5
 
     # Show all processes in Activity Monitor
     defaults write com.apple.ActivityMonitor ShowCategory -int 0
@@ -114,6 +125,19 @@ if is_confirmed; then
 
     # Add a context menu item for showing the Web Inspector in web views
     defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+
+    #########################
+    #### Privacy Tweaks ####
+    #########################
+
+    # Disable crash reporting
+    defaults write com.apple.CrashReporter DialogType none
+
+    # Disable search data leaking in safari
+    defaults write com.apple.Safari UniversalSearchEnabled -bool false
+    defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+    defaults write com.apple.Safari.plist WebsiteSpecificSearchEnabled -bool NO
 
 
     ####################################
