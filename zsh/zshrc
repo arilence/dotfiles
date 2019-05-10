@@ -30,7 +30,6 @@ alias vim="nvim"
 # Git alias
 alias gs="git status"
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias git-delete-local="git branch -d `git branch --merged | grep -v '^*' | grep -v 'master' | tr -d '\n'`"
 
 alias editorconfig="cp ~/dotfiles/editorconfig/editorconfig ."
 
@@ -61,7 +60,7 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   alias copyssh="pbcopy < $HOME/.ssh/id_rsa.pub"
 
   # Fixes some bug in Tmux on MaxOS Sierra
-  export EVENT_NOKQUEUE=1 
+  export EVENT_NOKQUEUE=1
 
   # This ugly section of code gets GPG and GPG-AGENT to work on MacOS
   unset SSH_AGENT_PID
@@ -75,7 +74,7 @@ if [[ $OSTYPE =~ "darwin" ]]; then
     export GPG_AGENT_INFO
     export SSH_AUTH_SOCK
   fi
-  # There is no straight forward way to detect if gpg-agent is running. If you try to run 
+  # There is no straight forward way to detect if gpg-agent is running. If you try to run
   # gpg-agent while it's already running, it displays an annoying error message whenever
   # a new terminal session is opened. So work around this, I'm piping everything from
   # gpg-agent to /dev/null to get rid of the message and then check the exit code to
@@ -86,7 +85,7 @@ if [[ $OSTYPE =~ "darwin" ]]; then
 
   # Default brew cask install directory
   export HOMEBREW_CASK_OPTS='--appdir=/Applications'
- 
+
   # Language / SDK Specific
   export ANDROID_HOME=$HOME/Library/Android/sdk
   export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools

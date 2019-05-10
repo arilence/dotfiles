@@ -74,8 +74,8 @@ if is_confirmed; then
     defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
     # Set a blazingly fast keyboard repeat rate
-    defaults write NSGlobalDomain KeyRepeat -int 1
-    defaults write NSGlobalDomain InitialKeyRepeat -int 10
+    defaults write NSGlobalDomain KeyRepeat -int 3
+    defaults write NSGlobalDomain InitialKeyRepeat -int 18
 
 
     ################
