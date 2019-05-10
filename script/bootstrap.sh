@@ -66,7 +66,7 @@ brew install tmux
 brew install vault
 
 # Install caskroom packages
-brew cask install '1password'
+brew cask install '1password6'
 brew cask install 'bartender'
 brew cask install 'docker'
 brew cask install 'dropbox'
