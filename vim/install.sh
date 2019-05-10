@@ -15,7 +15,7 @@ ln -sf ${CWD}/vim/init.vim ~/.vimrc
 vim +PlugInstall +qall
 
 if [ $? -ne 0 ]; then
-    e_error "Configuration failed!"
-    exit 1
+  e_error "Configuration failed!"
+  exit 1
 fi
 e_success "Success."

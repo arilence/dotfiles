@@ -3,13 +3,13 @@ source ./script/utils.sh
 
 e_header 'Installing Zsh'
 if ! type_exists 'zsh'; then
-    brew install zsh
-    if [ $? -ne 0 ]; then
-        e_error "Installation Failed!"
-        exit 1
-    fi
+  brew install zsh
+  if [ $? -ne 0 ]; then
+    e_error "Installation Failed!"
+    exit 1
+  fi
 else
-    e_success "You already have Zsh installed."
+  e_success "You already have Zsh installed."
 fi
 
 e_header 'Trying to install Prezto'

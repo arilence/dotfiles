@@ -31,7 +31,7 @@ if test ! $(which brew); then
     exit 1
   fi
 else
-    e_success "Brew is already installed."
+  e_success "Brew is already installed."
 fi
 
 # Install applications

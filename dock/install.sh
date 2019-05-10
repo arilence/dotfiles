@@ -12,7 +12,7 @@ dockutil --add '~/Downloads' --view grid --display folder --no-restart
 killall Dock
 
 if [ $? -ne 0 ]; then
-    e_error "Configuration failed!"
-    exit 1
+  e_error "Configuration failed!"
+  exit 1
 fi
 e_success "Success."

@@ -17,7 +17,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 gem install tmuxinator
 
 if [ $? -ne 0 ]; then
-    e_error "Configuration failed!"
-    exit 1
+  e_error "Configuration failed!"
+  exit 1
 fi
 e_success "Success."
