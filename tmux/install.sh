@@ -6,10 +6,10 @@ e_header "Trying to configure tmux..."
 CWD=$(pwd)
 ln -sf ${CWD}/tmux/tmux.conf ~/.tmux.conf
 
-brew install rbenv
+brew install rbenv ruby-build
 eval "$(rbenv init -)"
-rbenv install 2.5.3
-rbenv global 2.5.3
+rbenv install --skip-existing 2.6.3
+rbenv global 2.6.3
 
 # Tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
