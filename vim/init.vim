@@ -10,6 +10,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'rakr/vim-one'
 Plug 'vivkin/flatland.vim'
 Plug 'rainglow/vim'
+Plug 'arcticicestudio/nord-vim'
 
 " Functional plugins
 Plug 'mhinz/vim-signify'
@@ -53,7 +54,7 @@ endif
 
 " Only apply the colorscheme if it's available
 try
-colorscheme Stasis-contrast
+colorscheme nord
 set background=dark
 catch
 endtry
@@ -63,6 +64,7 @@ syntax on
 syntax enable
 scriptencoding utf-8                           " Need to set encoding for 'listchars' to work under windows env
 
+let $LANG='en'                                 " Avoid random characters in other languges on windows
 set autoread                                   " Automatically reload files when they're changed on disk
 set backspace=2                                " Fixes some backspace issues
 set clipboard=unnamed                          " Enables use of system clipboard

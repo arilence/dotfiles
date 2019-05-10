@@ -17,7 +17,7 @@ fi
 
 # Install Homebrew for mac as a base for installing other applications
 e_header "Trying to install Homebrew..."
-if ! type_exists 'brew'; then
+if test ! $(which brew); then
   if  [[ $OSTYPE =~ "darwin" ]]; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   elif [[ $OSTYPE =~ "linux" ]]; then

@@ -16,10 +16,32 @@ fi
 # Set correct TERM for plain shell and tmux
 export TERM='xterm-256color'
 
+# Don’t clear the screen after quitting a manual page.
+export MANPAGER='less -X';
+
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear";
+
 # Need that neovim love
 export EDITOR='nvim'
 export VISUAL='nvim'
 alias vim="nvim"
+
+# Git alias
+alias gs="git status"
+alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias git-delete-local="git branch -d `git branch --merged | grep -v '^*' | grep -v 'master' | tr -d '\n'`"
+
+alias editorconfig="cp ~/dotfiles/editorconfig/editorconfig ."
+
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+	colorflag="--color"
+	export LS_COLORS='no=00:fi=00:di=01;31:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
+else # macOS `ls`
+	colorflag="-G"
+	export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
+fi
 
 # OS dependent configurations
 # darwin = osx
@@ -29,13 +51,14 @@ if [[ $OSTYPE =~ "darwin" ]]; then
   alias flush='dscacheutil -flushcache' # Flush Directory Service cache
   alias fs='stat -f \"%z bytes\"'   # Get friendly formatted filesize
   alias emptyTrash='sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash' # includes mounted volumes
-  alias lockScreen='/System/Library/CoreServices/\"Menu Extras\"/User.menu/Contents/Resources/CGSession -suspend'
-  alias hideDesktop='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
+  alias lock='/System/Library/CoreServices/\"Menu Extras\"/User.menu/Contents/Resources/CGSession -suspend'
+  alias show='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+  alias hide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
   alias showDesktop='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'
-  alias hideHiddenFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
-  alias showHiddenFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+  alias hideDesktop='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
   alias mux='tmuxinator'
   alias cask='brew cask'
+  alias copyssh="pbcopy < $HOME/.ssh/id_rsa.pub"
 
   # Fixes some bug in Tmux on MaxOS Sierra
   export EVENT_NOKQUEUE=1 
