@@ -18,8 +18,8 @@ window:
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
-    columns: 88
-    lines: 40
+    columns: 120
+    lines: 48
 
   # Window padding (changes require restart)
   #
@@ -48,7 +48,7 @@ window:
   #     - none: Neither borders nor title bar
   #     - buttonless: Title bar, transparent background and title bar buttons
   #     - transparent: Title bar, transparent background, but no title bar buttons
-  decorations: buttonless
+  decorations: full
 
   # When true, alacritty starts maximized.
   start_maximized: false
@@ -133,14 +133,14 @@ persistent_logging: false
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Nordtheme.com)
+# Colors (yui vim)
 colors:
   primary:
-    background: '0x2E3440'
-    foreground: '0xD8DEE9'
+    background: '0xefeae5'
+    foreground: '0x72645f'
   cursor:
     text: '0x2E3440'
-    cursor: '0xD8DEE9'
+    cursor: '0x72645f'
   normal:
     black: '0x3B4252'
     red: '0xBF616A'

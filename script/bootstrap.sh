@@ -53,17 +53,14 @@ brew install fzy
 brew install git
 brew install git-lfs
 brew install gnupg2
-brew install kubectl
 brew install neovim
 brew install node
 brew install openssl
-brew install packer
 brew install pinentry-mac
 brew install python3
 brew install ripgrep
-brew install terraform
 brew install tmux
-brew install vault
+brew install yarn
 
 # Install caskroom packages
 brew cask install '1password6'
