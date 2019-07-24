@@ -1,25 +1,16 @@
-" NOTE: DEFAULT LEADER KEY IS '\'
-
-" -------------------
-" ENABLE PLUGINS
-" -------------------
-" Setup Vundle package manager
+" Plugins
+" =======
 call plug#begin('~/.vim/plugged')
-
-" Colorschemes
-Plug 'rakr/vim-one'
-Plug 'vivkin/flatland.vim'
-Plug 'rainglow/vim'
-Plug 'arcticicestudio/nord-vim'
-
-" Functional plugins
-Plug 'mhinz/vim-signify'
-Plug 'editorconfig/editorconfig-vim'
+Plug 'cideM/yui'                            " Current colorscheme
+Plug 'lifepillar/vim-colortemplate'         " Used in colorscheme making
+Plug 'sheerun/vim-polyglot'                 " Provides syntax highlighting for many languages
+Plug 'mhinz/vim-signify'                    " Show git status in the sidebar
+Plug 'editorconfig/editorconfig-vim'        " Auto change space/tab indentation per project
 Plug 'christoomey/vim-tmux-navigator'       " Smart pane switching with vim and tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'   " Makes focus events work in tmux so vim can auto refresh file
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'junegunn/fzf.vim'                     " File search imo the better Ctrl-P
+Plug 'rust-lang/rust.vim'
 
 if has('nvim')
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -30,14 +21,15 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-
 call plug#end()
-filetype plugin indent on
 
+" Colorssss
+" =========
+set t_Co=256              " Enable 256 colors
+syntax on                 " Syntax Highlighting
+syntax enable
+if &term =~ '256color' | set t_ut= | endif " Disable Background Color Erase (tmux)
 
-" -----------------
-" BASIC SETTINGS
-" ----------------
 " Credit joshdick
 " Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 " (see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
@@ -54,69 +46,103 @@ endif
 
 " Only apply the colorscheme if it's available
 try
-colorscheme nord
-set background=dark
+colorscheme yui
+set background=light
 catch
 endtry
 
-set nocompatible
-syntax on
-syntax enable
-scriptencoding utf-8                           " Need to set encoding for 'listchars' to work under windows env
+" General Config
+" ==============
+set encoding=utf-8            " Always use utf-8
+set clipboard=unnamed         " Enables use of system clipboard
+set hidden                    " Buffers can hide in background
+set history=1000              " Remember more commands & searches
+set undolevels=1000           " Remember many levels of undo
+set number                    " Show line numbers
+set mouse=n                   " Enable mouse in only normal mode
+set noruler                   " Removes cursor location in bottom right
+set splitbelow                " Opens horizontal split below current window
+set splitright                " Opens vertical split right of current window
+set title                     " Auto update title with filename
+set autoread                  " Reload files when changed on disk
+set incsearch                 " Search immediately after each character
+set hlsearch                  " Highlight searches by default
+set backspace=2               " Default vim backspace is weird. It won't let you
+                              " delete certain things while in insert mode. This
+                              " makes backspace workd like typical editors
+set ignorecase                " Ignore case when searching...
+set smartcase                 " unless the pattern contains an uppercase letter
+                              " which in that case it becomes case-sensitive
+                              "
+" Plug.vim removes `~/.vim` from the runtimepath.
+" This is needed when using vim-colortemplate to make colorschemes.
+"set runtimepath+=~/.vim
 
-let $LANG='en'                                 " Avoid random characters in other languges on windows
-set autoread                                   " Automatically reload files when they're changed on disk
-set backspace=2                                " Fixes some backspace issues
-set clipboard=unnamed                          " Enables use of system clipboard
-set encoding=utf-8
-set hidden                                     " Hides buffers
-set history=1000                               " Remember more commands and search history
-set ignorecase                                 " Ignore case when searching
-set incsearch                                  " Search immediately after each character press
-set list                                       " Show trailing whitespace
-set listchars=tab:▸\ ,trail:.
-set nolist                                     " Disables $ at the end of lines on windows
-set nowrap
-set number                                     " Enable line numbers
-set ruler                                      " Turn on the ruler
-set rulerformat=%l,%c%V%=%P                    " Simplifies ruler format [Line number, Column number]
-set scrolloff=3
-set smartcase                                  " Case-insensitive search if any caps
-set t_Co=256                                   " 256-bit colours
-set title                                      " Auto update title with file name
-set ttyfast                                    " Smoother changes.. apparently?
-set undolevels=1000                            " Remembers many levels of undo
+" Start scrolling when we're getting close to margins
+set scrolloff=10
+set sidescrolloff=15
+set sidescroll=1
+
+" I actually don't know what these affect, but I'm too
+" afraid to remove it cause it looks important LOL
 set wildignore+=*.swp,*.bak,*.pyc,*.class
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor
 set wildmenu
 set wildmode=longest,list,full
-
-" Use 4 Space characters for each indent
-" This will be overridden by any .editorconfig settings
-set tabstop=4 
-set shiftwidth=4
-set softtabstop=0
-set expandtab
-set smarttab
-
-" Enables the ability to use mouse
-set mouse=a
-
-" Make new split panes appear more naturally
-set splitbelow
-set splitright
 
 " Support resizing in tmux
 if exists('$TMUX') && !has('nvim')
   set ttymouse=xterm2
 endif
 
-" Disable gui options in gVim
-set guioptions-=T  "remove toolbar
-set guioptions-=m  "remove menu bar
+" Indentation and Display
+" =======================
+filetype plugin indent on
+set nowrap                    " Disable wordwrap
+set list                      " Show whitespace
+set listchars=tab:▸\ ,trail:. " Set visible whitespace character indicators
 
-" Deoplete config
+" Use 4 Space characters for each indent
+" This will be overridden by any .editorconfig settings
+set tabstop=4
+set shiftwidth=4
+set softtabstop=0
+set expandtab
+set smarttab
+
+" Windows Plz
+" ============
+scriptencoding utf-8          " Need this for 'listchars' to work under windows
+let $LANG='en'                " Avoid garbage for foreign chars on windows
+set nolist                    " Disables $ at the end of lines on windows
+set guioptions-=T             " Remove gVim toolbar
+set guioptions-=m             " Remove gVim menu bar
+
+" Key Bindings
+" ============
+" Opens Defx similar to NerdTree
+nnoremap <leader>f :Defx<CR>
+
+" Opens Fzf similar to Ctrl-P
+nnoremap <C-p> :Files<CR>
+
+" Disables moving the cursor with the arrow keys while in
+" normal mode. Originally did this to learn vim locomotion
+" and now I just keep it.
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+" Rust Config
+" ===========
+let g:rustfmt_autosave = 1
+let g:rust_recommended_style = 1
+
+" Deoplete Config
+" ===============
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('smart_case', v:true)
 inoremap <expr><C-j> pumvisible()? "\<C-n>" : "\<C-j>"
 inoremap <expr><C-k> pumvisible()? "\<C-p>" : "\<C-k>"
 inoremap <silent><expr> <TAB>
@@ -136,27 +162,8 @@ function g:Multiple_cursors_after()
   call deoplete#custom#buffer_option('auto_complete', v:true)
 endfunction
 
-
-" -------------------
-" CUSTOM KEYMAPPING
-" -------------------
-" Disable use of arrow keys while in normal mode
-" I did this to force myself to learn better
-" vim locomotion.
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Plugin Keymaps
-nnoremap <leader>f :Defx<CR>
-nnoremap <C-p> :Files<CR>
-
-" Default Key Mappings for Defx
+" Defx Config
+" ===========
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   " Define mappings
