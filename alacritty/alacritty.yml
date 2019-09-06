@@ -18,8 +18,8 @@ window:
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
-    columns: 120
-    lines: 48
+    columns: 115
+    lines: 36
 
   # Window padding (changes require restart)
   #
@@ -87,19 +87,19 @@ tabspaces: 2
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Menlo
+    family: Source Code Pro for Powerline
     # Style can be specified to pick a specific face.
     style: Regular
 
   # The bold font face
   bold:
-    family: Menlo
+    family: Source Code Pro for Powerline
     # Style can be specified to pick a specific face.
     style: Bold
 
   # The italic font face
   italic:
-    family: Menlo
+    family: Source Code Pro for Powerline
     # Style can be specified to pick a specific face.
     style: Italic
 
