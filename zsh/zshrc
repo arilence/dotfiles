@@ -3,11 +3,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin:$PATH"
 if [ -d "$HOME/.bin" ]; then # Include private bin if exists
   PATH="$HOME/.bin:$PATH"
@@ -16,18 +11,15 @@ fi
 # Set correct TERM for plain shell and tmux
 export TERM='xterm-256color'
 
-# Don’t clear the screen after quitting a manual page.
-export MANPAGER='less -X';
-
 # Don't record some commands
 export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear";
 
 # Need that neovim love
-export EDITOR='nvim'
-export VISUAL='nvim'
 alias vim="nvim"
 
 # Git alias
+alias gc="git commit"
+alias gd="git diff"
 alias gs="git status"
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
