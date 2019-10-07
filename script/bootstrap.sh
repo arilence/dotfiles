@@ -73,6 +73,7 @@ brew cask install 'istat-menus'
 brew cask install 'keepingyouawake'
 brew cask install 'mailspring'
 brew cask install 'spotify'
+brew cask install 'numi'
 
 # Remove outdated version
 brew cleanup

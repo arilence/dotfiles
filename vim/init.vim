@@ -43,10 +43,15 @@ endif
 if (has("termguicolors"))
     set termguicolors
 endif
+                              "
+" Plug.vim removes `~/.vim` from the runtimepath.
+" Must be set BEFORE `colorscheme` to work.
+" This is needed when using vim-colortemplate to make colorschemes.
+set runtimepath+=~/.vim
 
 " Only apply the colorscheme if it's available
 try
-colorscheme yui
+colorscheme mine
 set background=light
 catch
 endtry
@@ -61,6 +66,7 @@ set undolevels=1000           " Remember many levels of undo
 set number                    " Show line numbers
 set mouse=n                   " Enable mouse in only normal mode
 set noruler                   " Removes cursor location in bottom right
+set laststatus=1              " Only show the status bar when more than 1 tab exists
 set splitbelow                " Opens horizontal split below current window
 set splitright                " Opens vertical split right of current window
 set title                     " Auto update title with filename
@@ -73,10 +79,6 @@ set backspace=2               " Default vim backspace is weird. It won't let you
 set ignorecase                " Ignore case when searching...
 set smartcase                 " unless the pattern contains an uppercase letter
                               " which in that case it becomes case-sensitive
-                              "
-" Plug.vim removes `~/.vim` from the runtimepath.
-" This is needed when using vim-colortemplate to make colorschemes.
-"set runtimepath+=~/.vim
 
 " Start scrolling when we're getting close to margins
 set scrolloff=10
