@@ -1,23 +1,11 @@
-#!/usr/bin/env bash
-source ./script/utils.sh
+if test ! $(which gcc) || test ! $(which brew); then
+  return
+fi
 
-e_header "Trying to configure tmux..."
-
-CWD=$(pwd)
-ln -sf ${CWD}/tmux/tmux.conf ~/.tmux.conf
-
-brew install rbenv ruby-build
+# Assuming rbenv is already installed through homebrew
 eval "$(rbenv init -)"
 rbenv install --skip-existing 2.6.3
 rbenv global 2.6.3
 
 # Tmux plugin manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-gem install tmuxinator
-
-if [ $? -ne 0 ]; then
-  e_error "Configuration failed!"
-  exit 1
-fi
-e_success "Success."
+[ ! -d "$HOME/.tmux/plugins/tpm" ] && git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm

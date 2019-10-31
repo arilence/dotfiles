@@ -1,21 +1,9 @@
 #!/usr/bin/env bash
-source ./script/utils.sh
 
-e_header "Trying to configure Vim..."
-
-mkdir -p ~/.config/nvim/
-mkdir -p ~/.vim/
-
-CWD=$(pwd)
-ln -sf ${CWD}/vim/* ~/.config/nvim/
-ln -sf ${CWD}/vim/* ~/.vim/
-ln -sf ${CWD}/vim/init.vim ~/.vimrc
+# Many neovim plugins require the python-neovim bridge to be installed
+if test $(which pip3); then
+  pip3 install -q --user neovim
+fi
 
 # Install the vim-plug plugins
 vim +PlugInstall +qall
-
-if [ $? -ne 0 ]; then
-  e_error "Configuration failed!"
-  exit 1
-fi
-e_success "Success."

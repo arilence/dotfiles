@@ -1,0 +1,25 @@
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# TODO: Maybe dynamically change this line when bootstrapping dotfiles?
+export DOTFILES_HOME=$HOME/dotfiles
+
+# Modular *.zsh loading from github@holman/dotfiles
+
+# Reference *.zsh from our dotfiles
+typeset -U config_files
+config_files=($DOTFILES_HOME/**/*.zsh)
+
+# First, load the path files
+for file in ${(M)config_files:#*/path.zsh}; do
+  source $file
+done
+
+# Second, load alias files
+for file in ${(M)config_files:#*/aliases.zsh}; do
+  source $file
+done
+
+# TODO: Third, load zsh/prezto auto-completion files
