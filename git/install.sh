@@ -12,9 +12,14 @@ cp $DOTFILES_HOME/git/gitconfig.symlink.example $HOME/.gitconfig
 
 # Double check the `cp` worked
 if test -f $HOME/.gitconfig; then
-  # sed's "in-place" editing doesn't work very well on macOS.
-  # Instead .gitconfig.bak is created and then deleted after changes have finished.
-  sed -i .bak "s/GIT_FULLNAME/$GIT_FULLNAME/g" $HOME/.gitconfig
-  sed -i .bak "s/GIT_EMAIL/$GIT_EMAIL/g" $HOME/.gitconfig
-  rm $HOME/.gitconfig.bak
+  if [[ $OSTYPE =~ "darwin" ]]; then
+    # sed's "in-place" editing doesn't work very well on macOS.
+    # Instead .gitconfig.bak is created and then deleted after changes have finished.
+    sed -i .bak "s/GIT_FULLNAME/$GIT_FULLNAME/g" $HOME/.gitconfig
+    sed -i .bak "s/GIT_EMAIL/$GIT_EMAIL/g" $HOME/.gitconfig
+    rm $HOME/.gitconfig.bak
+  elif [[ $OSTYPE =~ "linux" ]]; then
+    sed -i "s/GIT_FULLNAME/$GIT_FULLNAME/g" $HOME/.gitconfig
+    sed -i .bak "s/GIT_EMAIL/$GIT_EMAIL/g" $HOME/.gitconfig
+  fi
 fi
