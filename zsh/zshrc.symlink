@@ -23,3 +23,11 @@ for file in ${(M)config_files:#*/aliases.zsh}; do
 done
 
 # TODO: Third, load zsh/prezto auto-completion files
+
+# TODO: Move this into a dedicated `ruby` folder? It's already
+# a requirement for tmux
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+# TODO: Move this to somewhere in dotfiles
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
