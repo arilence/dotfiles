@@ -1,2 +1,3 @@
 vimrc:.config/nvim/init.vim
 vimrc:.vimrc
+mytheme.vim:.config/nvim/colors/mytheme.vim

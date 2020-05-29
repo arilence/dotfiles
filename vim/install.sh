@@ -5,5 +5,5 @@ if test $(which pip3); then
   pip3 install -q --user neovim
 fi
 
-# Install the vim-plug plugins
-vim +PlugInstall +qall
+# Install dein.vim plugins
+vim "+call dein#install()" +qall

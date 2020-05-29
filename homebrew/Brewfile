@@ -1,9 +1,11 @@
 cask_args appdir: "/Applications"
 tap "neovim/neovim"
+tap "homebrew/cask-fonts"
 
 brew "coreutils"
 brew "ctags"
 brew "dockutil"      # dock management
+brew "exa"
 brew "fzy"
 brew "git"
 brew "git-lfs"
@@ -13,21 +15,22 @@ brew "openssl"
 brew "pinentry-mac"
 brew "python3"
 brew "rbenv"         # tmux
-brew "ruby-build"    # tmux
 brew "ripgrep"
+brew "ruby-build"    # tmux
+brew "tmux"
 brew "yarn"
 
-cask "1password6"
 cask "alacritty"
-cask "bartender"
+cask "alfred"
+cask "authy"
 cask "docker"
 cask "dropbox"
+cask "font-jetbrains-mono"
 cask "google-chrome"
 cask "gpg-suite"
 cask "istat-menus"
 cask "keepingyouawake"
-cask "mailspring"
-cask "numi"
+cask "meld"
 cask "spotify"
 
 mas "BetterSnapTool", id: 417375580

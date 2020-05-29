@@ -30,4 +30,12 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # TODO: Move this to somewhere in dotfiles
+# Loads zsh autocomplete for kubernetes
+source <(kubectl completion zsh)
+
+# TODO: Move this to somewhere in dotfiles
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND="rg --files --ignore --hidden -g '!.git/*' -g '!*.ttf' -g '!*.oft' -g '!*.png' -g '!*.jpg' -g '!.gitkeep'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-11.0.6.jdk/Contents/Home"
