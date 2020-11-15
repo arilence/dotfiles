@@ -15,6 +15,9 @@ fi
 # a new terminal session is opened. So work around this, I'm piping everything from
 # gpg-agent to /dev/null to get rid of the message and then check the exit code to
 # see if it has already been running.
+#
+# On top of that, sometimes the agent fails to read the yubikey and the only solution
+# I've found is to kill the agent `gpgconf --kill gpg-agent` and then restart my shell
 if ! gpg-agent /bye > /dev/null 2>&1; then
   eval $(gpg-agent --daemon)
 fi

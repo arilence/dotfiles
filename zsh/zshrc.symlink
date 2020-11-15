@@ -30,8 +30,10 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # TODO: Move this to somewhere in dotfiles
-# Loads zsh autocomplete for kubernetes
+# Loads zsh autocomplete for kubernetes, and helm (kuber package manager)
+# WARNING: These slow down ZSH startup like crazy :(
 source <(kubectl completion zsh)
+#source <(helm completion zsh)
 
 # TODO: Move this to somewhere in dotfiles
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -39,3 +41,7 @@ export FZF_DEFAULT_COMMAND="rg --files --ignore --hidden -g '!.git/*' -g '!*.ttf
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-11.0.6.jdk/Contents/Home"
+export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
+
+# TODO: Move this to somewhere in dotfiles
+export QMK_HOME="$HOME/projects/qmk_firmware"
