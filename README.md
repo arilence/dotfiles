@@ -1,10 +1,10 @@
 # dotfiles
 
 My personal configuration files. Somehow they work together to make my life easier.
+As I only use macOS as my primary platform, these have not been tested to work on any other *nix platforms.
 
-### Installation
-- Clone repo to your $HOME
-- Run the install script`./start.sh`
-
-### Notes
-- At the moment, these files are OS X specific. One day I will make them work on *nix platforms.
+## Installation
+```sh
+git clone https://github.com/maybeinit/dotfiles.git ~/dotfiles
+(cd ~/dotfiles && ./bootstrap.sh)
+```

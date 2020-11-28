@@ -1,0 +1,13 @@
+[user]
+  name = GIT_FULLNAME
+  email = GIT_EMAIL
+[credential]
+  helper = osxkeychain
+[core]
+  editor = nvim
+  excludesfile = ~/.gitignore_global
+[merge]
+  tool = vimdiff
+  conflictStyle = diff3
+[mergetool]
+  prompt = false

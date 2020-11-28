@@ -1,0 +1,178 @@
+" Installing dein.vim package manager
+" sh -c "$(curl -sSL https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh)" sh ~/.cache/dein
+
+"dein Scripts-----------------------------
+if &compatible
+  " work only in vImproved-mode, no vi backwards compatibility
+  set nocompatible
+endif
+
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
+
+  " Let dein manage dein
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+  " Custom plugins:
+  call dein#add('wsdjeg/dein-ui.vim')
+  call dein#add('dracula/vim', { 'name': 'dracula' })
+  call dein#add('airblade/vim-rooter')
+  call dein#add('editorconfig/editorconfig-vim')
+  call dein#add('christoomey/vim-tmux-navigator')
+
+  " https://github.com/Shougo/dein.vim/issues/74#issuecomment-237198717
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+
+  " Languages support
+  call dein#add('autozimu/LanguageClient-neovim', { 'build': 'bash install.sh', 'rev': 'next' })
+  call dein#add('ncm2/ncm2')
+  call dein#add('roxma/nvim-yarp') " required by ncm2
+
+  call dein#end()
+  call dein#save_state()
+endif
+filetype plugin indent on
+syntax enable
+
+" fzf.vim---------------------------------
+" Disable command preview window
+let g:fzf_preview_window = ''
+" Opens fzf in the same fashion as Ctrl-P
+nnoremap <C-p> :Files<CR>
+
+" Languageclient-neovim.vim---------------
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ }
+
+" ncm2.vim--------------------------------
+" important: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
+
+" general---------------------------------
+" Enable 256 colors
+set t_Co=256
+" Disable background color erase in tmux
+if &term =~ '256color' | set t_ut= | endif
+
+" Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+" (see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (has("nvim"))
+  " For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+" For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+" Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+    set termguicolors
+endif
+
+" Only apply the colorscheme if it's available
+try
+set background=light
+colorscheme mytheme
+catch
+endtry
+
+" *Always* use utf-8
+set encoding=utf-8
+
+" Enables use of the system clipboard
+set clipboard=unnamed
+
+" Buffers can hide in the background
+set hidden
+
+" Remember more commands & searches
+set history=1000
+
+" Remember more undo levels
+set undolevels=1000
+
+" Show line numbers
+set number
+
+" Enable mouse in only normal mode
+set mouse=n
+
+" Only show the status bar when more than 1 tab exists
+set laststatus=1
+
+" Make horizontal and vertical splitting feel better
+set splitbelow
+set splitright
+
+" Auto update title with filename
+set title
+
+" Reload files when changed on disk
+set autoread
+
+" Search immediately after each character
+set incsearch
+
+" Highlight searches by default
+set hlsearch
+
+" Ignore case when searching unless the pattern contains an uppercase letter
+set ignorecase
+set smartcase
+
+" Default vim backspace is weird. It won't let you delete certain things while
+" in insert mode. This makes backspace work like typical editors.
+set backspace=2
+
+" Show a vertical line at the text column dictated by the value 'textwidth'
+set colorcolumn=+1
+
+" Start scrolling when we're getting close to margins
+set scrolloff=10
+set sidescrolloff=15
+set sidescroll=1
+
+" Support resizing in tmux
+if exists('$TMUX') && !has('nvim')
+  set ttymouse=xterm2
+endif
+
+" Disable wordwrap
+set nowrap
+
+" Show whitespace
+set list
+set listchars=tab:▸\ ,trail:.
+
+" Use 4 Space characters for each indent
+" This will be overridden by any .editorconfig settings
+set tabstop=4
+set shiftwidth=4
+set softtabstop=0
+set expandtab
+set smarttab
+
+" Vim will wait a default of 4000 milliseconds after you stop typing
+set updatetime=750
+
+" Increase the size of the message box at the bottom
+set cmdheight=2
+
+" Windows doesn't like me
+scriptencoding utf-8
+let $LANG='en'
+set nolist
+set guioptions-=T
+set guioptions-=m
+
+" Disables moving the cursor with the arrow keys while in normal mode.
+" Originally did this to learn vim locomation and now just keep it around.
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+
+" Use home row keys to jump to beginning and end of line
+map H ^
+map L $
