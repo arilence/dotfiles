@@ -1,0 +1,17 @@
+# Config for starship terminal prompt
+# https://starship.rs/config/
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+# Fixes asdf failing to load
+command_timeout = 2000
+
+[package]
+disabled = true
+
+[elixir]
+disabled = true
+
+[git_status]
+disabled = true

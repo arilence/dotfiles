@@ -1,0 +1,75 @@
+live_config_reload: true
+
+import:
+  - ~/.config/alacritty/themes/everforest_dark_hard.yml
+
+env:
+  TERM: xterm-256color
+
+window:
+  padding:
+    x: 10
+    y: 10
+  dynamic_padding: false
+  dynamic_title: true
+  # 1.0 causes crazy frame lag, so we get as close to 1 as possible
+  opacity: 0.999
+  # decorations: buttonless
+
+scrolling:
+  history: 20000
+  multiplier: 3
+
+font:
+  size: 15.0
+  normal:
+    family: JetBrainsMono Nerd Font
+    style: Regular
+  bold:
+    family: JetBrainsMono Nerd Font
+    style: Bold
+  italic:
+    family: JetBrainsMono Nerd Font
+    style: Italic
+
+bell:
+  command: None
+
+cursor:
+  style: Block
+  blink_interval: 750
+  unfocused_hollow: true
+
+key_bindings:
+  # Trigger keybindings that aren't normally recognized by terminal emulators
+  # Such as Ctrl+/ and Ctrl+Space
+  # References:
+  # - https://en.wikipedia.org/wiki/List_of_Unicode_characters#Control_codes
+  # - https://www.reddit.com/r/neovim/comments/mbj8m5/how_to_setup_ctrlshiftkey_mappings_in_neovim_and/
+  # The one exception is I had to use `6u` (instead of `5u`) to get the combination to work inside Tmux.
+  - { key: Slash, mods: Control,       chars: "\x1f" }
+  - { key: Space, mods: Control,       chars: "\x00" }
+  - { key: F,     mods: Control|Shift, chars: "\x1b[70;6u" }
+  # New tmux window
+  - { key: T,     mods: Command, command: {program: "/usr/local/bin/tmux", args: ["new-window"]} }
+  # Close tmux window
+  - { key: W,     mods: Command, command: {program: "/usr/local/bin/tmux", args: ["confirm-before", "-p", "Close window? (y/n)", "kill-window"]} }
+  # Create new pane in direction
+  - { key: H,     mods: Command, command: {program: "/usr/local/bin/tmux", args: ["split-window", "-h", "-b", "-c", "#{pane_current_path}"]} }
+  - { key: J,     mods: Command, command: {program: "/usr/local/bin/tmux", args: ["split-window", "-c", "#{pane_current_path}"]} }
+  - { key: K,     mods: Command, command: {program: "/usr/local/bin/tmux", args: ["split-window", "-b", "-c", "#{pane_current_path}"]} }
+  - { key: L,     mods: Command, command: {program: "/usr/local/bin/tmux", args: ["split-window", "-h", "-c", "#{pane_current_path}"]} }
+  # Go to numbered tab
+  - { key: Key1,  mods: Command, command: {program: "/usr/local/bin/tmux", args: ["select-window", "-t", "1"]} }
+  - { key: Key2,  mods: Command, command: {program: "/usr/local/bin/tmux", args: ["select-window", "-t", "2"]} }
+  - { key: Key3,  mods: Command, command: {program: "/usr/local/bin/tmux", args: ["select-window", "-t", "3"]} }
+  - { key: Key4,  mods: Command, command: {program: "/usr/local/bin/tmux", args: ["select-window", "-t", "4"]} }
+  - { key: Key5,  mods: Command, command: {program: "/usr/local/bin/tmux", args: ["select-window", "-t", "5"]} }
+  - { key: Key6,  mods: Command, command: {program: "/usr/local/bin/tmux", args: ["select-window", "-t", "6"]} }
+  - { key: Key7,  mods: Command, command: {program: "/usr/local/bin/tmux", args: ["select-window", "-t", "7"]} }
+  - { key: Key8,  mods: Command, command: {program: "/usr/local/bin/tmux", args: ["select-window", "-t", "8"]} }
+  - { key: Key9,  mods: Command, command: {program: "/usr/local/bin/tmux", args: ["select-window", "-t", "9"]} }
+  # Move tab order
+  - { key: H,     mods: Command|Shift, command: {program: "/usr/local/bin/tmux", args: ["swap-window", "-t", "-1", ";", "select-window", "-t", "-1"]} }
+  - { key: L,     mods: Command|Shift, command: {program: "/usr/local/bin/tmux", args: ["swap-window", "-t", "+1", ";", "select-window", "-t", "+1"]} }
+

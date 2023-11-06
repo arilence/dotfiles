@@ -1,12 +1,15 @@
 #
 # Executes commands at login pre-zshrc.
 #
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
 
 #
 # Browser
 #
 
-if [[ "$OSTYPE" == darwin* ]]; then
+if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
 
@@ -14,11 +17,15 @@ fi
 # Editors
 #
 
-export EDITOR='nvim'
-export VISUAL='nvim'
-export PAGER='less'
-# Don’t clear the screen after quitting a manual page.
-export MANPAGER='less -X';
+if [[ -z "$EDITOR" ]]; then
+  export EDITOR='nvim'
+fi
+if [[ -z "$VISUAL" ]]; then
+  export VISUAL='nvim'
+fi
+if [[ -z "$PAGER" ]]; then
+  export PAGER='less'
+fi
 
 #
 # Language
@@ -26,9 +33,6 @@ export MANPAGER='less -X';
 
 if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
-  export LANGUAGE=en_US.UTF-8
-  export LC_ALL=en_US.UTF-8
-  export LC_CTYPE=en_US.UTF-8
 fi
 
 #
@@ -45,7 +49,9 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  /usr/local/{bin,sbin}
+  $HOME/{,s}bin(N)
+  /opt/{homebrew,local}/{,s}bin(N)
+  /usr/local/{,s}bin(N)
   $path
 )
 
@@ -55,11 +61,13 @@ path=(
 
 # Set the default Less options.
 # Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS='-F -g -i -M -R -S -w -X -z-4'
+# Remove -X to enable it.
+if [[ -z "$LESS" ]]; then
+  export LESS='-g -i -M -R -S -w -X -z-4'
+fi
 
 # Set the Less input preprocessor.
 # Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
-if (( $#commands[(i)lesspipe(|.sh)] )); then
+if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi

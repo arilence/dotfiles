@@ -1,0 +1,27 @@
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# bsp or float (default: float)
+yabai -m config layout bsp
+
+# Set all padding and gaps to 20pt (default: 0)
+yabai -m config top_padding    10
+yabai -m config bottom_padding 10
+yabai -m config left_padding   10
+yabai -m config right_padding  10
+yabai -m config window_gap     10
+
+# Make certain apps use floating windows
+yabai -m rule --add app="^Spotify$" manage=off
+yabai -m rule --add app="^1Password$" manage=off
+yabai -m rule --add app="^Supersonic$" manage=off
+yabai -m rule --add app="^Archive Utility$" manage=off
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^Beeper$" manage=off
+
+# Put twitch stuff in fullscreen
+yabai -m rule --add app=VLC native-fullscreen=on
+yabai -m rule --add app=chatterino native-fullscreen=on
