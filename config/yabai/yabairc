@@ -21,6 +21,8 @@ yabai -m rule --add app="^Supersonic$" manage=off
 yabai -m rule --add app="^Archive Utility$" manage=off
 yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="^Beeper$" manage=off
+yabai -m rule --add app="^DBeaver" manage=off
+yabai -m rule --add app="^Alfred" manage=off
 
 # Put twitch stuff in fullscreen
 yabai -m rule --add app=VLC native-fullscreen=on
