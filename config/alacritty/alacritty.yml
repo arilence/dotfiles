@@ -21,15 +21,15 @@ scrolling:
   multiplier: 3
 
 font:
-  size: 15.0
+  size: 16.0
   normal:
-    family: JetBrainsMono Nerd Font
+    family: GeistMono NF
     style: Regular
   bold:
-    family: JetBrainsMono Nerd Font
+    family: GeistMono NF
     style: Bold
   italic:
-    family: JetBrainsMono Nerd Font
+    family: GeistMono NF
     style: Italic
 
 bell:
