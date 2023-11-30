@@ -1,3 +1,4 @@
 .secrets
 gitconfig
 .gitconfig
+.DS_Store
