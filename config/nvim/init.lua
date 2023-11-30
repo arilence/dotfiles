@@ -57,7 +57,7 @@ require("lazy").setup({
     config = function()
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
-          "elixir", "heex", "eex", "vim", "typescript", "tsx", "graphql", "css",
+          "elixir", "heex", "eex", "vim", "typescript", "tsx", "graphql", "css", "c", "lua", "vimdoc", "query"
         },
         highlight = {
           enable = true,
