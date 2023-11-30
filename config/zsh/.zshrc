@@ -46,6 +46,9 @@ eval "$(rtx activate zsh)"
 alias gs='git status'
 alias gc='git commit'
 alias ga='git add'
+alias gd="git diff"
+alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias lg='lazygit'
 
 ###
 # Starship.rs prompt
