@@ -1,6 +1,6 @@
 # dotfiles
 
-My personal configuration files. Somehow they work together to make my life easier.
+My personal configuration files.
 As I only use macOS as my primary platform, these have not been tested to work on any other *nix platforms.
 
 ## Installation
@@ -8,17 +8,16 @@ As I only use macOS as my primary platform, these have not been tested to work o
 This is **destructive**.
 
 ```sh
-for d in config/*/; do
-  echo "$d"
-  ln -sf "${PWD}/${d}" "${HOME}/.config"
-done
+# TODO: Fail if `.config/` already exists
 
+ln -sf "${PWD}/config" "${HOME}/.config"
 ln -sf "${PWD}/zshenv" "${HOME}/.zshenv"
 ln -sf "${PWD}/editorconfig" "${HOME}/.editorconfig"
 
-bash macos/install.sh
-
+# Must be run after creating symlinks or else ln will fail and complain about non-empty directory
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
+
+bash macos/install.sh
 chsh -s /bin/zsh
 ```
 
