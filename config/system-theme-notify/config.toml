@@ -1,0 +1,19 @@
+dark_mode_commands = [
+  '''sed -i '' "s/light.yml/dark.yml/" ~/.config/alacritty/alacritty.yml''',
+  '''tmux source-file ~/.config/tmux/tmux-dark.conf''',
+  '''
+  for SERVER_PIPE in $(find "${XDG_RUNTIME_DIR:-${TMPDIR}nvim.${USER}}" -type s); do
+    nvim --server "$SERVER_PIPE" --remote-send ':set background=dark<cr>' 2> /dev/null
+  done
+  ''',
+]
+
+light_mode_commands = [
+  '''sed -i '' "s/dark.yml/light.yml/" ~/.config/alacritty/alacritty.yml''',
+  '''tmux source-file ~/.config/tmux/tmux-light.conf''',
+  '''
+  for SERVER_PIPE in $(find "${XDG_RUNTIME_DIR:-${TMPDIR}nvim.${USER}}" -type s); do
+    nvim --server "$SERVER_PIPE" --remote-send ':set background=light<cr>' 2> /dev/null
+  done
+  ''',
+]
