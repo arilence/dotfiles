@@ -49,15 +49,12 @@ require("lazy").setup({
     config = function()
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
-          "elixir", "heex", "eex", "vim", "typescript", "tsx", "graphql", "css", "c", "lua", "vimdoc", "query"
+          "elixir", "heex", "eex", "vim", "typescript", "tsx", "graphql", "css", "c", "lua", "vimdoc", "query", "rust"
         },
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
           enable_autocmd = false, -- required by nvim-ts-context-commentstring
-        },
-        context_commentstring = {
-          enable = true,
         },
       }
     end,
