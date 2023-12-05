@@ -22,22 +22,14 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Load plugins through package manager
+-- Use `:Lazy install` or `:Lazy update` to trigger plugin installs
 require("lazy").setup({
   -- Colour Schemes
-  "folke/tokyonight.nvim",
   {
-    "neanias/everforest-nvim",
+    "cocopon/iceberg.vim",
     version = false,
     lazy = false,
     priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      require("everforest").setup({
-        background = "hard",
-        italics = true,
-        ui_contrast = "low",
-        show_eob = true,
-      })
-    end,
   },
 
   -- Miscellaneous
@@ -312,7 +304,7 @@ endif
 vim.cmd([[
 try
 set background=dark
-colorscheme everforest
+colorscheme iceberg
 catch
 endtry
 ]])
@@ -445,6 +437,9 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 ]])
+
+-- Enable cursorline
+vim.o.cursorline = true
 
 -- EditorConfig is enabled by default, but just in case
 vim.g.editorconfig = true
