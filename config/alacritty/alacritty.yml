@@ -9,7 +9,7 @@ env:
 window:
   dimensions:
     columns: 82
-    lines: 40
+    lines: 35
   padding:
     x: 10
     y: 10
