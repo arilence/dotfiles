@@ -38,8 +38,8 @@ alias tl='tmux list-sessions'
 alias vim="nvim"
 
 ###
-# rtx version manager (alternative to asdf)
-eval "$(rtx activate zsh)"
+# mise (formerly rtx, alternative to asdf)
+eval "$(/usr/local/bin/mise activate zsh)"
 
 ###
 # Git
