@@ -20,6 +20,10 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
 ###
+# Miscellaneous Aliases
+alias ls='eza --group-directories-first'
+
+###
 # Tmux
 # Attaches tmux to the last session; creates a new session if none exists.
 alias t='tmux attach || tmux new-session'
