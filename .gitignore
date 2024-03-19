@@ -2,3 +2,6 @@
 gitconfig
 .gitconfig
 .DS_Store
+config/1Password
+# op is the 1Password cli
+config/op
