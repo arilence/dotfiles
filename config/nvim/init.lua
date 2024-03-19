@@ -208,7 +208,7 @@ require("lazy").setup({
         credo = { enable = true },
         elixirls = {
           enable = true,
-          tag = "v0.16.0", -- Had to specify version for `rtx` support
+          tag = "v0.20.0", -- Had to specify version to work with `mise`
           settings = elixirls.settings {
             dialyzerEnabled = true,
             fetchDeps = false,
