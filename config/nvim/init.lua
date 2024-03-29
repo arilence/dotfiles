@@ -1,3 +1,17 @@
+-- Change leader key to CTRL+S
+vim.g.mapleader = "<C-s>"
+
+-- Disable netrw in favor of nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- Disables moving the cursor with the arrow keys while in normal mode.
+-- I originally did this to learn vim locomation and now just keep it around out of habit.
+vim.api.nvim_set_keymap('n', '<Up>',    '', { noremap = true})
+vim.api.nvim_set_keymap('n', '<Down>',  '', { noremap = true})
+vim.api.nvim_set_keymap('n', '<Left>',  '', { noremap = true})
+vim.api.nvim_set_keymap('n', '<Right>', '', { noremap = true})
+
 -- Bootstraps package manager, lazy.nvim, automatically
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -11,15 +25,6 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-
--- Change leader key to CTRL+S
-vim.cmd([[
-let mapleader = "\<C-s>"
-]])
-
--- Disable netrw in favor of nvim-tree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 -- Load plugins through package manager
 -- Use `:Lazy install` or `:Lazy update` to trigger plugin installs
@@ -297,97 +302,89 @@ if (has("termguicolors"))
 endif
 ]])
 
--- Fail silently if colorscheme is not installed
-vim.cmd([[
-try
-set background=dark
-colorscheme iceberg
-catch
-endtry
-]])
+vim.opt.encoding = "utf-8"
+vim.opt.history = 1000
+vim.opt.undolevels = 1000
 
--- Always use utf-8
-vim.cmd([[
-set encoding=utf-8
-]])
+-- Set colorscheme
+vim.g.colors_name = "iceberg"
+vim.opt.background = "light"
 
 -- Use the system clipboard for easier copy+pasting
-vim.cmd([[
-set clipboard=unnamedplus
-]])
-
--- Remember more commands & searches
-vim.cmd([[
-set history=1000
-]])
-
--- Remember more undo levels
-vim.cmd([[
-set undolevels=1000
-]])
+vim.opt.clipboard = "unnamedplus"
 
 -- Show line numbers
-vim.cmd([[
-set number
-]])
+vim.opt.number = true
 
--- Enable mouse in only normal mode
-vim.cmd([[
-set mouse=n
-]])
+-- Enable mouse in all modes
+vim.opt.mouse = "a"
 
 -- Only show the status bar when more than 1 tab exists
-vim.cmd([[
-set laststatus=1
-]])
+-- vim.opt.laststatus = 1
 
 -- Make horizontal and vertical splitting feel better
-vim.cmd([[
-set splitbelow
-set splitright
-]])
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 -- Auto update title with filename
-vim.cmd([[
-set title
-]])
+vim.opt.title = true
 
 -- Reload files if changed on disk
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, { command = "checktime" })
 
 -- Search immediately after each character
-vim.cmd([[
-set incsearch
-]])
+vim.opt.incsearch = true
 
 -- Highlight searches by default
-vim.cmd([[
-set hlsearch
-]])
+vim.opt.hlsearch = true
 
 -- Ignore case when searching unless the pattern contains an uppercase letter
-vim.cmd([[
-set ignorecase
-set smartcase
-]])
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- Default vim backspace is weird. It won't let you delete certain things while
 -- in insert mode. This makes backspace work like typical editors.
-vim.cmd([[
-set backspace=2
-]])
+-- This is the same as `set backspace=2`
+vim.opt.backspace = {
+  "indent",
+  "eol",
+  "start",
+}
 
 -- Show a vertical line at the text column dictated by the value 'textwidth'
-vim.cmd([[
-set colorcolumn=+1
-]])
+vim.opt.colorcolumn = "+1"
 
 -- Start scrolling when we're getting close to margins
-vim.cmd([[
-set scrolloff=10
-set sidescrolloff=15
-set sidescroll=1
-]])
+vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 15
+vim.opt.sidescroll = 1
+
+-- Disable wordwrap
+vim.opt.wrap = false
+
+-- Show whitespace
+vim.opt.list = true
+vim.opt.listchars = "tab:▸ ,trail:."
+
+-- Use 4 Space characters for each indent
+-- This will be overridden by any .editorconfig settings
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 0
+vim.opt.expandtab = true
+vim.opt.smarttab = true
+
+-- Vim will wait a default of 4000 milliseconds after you stop typing
+vim.opt.updatetime = 500
+
+-- Hide the command/message box at the bottom when it's not being used
+vim.opt.cmdheight=0
+
+-- Enable cursorline
+vim.opt.cursorline = true
+
+-- EditorConfig is enabled by default, but just in case
+vim.g.editorconfig = true
 
 -- Support resizing in tmux
 vim.cmd([[
@@ -395,51 +392,6 @@ if exists('$TMUX') && !has('nvim')
   set ttymouse=xterm2
 endif
 ]])
-
--- Disable wordwrap
-vim.cmd([[
-set nowrap
-]])
-
--- Show whitespace
-vim.cmd([[
-set list
-set listchars=tab:▸\ ,trail:.
-]])
-
--- Use 4 Space characters for each indent
--- This will be overridden by any .editorconfig settings
-vim.cmd([[
-set tabstop=4
-set shiftwidth=4
-set softtabstop=0
-set expandtab
-set smarttab
-]])
-
--- Vim will wait a default of 4000 milliseconds after you stop typing
-vim.cmd([[
-set updatetime=500
-]])
-
--- Hide the command/message box at the bottom when it's not being used
-vim.cmd([[
-set cmdheight=0
-]])
-
--- Disables moving the cursor with the arrow keys while in normal mode.
--- Originally did this to learn vim locomation and now just keep it around.
-vim.cmd([[
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-]])
-
--- Enable cursorline
-vim.o.cursorline = true
-
--- EditorConfig is enabled by default, but just in case
-vim.g.editorconfig = true
 
 -- Clear current search with //
 vim.keymap.set('n', '//', ':nohlsearch <CR>')
