@@ -279,6 +279,39 @@ require("lazy").setup({
       require("nvim-tree").setup()
     end,
   },
+
+  -- Database client
+  {
+    -- Official project is: kndndrj/nvim-dbee but currently errors on install
+    "fbuchlak/nvim-dbee",
+    branch = "fix/docs-remove-duplicate-tags",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    build = function()
+      -- Install tries to automatically detect the install method.
+      -- if it fails, try calling it with one of these parameters:
+      --    "curl", "wget", "bitsadmin", "go"
+      require("dbee").install()
+    end,
+    config = function()
+      require("dbee").setup {
+        sources = {
+          require("dbee.sources").MemorySource:new({
+            {
+              name = "local_development",
+              type = "postgres",
+              url = "postgres://postgres:postgres@localhost:5432?sslmode=disable",
+            },
+            -- ...
+          }),
+        }
+      }
+
+      -- Add `:Dbee` command to toggle opening the UI
+      vim.api.nvim_create_user_command('Dbee', 'lua require("dbee").toggle()', {})
+    end,
+  },
 })
 
 -- Hacky way to get colours working across vim and tmux
