@@ -66,8 +66,10 @@ require("lazy").setup({
     dependencies = {
       -- Comment.nvim doesn't support tsx/jsx, this adds support for the two
       "JoosepAlviste/nvim-ts-context-commentstring",
+      "nvim-treesitter/nvim-treesitter-textobjects",
     },
   },
+  { "andymass/vim-matchup" },
 
   -- Smart commenting
   {
