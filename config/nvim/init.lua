@@ -394,6 +394,7 @@ vim.opt.sidescroll = 1
 
 -- Disable wordwrap
 vim.opt.wrap = false
+vim.wo.wrap = false
 
 -- Show whitespace
 vim.opt.list = true
