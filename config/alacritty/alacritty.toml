@@ -73,8 +73,8 @@ dynamic_title = true
 opacity = 0.999
 
 [window.dimensions]
-columns = 82
-lines = 30
+columns = 110
+lines = 35
 
 [window.padding]
 x = 10
