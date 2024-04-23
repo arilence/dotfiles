@@ -1,6 +1,12 @@
 [tools]
+usage = "latest" # for mise completions
 erlang = "latest"
 elixir = "latest"
 node = "latest"
 rust = "latest"
 python = "latest"
+java = "temurin-17"
+kubectl = "latest"
+
+[settings]
+python_compile = true
