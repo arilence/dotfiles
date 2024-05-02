@@ -12,6 +12,9 @@ vim.api.nvim_set_keymap('n', '<Down>',  '', { noremap = true})
 vim.api.nvim_set_keymap('n', '<Left>',  '', { noremap = true})
 vim.api.nvim_set_keymap('n', '<Right>', '', { noremap = true})
 
+-- Prepend mise shims to PATH
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
+
 -- Bootstraps package manager, lazy.nvim, automatically
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
