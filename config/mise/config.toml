@@ -10,3 +10,4 @@ kubectl = "latest"
 
 [settings]
 python_compile = true
+experimental = true
