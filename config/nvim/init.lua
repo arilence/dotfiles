@@ -57,7 +57,7 @@ require("lazy").setup({
     config = function()
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
-          "elixir", "heex", "eex", "vim", "typescript", "tsx", "graphql", "css", "c", "lua", "vimdoc", "query", "rust"
+          "elixir", "heex", "eex", "vim", "typescript", "tsx", "graphql", "css", "c", "lua", "vimdoc", "query", "rust", "yaml"
         },
         highlight = {
           enable = true,
@@ -201,10 +201,28 @@ require("lazy").setup({
 
   -- Language Server Specific
   {
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup {
+        ensure_installed = { "yamlls" },
+        automatic_installation = true,
+      }
+    end
+  },
+  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
+    },
   },
-
   {
     "elixir-tools/elixir-tools.nvim",
     version = "*",
@@ -314,6 +332,30 @@ require("lazy").setup({
     },
     config = function()
       require("nvim-tree").setup()
+    end,
+  },
+  {
+    "someone-stole-my-name/yaml-companion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+      require("telescope").load_extension("yaml_schema")
+      local cfg = require("yaml-companion").setup({
+        -- detect k8s schemas based on file content
+        builtin_matchers = {
+          kubernetes = { enabled = true }
+        },
+        lspconfig = {
+          settings = {
+            yaml = {
+              validate = true,
+            }
+          }
+        }
+      })
+      require("lspconfig")["yamlls"].setup(cfg)
     end,
   },
 
