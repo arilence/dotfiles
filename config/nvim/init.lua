@@ -351,6 +351,7 @@ require("lazy").setup({
           settings = {
             yaml = {
               validate = true,
+              format = { enable = false },
             }
           }
         }
