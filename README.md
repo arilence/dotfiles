@@ -21,6 +21,21 @@ bash macos/install.sh
 chsh -s /bin/zsh
 ```
 
+## Updating
+```bash
+brew upgrade
+zprezto-update
+nvim --headless "+Lazy! update" +qa
+nvim --headless "+MasonUpdate" +qa
+mise up
+```
+
+## Completions
+```bash
+prezto_build_cache
+prezto_clear_cache
+```
+
 ## Inspiration
 - https://github.com/knowler/dotfiles
 - https://github.com/tcmmichaelb139/.dotfiles/
