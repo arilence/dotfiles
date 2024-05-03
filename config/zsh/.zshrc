@@ -20,6 +20,13 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
 ###
+# Merge + Diff tool
+if [[ -d "/Applications/Araxis Merge.app/Contents/Utilities" ]]; then
+  # Provides a custom `compare` command using Araxis Merge
+  export PATH=$PATH:"/Applications/Araxis Merge.app/Contents/Utilities"
+fi
+
+###
 # Miscellaneous Aliases
 alias ls='eza --group-directories-first'
 
