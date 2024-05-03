@@ -4,18 +4,16 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # TODO: Check which applications are installed first
-prezto_build_cache() {
-  mise completion zsh >| "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto/modules/completion/external/src/_mise"
-  kubectl completion zsh >| "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto/modules/completion/external/src/_kubectl"
-  kubecm completion zsh >| "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto/modules/completion/external/src/_kubecm"
-  docker completion zsh >| "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto/modules/completion/external/src/_docker"
-  flux completion zsh >| "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto/modules/completion/external/src/_flux"
-  curl -o "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto/modules/completion/external/src/_sops" https://raw.githubusercontent.com/zchee/zsh-completions/main/src/go/_sops
-  op completion zsh >| "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto/modules/completion/external/src/_op"
+zprezto-build-cache() {
+  kubectl completion zsh >| "/usr/local/share/zsh/site-functions/_kubectl"
+  kubecm completion zsh >| "/usr/local/share/zsh/site-functions/_kubecm"
+  flux completion zsh >| "/usr/local/share/zsh/site-functions/_flux"
+  curl -o "/usr/local/share/zsh/site-functions/_sops" https://raw.githubusercontent.com/zchee/zsh-completions/main/src/go/_sops
+  op completion zsh >| "/usr/local/share/zsh/site-functions/_op"
 }
 
 # Delete completion cache and then rebuild it
-prezto_clear_cache() {
+zprezto-clear-cache() {
   rm -rf ~/.cache/prezto/*
   compinit
 }
