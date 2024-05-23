@@ -32,3 +32,49 @@ function neovim {
 
   nvim.exe $Passthrough
 }
+
+function git-diff {
+  [alias('gd')]
+  param(
+    # Passes all arguments to command
+    [parameter(ValueFromRemainingArguments = $true)]
+    [string[]]$Passthrough
+  )
+
+  git.exe diff $Passthrough
+}
+
+function git-status {
+  [alias('gs')]
+  param(
+    # Passes all arguments to command
+    [parameter(ValueFromRemainingArguments = $true)]
+    [string[]]$Passthrough
+  )
+
+  git.exe status $Passthrough
+}
+
+function git-commit {
+  param(
+    # Passes all arguments to command
+    [parameter(ValueFromRemainingArguments = $true)]
+    [string[]]$Passthrough
+  )
+
+  git.exe commit $Passthrough
+}
+# `gc` is already an alias for `Get-Content`. Setting -Force overwrites the alias.
+Set-Alias -Name gc -Value git-commit -Force
+
+function git-log {
+  param(
+    # Passes all arguments to command
+    [parameter(ValueFromRemainingArguments = $true)]
+    [string[]]$Passthrough
+  )
+
+  git.exe log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit $Passthrough
+}
+# `gl` is already an alias for `Get-Location`. Setting -Force overwrites the alias.
+Set-Alias -Name gl -Value git-log -Force
