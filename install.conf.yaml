@@ -10,25 +10,26 @@
     ~/.gitignore_global: config/git/gitignore_global
 
 # Install windows specific configs
-- defaults:
-    crossplatform-shell:
-      platform: win32
-    crossplatform-link:
-      platform: win32
 - crossplatform-shell:
     # Create directories before symlinking files
     - command: if not exist "%USERPROFILE%\Documents\PowerShell" mkdir "%USERPROFILE%\Documents\PowerShell"
+      platform: win32
     - command: if not exist "%USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState" mkdir "%USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
+      platform: win32
     - command: if not exist "%USERPROFILE%\AppData\Local\nvim" mkdir "%USERPROFILE%\AppData\Local\nvim"
+      platform: win32
 - crossplatform-link:
     ~/Documents/PowerShell/Profile.ps1:
       path: config/powershell/Profile.ps1
+      platform: win32
     ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json:
       path: config/windows-terminal/settings.json
       force: true
+      platform: win32
     ~/AppData/Local/nvim/:
       path: config/nvim/**
       glob: true
+      platform: win32
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
