@@ -4,5 +4,27 @@
 
 - clean: ['~']
 
+- defaults:
+    crossplatform-shell:
+      platform: win32
+    crossplatform-link:
+      platform: win32
+
+- crossplatform-shell:
+    # Create directories before symlinking files
+    - command: if not exist "%USERPROFILE%\Documents\PowerShell" mkdir "%USERPROFILE%\Documents\PowerShell"
+    - command: if not exist "%USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState" mkdir "%USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
+    - command: if not exist "%USERPROFILE%\AppData\Local\nvim" mkdir "%USERPROFILE%\AppData\Local\nvim"
+
+- crossplatform-link:
+    ~/Documents/PowerShell/Profile.ps1:
+      path: config/powershell/Profile.ps1
+    ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json:
+      path: config/windows-terminal/settings.json
+      force: true
+    ~/AppData/Local/nvim/:
+      path: config/nvim/**
+      glob: true
+
 - shell:
     - [git submodule update --init --recursive, Installing submodules]

@@ -1,0 +1,104 @@
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": 
+    [
+        {
+            "command": 
+            {
+                "action": "copy",
+                "singleLine": false
+            },
+            "keys": "ctrl+c"
+        },
+        {
+            "command": "paste",
+            "keys": "ctrl+v"
+        },
+        {
+            "command": "find",
+            "keys": "ctrl+shift+f"
+        }
+    ],
+    "alwaysShowNotificationIcon": false,
+    "alwaysShowTabs": true,
+    "copyFormatting": "none",
+    "copyOnSelect": true,
+    "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "firstWindowPreference": "defaultProfile",
+    "initialCols": 100,
+    "initialRows": 45,
+    "minimizeToNotificationArea": false,
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": 
+    {
+        "defaults": 
+        {
+            "colorScheme": "Custom One Half Light",
+            "cursorShape": "filledBox",
+            "font": 
+            {
+                "face": "GeistMono Nerd Font Mono",
+                "size": 11.0
+            },
+            "useAcrylic": true
+        },
+        "list": 
+        [
+            {
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": false,
+                "name": "Command Prompt"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": true,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "hidden": false,
+                "name": "PowerShell",
+                "source": "Windows.Terminal.PowershellCore"
+            }
+        ]
+    },
+    "schemes": 
+    [
+        {
+            "background": "#FAFAFA",
+            "black": "#282C34",
+            "blue": "#61AFEF",
+            "brightBlack": "#282C34",
+            "brightBlue": "#0184BC",
+            "brightCyan": "#0997B3",
+            "brightGreen": "#50A14F",
+            "brightPurple": "#A626A4",
+            "brightRed": "#E45649",
+            "brightWhite": "#5A6374",
+            "brightYellow": "#C18301",
+            "cursorColor": "#4F525D",
+            "cyan": "#56B6C2",
+            "foreground": "#383A42",
+            "green": "#98C379",
+            "name": "Custom One Half Light",
+            "purple": "#C678DD",
+            "red": "#E06C75",
+            "selectionBackground": "#4F525D",
+            "white": "#5A6374",
+            "yellow": "#E5C07B"
+        }
+    ],
+    "showTabsInTitlebar": true,
+    "tabWidthMode": "equal",
+    "theme": "system",
+    "themes": [],
+    "useAcrylicInTabRow": true,
+    "windowingBehavior": "useNew"
+}
