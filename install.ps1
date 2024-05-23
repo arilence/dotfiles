@@ -4,7 +4,7 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
   # Get the path of the currently running PowerShell executable
   $psPath = [System.Diagnostics.Process]::GetCurrentProcess().MainModule.FileName
   $currentArgs = $args -join ' '
-  Start-Process -FilePath $psPath -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" $currentArgs"
+  Start-Process -FilePath $psPath -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" --no-color $currentArgs"
   Exit
 }
 
@@ -26,7 +26,7 @@ foreach ($PYTHON in ('python', 'python3')) {
             ![string]::IsNullOrEmpty((&$PYTHON -V))
             $ErrorActionPreference = "Stop" }) {
         # Run dotbot
-        &$PYTHON $(Join-Path $BASEDIR -ChildPath $DOTBOT_DIR | Join-Path -ChildPath $DOTBOT_BIN) -d $BASEDIR -c $CONFIG $Args
+        &$PYTHON $(Join-Path $BASEDIR -ChildPath $DOTBOT_DIR | Join-Path -ChildPath $DOTBOT_BIN) -d $BASEDIR -c $CONFIG --plugin-dir dotbot-crossplatform $Args
         # If running in the console, wait for input before closing.
         if ($Host.Name -eq "ConsoleHost") {
             Write-Host "Press any key to continue..."
