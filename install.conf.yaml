@@ -18,6 +18,14 @@
       platform: win32
     - command: if not exist "%USERPROFILE%\AppData\Local\nvim" mkdir "%USERPROFILE%\AppData\Local\nvim"
       platform: win32
+    # Install applications using windows package manager
+    # Scoop version of windows terminal runs in portable mode
+    - command: winget install Microsoft.WindowsTerminal --source winget
+      platform: win32
+    - command: winget install Microsoft.Powershell --source winget
+      platform: win32
+    - command: winget install Microsoft.PowerToys --source winget
+      platform: win32
 - crossplatform-link:
     ~/Documents/PowerShell/Profile.ps1:
       path: config/powershell/Profile.ps1
