@@ -30,6 +30,28 @@
       path: config/nvim/**
       glob: true
       platform: win32
+- scoop:
+    buckets:
+      - main
+      - extras
+      - nerd-fonts
+    apps:
+      - GeistMono-NF-Mono
+      # App dependencies
+      - fzf
+      - gcc
+      - 7zip
+      - make
+      - nodejs
+      - python
+      - ripgrep
+      # Apps
+      - eza
+      - kopiaui
+      - lazygit
+      - neovim
+      - obsidian
+      - zeal
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
