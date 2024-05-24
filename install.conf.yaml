@@ -19,12 +19,14 @@
     - command: if not exist "%USERPROFILE%\AppData\Local\nvim" mkdir "%USERPROFILE%\AppData\Local\nvim"
       platform: win32
     # Install applications using windows package manager
-    # Scoop version of windows terminal runs in portable mode
-    - command: winget install Microsoft.WindowsTerminal --source winget
+    # winget returns $False when it goes to install an application that is already installed
+    # This is an undesirable behaviour for idempotent scripts, as a workaround I'm checking if the return code is -1978335135 to know if the application is already installed
+    # winget return codes: https://github.com/microsoft/winget-cli/blob/master/doc/windows/package-manager/winget/returnCodes.md#general-errors
+    - command: powershell -Command "winget install Microsoft.WindowsTerminal --source winget --no-upgrade; if ($? -eq $True -or $LASTEXITCODE -eq -1978335135) { $True } else { $False }"
       platform: win32
-    - command: winget install Microsoft.Powershell --source winget
+    - command: powershell -Command "winget install Microsoft.Powershell --source winget --no-upgrade; if ($? -eq $True -or $LASTEXITCODE -eq -1978335135) { $True } else { $False }"
       platform: win32
-    - command: winget install Microsoft.PowerToys --source winget
+    - command: powershell -Command "winget install Microsoft.PowerToys --source winget --no-upgrade; if ($? -eq $True -or $LASTEXITCODE -eq -1978335135) { $True } else { $False }"
       platform: win32
 - crossplatform-link:
     ~/Documents/PowerShell/Profile.ps1:
