@@ -26,7 +26,10 @@ foreach ($PYTHON in ('python', 'python3')) {
             ![string]::IsNullOrEmpty((&$PYTHON -V))
             $ErrorActionPreference = "Stop" }) {
         # Run dotbot
-        &$PYTHON $(Join-Path $BASEDIR -ChildPath $DOTBOT_DIR | Join-Path -ChildPath $DOTBOT_BIN) -d $BASEDIR -c $CONFIG --plugin-dir dotbot-crossplatform $Args
+        &$PYTHON $(Join-Path $BASEDIR -ChildPath $DOTBOT_DIR | Join-Path -ChildPath $DOTBOT_BIN) -d $BASEDIR -c $CONFIG `
+        --plugin-dir dotbot-crossplatform `
+        --plugin-dir dotbot-scoop `
+        $Args
         # If running in the console, wait for input before closing.
         if ($Host.Name -eq "ConsoleHost") {
             Write-Host "Press any key to continue..."
