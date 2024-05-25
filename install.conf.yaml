@@ -11,6 +11,9 @@
 
 # Install windows specific configs
 - crossplatform-shell:
+    # Decrypt git secrets
+    - command: sops --decrypt config\git\gitlocal.win.sops.ini > %USERPROFILE%\.gitlocal
+      platform: win32
     # Create directories before symlinking files
     - command: if not exist "%USERPROFILE%\Documents\PowerShell" mkdir "%USERPROFILE%\Documents\PowerShell"
       platform: win32
@@ -59,11 +62,13 @@
       - python
       - ripgrep
       # Apps
+      - 1password-cli
       - eza
       - kopiaui
       - lazygit
       - neovim
       - obsidian
+      - sops
       - zeal
 
 - shell:

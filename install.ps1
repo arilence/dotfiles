@@ -8,6 +8,9 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
   Exit
 }
 
+# Load secrets
+$Env:SOPS_AGE_KEY = "op://Personal/SOPS Age Key/password"
+
 $ErrorActionPreference = "Stop"
 
 $CONFIG = "install.conf.yaml"
@@ -26,7 +29,9 @@ foreach ($PYTHON in ('python', 'python3')) {
             ![string]::IsNullOrEmpty((&$PYTHON -V))
             $ErrorActionPreference = "Stop" }) {
         # Run dotbot
-        &$PYTHON $(Join-Path $BASEDIR -ChildPath $DOTBOT_DIR | Join-Path -ChildPath $DOTBOT_BIN) -d $BASEDIR -c $CONFIG `
+        # 1Password by default buffers command execution, which results in a confusing blank screen for the entire dotbot installation.
+        # `--no-masking` "fixes" this issue but creates another issue of potentially leaking secrets (Haven't seen any leaked yet)
+        op run --no-masking -- $PYTHON $(Join-Path $BASEDIR -ChildPath $DOTBOT_DIR | Join-Path -ChildPath $DOTBOT_BIN) -d $BASEDIR -c $CONFIG `
         --plugin-dir dotbot-crossplatform `
         --plugin-dir dotbot-scoop `
         $Args

@@ -1,0 +1,6 @@
+---
+creation_rules:
+  - path_regex: .*\.sops\.ya?ml
+    age: age1035xptn7qjc7c2erc7laujyn3cyj3xr94r0p07avqk9ry0nzyglqy7vf5u
+  - path_regex: .*\.sops\.ini
+    age: age1035xptn7qjc7c2erc7laujyn3cyj3xr94r0p07avqk9ry0nzyglqy7vf5u
