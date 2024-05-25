@@ -16,9 +16,10 @@
             "keys": "ctrl+v"
         },
         {
-            "command": {
+            "command": 
+            {
                 "action": "sendInput",
-                "input": "\u001B[70;6u"
+                "input": "\u001b[70;6u"
             },
             "keys": "ctrl+shift+f"
         }
