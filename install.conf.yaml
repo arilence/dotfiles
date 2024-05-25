@@ -31,9 +31,6 @@
       platform: win32
     - command: powershell -Command "winget install Microsoft.PowerToys --source winget --no-upgrade; if ($? -eq $True -or $LASTEXITCODE -eq -1978335135) { $True } else { $False }"
       platform: win32
-    # Debian WSL
-    - command: powershell -Command "winget install --Id '9MSVKQC78PK6' --source msstore --no-upgrade --accept-source-agreements --accept-package-agreements; if ($? -eq $True -or $LASTEXITCODE -eq -1978335135) { $True } else { $False }"
-      platform: win32
 - crossplatform-link:
     ~/Documents/PowerShell/Profile.ps1:
       path: config/powershell/Profile.ps1
