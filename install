@@ -2,6 +2,15 @@
 
 set -e
 
+# Access 1Password while running within WSL
+if [ ! -z "$WSL_DISTRO_NAME" ]; then
+    shopt -s expand_aliases
+    alias op=op.exe
+fi
+
+# Load secrets
+export SOPS_AGE_KEY=$(op read "op://Personal/SOPS AGE Key/password")
+
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
 
@@ -14,4 +23,5 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" \
     --plugin-dir dotbot-crossplatform \
+    --plugin-dir dotbot-scoop \
     "${@}"
