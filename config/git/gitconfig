@@ -3,6 +3,8 @@
     excludesfile = ~/.gitignore_global
 [init]
     defaultBranch = main
+[pull]
+    ff = only
 [commit]
     gpgsign = true
 [include]
