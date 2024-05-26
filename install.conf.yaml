@@ -21,6 +21,8 @@
       platform: linux
     - command: mkdir -p ~/.config/starship
       platform: linux
+    - command: mkdir -p ~/.config/mise
+      platform: linux
     - command: mkdir -p ~/.config/nvim
       platform: linux
     # Install applications using windows package manager
@@ -60,6 +62,10 @@
     # starship-rs
     ~/.config/starship/starship.toml:
       path: config/starship/starship.toml
+      platform: linux
+    # mise
+    ~/.config/mise/config.toml:
+      path: config/mise/config.toml
       platform: linux
     # neovim
     ~/AppData/Local/nvim/:

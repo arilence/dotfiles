@@ -73,8 +73,8 @@ alias vim="nvim"
 ###
 # mise (formerly rtx, alternative to asdf)
 alias mr='mise run --'
-if [[ -f "/usr/local/bin/mise" ]]; then
-  eval "$(/usr/local/bin/mise activate zsh)"
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
 fi
 
 ###
