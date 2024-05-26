@@ -1,27 +1,28 @@
 # dotfiles
 
-My personal configuration files.
-As I only use macOS as my primary platform, these have not been tested to work on any other *nix platforms.
+My personal configuration files. Built on [Dotbot](https://github.com/anishathalye/dotbot) for cross-platform compatibility.
 
 ## Installation
 
-This is **destructive**.
+For linux and macOS:
+```bash
+./install
+```
 
-```sh
-# TODO: Fail if `.config/` already exists
-
-ln -sf "${PWD}/config" "${HOME}/.config"
-ln -sf "${PWD}/zshenv" "${HOME}/.zshenv"
-ln -sf "${PWD}/editorconfig" "${HOME}/.editorconfig"
-
-# Must be run after creating symlinks or else ln will fail and complain about non-empty directory
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
-
-bash macos/install.sh
-chsh -s /bin/zsh
+For windows:
+```powershell
+.\install.ps1
 ```
 
 ## Updating
+
+### Dotbot + Plugins
+
+```bash
+git submodule update --remote
+```
+
+### Misc
 ```bash
 brew upgrade
 zprezto-update
