@@ -1,10 +1,9 @@
 [core]
     editor = nvim
     excludesfile = ~/.gitignore_global
-    autocrlf = true
 [init]
     defaultBranch = main
 [commit]
     gpgsign = true
 [include]
-    path = .gitlocal
+    path = ~/.gitlocal
