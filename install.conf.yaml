@@ -70,6 +70,10 @@
       path: config/nvim/**
       glob: true
       platform: linux
+    # editorconfig
+    ~/.editorconfig:
+      path: config/editorconfig
+      platform: linux
 - scoop:
     buckets:
       - main
