@@ -17,6 +17,12 @@
       platform: win32
     - command: if not exist "%USERPROFILE%\AppData\Local\nvim" mkdir "%USERPROFILE%\AppData\Local\nvim"
       platform: win32
+    - command: mkdir -p ~/.config/zsh
+      platform: linux
+    - command: mkdir -p ~/.config/starship
+      platform: linux
+    - command: mkdir -p ~/.config/nvim
+      platform: linux
     # Install applications using windows package manager
     # winget returns $False when it goes to install an application that is already installed
     # This is an undesirable behaviour for idempotent scripts, as a workaround I'm checking if the return code is -1978335135 to know if the application is already installed
@@ -33,17 +39,37 @@
     - command: sops --decrypt config/git/gitlocal.wsl.sops.ini > ~/.gitlocal
       environment: WSL_DISTRO_NAME
 - crossplatform-link:
+    # powershell 7
     ~/Documents/PowerShell/Profile.ps1:
       path: config/powershell/Profile.ps1
       platform: win32
+    # windows terminal
     ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json:
       path: config/windows-terminal/settings.json
       force: true
       platform: win32
+    # zsh / prezto
+    ~/.zshenv:
+      path: config/zsh/zshenv
+      platform: linux
+    ~/.config/zsh/:
+      path: config/zsh/.*
+      glob: true
+      exclude: [ config/zsh/zshenv ]
+      platform: linux
+    # starship-rs
+    ~/.config/starship/starship.toml:
+      path: config/starship/starship.toml
+      platform: linux
+    # neovim
     ~/AppData/Local/nvim/:
       path: config/nvim/**
       glob: true
       platform: win32
+    ~/.config/nvim/:
+      path: config/nvim/**
+      glob: true
+      platform: linux
 - scoop:
     buckets:
       - main
@@ -68,6 +94,16 @@
       - obsidian
       - sops
       - zeal
+- crossplatform-shell:
+    # install prezto
+    - command: if [ ! -d "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto" ]; then git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"; fi
+      platform: linux
+    # change default shell to zsh
+    - command: CURRENT_SHELL=$(getent passwd $USER | cut "-d:" -f7) && if [ "${CURRENT_SHELL}" != "/bin/zsh" ]; then echo "Changing default shell to zsh" && chsh -s /bin/zsh; fi
+      stdin: true
+      stdout: true
+      stderr: true
+      platform: linux
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]

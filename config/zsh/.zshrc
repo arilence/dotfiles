@@ -18,27 +18,34 @@ zprezto-clear-cache() {
   compinit
 }
 
-###
-# Homebrew
+# Load Homebrew on both macOS and Linux
+if [[ "$(uname)" == "Darwin" ]]; then
+  export HOMEBREW_PREFIX="/usr/local";
+  export HOMEBREW_CELLAR="/usr/local/Cellar";
+  export HOMEBREW_REPOSITORY="/usr/local/Homebrew";
+  export PATH="/usr/local/bin:/usr/local/sbin${PATH+:$PATH}";
+  export MANPATH="/usr/local/share/man${MANPATH+:$MANPATH}:";
+  export INFOPATH="/usr/local/share/info:${INFOPATH:-}";
+elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+  if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  fi
+fi
 export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_PREFIX="/usr/local";
-export HOMEBREW_CELLAR="/usr/local/Cellar";
-export HOMEBREW_REPOSITORY="/usr/local/Homebrew";
-export PATH="/usr/local/bin:/usr/local/sbin${PATH+:$PATH}";
-export MANPATH="/usr/local/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="/usr/local/share/info:${INFOPATH:-}";
 
-###
-# Yubikey GPG Agent (For SSH)
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
+# Yubikey GPG Agent on macOS (For SSH)
+if [[ "$(uname)" == "Darwin" ]]; then
+  export GPG_TTY="$(tty)"
+  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+  gpgconf --launch gpg-agent
+fi
 
-###
-# Merge + Diff tool
-if [[ -d "/Applications/Araxis Merge.app/Contents/Utilities" ]]; then
-  # Provides a custom `compare` command using Araxis Merge
-  export PATH=$PATH:"/Applications/Araxis Merge.app/Contents/Utilities"
+# Merge + Diff tool on macOS
+if [[ "$(uname)" == "Darwin" ]]; then
+  if [[ -d "/Applications/Araxis Merge.app/Contents/Utilities" ]]; then
+    # Provides a custom `compare` command using Araxis Merge
+    export PATH=$PATH:"/Applications/Araxis Merge.app/Contents/Utilities"
+  fi
 fi
 
 ###
@@ -66,7 +73,9 @@ alias vim="nvim"
 ###
 # mise (formerly rtx, alternative to asdf)
 alias mr='mise run --'
-eval "$(/usr/local/bin/mise activate zsh)"
+if [[ -f "/usr/local/bin/mise" ]]; then
+  eval "$(/usr/local/bin/mise activate zsh)"
+fi
 
 ###
 # Git
