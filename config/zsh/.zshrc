@@ -3,6 +3,10 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# Fixes slow tab completion on WSL
+# See: https://github.com/sorin-ionescu/prezto/issues/1820
+unsetopt PATH_DIRS
+
 # TODO: Check which applications are installed first
 zprezto-build-cache() {
   kubectl completion zsh >| "/usr/local/share/zsh/site-functions/_kubectl"
