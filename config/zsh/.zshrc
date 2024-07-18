@@ -90,6 +90,11 @@ alias gd="git diff"
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias lg='lazygit'
 
+# WSL Specific aliases
+if [[ ! -z "${WSL_DISTRO_NAME}" ]]; then
+alias ssh='ssh.exe'
+fi
+
 ###
 # Starship.rs prompt
 export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
