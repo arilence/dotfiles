@@ -43,7 +43,7 @@
     {
         "defaults": 
         {
-            "colorScheme": "Custom One Half Light",
+            "colorScheme": "zenbones",
             "cursorShape": "filledBox",
             "font": 
             {
@@ -143,29 +143,6 @@
             "selectionBackground": "#FFFFFF",
             "white": "#CCCCCC",
             "yellow": "#C19C00"
-        },
-        {
-            "background": "#FAFAFA",
-            "black": "#282C34",
-            "blue": "#61AFEF",
-            "brightBlack": "#282C34",
-            "brightBlue": "#0184BC",
-            "brightCyan": "#0997B3",
-            "brightGreen": "#50A14F",
-            "brightPurple": "#A626A4",
-            "brightRed": "#E45649",
-            "brightWhite": "#5A6374",
-            "brightYellow": "#C18301",
-            "cursorColor": "#4F525D",
-            "cyan": "#56B6C2",
-            "foreground": "#383A42",
-            "green": "#98C379",
-            "name": "Custom One Half Light",
-            "purple": "#C678DD",
-            "red": "#E06C75",
-            "selectionBackground": "#4F525D",
-            "white": "#5A6374",
-            "yellow": "#E5C07B"
         },
         {
             "background": "#282C34",
@@ -350,6 +327,29 @@
             "selectionBackground": "#FFFFFF",
             "white": "#C0C0C0",
             "yellow": "#808000"
+        },
+        {
+          "name": "zenbones",
+          "black": "#f0edec",
+          "red": "#a8334c",
+          "green": "#4f6c31",
+          "yellow": "#944927",
+          "blue": "#286486",
+          "purple": "#88507d",
+          "cyan": "#3b8992",
+          "white": "#2c363c",
+          "brightBlack": "#cfc1ba",
+          "brightRed": "#94253e",
+          "brightGreen": "#3f5a22",
+          "brightYellow": "#803d1c",
+          "brightBlue": "#1d5573",
+          "brightPurple": "#7b3b70",
+          "brightCyan": "#2b747c",
+          "brightWhite": "#4f5e68",
+          "background": "#f0edec",
+          "foreground": "#2c363c",
+          "selectionBackground": "#cbd9e3",
+          "cursorColor": "#2c363c"
         }
     ],
     "showTabsInTitlebar": true,
