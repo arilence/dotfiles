@@ -48,7 +48,10 @@
             "font": 
             {
                 "face": "GeistMono Nerd Font Mono",
-                "size": 11.0
+                "size": 11.0,
+                "features": {
+                    "liga": 0
+                }
             },
             "useAcrylic": true
         },
