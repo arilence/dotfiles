@@ -37,19 +37,34 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
 fi
 export HOMEBREW_NO_ANALYTICS=1
 
-# Yubikey GPG Agent on macOS (For SSH)
+# macOS Only
 if [[ "$(uname)" == "Darwin" ]]; then
+  # Yubikey GPG Agent (For SSH)
   export GPG_TTY="$(tty)"
   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   gpgconf --launch gpg-agent
-fi
 
-# Merge + Diff tool on macOS
-if [[ "$(uname)" == "Darwin" ]]; then
+  # Merge + Diff tool
   if [[ -d "/Applications/Araxis Merge.app/Contents/Utilities" ]]; then
     # Provides a custom `compare` command using Araxis Merge
     export PATH=$PATH:"/Applications/Araxis Merge.app/Contents/Utilities"
   fi
+fi
+
+# macOS and Linux
+if [[ "$(uname)" == "Darwin" || "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+  if [[ -d "$HOME/.fly" ]]; then
+    export FLYCTL_INSTALL="$HOME/.fly"
+    export PATH="$FLYCTL_INSTALL/bin:$PATH"
+  fi
+
+  # Navigate faster
+  eval "$(jump shell zsh)"
+fi
+
+# WSL Only
+if [[ ! -z "${WSL_DISTRO_NAME}" ]]; then
+  alias ssh='ssh.exe'
 fi
 
 ###
@@ -89,11 +104,6 @@ alias ga='git add'
 alias gd="git diff"
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias lg='lazygit'
-
-# WSL Specific aliases
-if [[ ! -z "${WSL_DISTRO_NAME}" ]]; then
-alias ssh='ssh.exe'
-fi
 
 ###
 # Starship.rs prompt
