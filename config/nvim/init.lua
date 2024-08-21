@@ -325,7 +325,16 @@ require("lazy").setup({
     end,
   },
   {
+    "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("nvim-web-devicons").setup()
+    end,
+  },
+  {
     "nvim-tree/nvim-tree.lua",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons"
+    },
     version = "*",
     keys = {
       { "<C-S-f>", ":NvimTreeToggle<CR>", mode = { "n" } },
