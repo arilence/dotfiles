@@ -65,6 +65,7 @@ fi
 # WSL Only
 if [[ ! -z "${WSL_DISTRO_NAME}" ]]; then
   alias ssh='ssh.exe'
+  alias op='op.exe'
 fi
 
 ###
