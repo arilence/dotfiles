@@ -331,7 +331,11 @@ require("lazy").setup({
       { "<C-S-f>", ":NvimTreeToggle<CR>", mode = { "n" } },
     },
     config = function()
-      require("nvim-tree").setup()
+      require("nvim-tree").setup({
+        view = {
+          width = 35
+        }
+      })
     end,
   },
   {
