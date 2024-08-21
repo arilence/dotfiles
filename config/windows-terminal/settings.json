@@ -53,7 +53,8 @@
                     "liga": 0
                 }
             },
-            "useAcrylic": true
+            "useAcrylic": true,
+            "bellStyle": "window"
         },
         "list": 
         [
