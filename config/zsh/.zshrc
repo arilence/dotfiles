@@ -62,6 +62,11 @@ if [[ "$(uname)" == "Darwin" || "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; 
   eval "$(jump shell zsh)"
 fi
 
+# Linux only
+if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+  fpath+=/home/linuxbrew/.linuxbrew/share/zsh/site-functions
+fi
+
 # WSL Only
 if [[ ! -z "${WSL_DISTRO_NAME}" ]]; then
   alias ssh='ssh.exe'
