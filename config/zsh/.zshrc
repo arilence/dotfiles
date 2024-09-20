@@ -7,18 +7,19 @@ fi
 # See: https://github.com/sorin-ionescu/prezto/issues/1820
 unsetopt PATH_DIRS
 
-# TODO: Check which applications are installed first
-zprezto-build-cache() {
-  kubectl completion zsh >| "/usr/local/share/zsh/site-functions/_kubectl"
-  kubecm completion zsh >| "/usr/local/share/zsh/site-functions/_kubecm"
-  flux completion zsh >| "/usr/local/share/zsh/site-functions/_flux"
-  curl -o "/usr/local/share/zsh/site-functions/_sops" https://raw.githubusercontent.com/zchee/zsh-completions/main/src/go/_sops
-  op completion zsh >| "/usr/local/share/zsh/site-functions/_op"
-}
+zprezto-build-completion() {
+  local completion_dir="${ZDOTDIR:-$HOME}/.zprezto/modules/completion/external/src"
+  local check-command-exists() {
+    command -v $1 >/dev/null 2>&1
+  }
 
-# Delete completion cache and then rebuild it
-zprezto-clear-cache() {
-  rm -rf ~/.cache/prezto/*
+  check-command-exists flux && flux completion zsh >| "${completion_dir}/_flux"
+  check-command-exists kubecm && kubecm completion zsh >| "${completion_dir}/_kubecm"
+  check-command-exists kubectl && kubectl completion zsh >| "${completion_dir}/_kubectl"
+  check-command-exists op && op completion zsh >| "${completion_dir}/_op"
+  check-command-exists rye && rye self completion -s zsh >| "${completion_dir}/_rye"
+  check-command-exists sops && curl -o "${completion_dir}/_sops" https://raw.githubusercontent.com/zchee/zsh-completions/main/src/go/_sops
+
   compinit
 }
 

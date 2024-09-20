@@ -33,8 +33,7 @@ mise up
 
 ## Completions
 ```bash
-zprezto-build-cache
-zprezto-clear-cache
+zprezto-build-completion
 ```
 
 ## Inspiration
