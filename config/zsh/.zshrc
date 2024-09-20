@@ -7,22 +7,6 @@ fi
 # See: https://github.com/sorin-ionescu/prezto/issues/1820
 unsetopt PATH_DIRS
 
-zprezto-build-completion() {
-  local completion_dir="${ZDOTDIR:-$HOME}/.zprezto/modules/completion/external/src"
-  local check-command-exists() {
-    command -v $1 >/dev/null 2>&1
-  }
-
-  check-command-exists flux && flux completion zsh >| "${completion_dir}/_flux"
-  check-command-exists kubecm && kubecm completion zsh >| "${completion_dir}/_kubecm"
-  check-command-exists kubectl && kubectl completion zsh >| "${completion_dir}/_kubectl"
-  check-command-exists op && op completion zsh >| "${completion_dir}/_op"
-  check-command-exists rye && rye self completion -s zsh >| "${completion_dir}/_rye"
-  check-command-exists sops && curl -s -o "${completion_dir}/_sops" https://raw.githubusercontent.com/zchee/zsh-completions/main/src/go/_sops
-
-  compinit
-}
-
 # Load Homebrew on both macOS and Linux
 if [[ "$(uname)" == "Darwin" ]]; then
   export HOMEBREW_PREFIX="/usr/local";
@@ -115,6 +99,23 @@ alias ga='git add'
 alias gd="git diff"
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias lg='lazygit'
+
+# This function must be declared after all aliases that are referenced inside it
+zprezto-build-completion() {
+  local completion_dir="${ZDOTDIR:-$HOME}/.zprezto/modules/completion/external/src"
+  local check-command-exists() {
+    command -v $1 >/dev/null 2>&1
+  }
+
+  check-command-exists flux && flux completion zsh >| "${completion_dir}/_flux"
+  check-command-exists kubecm && kubecm completion zsh >| "${completion_dir}/_kubecm"
+  check-command-exists kubectl && kubectl completion zsh >| "${completion_dir}/_kubectl"
+  check-command-exists op && op completion zsh >| "${completion_dir}/_op"
+  check-command-exists rye && rye self completion -s zsh >| "${completion_dir}/_rye"
+  check-command-exists sops && curl -s -o "${completion_dir}/_sops" https://raw.githubusercontent.com/zchee/zsh-completions/main/src/go/_sops
+
+  compinit
+}
 
 ###
 # Starship.rs prompt
