@@ -18,7 +18,7 @@ zprezto-build-completion() {
   check-command-exists kubectl && kubectl completion zsh >| "${completion_dir}/_kubectl"
   check-command-exists op && op completion zsh >| "${completion_dir}/_op"
   check-command-exists rye && rye self completion -s zsh >| "${completion_dir}/_rye"
-  check-command-exists sops && curl -o "${completion_dir}/_sops" https://raw.githubusercontent.com/zchee/zsh-completions/main/src/go/_sops
+  check-command-exists sops && curl -s -o "${completion_dir}/_sops" https://raw.githubusercontent.com/zchee/zsh-completions/main/src/go/_sops
 
   compinit
 }
