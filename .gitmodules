@@ -5,6 +5,3 @@
 [submodule "dotbot-crossplatform"]
 	path = dotbot-crossplatform
 	url = git@github.com:msdrigg/dotbot-crossplatform.git
-[submodule "dotbot-scoop"]
-	path = dotbot-scoop
-	url = git@github.com:JamJar00/dotbot-scoop.git

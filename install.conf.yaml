@@ -85,30 +85,6 @@
       path: config/tmux/
       platform: linux
       force: true
-- scoop:
-    buckets:
-      - main
-      - extras
-      - nerd-fonts
-    apps:
-      - GeistMono-NF-Mono
-      # App dependencies
-      - fzf
-      - gcc
-      - 7zip
-      - make
-      - nodejs
-      - python
-      - ripgrep
-      # Apps
-      - 1password-cli
-      - eza
-      - kopiaui
-      - lazygit
-      - neovim
-      - obsidian
-      - sops
-      - zeal
 - crossplatform-shell:
     # install prezto
     - command: if [ ! -d "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto" ]; then git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"; fi
