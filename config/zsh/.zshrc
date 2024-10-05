@@ -100,6 +100,12 @@ alias gd="git diff"
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias lg='lazygit'
 
+###
+# Atuin - shell history recorded to a SQLite database
+if command -v atuin &> /dev/null; then
+  eval "$(atuin init zsh)"
+fi
+
 # This function must be declared after all aliases that are referenced inside it
 zprezto-build-completion() {
   local completion_dir="${ZDOTDIR:-$HOME}/.zprezto/modules/completion/external/src"
