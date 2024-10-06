@@ -6,8 +6,12 @@
 
 # Install cross-platform configs
 - crossplatform-link:
-    ~/.gitconfig: config/git/gitconfig
-    ~/.gitignore_global: config/git/gitignore_global
+    ~/.gitconfig:
+      path: config/git/gitconfig
+      force: true
+    ~/.gitignore_global:
+      path: config/git/gitignore_global
+      force: true
 
 - crossplatform-shell:
     # Create directories before symlinking files
