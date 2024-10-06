@@ -14,6 +14,7 @@
         { "PackageIdentifier": "Microsoft.PowerShell" },
         { "PackageIdentifier": "Mozilla.SOPS" },
         { "PackageIdentifier": "Python.Python.3.12" },
+        { "PackageIdentifier": "Rustlang.Rustup" },
         { "PackageIdentifier": "WinFsp.WinFsp" },
 
         { "PackageIdentifier": "7zip.7zip" },
@@ -52,7 +53,6 @@
         { "PackageIdentifier": "Playnite.Playnite" },
         { "PackageIdentifier": "PrismLauncher.PrismLauncher" },
         { "PackageIdentifier": "PrivateInternetAccess.PrivateInternetAccess" },
-        { "PackageIdentifier": "Rustlang.Rustup" },
         { "PackageIdentifier": "Spotify.Spotify" },
         { "PackageIdentifier": "TablePlus.TablePlus" },
         { "PackageIdentifier": "TheBrowserCompany.Arc" },
