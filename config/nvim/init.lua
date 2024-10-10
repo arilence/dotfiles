@@ -55,6 +55,8 @@ require("lazy").setup({
     build = ":TSUpdate",
     event = "BufRead",
     config = function()
+      require 'nvim-treesitter.install'.prefer_git = false
+      require 'nvim-treesitter.install'.compilers = { "zig", "gcc" }
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
           "elixir", "heex", "eex", "vim", "typescript", "tsx", "graphql", "css", "c", "lua", "vimdoc", "query", "rust", "yaml"
