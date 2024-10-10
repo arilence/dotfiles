@@ -287,8 +287,7 @@ require("lazy").setup({
   {
     "nvim-telescope/telescope.nvim", tag = "0.1.6",
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+      "nvim-lua/plenary.nvim"
     },
     config = function()
       local telescope = require("telescope")
@@ -312,7 +311,6 @@ require("lazy").setup({
           }
         }
       }
-      telescope.load_extension("fzf")
 
       -- Unmap Ctrl+F
       vim.keymap.set('n', '<C-f>', '<nop>')
