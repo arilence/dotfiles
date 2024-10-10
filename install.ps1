@@ -44,6 +44,14 @@ if ($LastExitCode -ne 0) {
 # Reload environment after installing applications with winget
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
 
+# Neovim mason-lspconfig requires this one node package :(
+npm install --global yaml-language-server
+if ($LastExitCode -ne 0) {
+    Write-Error "Error: npm install yaml-language-server failed."
+    wait-before-exit
+    return
+}
+
 foreach ($PYTHON in ('python', 'python3')) {
     # Python redirects to Microsoft Store in Windows 10 when not installed
     if (& { $ErrorActionPreference = "SilentlyContinue"

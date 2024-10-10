@@ -14,6 +14,7 @@
         { "PackageIdentifier": "Microsoft.OpenJDK.21" },
         { "PackageIdentifier": "Microsoft.PowerShell" },
         { "PackageIdentifier": "Mozilla.SOPS" },
+        { "PackageIdentifier": "OpenJS.NodeJS.LTS" },
         { "PackageIdentifier": "Python.Python.3.12" },
         { "PackageIdentifier": "Rustlang.Rustup" },
         { "PackageIdentifier": "WinFsp.WinFsp" },
