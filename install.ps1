@@ -8,6 +8,16 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
   Exit
 }
 
+function wait-before-exit {
+    # If running in the console, wait for input before closing.
+    if ($Host.Name -eq "ConsoleHost") {
+        Write-Host "Press any key to continue..."
+        # Make sure buffered input doesn't "press a key" and skip the ReadKey()
+        $Host.UI.RawUI.FlushInputBuffer()
+        $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyUp") > $null
+    }
+}
+
 # Load secrets
 $Env:SOPS_AGE_KEY = "op://Personal/SOPS Age Key/password"
 
@@ -35,13 +45,7 @@ foreach ($PYTHON in ('python', 'python3')) {
         --plugin-dir dotbot-crossplatform `
         --plugin-dir dotbot-scoop `
         $Args
-        # If running in the console, wait for input before closing.
-        if ($Host.Name -eq "ConsoleHost") {
-            Write-Host "Press any key to continue..."
-            # Make sure buffered input doesn't "press a key" and skip the ReadKey()
-            $Host.UI.RawUI.FlushInputBuffer()
-            $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyUp") > $null
-        }
+        wait-before-exit
         return
     }
 }
