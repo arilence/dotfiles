@@ -17,6 +17,7 @@
         { "PackageIdentifier": "OpenJS.NodeJS.LTS" },
         { "PackageIdentifier": "Python.Python.3.12" },
         { "PackageIdentifier": "Rustlang.Rustup" },
+        { "PackageIdentifier": "sharkdp.fd" },
         { "PackageIdentifier": "WinFsp.WinFsp" },
         { "PackageIdentifier": "zig.zig" },
 
