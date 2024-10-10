@@ -9,6 +9,7 @@
         { "PackageIdentifier": "GnuWin32.Make" },
         { "PackageIdentifier": "jqlang.jq" },
         { "PackageIdentifier": "junegunn.fzf" },
+        { "PackageIdentifier": "Kitware.CMake" },
         { "PackageIdentifier": "Microsoft.OpenJDK.17" },
         { "PackageIdentifier": "Microsoft.OpenJDK.21" },
         { "PackageIdentifier": "Microsoft.PowerShell" },
@@ -16,6 +17,7 @@
         { "PackageIdentifier": "Python.Python.3.12" },
         { "PackageIdentifier": "Rustlang.Rustup" },
         { "PackageIdentifier": "WinFsp.WinFsp" },
+        { "PackageIdentifier": "zig.zig" },
 
         { "PackageIdentifier": "7zip.7zip" },
         { "PackageIdentifier": "AgileBits.1Password" },

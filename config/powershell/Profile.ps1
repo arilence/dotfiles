@@ -78,3 +78,6 @@ function git-log {
 }
 # `gl` is already an alias for `Get-Location`. Setting -Force overwrites the alias.
 Set-Alias -Name gl -Value git-log -Force
+
+# Adds Make to PATH
+$env:PATH += ";C:\Program Files (x86)\GnuWin32\bin"
