@@ -55,6 +55,7 @@
         { "PackageIdentifier": "Playnite.Playnite" },
         { "PackageIdentifier": "PrismLauncher.PrismLauncher" },
         { "PackageIdentifier": "PrivateInternetAccess.PrivateInternetAccess" },
+        { "PackageIdentifier": "SideQuestVR.SideQuest" },
         { "PackageIdentifier": "Spotify.Spotify" },
         { "PackageIdentifier": "TablePlus.TablePlus" },
         { "PackageIdentifier": "Ubisoft.Connect" },
@@ -62,9 +63,8 @@
         { "PackageIdentifier": "VideoLAN.VLC" },
         { "PackageIdentifier": "VirtualDesktop.Streamer" },
         { "PackageIdentifier": "voidtools.Everything" },
-        { "PackageIdentifier": "WinMerge.WinMerge" },
         { "PackageIdentifier": "Zen-Team.Zen-Browser" },
-        { "PackageIdentifier": "SideQuestVR.SideQuest" }
+        { "PackageIdentifier": "WinMerge.WinMerge" }
     ],
     "SourceDetails": {
       "Argument": "https://cdn.winget.microsoft.com/cache",
