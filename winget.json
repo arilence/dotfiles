@@ -24,6 +24,7 @@
         { "PackageIdentifier": "7zip.7zip" },
         { "PackageIdentifier": "AgileBits.1Password" },
         { "PackageIdentifier": "AgileBits.1Password.CLI" },
+        { "PackageIdentifier": "ajeetdsouza.zoxide" },
         { "PackageIdentifier": "AntibodySoftware.WizTree" },
         { "PackageIdentifier": "Beeper.Beeper" },
         { "PackageIdentifier": "Cryptomator.Cryptomator" },

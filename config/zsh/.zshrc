@@ -46,9 +46,6 @@ if [[ "$(uname)" == "Darwin" || "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; 
   if [[ -d "$HOME/.rye" && -f "$HOME/.rye/env" ]]; then
     source "$HOME/.rye/env"
   fi
-
-  # Navigate faster
-  eval "$(jump shell zsh)"
 fi
 
 # Linux only
@@ -99,6 +96,12 @@ alias ga='git add'
 alias gd="git diff"
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias lg='lazygit'
+
+###
+# zoxide "a smarter cd command"
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh --cmd j)"
+fi
 
 ###
 # Atuin - shell history recorded to a SQLite database
