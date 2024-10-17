@@ -8,6 +8,7 @@ python = "latest"
 java = "temurin-17"
 kubectl = "latest"
 rye = "latest" # python package manager
+stylua = "latest" # lua code formatting
 
 [settings]
 python_compile = true

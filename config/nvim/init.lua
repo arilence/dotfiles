@@ -7,31 +7,31 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Disables moving the cursor with the arrow keys while in normal mode.
 -- I originally did this to learn vim locomation and now just keep it around out of habit.
-vim.api.nvim_set_keymap('n', '<Up>',    '', { noremap = true})
-vim.api.nvim_set_keymap('n', '<Down>',  '', { noremap = true})
-vim.api.nvim_set_keymap('n', '<Left>',  '', { noremap = true})
-vim.api.nvim_set_keymap('n', '<Right>', '', { noremap = true})
+vim.api.nvim_set_keymap("n", "<Up>", "", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Down>", "", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Left>", "", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Right>", "", { noremap = true })
 
 -- Prepend mise shims to PATH
 vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
 
 -- Bootstraps package manager, lazy.nvim, automatically
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
+  vim.fn.system {
     "git",
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable", -- latest stable release
     lazypath,
-  })
+  }
 end
 vim.opt.rtp:prepend(lazypath)
 
 -- Load plugins through package manager
 -- Use `:Lazy install` or `:Lazy update` to trigger plugin installs
-require("lazy").setup({
+require("lazy").setup {
   -- Colour Schemes
   {
     "cocopon/iceberg.vim",
@@ -46,7 +46,7 @@ require("lazy").setup({
     "lewis6991/gitsigns.nvim",
     config = function()
       require("gitsigns").setup()
-    end
+    end,
   },
 
   -- Language Parsing
@@ -55,11 +55,24 @@ require("lazy").setup({
     build = ":TSUpdate",
     event = "BufRead",
     config = function()
-      require 'nvim-treesitter.install'.prefer_git = false
-      require 'nvim-treesitter.install'.compilers = { "zig", "gcc" }
+      require("nvim-treesitter.install").prefer_git = false
+      require("nvim-treesitter.install").compilers = { "zig", "gcc" }
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
-          "elixir", "heex", "eex", "vim", "typescript", "tsx", "graphql", "css", "c", "lua", "vimdoc", "query", "rust", "yaml"
+          "elixir",
+          "heex",
+          "eex",
+          "vim",
+          "typescript",
+          "tsx",
+          "graphql",
+          "css",
+          "c",
+          "lua",
+          "vimdoc",
+          "query",
+          "rust",
+          "yaml",
         },
         highlight = {
           enable = true,
@@ -78,7 +91,7 @@ require("lazy").setup({
 
   -- Smart commenting
   {
-    'numToStr/Comment.nvim',
+    "numToStr/Comment.nvim",
     keys = {
       -- `:h comment.plugmaps` for a list of commands
       { "<C-_>", "<Plug>(comment_toggle_linewise_current)<CR>", mode = { "n" } },
@@ -92,11 +105,11 @@ require("lazy").setup({
     },
     lazy = false,
     config = function()
-      require('Comment').setup {
+      require("Comment").setup {
         -- pre_hook is required by nvim-ts-context-commentstring
-        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
       }
-    end
+    end,
   },
 
   -- Auto-completion and snippets
@@ -108,15 +121,15 @@ require("lazy").setup({
       local has_words_before = function()
         unpack = unpack or table.unpack
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
       end
 
       local feedkey = function(key, mode)
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
       end
 
-      local cmp = require("cmp")
-      cmp.setup({
+      local cmp = require "cmp"
+      cmp.setup {
         snippet = {
           expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
@@ -126,15 +139,15 @@ require("lazy").setup({
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.abort(),
+        mapping = cmp.mapping.preset.insert {
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
           -- Safetly select entries with Carriage Return <CR>
           -- If nothing is selected in suggestions add a newline as usual
           -- If something has explicitly been selected, autocomplete it
-          ['<CR>'] = cmp.mapping.confirm({ select = false }),
+          ["<CR>"] = cmp.mapping.confirm { select = false },
           -- Use Tab to cycle forward through list of suggestions
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -155,43 +168,43 @@ require("lazy").setup({
               feedkey("<Plug>(vsnip-jump-prev)", "")
             end
           end, { "i", "s" }),
-        }),
+        },
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "vsnip" },
           { name = "git" },
         }, {
-          { name = 'buffer' },
-        })
-      })
+          { name = "buffer" },
+        }),
+      }
 
       -- Set configuration for specific filetype.
-      cmp.setup.filetype('gitcommit', {
+      cmp.setup.filetype("gitcommit", {
         sources = cmp.config.sources({
-          { name = 'git' }, -- requires cmp-git
+          { name = "git" }, -- requires cmp-git
         }, {
-          { name = 'buffer' },
-        })
+          { name = "buffer" },
+        }),
       })
 
       -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-      cmp.setup.cmdline({ '/', '?' }, {
+      cmp.setup.cmdline({ "/", "?" }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-          { name = 'buffer' }
-        }
+          { name = "buffer" },
+        },
       })
 
       -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-      cmp.setup.cmdline(':', {
+      cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          { name = 'path' }
+          { name = "path" },
         }, {
-          { name = 'cmdline' }
-        })
+          { name = "cmdline" },
+        }),
       })
-    end
+    end,
   },
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
@@ -199,14 +212,14 @@ require("lazy").setup({
   "hrsh7th/cmp-cmdline",
   "hrsh7th/cmp-vsnip",
   "hrsh7th/vim-vsnip",
-  {"petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" }},
+  { "petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" } },
 
   -- Language Server Specific
   {
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup()
-    end
+    end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
@@ -215,7 +228,7 @@ require("lazy").setup({
         ensure_installed = { "yamlls" },
         automatic_installation = true,
       }
-    end
+    end,
   },
   {
     "neovim/nvim-lspconfig",
@@ -230,8 +243,8 @@ require("lazy").setup({
     version = "*",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      local elixir = require("elixir")
-      local elixirls = require("elixir.elixirls")
+      local elixir = require "elixir"
+      local elixirls = require "elixir.elixirls"
 
       elixir.setup {
         nextls = { enable = false },
@@ -245,7 +258,7 @@ require("lazy").setup({
             enableTestLenses = true,
             suggestSpecs = true,
           },
-        }
+        },
       }
     end,
     dependencies = {
@@ -259,8 +272,9 @@ require("lazy").setup({
     opts = {},
     config = function()
       local slow_format_filetypes = {}
-      require("conform").setup({
+      require("conform").setup {
         formatters_by_ft = {
+          lua = { "stylua" },
           elixir = { "mix" },
         },
         format_on_save = function(bufnr)
@@ -268,7 +282,7 @@ require("lazy").setup({
             return
           end
           local function on_format(err)
-            if err and err:match("timeout$") then
+            if err and err:match "timeout$" then
               slow_format_filetypes[vim.bo[bufnr].filetype] = true
             end
           end
@@ -281,7 +295,7 @@ require("lazy").setup({
           end
           return { lsp_fallback = true }
         end,
-      })
+      }
     end,
   },
 
@@ -289,10 +303,10 @@ require("lazy").setup({
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      "nvim-lua/plenary.nvim"
+      "nvim-lua/plenary.nvim",
     },
     config = function()
-      local telescope = require("telescope")
+      local telescope = require "telescope"
       local actions = require "telescope.actions"
       telescope.setup {
         defaults = {
@@ -304,22 +318,22 @@ require("lazy").setup({
             n = {
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
-            }
-          }
+            },
+          },
         },
         pickers = {
           find_files = {
-            hidden = true
-          }
-        }
+            hidden = true,
+          },
+        },
       }
 
       -- Unmap Ctrl+F
-      vim.keymap.set('n', '<C-f>', '<nop>')
+      vim.keymap.set("n", "<C-f>", "<nop>")
 
-      local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-      vim.keymap.set('n', '<C-f>', builtin.live_grep, {})
+      local builtin = require "telescope.builtin"
+      vim.keymap.set("n", "<C-p>", builtin.find_files, {})
+      vim.keymap.set("n", "<C-f>", builtin.live_grep, {})
       -- vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
       -- vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
     end,
@@ -333,18 +347,18 @@ require("lazy").setup({
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = {
-      "nvim-tree/nvim-web-devicons"
+      "nvim-tree/nvim-web-devicons",
     },
     version = "*",
     keys = {
       { "<C-S-f>", ":NvimTreeToggle<CR>", mode = { "n" } },
     },
     config = function()
-      require("nvim-tree").setup({
+      require("nvim-tree").setup {
         view = {
-          width = 35
-        }
-      })
+          width = 35,
+        },
+      }
     end,
   },
   {
@@ -354,21 +368,21 @@ require("lazy").setup({
       "nvim-telescope/telescope.nvim",
     },
     config = function()
-      require("telescope").load_extension("yaml_schema")
-      local cfg = require("yaml-companion").setup({
+      require("telescope").load_extension "yaml_schema"
+      local cfg = require("yaml-companion").setup {
         -- detect k8s schemas based on file content
         builtin_matchers = {
-          kubernetes = { enabled = true }
+          kubernetes = { enabled = true },
         },
         lspconfig = {
           settings = {
             yaml = {
               validate = true,
               format = { enable = false },
-            }
-          }
-        }
-      })
+            },
+          },
+        },
+      }
       require("lspconfig")["yamlls"].setup(cfg)
     end,
   },
@@ -390,25 +404,24 @@ require("lazy").setup({
     config = function()
       require("dbee").setup {
         sources = {
-          require("dbee.sources").MemorySource:new({
+          require("dbee.sources").MemorySource:new {
             {
               name = "local_development",
               type = "postgres",
               url = "postgres://postgres:postgres@localhost:5432?sslmode=disable",
             },
             -- ...
-          }),
-        }
+          },
+        },
       }
 
       -- Add `:Dbee` command to toggle opening the UI
-      vim.api.nvim_create_user_command('Dbee', 'lua require("dbee").toggle()', {})
+      vim.api.nvim_create_user_command("Dbee", 'lua require("dbee").toggle()', {})
     end,
   },
-})
 
 -- Hacky way to get colours working across vim and tmux
-vim.cmd([[
+vim.cmd [[
 " Enable 256 colors
 set t_Co=256
 " Disable background color erase in tmux
@@ -426,7 +439,7 @@ endif
 if (has("termguicolors"))
     set termguicolors
 endif
-]])
+]]
 
 vim.opt.encoding = "utf-8"
 vim.opt.history = 1000
@@ -505,7 +518,7 @@ vim.opt.smarttab = true
 vim.opt.updatetime = 500
 
 -- Hide the command/message box at the bottom when it's not being used
-vim.opt.cmdheight=0
+vim.opt.cmdheight = 0
 
 -- Enable cursorline
 vim.opt.cursorline = true
@@ -517,19 +530,19 @@ vim.wo.relativenumber = true
 vim.g.editorconfig = true
 
 -- Support resizing in tmux
-vim.cmd([[
+vim.cmd [[
 if exists('$TMUX') && !has('nvim')
   set ttymouse=xterm2
 endif
-]])
+]]
 
 -- Clear current search with //
-vim.keymap.set('n', '//', ':nohlsearch <CR>')
+vim.keymap.set("n", "//", ":nohlsearch <CR>")
 
 -- Stay in visual mode when indenting
-vim.keymap.set('v', '<', '<gv')
-vim.keymap.set('v', '>', '>gv')
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
 
 -- Prevents (P)aste from overwriting value in buffer. This is handy when pasting a
 -- value to multiple locations.
-vim.keymap.set('v', 'p', '"_dP')
+vim.keymap.set("v", "p", '"_dP')
