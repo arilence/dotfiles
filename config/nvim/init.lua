@@ -510,6 +510,9 @@ vim.opt.cmdheight=0
 -- Enable cursorline
 vim.opt.cursorline = true
 
+-- Show relative line numbers
+vim.wo.relativenumber = true
+
 -- EditorConfig is enabled by default, but just in case
 vim.g.editorconfig = true
 
