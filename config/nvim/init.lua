@@ -424,6 +424,8 @@ require("lazy").setup {
     end,
   },
 
+}
+
 -- Hacky way to get colours working across vim and tmux
 vim.cmd [[
 " Enable 256 colors
