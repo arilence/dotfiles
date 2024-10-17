@@ -44,6 +44,14 @@ if ($LastExitCode -ne 0) {
 # Reload environment after installing applications with winget
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
 
+# Some applications aren't found on winget registries :(
+cargo install stylua
+if ($LastExitCode -ne 0) {
+    Write-Error "Error: cargo install failed."
+    wait-before-exit
+    return
+}
+
 # Neovim mason-lspconfig requires this one node package :(
 npm install --global yaml-language-server
 if ($LastExitCode -ne 0) {
