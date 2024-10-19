@@ -291,7 +291,7 @@ require("lazy").setup {
             end
           end
 
-          return { timeout_ms = 200, lsp_fallback = true }, on_format
+          return { timeout_ms = 2500, lsp_fallback = true }, on_format
         end,
         format_after_save = function(bufnr)
           if not slow_format_filetypes[vim.bo[bufnr].filetype] then
