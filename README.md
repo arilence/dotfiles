@@ -22,15 +22,6 @@ For windows:
 git submodule update --remote
 ```
 
-### Misc
-```bash
-brew upgrade
-zprezto-update
-nvim --headless "+Lazy! update" +qa
-nvim --headless "+MasonUpdate" +qa
-mise up
-```
-
 ## Completions
 ```bash
 zprezto-build-completion
