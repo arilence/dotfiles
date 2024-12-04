@@ -22,6 +22,18 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
 fi
 export HOMEBREW_NO_ANALYTICS=1
 
+# macOS and Linux
+if [[ "$(uname)" == "Darwin" || "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+  if [[ -d "$HOME/.fly" ]]; then
+    export FLYCTL_INSTALL="$HOME/.fly"
+    export PATH="$FLYCTL_INSTALL/bin:$PATH"
+  fi
+
+  if [[ -d "$HOME/.rye" && -f "$HOME/.rye/env" ]]; then
+    source "$HOME/.rye/env"
+  fi
+fi
+
 # macOS Only
 if [[ "$(uname)" == "Darwin" ]]; then
   # Yubikey GPG Agent (For SSH)
@@ -33,18 +45,6 @@ if [[ "$(uname)" == "Darwin" ]]; then
   if [[ -d "/Applications/Araxis Merge.app/Contents/Utilities" ]]; then
     # Provides a custom `compare` command using Araxis Merge
     export PATH=$PATH:"/Applications/Araxis Merge.app/Contents/Utilities"
-  fi
-fi
-
-# macOS and Linux
-if [[ "$(uname)" == "Darwin" || "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
-  if [[ -d "$HOME/.fly" ]]; then
-    export FLYCTL_INSTALL="$HOME/.fly"
-    export PATH="$FLYCTL_INSTALL/bin:$PATH"
-  fi
-
-  if [[ -d "$HOME/.rye" && -f "$HOME/.rye/env" ]]; then
-    source "$HOME/.rye/env"
   fi
 fi
 
