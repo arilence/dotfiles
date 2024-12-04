@@ -229,9 +229,10 @@ require("lazy").setup {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup {
-        ensure_installed = { "yamlls" },
+        ensure_installed = { "yamlls", "rust_analyzer" },
         automatic_installation = true,
       }
+      require("lspconfig").rust_analyzer.setup {}
     end,
   },
   {
@@ -278,8 +279,9 @@ require("lazy").setup {
       local slow_format_filetypes = {}
       require("conform").setup {
         formatters_by_ft = {
-          lua = { "stylua" },
           elixir = { "mix" },
+          lua = { "stylua" },
+          rust = { "rustfmt" },
         },
         format_on_save = function(bufnr)
           if slow_format_filetypes[vim.bo[bufnr].filetype] then
