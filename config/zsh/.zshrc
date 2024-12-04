@@ -109,6 +109,26 @@ if command -v atuin &> /dev/null; then
   eval "$(atuin init zsh)"
 fi
 
+###
+# Helper functions
+
+# Reminder to update at least once a week
+LAST_UPDATE_TIME_FILE="$HOME/.last_update_time_file"
+dotfiles-update() {
+  echo "Running brew upgrade"; brew upgrade || exit $?
+  echo "Running zprezto update"; zprezto-update || exit $?
+  echo "Running nvim plugin update"; nvim --headless "+Lazy! update" +qa || exit $?
+  echo "Running nvim mason update"; nvim --headless "+MasonUpdate" +qa || exit $?
+  echo "Running mise upgrade"; mise upgrade --bump || exit $?
+
+  # Update the last run timestamp
+  date +%s >! "$LAST_UPDATE_TIME_FILE"
+}
+# Check if it's been 7 days or more since last running the update command
+if [ ! -f "$LAST_UPDATE_TIME_FILE" ] || [ $(( $(date +%s) - $(cat "$LAST_UPDATE_TIME_FILE") )) -gt $(( 7 * 24 * 60 * 60 )) ]; then
+  echo "It's been over a week since the last update check.\nRun $ dotfiles-update to check for updates."
+fi
+
 # This function must be declared after all aliases that are referenced inside it
 zprezto-build-completion() {
   local completion_dir="${ZDOTDIR:-$HOME}/.zprezto/modules/completion/external/src"
