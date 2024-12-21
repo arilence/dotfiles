@@ -97,6 +97,9 @@ alias gd="git diff"
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias lg='lazygit'
 
+# Must be called before zoxide init
+autoload -Uz compinit && compinit
+
 ###
 # fzf
 if command -v fzf &> /dev/null; then
