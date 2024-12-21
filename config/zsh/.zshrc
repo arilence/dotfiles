@@ -98,6 +98,12 @@ alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgree
 alias lg='lazygit'
 
 ###
+# fzf
+if command -v fzf &> /dev/null; then
+  source <(fzf --zsh)
+fi
+
+###
 # zoxide "a smarter cd command"
 if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh --cmd j)"
