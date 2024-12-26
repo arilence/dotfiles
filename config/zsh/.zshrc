@@ -61,6 +61,7 @@ fi
 ###
 # Miscellaneous Aliases
 alias ls='eza --group-directories-first'
+alias c='clear'
 
 ###
 # Tmux
