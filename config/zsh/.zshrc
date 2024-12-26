@@ -46,10 +46,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
     # Provides a custom `compare` command using Araxis Merge
     export PATH=$PATH:"/Applications/Araxis Merge.app/Contents/Utilities"
   fi
-fi
 
 # Linux only
-if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+else
   fpath+=/home/linuxbrew/.linuxbrew/share/zsh/site-functions
 fi
 
