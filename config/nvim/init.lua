@@ -40,6 +40,11 @@ require("lazy").setup {
     priority = 1000, -- make sure to load this before all the other start plugins
   },
 
+  -- Auto set background=dark/light based on system theme
+  {
+    "vimpostor/vim-lumen",
+  },
+
   -- Miscellaneous
   "christoomey/vim-tmux-navigator",
   {
@@ -426,7 +431,6 @@ require("lazy").setup {
       vim.api.nvim_create_user_command("Dbee", 'lua require("dbee").toggle()', {})
     end,
   },
-
 }
 
 -- Hacky way to get colours working across vim and tmux
@@ -456,7 +460,8 @@ vim.opt.undolevels = 1000
 
 -- Set colorscheme
 vim.g.colors_name = "iceberg"
-vim.opt.background = "light"
+-- vim-lumen handles automatically changing background colour based on system theme
+-- vim.opt.background = "light"
 
 -- Use the system clipboard for easier copy+pasting
 vim.opt.clipboard = "unnamedplus"
