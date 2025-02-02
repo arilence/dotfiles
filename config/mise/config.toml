@@ -7,7 +7,6 @@ rust = "latest"
 python = "latest"
 java = "temurin-17"
 kubectl = "latest"
-rye = "latest" # python package manager
 lua = "5.1" # lazy.nvim luarocks requires 5.1
 stylua = "latest" # lua code formatting
 
