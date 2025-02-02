@@ -52,7 +52,6 @@
         { "PackageIdentifier": "Microsoft.WindowsTerminal" },
         { "PackageIdentifier": "Modrinth.ModrinthApp" },
         { "PackageIdentifier": "Neovim.Neovim" },
-        { "PackageIdentifier": "Nvidia.GeForceExperience" },
         { "PackageIdentifier": "Obsidian.Obsidian" },
         { "PackageIdentifier": "OlegShparber.Zeal" },
         { "PackageIdentifier": "Olivia.VIA" },

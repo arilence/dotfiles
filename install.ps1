@@ -4,18 +4,8 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
   # Get the path of the currently running PowerShell executable
   $psPath = [System.Diagnostics.Process]::GetCurrentProcess().MainModule.FileName
   $currentArgs = $args -join ' '
-  Start-Process -FilePath $psPath -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" --no-color $currentArgs"
+  Start-Process -FilePath $psPath -Verb Runas -ArgumentList "-NoExit -File `"$($MyInvocation.MyCommand.Path)`" --no-color $currentArgs"
   Exit
-}
-
-function wait-before-exit {
-    # If running in the console, wait for input before closing.
-    if ($Host.Name -eq "ConsoleHost") {
-        Write-Host "Press any key to continue..."
-        # Make sure buffered input doesn't "press a key" and skip the ReadKey()
-        $Host.UI.RawUI.FlushInputBuffer()
-        $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyUp") > $null
-    }
 }
 
 # Load secrets
@@ -37,7 +27,6 @@ git submodule update --init --recursive $DOTBOT_DIR
 winget import --no-upgrade --accept-package-agreements --accept-source-agreements -i winget.json
 if ($LastExitCode -ne 0) {
     Write-Error "Error: Winget install failed."
-    wait-before-exit
     return
 }
 
@@ -48,7 +37,6 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";"
 cargo install stylua
 if ($LastExitCode -ne 0) {
     Write-Error "Error: cargo install failed."
-    wait-before-exit
     return
 }
 
@@ -56,7 +44,6 @@ if ($LastExitCode -ne 0) {
 npm install --global yaml-language-server
 if ($LastExitCode -ne 0) {
     Write-Error "Error: npm install yaml-language-server failed."
-    wait-before-exit
     return
 }
 
@@ -72,7 +59,6 @@ foreach ($PYTHON in ('python', 'python3')) {
         --plugin-dir dotbot-crossplatform `
         --plugin-dir dotbot-scoop `
         $Args
-        wait-before-exit
         return
     }
 }
