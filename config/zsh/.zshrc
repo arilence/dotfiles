@@ -134,8 +134,7 @@ dotfiles-update() {
   echo "Running brew upgrade"; brew upgrade || exit $?
   echo "Running zprezto update"; zprezto-update || exit $?
   echo "Running nvim plugin update"; nvim --headless "+Lazy! update" +qa || exit $?
-  echo "Running nvim mason update"; nvim --headless "+MasonUpdate" +qa || exit $?
-  echo "Running mise upgrade"; mise upgrade --bump || exit $?
+  echo "Running mise upgrade"; mise upgrade || exit $?
 
   # Update the last run timestamp
   date +%s >! "$LAST_UPDATE_TIME_FILE"

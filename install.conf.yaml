@@ -19,15 +19,12 @@
       platform: win32
     - command: if not exist "%USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState" mkdir "%USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
       platform: win32
-    - command: if not exist "%USERPROFILE%\AppData\Local\nvim" mkdir "%USERPROFILE%\AppData\Local\nvim"
       platform: win32
     - command: mkdir -p ~/.config/zsh
       platform: linux
     - command: mkdir -p ~/.config/starship
       platform: linux
     - command: mkdir -p ~/.config/mise
-      platform: linux
-    - command: mkdir -p ~/.config/nvim
       platform: linux
     # Decrypt git secrets
     - command: sops --decrypt config\git\gitlocal.win.sops.ini > %USERPROFILE%\.gitlocal
@@ -62,12 +59,12 @@
       path: config/mise/config.toml
       platform: linux
     # neovim
-    ~/AppData/Local/nvim/:
-      path: config/nvim/**
+    ~/AppData/Local/nvim:
+      path: config/nvim
       glob: true
       platform: win32
-    ~/.config/nvim/:
-      path: config/nvim/**
+    ~/.config/nvim:
+      path: config/nvim
       glob: true
       platform: linux
     # editorconfig
