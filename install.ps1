@@ -40,10 +40,10 @@ if ($LastExitCode -ne 0) {
     return
 }
 
-# Neovim mason-lspconfig requires this one node package :(
-npm install --global yaml-language-server
+# Neovim requires some node packages :(
+npm install --global neovim yaml-language-server
 if ($LastExitCode -ne 0) {
-    Write-Error "Error: npm install yaml-language-server failed."
+    Write-Error "Error: npm install failed."
     return
 }
 
@@ -52,6 +52,9 @@ foreach ($PYTHON in ('python', 'python3')) {
     if (& { $ErrorActionPreference = "SilentlyContinue"
             ![string]::IsNullOrEmpty((&$PYTHON -V))
             $ErrorActionPreference = "Stop" }) {
+        # Install python dependencies
+        pip install neovim
+
         # Run dotbot
         # 1Password by default buffers command execution, which results in a confusing blank screen for the entire dotbot installation.
         # `--no-masking` "fixes" this issue but creates another issue of potentially leaking secrets (Haven't seen any leaked yet)

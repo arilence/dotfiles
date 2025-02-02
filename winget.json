@@ -4,6 +4,8 @@
   "Sources": [{
     "Packages": [
         { "PackageIdentifier": "BurntSushi.ripgrep.MSVC" },
+        { "PackageIdentifier": "DEVCOM.Lua" },
+        { "PackageIdentifier": "DEVCOM.LuaJIT" },
         { "PackageIdentifier": "EclipseAdoptium.Temurin.8.JDK" },
         { "PackageIdentifier": "eza-community.eza" },
         { "PackageIdentifier": "GnuWin32.Make" },
