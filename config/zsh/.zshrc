@@ -54,6 +54,9 @@ if [[ ! -z "${WSL_DISTRO_NAME}" ]]; then
   alias op='op.exe'
 fi
 
+# Some applications install themselves inside here
+export PATH="$HOME/.local/bin:$PATH"
+
 ###
 # Miscellaneous Aliases
 alias ls='eza --group-directories-first'
