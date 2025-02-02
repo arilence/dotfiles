@@ -28,10 +28,6 @@ if [[ "$(uname)" == "Darwin" || "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; 
     export FLYCTL_INSTALL="$HOME/.fly"
     export PATH="$FLYCTL_INSTALL/bin:$PATH"
   fi
-
-  if [[ -d "$HOME/.rye" && -f "$HOME/.rye/env" ]]; then
-    source "$HOME/.rye/env"
-  fi
 fi
 
 # macOS Only
