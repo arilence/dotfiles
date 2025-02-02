@@ -9,6 +9,8 @@ java = "temurin-17"
 kubectl = "latest"
 lua = "5.1" # lazy.nvim luarocks requires 5.1
 stylua = "latest" # lua code formatting
+zig = "latest"
+zls = "latest"
 
 [settings]
 python_compile = true
