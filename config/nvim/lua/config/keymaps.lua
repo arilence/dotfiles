@@ -16,3 +16,6 @@ vim.keymap.set("v", "p", '"_dP')
 -- Change the default Split Window Right
 vim.keymap.del("n", "<leader>|")
 vim.keymap.set("n", "<leader>\\", "<C-W>v", { desc = "Split Window Right", remap = true })
+
+-- Remove the default "Open Terminal window"
+vim.keymap.del("n", "<C-_>")
