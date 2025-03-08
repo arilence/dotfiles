@@ -131,10 +131,10 @@ esac
 # Reminder to update at least once a week
 LAST_UPDATE_TIME_FILE="$HOME/.last_update_time_file"
 dotfiles-update() {
-  echo "Running brew upgrade"; brew upgrade || exit $?
-  echo "Running zprezto update"; zprezto-update || exit $?
-  echo "Running nvim plugin update"; nvim --headless "+Lazy! update" +qa || exit $?
-  echo "Running mise upgrade"; mise upgrade || exit $?
+  echo "Running brew upgrade"; brew upgrade || return $?
+  echo "Running zprezto update"; zprezto-update || return $?
+  echo "Running nvim plugin update"; nvim --headless "+Lazy! update" +qa || return $?
+  echo "Running mise upgrade"; mise upgrade || return $?
 
   # Update the last run timestamp
   date +%s >! "$LAST_UPDATE_TIME_FILE"
