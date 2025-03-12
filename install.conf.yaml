@@ -21,6 +21,9 @@
       platform: linux
     - command: mkdir -p ~/.config/starship
       platform: linux
+    # Setup mise
+    - command: if not exist "%USERPROFILE%\.config\mise" mkdir "%USERPROFILE%\.config\mise"
+      platform: win32
     - command: mkdir -p ~/.config/mise
       platform: linux
     # Decrypt git secrets
@@ -63,7 +66,6 @@
     # mise
     ~/.config/mise/config.toml:
       path: config/mise/config.toml
-      platform: linux
     # neovim
     ~/AppData/Local/nvim:
       path: config/nvim

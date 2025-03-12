@@ -93,5 +93,8 @@ function which-command {
 # Adds Make to PATH
 $env:PATH += ";C:\Program Files (x86)\GnuWin32\bin"
 
+# mise-en-place
+Invoke-Expression (& { (mise activate pwsh | Out-String) })
+
 # zoxide "a smarter cd command"
 Invoke-Expression (& { (zoxide init powershell --cmd j | Out-String) })

@@ -9,6 +9,7 @@
         { "PackageIdentifier": "EclipseAdoptium.Temurin.8.JDK" },
         { "PackageIdentifier": "eza-community.eza" },
         { "PackageIdentifier": "GnuWin32.Make" },
+        { "PackageIdentifier": "jdx.mise" },
         { "PackageIdentifier": "jqlang.jq" },
         { "PackageIdentifier": "junegunn.fzf" },
         { "PackageIdentifier": "Kitware.CMake" },
