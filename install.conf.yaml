@@ -44,7 +44,7 @@
     ~/.config/zsh/:
       path: config/zsh/.*
       glob: true
-      exclude: [ config/zsh/zshenv ]
+      exclude: [config/zsh/zshenv]
       platform: linux
     # starship-rs
     ~/.config/starship/starship.toml:
