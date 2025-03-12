@@ -6,7 +6,10 @@
 
 - crossplatform-shell:
     # Create directories before symlinking files
+    - command: if not exist "%USERPROFILE%\.config\git" mkdir "%USERPROFILE%\.config\git"
+      platform: win32
     - command: mkdir -p ~/.config/git
+      platform: linux
     - command: if not exist "%USERPROFILE%\Documents\PowerShell" mkdir "%USERPROFILE%\Documents\PowerShell"
       platform: win32
     - command: if not exist "%USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState" mkdir "%USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
@@ -18,8 +21,11 @@
     - command: mkdir -p ~/.config/mise
       platform: linux
     # Decrypt git secrets
+    - command: sops --decrypt config\git\gitlocal.common.sops.ini > "%USERPROFILE%\.config\git\gitlocal-common"
+      platform: win32 # every platform but windows
     - command: sops --decrypt config/git/gitlocal.common.sops.ini > ~/.config/git/gitlocal-common
-    - command: sops --decrypt config\git\gitlocal.win.sops.ini > ~\.config\git\gitlocal
+      platform: "!win32" # every platform but windows
+    - command: sops --decrypt config\git\gitlocal.win.sops.ini >"%USERPROFILE%\.config\git\gitlocal"
       platform: win32
     - command: sops --decrypt config/git/gitlocal.wsl.sops.ini > ~/.config/git/gitlocal
       environment: WSL_DISTRO_NAME
