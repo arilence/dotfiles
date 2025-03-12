@@ -1,6 +1,6 @@
 [core]
     editor = nvim
-    excludesfile = ~/.gitignore_global
+    excludesfile = ~/.config/git/gitignore_global
 [init]
     defaultBranch = main
 [pull]
@@ -8,4 +8,4 @@
 [commit]
     gpgsign = true
 [include]
-    path = ~/.gitlocal
+    path = ~/.config/git/gitlocal

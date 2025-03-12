@@ -2,23 +2,14 @@
     link:
       relink: true
 
-- clean: ['~']
-
-# Install cross-platform configs
-- crossplatform-link:
-    ~/.gitconfig:
-      path: config/git/gitconfig
-      force: true
-    ~/.gitignore_global:
-      path: config/git/gitignore_global
-      force: true
+- clean: ["~"]
 
 - crossplatform-shell:
     # Create directories before symlinking files
+    - command: mkdir -p ~/.config/git
     - command: if not exist "%USERPROFILE%\Documents\PowerShell" mkdir "%USERPROFILE%\Documents\PowerShell"
       platform: win32
     - command: if not exist "%USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState" mkdir "%USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
-      platform: win32
       platform: win32
     - command: mkdir -p ~/.config/zsh
       platform: linux
@@ -27,9 +18,9 @@
     - command: mkdir -p ~/.config/mise
       platform: linux
     # Decrypt git secrets
-    - command: sops --decrypt config\git\gitlocal.win.sops.ini > %USERPROFILE%\.gitlocal
+    - command: sops --decrypt config\git\gitlocal.win.sops.ini > ~\.config\git\gitlocal
       platform: win32
-    - command: sops --decrypt config/git/gitlocal.wsl.sops.ini > ~/.gitlocal
+    - command: sops --decrypt config/git/gitlocal.wsl.sops.ini > ~/.config/git/gitlocal
       environment: WSL_DISTRO_NAME
 - crossplatform-link:
     # powershell 7
@@ -41,6 +32,11 @@
       path: config/windows-terminal/settings.json
       force: true
       platform: win32
+    # git
+    ~/.config/git/config:
+      path: config/git/gitconfig
+    ~/.config/git/gitignore_global:
+      path: config/git/gitignore_global
     # zsh / prezto
     ~/.zshenv:
       path: config/zsh/zshenv
