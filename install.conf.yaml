@@ -5,6 +5,9 @@
 - clean: ["~"]
 
 - crossplatform-shell:
+    - command: |
+        powershell -Command "[System.Environment]::SetEnvironmentVariable('GIT_CONFIG_GLOBAL','%USERPROFILE%\.config\git\config', 'User')"
+      platform: win32
     # Create directories before symlinking files
     - command: if not exist "%USERPROFILE%\.config\git" mkdir "%USERPROFILE%\.config\git"
       platform: win32
