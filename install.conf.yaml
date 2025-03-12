@@ -18,6 +18,7 @@
     - command: mkdir -p ~/.config/mise
       platform: linux
     # Decrypt git secrets
+    - command: sops --decrypt config/git/gitlocal.common.sops.ini > ~/.config/git/gitlocal-common
     - command: sops --decrypt config\git\gitlocal.win.sops.ini > ~\.config\git\gitlocal
       platform: win32
     - command: sops --decrypt config/git/gitlocal.wsl.sops.ini > ~/.config/git/gitlocal

@@ -8,4 +8,5 @@
 [commit]
     gpgsign = true
 [include]
+    path = ~/.config/git/gitlocal-common
     path = ~/.config/git/gitlocal
