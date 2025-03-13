@@ -1,0 +1,27 @@
+{
+  "workbench.startupEditor": "none",
+  "editor.rulers": [80, 120],
+  "redhat.telemetry.enabled": false,
+  "editor.wordWrap": "off",
+  "git.autofetch": true,
+  "editor.renderWhitespace": "trailing",
+  "window.autoDetectColorScheme": true,
+  "workbench.colorTheme": "GitHub Light",
+  "workbench.preferredDarkColorTheme": "Rainbow (rainglow)",
+  "workbench.preferredLightColorTheme": "Nord Light",
+  "workbench.tips.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  "editor.formatOnSave": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.fontFamily": "Consolas, 'Courier New', monospace",
+  "git.confirmSync": false,
+  "explorer.confirmDelete": false,
+  "rust-analyzer.check.command": "clippy",
+  "editor.fontFamily": "GeistMono Nerd Font Mono, Consolas, 'Courier New', monospace"
+}

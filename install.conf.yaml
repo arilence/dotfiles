@@ -84,6 +84,13 @@
       path: config/tmux/
       platform: linux
       force: true
+    # Visual Studio Code
+    ~/AppData/Roaming/Code/User/settings.json:
+      path: config/vs-code/settings.json
+      platform: win32
+    ~/AppData/Roaming/Code/User/keybindings.json:
+      path: config/vs-code/keybindings.json
+      platform: win32
 - crossplatform-shell:
     # install prezto
     - command: if [ ! -d "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto" ]; then git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"; fi
