@@ -1,6 +1,5 @@
 [core]
   editor = nvim
-  excludesfile = ~/.config/git/gitignore_global
 [init]
   defaultBranch = main
 [pull]

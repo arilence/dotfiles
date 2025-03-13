@@ -48,8 +48,8 @@
     # git
     ~/.config/git/config:
       path: config/git/gitconfig
-    ~/.config/git/gitignore_global:
-      path: config/git/gitignore_global
+    ~/.config/git/ignore:
+      path: config/git/gitignore
     # zsh / prezto
     ~/.zshenv:
       path: config/zsh/zshenv
