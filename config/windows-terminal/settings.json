@@ -9,13 +9,11 @@
                 "action": "copy",
                 "singleLine": false
             },
-            "id": "User.copy.644BA8F2",
-            "keys": "ctrl+c"
+            "id": "User.copy.644BA8F2"
         },
         {
             "command": "paste",
-            "id": "User.paste",
-            "keys": "ctrl+v"
+            "id": "User.paste"
         },
         {
             "command": 
@@ -23,18 +21,33 @@
                 "action": "sendInput",
                 "input": "\u001b[70;6u"
             },
-            "id": "User.sendInput.6100CC58",
-            "keys": "ctrl+shift+f"
+            "id": "User.sendInput.6100CC58"
         }
     ],
     "alwaysShowNotificationIcon": false,
     "alwaysShowTabs": true,
+    "centerOnLaunch": true,
     "copyFormatting": "none",
     "copyOnSelect": true,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
     "firstWindowPreference": "defaultProfile",
     "initialCols": 160,
     "initialRows": 45,
+    "keybindings": 
+    [
+        {
+            "id": "User.copy.644BA8F2",
+            "keys": "ctrl+c"
+        },
+        {
+            "id": "User.sendInput.6100CC58",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "User.paste",
+            "keys": "ctrl+v"
+        }
+    ],
     "minimizeToNotificationArea": false,
     "newTabMenu": 
     [
@@ -147,6 +160,5 @@
     "theme": "system",
     "themes": [],
     "useAcrylicInTabRow": true,
-    "windowingBehavior": "useNew",
-    "centerOnLaunch": true
+    "windowingBehavior": "useNew"
 }
