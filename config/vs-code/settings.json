@@ -20,6 +20,10 @@
   },
   "terminal.integrated.defaultProfile.linux": "bash",
   "terminal.integrated.fontFamily": "Consolas, 'Courier New', monospace",
+  "terminal.integrated.commandsToSkipShell": [
+    "workbench.action.toggleSidebarVisibility",
+    "workbench.action.toggleAuxiliaryBar"
+  ],
   "git.confirmSync": false,
   "explorer.confirmDelete": false,
   "rust-analyzer.check.command": "clippy",
