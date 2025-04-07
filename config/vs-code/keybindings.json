@@ -40,17 +40,12 @@
   {
     "key": "ctrl+j",
     "command": "workbench.action.quickOpenSelectNext",
-    "when": "inQuickInput && vim.mode == 'Normal'"
+    "when": "inQuickInput"
   },
   {
     "key": "ctrl+k",
     "command": "workbench.action.quickOpenSelectPrevious",
-    "when": "inQuickInput && vim.mode == 'Normal'"
-  },
-  {
-    "key": "ctrl+j",
-    "command": "workbench.action.togglePanel",
-    "when": "!inQuickInput"
+    "when": "inQuickInput"
   },
   {
     "key": "ctrl+j",
@@ -60,5 +55,25 @@
     "key": "ctrl+p",
     "command": "-extension.vim_ctrl+p",
     "when": "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.navigateDown",
+    "when": "!inQuickInput"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.navigateUp",
+    "when": "!inQuickInput"
+  },
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.navigateLeft",
+    "when": "!inQuickInput"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.navigateRight",
+    "when": "!inQuickInput"
   }
 ]
