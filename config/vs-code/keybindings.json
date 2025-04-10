@@ -75,5 +75,14 @@
     "key": "ctrl+l",
     "command": "workbench.action.navigateRight",
     "when": "!inQuickInput"
+  },
+  {
+    "key": "cmd+b",
+    "command": "workbench.action.debug.start",
+    "when": "debuggersAvailable && debugState == 'inactive'"
+  },
+  {
+    "key": "cmd+b",
+    "command": "-workbench.action.toggleSidebarVisibility"
   }
 ]
