@@ -28,5 +28,9 @@
   "explorer.confirmDelete": false,
   "rust-analyzer.check.command": "clippy",
   "editor.fontFamily": "GeistMono Nerd Font Mono, Consolas, 'Courier New', monospace",
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "update.showReleaseNotes": false,
+  "workbench.activityBar.location": "top",
+  "workbench.sideBar.location": "right",
+  "chat.commandCenter.enabled": false
 }
