@@ -1,8 +1,7 @@
 [
   {
     "key": "ctrl+[",
-    "command": "workbench.action.toggleSidebarVisibility",
-    "when": "vim.mode == 'Normal'"
+    "command": "workbench.action.toggleSidebarVisibility"
   },
   {
     "key": "ctrl+b",
@@ -10,8 +9,7 @@
   },
   {
     "key": "ctrl+]",
-    "command": "workbench.action.toggleAuxiliaryBar",
-    "when": "vim.mode == 'Normal'"
+    "command": "workbench.action.toggleAuxiliaryBar"
   },
   {
     "key": "ctrl+alt+b",
