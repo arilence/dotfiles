@@ -1,7 +1,7 @@
 [
   {
     "key": "ctrl+[",
-    "command": "workbench.action.toggleSidebarVisibility"
+    "command": "workbench.action.toggleAuxiliaryBar"
   },
   {
     "key": "ctrl+b",
@@ -9,7 +9,7 @@
   },
   {
     "key": "ctrl+]",
-    "command": "workbench.action.toggleAuxiliaryBar"
+    "command": "workbench.action.toggleSidebarVisibility"
   },
   {
     "key": "ctrl+alt+b",
