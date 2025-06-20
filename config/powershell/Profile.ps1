@@ -93,6 +93,9 @@ function which-command {
 # Adds Make to PATH
 $env:PATH += ";C:\Program Files (x86)\GnuWin32\bin"
 
+# Sets default editor to Neovim
+$env:EDITOR = "nvim"
+
 # mise-en-place
 Invoke-Expression (& { (mise activate pwsh | Out-String) })
 
