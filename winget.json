@@ -30,6 +30,7 @@
         { "PackageIdentifier": "ajeetdsouza.zoxide" },
         { "PackageIdentifier": "AntibodySoftware.WizTree" },
         { "PackageIdentifier": "Armin2208.WindowsAutoNightMode" },
+        { "PackageIdentifier": "AutoHotkey.AutoHotkey" },
         { "PackageIdentifier": "Cryptomator.Cryptomator" },
         { "PackageIdentifier": "DevToys-app.DevToys" },
         { "PackageIdentifier": "Discord.Discord.PTB" },
@@ -47,6 +48,7 @@
         { "PackageIdentifier": "JesseDuffield.lazygit" },
         { "PackageIdentifier": "Kopia.KopiaUI" },
         { "PackageIdentifier": "LizardByte.Sunshine" },
+        { "PackageIdentifier": "Logitech.GHUB" },
         { "PackageIdentifier": "MHNexus.HxD" },
         { "PackageIdentifier": "Microsoft.PowerToys" },
         { "PackageIdentifier": "Microsoft.VisualStudioCode" },
@@ -62,7 +64,6 @@
         { "PackageIdentifier": "SideQuestVR.SideQuest" },
         { "PackageIdentifier": "Spotify.Spotify" },
         { "PackageIdentifier": "TablePlus.TablePlus" },
-        { "PackageIdentifier": "TheBrowserCompany.Arc" },
         { "PackageIdentifier": "TortoiseGit.TortoiseGit" },
         { "PackageIdentifier": "Ubisoft.Connect" },
         { "PackageIdentifier": "Valve.Steam" },
@@ -71,6 +72,7 @@
         { "PackageIdentifier": "VirtualDesktop.Streamer" },
         { "PackageIdentifier": "voidtools.Everything" },
         { "PackageIdentifier": "WinMerge.WinMerge" },
+        { "PackageIdentifier": "Yaak.app" },
         { "PackageIdentifier": "Zen-Team.Zen-Browser" }
     ],
     "SourceDetails": {
