@@ -33,5 +33,6 @@
   "workbench.activityBar.location": "top",
   "workbench.sideBar.location": "right",
   "chat.commandCenter.enabled": false,
-  "workbench.editor.empty.hint": "hidden"
+  "workbench.editor.empty.hint": "hidden",
+  "window.restoreWindows": "none"
 }
