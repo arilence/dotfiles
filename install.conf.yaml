@@ -78,7 +78,6 @@
     # editorconfig
     ~/.editorconfig:
       path: config/editorconfig
-      platform: linux
     # tmux
     ~/.config/tmux:
       path: config/tmux/
