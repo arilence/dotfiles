@@ -11,6 +11,7 @@ lua = "5.1" # lazy.nvim luarocks requires 5.1
 stylua = "latest" # lua code formatting
 zig = "latest"
 zls = "latest"
+"npm:@google/gemini-cli" = "latest"
 
 [settings]
 python_compile = true

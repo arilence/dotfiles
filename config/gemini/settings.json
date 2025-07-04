@@ -1,0 +1,17 @@
+{
+  "theme": "GitHub Light",
+  "selectedAuthType": "oauth-personal",
+  "mcpServers": {
+    "Context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    }
+  },
+  "checkpointing": {
+    "enabled": true
+  },
+  "telemetry": {
+    "enabled": false
+  },
+  "usageStatisticsEnabled": false
+}

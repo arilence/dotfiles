@@ -21,6 +21,10 @@
       platform: linux
     - command: mkdir -p ~/.config/starship
       platform: linux
+    - command: if not exist "%USERPROFILE%\.gemini" mkdir "%USERPROFILE%\.gemini"
+      platform: win32
+    - command: mkdir -p ~/.gemini
+      platform: linux
     # Setup mise
     - command: if not exist "%USERPROFILE%\.config\mise" mkdir "%USERPROFILE%\.config\mise"
       platform: win32
@@ -90,6 +94,9 @@
     ~/AppData/Roaming/Code/User/keybindings.json:
       path: config/vs-code/keybindings.json
       platform: win32
+    # gemini cli
+    ~/.gemini/settings.json:
+      path: config/gemini/settings.json
 - crossplatform-shell:
     # install prezto
     - command: if [ ! -d "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto" ]; then git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"; fi
