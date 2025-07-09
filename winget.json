@@ -41,7 +41,6 @@
         { "PackageIdentifier": "Git.Git" },
         { "PackageIdentifier": "GnuPG.Gpg4win" },
         { "PackageIdentifier": "Helix.Helix" },
-        { "PackageIdentifier": "HeroicGamesLauncher.HeroicGamesLauncher" },
         { "PackageIdentifier": "HumbleBundle.HumbleApp" },
         { "PackageIdentifier": "ItchIo.Itch" },
         { "PackageIdentifier": "Iterate.Cyberduck" },
