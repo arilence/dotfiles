@@ -1,2 +1,2 @@
 [env]
-SOPS_AGE_KEY = { value = "{{ exec(command='op.exe read \"op://Personal/SOPS Age Key/password\"', cache_key='sops_age_key')}}", redact = true }
+_.file = ".env.toml"
