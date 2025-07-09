@@ -1,3 +1,4 @@
+.env.toml
 .secrets
 .DS_Store
 config/1Password
