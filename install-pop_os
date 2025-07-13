@@ -1,0 +1,157 @@
+#!/usr/bin/env bash
+
+# TODO: This script should be idempotent.
+# i.e. Running the command multiple times should result in the same outcome.
+
+# Request sudo for later and then keep-alive as long as script is running
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# 1password
+if ! command -v 1password &> /dev/null && ! test -f /usr/bin/1password; then
+    echo "Please install 1password"
+    exit 1
+fi
+if ! command -v op &> /dev/null; then
+    sudo apt update && sudo apt install 1password-cli
+fi
+export SOPS_AGE_KEY=$(op read "op://Personal/SOPS AGE KEY/password")
+if [[ $? -ne 0 || -z "$SOPS_AGE_KEY" ]]; then
+    echo "Setting sops key failed, please make sure 1password is running"
+    exit 1
+fi
+
+# mise.jdx.dev
+mkdir -p $HOME/.config/mise
+ln -sf $PWD/config/mise/config.toml $HOME/.config/mise/config.toml
+
+if ! command -v mise &> /dev/null && ! test -f $HOME/.local/bin/mise
+then
+    echo "Mise not found. Installing..."
+    curl https://mise.run | sh
+fi
+
+# dependencies for tools installed through mise
+# erlang
+sudo apt-get install -y automake autoconf libncurses-dev libwxgtk-webview3.0-gtk3-dev inotify-tools libssl-dev
+
+# add mise to bashrc
+MISE_SEARCH_STRING="mise activate bash"
+MISE_INSTALL_STRING="\n# mise.jdx.dev\neval \"\$(~/.local/bin/mise activate bash)\""
+if ! grep -qiF "$MISE_SEARCH_STRING" $HOME/.bashrc
+then
+    echo -e $MISE_INSTALL_STRING >> $HOME/.bashrc
+    eval "$(~/.local/bin/mise activate bash)"
+    ~/.local/bin/mise trust $PWD
+    ~/.local/bin/mise install
+fi
+
+# git
+mkdir -p $HOME/.config/git
+sops --decrypt $PWD/config/git/gitlocal.common.sops.ini > $HOME/.config/git/gitlocal-common
+sops --decrypt $PWD/config/git/gitlocal.linux.sops.ini > $HOME/.config/git/gitlocal
+ln -sf $PWD/config/git/gitconfig $HOME/.config/git/config
+ln -sf $PWD/config/git/gitignore $HOME/.config/git/ignore
+
+# neovim
+if ! command -v nvim &> /dev/null && ! test -d /opt/nvim-linux-x86_64
+then
+    echo "Neovim not found. Installing..."
+    sudo rm -rf /opt/nvim
+    curl -sL "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz" | sudo sh -c 'tar -xzf - -C /opt'
+fi
+
+# add neovim to bashrc
+NEOVIM_SEARCH_STRING="/opt/nvim-linux-x86_64/bin"
+NEOVIM_INSTALL_STRING="\n# neovim\nexport PATH=\"\$PATH:/opt/nvim-linux-x86_64/bin\""
+if ! grep -qiF "$NEOVIM_SEARCH_STRING" $HOME/.bashrc
+then
+    echo -e $NEOVIM_INSTALL_STRING >> $HOME/.bashrc
+    export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+fi
+
+# editorconfig
+ln -sf $PWD/config/editorconfig $HOME/.editorconfig
+
+# visual studio code
+mkdir -p $HOME/.config/Code/User
+ln -sf $PWD/config/vs-code/keybindings.json $HOME/.config/Code/User/keybindings.json
+ln -sf $PWD/config/vs-code/settings.json $HOME/.config/Code/User/settings.json
+
+if ! command -v code &> /dev/null && ! test -f /usr/bin/code; then
+    echo "Vscode not found. Installing..."
+    curl -o /tmp/vscode.deb -sL "https://go.microsoft.com/fwlink/?LinkID=760868"
+    sudo apt-get install /tmp/vscode.deb
+    rm /tmp/vscode.deb
+fi
+
+# lazygit
+mkdir -p $HOME/.config/lazygit
+ln -sf $PWD/config/lazygit/config.yml $HOME/.config/lazygit/config.yml
+
+# google gemini cli
+mkdir -p $HOME/.gemini
+ln -sf $PWD/config/gemini/settings.json $HOME/.gemini/settings.json
+
+# syncthing
+# from: https://apt.syncthing.net/
+if ! command -v syncthing &> /dev/null && ! test -f /usr/bin/syncthing; then
+    sudo mkdir -p /etc/apt/keyrings
+    if ! test -f /etc/apt/keyrings/syncthing-archive-keyring.gpg; then
+        sudo curl -sL -o /etc/apt/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
+    fi
+    if ! test -f /etc/apt/sources.list.d/syncthing.list; then
+        echo "deb [signed-by=/etc/apt/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list > /dev/null
+    fi
+    if ! test -f /etc/apt/preferences.d/syncthing.pref; then
+        echo -e "Package: *\nPin: origin apt.syncthing.net\nPin-Priority: 990\n" | sudo tee /etc/apt/preferences.d/syncthing.pref > /dev/null
+    fi
+    sudo apt-get update
+    sudo apt-get install syncthing
+fi
+
+# obsidian
+if ! command -v obsidian &> /dev/null && ! test -f /usr/bin/obsidian; then
+    echo "Obsidian not found. Installing..."
+    curl -o /tmp/obsidian.deb -sL "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.8.10/obsidian_1.8.10_amd64.deb"
+    sudo apt-get install /tmp/obsidian.deb
+    rm /tmp/obsidian.deb
+fi
+
+# starship
+mkdir -p $HOME/.config/starship
+ln -sf $PWD/config/starship/starship.toml $HOME/.config/starship/starship.toml
+
+# zsh / prezto
+mkdir -p $HOME/.config/zsh
+ln -sf $PWD/config/zsh/zshenv $HOME/.zshenv
+# dotglob is required to symlink files that start with a period
+shopt -s dotglob
+ln -sf $PWD/config/zsh/* $HOME/.config/zsh/
+# we unset dotglob now that we're done with it
+shopt -u dotglob
+# install zsh and prezto
+sudo apt-get update
+sudo apt-get install -y zsh
+if [ ! -d "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto" ]; then
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
+fi
+
+# eza
+if ! command -v eza &> /dev/null && ! test -f $HOME/.cargo/bin/eza; then
+    cargo install eza
+fi
+
+# Missing TMUX and Neovim
+
+# Change default shell to zsh
+CURRENT_SHELL=$(getent passwd $USER | cut "-d:" -f7)
+if [ "${CURRENT_SHELL}" != "/bin/zsh" ]; then
+    echo "Changing default shell to zsh" && chsh -s /bin/zsh
+fi
+
+if ! command -v ghostty &> /dev/null; then
+  echo "Reminder to install Ghostty manually"
+fi
+
+echo "Done"

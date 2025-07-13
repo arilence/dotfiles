@@ -1,2 +1,5 @@
+[tools]
+"aqua:getsops/sops" = "latest"
+
 [env]
 _.file = ".env.toml"

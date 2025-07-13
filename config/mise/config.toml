@@ -4,13 +4,11 @@ erlang = "latest"
 elixir = "latest"
 node = "latest"
 rust = "latest"
-python = "latest"
-java = "temurin-17"
-kubectl = "latest"
-lua = "5.1" # lazy.nvim luarocks requires 5.1
-stylua = "latest" # lua code formatting
 zig = "latest"
 zls = "latest"
+"aqua:starship/starship" = "latest"
+"aqua:ajeetdsouza/zoxide" = "latest"
+"aqua:jesseduffield/lazygit" = "latest"
 "npm:@google/gemini-cli" = "latest"
 
 [settings]
