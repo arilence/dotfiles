@@ -144,6 +144,12 @@ fi
 
 # Missing TMUX and Neovim
 
+# Apply Pop_OS specific configuration settings
+# Most of these are actually gnome specific, but this is just in case.
+if grep -q '^ID=pop$' /etc/os-release; then
+  bash $PWD/pop_os/setup.sh
+fi
+
 # Change default shell to zsh
 CURRENT_SHELL=$(getent passwd $USER | cut "-d:" -f7)
 if [ "${CURRENT_SHELL}" != "/bin/zsh" ]; then
