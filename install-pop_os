@@ -142,6 +142,12 @@ if ! command -v eza &> /dev/null && ! test -f $HOME/.cargo/bin/eza; then
     cargo install eza
 fi
 
+# zen browser
+if ! flatpak list | grep -qF "app.zen_browser.zen"; then
+    echo "Zen Browser not found. Installing..."
+    flatpak install -y flathub app.zen_browser.zen
+fi
+
 # Missing TMUX and Neovim
 
 # Apply Pop_OS specific configuration settings
