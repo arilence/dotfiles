@@ -1,4 +1,3 @@
-sudo apt-get update
 sudo apt-get install gnome-tweaks
 
 # There is no easy way to get the config ID from the GUI settings. The best way I found is to run a command that watches for config changes.
@@ -20,7 +19,7 @@ gsettings set org.gnome.desktop.peripherals.touchpad speed 0.45
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
 
 # Set mouse/trackpad acceleration profile to flat
-gsettings set org.gnome.desktop.peripherals.mouse.accel-profile 'flat'
+gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'flat'
 
 # Moves window buttons to the left (like macOS) and then also enables the maximize button
 gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:appmenu'
@@ -36,4 +35,4 @@ gsettings set org.gnome.desktop.interface clock-format '24h'
 
 # Disable vertical workspaces (brings back horizontal workspaces)
 # Similar to macOS spaces
-gsettings set org.gnome.shell.disabled-extensions "['cosmic-workspaces@system76.com']"
+gsettings set org.gnome.shell disabled-extensions "['cosmic-workspaces@system76.com']"
