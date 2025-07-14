@@ -31,3 +31,6 @@ gsettings set org.gnome.desktop.input-sources xkb-options "['caps:ctrl_modifier'
 # Sets clock to 24 hour format
 gsettings set org.gnome.desktop.interface clock-format '24h'
 
+# Disable vertical workspaces (brings back horizontal workspaces)
+# Similar to macOS spaces
+gsettings set org.gnome.shell.disabled-extensions "['cosmic-workspaces@system76.com']"
