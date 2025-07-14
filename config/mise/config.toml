@@ -9,6 +9,7 @@ zls = "latest"
 "aqua:starship/starship" = "latest"
 "aqua:ajeetdsouza/zoxide" = "latest"
 "aqua:jesseduffield/lazygit" = "latest"
+#"ubi:openai/codex" = "codex-rs-ac6e1b2661320a631d80aa51bdfa8f1635e0c8fa-1-rust-v0.0.2506052246"
 "npm:@google/gemini-cli" = "latest"
 
 [settings]
