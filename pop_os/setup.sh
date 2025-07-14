@@ -21,6 +21,9 @@ gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
 # Set mouse/trackpad acceleration profile to flat
 gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'flat'
 
+# Keeps the trackpad enabled while typing
+gsettings set org.gnome.desktop.peripherals.touchpad disable-while-typing false
+
 # Moves window buttons to the left (like macOS) and then also enables the maximize button
 gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:appmenu'
 
@@ -36,3 +39,9 @@ gsettings set org.gnome.desktop.interface clock-format '24h'
 # Disable vertical workspaces (brings back horizontal workspaces)
 # Similar to macOS spaces
 gsettings set org.gnome.shell disabled-extensions "['cosmic-workspaces@system76.com']"
+
+# Add keybinding for maximizing a window
+gsettings set org.gnome.desktop.wm.keybindings maximize "['<Primary><Alt><Super>Up']"
+
+# Add keybinding for restoring a window back to it's original size
+gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Primary><Alt><Super>Down']"
