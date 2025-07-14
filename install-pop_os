@@ -120,6 +120,19 @@ if ! command -v obsidian &> /dev/null && ! test -f /usr/bin/obsidian; then
     rm /tmp/obsidian.deb
 fi
 
+# kopia
+if ! command -v kopia-ui &> /dev/null && ! test -f /usr/bin/kopia-ui; then
+    sudo mkdir -p /etc/apt/keyrings
+    if ! test -f /etc/apt/keyrings/kopia-keyring.gpg; then
+        curl -s https://kopia.io/signing-key | sudo gpg --dearmor -o /etc/apt/keyrings/kopia-keyring.gpg
+    fi
+    if ! test -f /etc/apt/sources.list.d/kopia.list; then
+        echo "deb [signed-by=/etc/apt/keyrings/kopia-keyring.gpg] http://packages.kopia.io/apt/ stable main" | sudo tee /etc/apt/sources.list.d/kopia.list > /dev/null
+    fi
+    sudo apt-get update
+    sudo apt-get install kopia-ui
+fi
+
 # starship
 mkdir -p $HOME/.config/starship
 ln -sf $PWD/config/starship/starship.toml $HOME/.config/starship/starship.toml
