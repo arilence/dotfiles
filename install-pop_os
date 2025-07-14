@@ -7,13 +7,15 @@
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+sudo apt-get update
+
 # 1password
 if ! command -v 1password &> /dev/null && ! test -f /usr/bin/1password; then
     echo "Please install 1password"
     exit 1
 fi
 if ! command -v op &> /dev/null; then
-    sudo apt update && sudo apt install 1password-cli
+    sudo apt-get install 1password-cli
 fi
 export SOPS_AGE_KEY=$(op read "op://Personal/SOPS AGE KEY/password")
 if [[ $? -ne 0 || -z "$SOPS_AGE_KEY" ]]; then
@@ -131,7 +133,6 @@ ln -sf $PWD/config/zsh/* $HOME/.config/zsh/
 # we unset dotglob now that we're done with it
 shopt -u dotglob
 # install zsh and prezto
-sudo apt-get update
 sudo apt-get install -y zsh
 if [ ! -d "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto" ]; then
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
