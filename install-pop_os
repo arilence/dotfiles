@@ -150,6 +150,11 @@ fi
 
 # Missing TMUX and Neovim
 
+# startup applications
+mkdir -p $HOME/.config/autostart
+ln -sf $PWD/config/autostart/1password.desktop $HOME/.config/autostart/1password.desktop
+ln -sf $PWD/config/autostart/syncthing-start.desktop $HOME/.config/autostart/syncthing-start.desktop
+
 # Apply Pop_OS specific configuration settings
 # Most of these are actually gnome specific, but this is just in case.
 if grep -q '^ID=pop$' /etc/os-release; then
