@@ -34,5 +34,7 @@
   "workbench.sideBar.location": "right",
   "chat.commandCenter.enabled": false,
   "workbench.editor.empty.hint": "hidden",
-  "window.restoreWindows": "none"
+  "window.restoreWindows": "none",
+  "mise.configureExtensionsAutomatically": false,
+  "editor.lineNumbers": "relative"
 }
