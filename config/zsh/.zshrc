@@ -117,7 +117,8 @@ fi
 ###
 # Atuin - shell history recorded to a SQLite database
 if command -v atuin &> /dev/null; then
-  eval "$(atuin init zsh)"
+  # Only show atuin on ctrl-r, not on up-arrow
+  eval "$(atuin init zsh --disable-up-arrow)"
 fi
 
 ###
