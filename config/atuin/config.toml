@@ -1,0 +1,6 @@
+# From: https://docs.atuin.sh/configuration/config/
+update_check = false
+style = "compact"
+show_help = false
+enter_accept = false
+keymap_mode = "vim-normal"

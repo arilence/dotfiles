@@ -157,6 +157,8 @@ if ! command -v eza &> /dev/null && ! test -f $HOME/.cargo/bin/eza; then
 fi
 
 # atuin
+mkdir -p $HOME/.config/atuin
+ln -sf $PWD/config/atuin/config.toml $HOME/.config/atuin/config.toml
 if ! command -v atuin &> /dev/null && ! test -f $HOME/.cargo/bin/atuin; then
     cargo install atuin
 fi
