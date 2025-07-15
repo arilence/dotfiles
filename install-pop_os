@@ -156,6 +156,11 @@ if ! command -v eza &> /dev/null && ! test -f $HOME/.cargo/bin/eza; then
     cargo install eza
 fi
 
+# atuin
+if ! command -v atuin &> /dev/null && ! test -f $HOME/.cargo/bin/atuin; then
+    cargo install atuin
+fi
+
 # zen browser
 if ! flatpak list | grep -qF "app.zen_browser.zen"; then
     echo "Zen Browser not found. Installing..."
