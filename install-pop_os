@@ -163,6 +163,10 @@ if ! command -v atuin &> /dev/null && ! test -f $HOME/.cargo/bin/atuin; then
     cargo install atuin
 fi
 
+# ghostty
+mkdir -p $HOME/.config/ghostty
+ln -sf $PWD/config/ghostty/config $HOME/.config/ghostty/config
+
 # zen browser
 if ! flatpak list | grep -qF "app.zen_browser.zen"; then
     echo "Zen Browser not found. Installing..."
