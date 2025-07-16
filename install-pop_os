@@ -175,6 +175,7 @@ fi
 mkdir -p $HOME/.config/autostart
 ln -sf $PWD/config/autostart/1password.desktop $HOME/.config/autostart/1password.desktop
 ln -sf $PWD/config/autostart/syncthing-start.desktop $HOME/.config/autostart/syncthing-start.desktop
+ln -sf $PWD/config/autostart/caffeine-indicator.desktop $HOME/.config/autostart/caffeine-indicator.desktop
 
 # Apply Pop_OS specific configuration settings
 # Most of these are actually gnome specific, but this is just in case.

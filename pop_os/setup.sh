@@ -1,4 +1,4 @@
-sudo apt-get install gnome-tweaks
+sudo apt-get install -y gnome-tweaks caffeine
 
 # There is no easy way to get the config ID from the GUI settings. The best way I found is to run a command that watches for config changes.
 # Command: `dconf watch /`
