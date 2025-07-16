@@ -36,5 +36,6 @@
   "workbench.editor.empty.hint": "hidden",
   "window.restoreWindows": "none",
   "mise.configureExtensionsAutomatically": false,
-  "editor.lineNumbers": "relative"
+  "editor.lineNumbers": "relative",
+  "terminal.integrated.defaultLocation": "editor"
 }
