@@ -27,9 +27,6 @@ gsettings set org.gnome.desktop.peripherals.touchpad disable-while-typing false
 # Moves window buttons to the left (like macOS) and then also enables the maximize button
 gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:appmenu'
 
-# Show battery percentage in menu bar
-gsettings set org.gnome.desktop.interface show-battery-percentage true
-
 # Makes Caps Lock act as Ctrl (requires gnome-tweaks)
 gsettings set org.gnome.desktop.input-sources xkb-options "['caps:ctrl_modifier']"
 
