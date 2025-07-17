@@ -115,6 +115,7 @@ fi
 # obsidian
 if ! command -v obsidian &> /dev/null && ! test -f /usr/bin/obsidian; then
     echo "Obsidian not found. Installing..."
+    # TODO: Get the latest instead of hardcoded version
     curl -o /tmp/obsidian.deb -sL "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.8.10/obsidian_1.8.10_amd64.deb"
     sudo apt-get install /tmp/obsidian.deb
     rm /tmp/obsidian.deb
