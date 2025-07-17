@@ -193,6 +193,10 @@ fi
 
 # Missing TMUX and Neovim
 
+# caffeine, choose when the screen should stay on indefinitely
+if ! command -v caffeine &> /dev/null && ! test -f /usr/bin/caffeine; then
+    sudo apt-get install -y caffeine
+fi
 ln -sf $PWD/config/autostart/caffeine-indicator.desktop $HOME/.config/autostart/caffeine-indicator.desktop
 
 # Apply Pop_OS specific configuration settings
