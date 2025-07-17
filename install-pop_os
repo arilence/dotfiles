@@ -18,7 +18,7 @@ if ! command -v 1password &> /dev/null && ! test -f /usr/bin/1password; then
     exit 1
 fi
 if ! command -v op &> /dev/null; then
-    sudo apt-get install 1password-cli
+    sudo apt-get install -y 1password-cli
 fi
 ln -sf $PWD/config/autostart/1password.desktop $HOME/.config/autostart/1password.desktop
 export SOPS_AGE_KEY=$(op read "op://Personal/SOPS AGE KEY/password")
@@ -87,7 +87,7 @@ ln -sf $PWD/config/vs-code/settings.json $HOME/.config/Code/User/settings.json
 if ! command -v code &> /dev/null && ! test -f /usr/bin/code; then
     echo "Vscode not found. Installing..."
     curl -o /tmp/vscode.deb -sL "https://go.microsoft.com/fwlink/?LinkID=760868"
-    sudo apt-get install /tmp/vscode.deb
+    sudo apt-get install -y /tmp/vscode.deb
     rm /tmp/vscode.deb
 fi
 
@@ -113,7 +113,7 @@ if ! command -v syncthing &> /dev/null && ! test -f /usr/bin/syncthing; then
         echo -e "Package: *\nPin: origin apt.syncthing.net\nPin-Priority: 990\n" | sudo tee /etc/apt/preferences.d/syncthing.pref > /dev/null
     fi
     sudo apt-get update
-    sudo apt-get install syncthing
+    sudo apt-get install -y syncthing
 fi
 ln -sf $PWD/config/autostart/syncthing-start.desktop $HOME/.config/autostart/syncthing-start.desktop
 
@@ -122,7 +122,7 @@ if ! command -v obsidian &> /dev/null && ! test -f /usr/bin/obsidian; then
     echo "Obsidian not found. Installing..."
     # TODO: Get the latest instead of hardcoded version
     curl -o /tmp/obsidian.deb -sL "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.8.10/obsidian_1.8.10_amd64.deb"
-    sudo apt-get install /tmp/obsidian.deb
+    sudo apt-get install -y /tmp/obsidian.deb
     rm /tmp/obsidian.deb
 fi
 
@@ -136,7 +136,7 @@ if ! command -v kopia-ui &> /dev/null && ! test -f /usr/bin/kopia-ui; then
         echo "deb [signed-by=/etc/apt/keyrings/kopia-keyring.gpg] http://packages.kopia.io/apt/ stable main" | sudo tee /etc/apt/sources.list.d/kopia.list > /dev/null
     fi
     sudo apt-get update
-    sudo apt-get install kopia-ui
+    sudo apt-get install -y kopia-ui
 fi
 
 # ulauncher
@@ -144,7 +144,7 @@ if ! command -v ulauncher &> /dev/null && ! test -f /usr/bin/ulauncher; then
     echo "Ulauncher not found. Installing..."
     # TODO: Get the latest instead of hardcoded version
     curl -o /tmp/ulauncher.deb -sL "https://github.com/Ulauncher/Ulauncher/releases/download/v6.0.0-beta20/ulauncher_6.0.0.beta20_all.deb"
-    sudo apt-get install /tmp/ulauncher.deb
+    sudo apt-get install -y /tmp/ulauncher.deb
     rm /tmp/ulauncher.deb
 fi
 ln -sf $PWD/config/autostart/ulauncher.desktop $HOME/.config/autostart/ulauncher.desktop
@@ -162,7 +162,9 @@ ln -sf $PWD/config/zsh/* $HOME/.config/zsh/
 # we unset dotglob now that we're done with it
 shopt -u dotglob
 # install zsh and prezto
-sudo apt-get install -y zsh
+if ! command -v zsh &> /dev/null && ! test -f /usr/bin/zsh; then
+    sudo apt-get install -y zsh
+fi
 if [ ! -d "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto" ]; then
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
 fi
