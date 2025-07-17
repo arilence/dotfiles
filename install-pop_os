@@ -9,6 +9,9 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 sudo apt-get update
 
+# create a startup applications folder for later
+mkdir -p $HOME/.config/autostart
+
 # 1password
 if ! command -v 1password &> /dev/null && ! test -f /usr/bin/1password; then
     echo "Please install 1password"
@@ -17,6 +20,7 @@ fi
 if ! command -v op &> /dev/null; then
     sudo apt-get install 1password-cli
 fi
+ln -sf $PWD/config/autostart/1password.desktop $HOME/.config/autostart/1password.desktop
 export SOPS_AGE_KEY=$(op read "op://Personal/SOPS AGE KEY/password")
 if [[ $? -ne 0 || -z "$SOPS_AGE_KEY" ]]; then
     echo "Setting sops key failed, please make sure 1password is running"
@@ -111,6 +115,7 @@ if ! command -v syncthing &> /dev/null && ! test -f /usr/bin/syncthing; then
     sudo apt-get update
     sudo apt-get install syncthing
 fi
+ln -sf $PWD/config/autostart/syncthing-start.desktop $HOME/.config/autostart/syncthing-start.desktop
 
 # obsidian
 if ! command -v obsidian &> /dev/null && ! test -f /usr/bin/obsidian; then
@@ -142,6 +147,7 @@ if ! command -v ulauncher &> /dev/null && ! test -f /usr/bin/ulauncher; then
     sudo apt-get install /tmp/ulauncher.deb
     rm /tmp/ulauncher.deb
 fi
+ln -sf $PWD/config/autostart/ulauncher.desktop $HOME/.config/autostart/ulauncher.desktop
 
 # starship
 mkdir -p $HOME/.config/starship
@@ -185,12 +191,7 @@ fi
 
 # Missing TMUX and Neovim
 
-# startup applications
-mkdir -p $HOME/.config/autostart
-ln -sf $PWD/config/autostart/1password.desktop $HOME/.config/autostart/1password.desktop
-ln -sf $PWD/config/autostart/syncthing-start.desktop $HOME/.config/autostart/syncthing-start.desktop
 ln -sf $PWD/config/autostart/caffeine-indicator.desktop $HOME/.config/autostart/caffeine-indicator.desktop
-ln -sf $PWD/config/autostart/ulauncher.desktop $HOME/.config/autostart/ulauncher.desktop
 
 # Apply Pop_OS specific configuration settings
 # Most of these are actually gnome specific, but this is just in case.
