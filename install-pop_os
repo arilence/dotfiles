@@ -133,6 +133,15 @@ if ! command -v kopia-ui &> /dev/null && ! test -f /usr/bin/kopia-ui; then
     sudo apt-get install kopia-ui
 fi
 
+# ulauncher
+if ! command -v ulauncher &> /dev/null && ! test -f /usr/bin/ulauncher; then
+    echo "Ulauncher not found. Installing..."
+    # TODO: Get the latest instead of hardcoded version
+    curl -o /tmp/ulauncher.deb -sL "https://github.com/Ulauncher/Ulauncher/releases/download/v6.0.0-beta20/ulauncher_6.0.0.beta20_all.deb"
+    sudo apt-get install /tmp/ulauncher.deb
+    rm /tmp/ulauncher.deb
+fi
+
 # starship
 mkdir -p $HOME/.config/starship
 ln -sf $PWD/config/starship/starship.toml $HOME/.config/starship/starship.toml
@@ -180,6 +189,7 @@ mkdir -p $HOME/.config/autostart
 ln -sf $PWD/config/autostart/1password.desktop $HOME/.config/autostart/1password.desktop
 ln -sf $PWD/config/autostart/syncthing-start.desktop $HOME/.config/autostart/syncthing-start.desktop
 ln -sf $PWD/config/autostart/caffeine-indicator.desktop $HOME/.config/autostart/caffeine-indicator.desktop
+ln -sf $PWD/config/autostart/ulauncher.desktop $HOME/.config/autostart/ulauncher.desktop
 
 # Apply Pop_OS specific configuration settings
 # Most of these are actually gnome specific, but this is just in case.

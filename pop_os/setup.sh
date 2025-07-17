@@ -42,3 +42,10 @@ gsettings set org.gnome.desktop.wm.keybindings maximize "['<Primary><Alt><Super>
 
 # Add keybinding for restoring a window back to it's original size
 gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Primary><Alt><Super>Down']"
+
+# Disable Super-Space keybind for ulauncher
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "[]"
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source "[]"
+
+# Change "overview" shortcut to right super so that left super can be used for ulauncher
+gsettings set org.gnome.mutter overlay-key ""

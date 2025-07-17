@@ -1,0 +1,11 @@
+[Desktop Entry]
+Icon=ulauncher
+Name=Ulauncher
+Comment=Application launcher for Linux
+TryExec=/usr/bin/ulauncher
+Exec=env GDK_BACKEND=x11 /usr/bin/ulauncher --hide-window --hide-window --hide-window --hide-window --hide-window
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Utility;
+GenericName=Launcher
+X-GNOME-Autostart-enabled=false
