@@ -43,6 +43,14 @@ gsettings set org.gnome.desktop.wm.keybindings maximize "['<Primary><Alt><Super>
 # Add keybinding for restoring a window back to it's original size
 gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Primary><Alt><Super>Down']"
 
+# Disable keybindings for some default apps
+gsettings set org.gnome.settings-daemon.plugins.media-keys email "[]"
+gsettings set org.gnome.settings-daemon.plugins.media-keys help "[]"
+gsettings set org.gnome.settings-daemon.plugins.media-keys home "[]"
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "[]"
+gsettings set org.gnome.settings-daemon.plugins.media-keys www "[]"
+gsettings set org.gnome.shell.keybindings toggle-application-view "[]"
+
 # Disable Super-Space keybind for ulauncher
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "[]"
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source "[]"
