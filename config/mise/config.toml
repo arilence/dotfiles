@@ -11,7 +11,7 @@ zls = "latest"
 "aqua:starship/starship" = "latest"
 "aqua:superfly/flyctl" = "latest"
 "npm:@google/gemini-cli" = "latest"
-"npm:opencode-ai" = "latest"
+"ubi:sst/opencode" = "latest"
 "ubi:openai/codex" = "latest"
 
 [settings]
