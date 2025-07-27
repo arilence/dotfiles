@@ -1,3 +1,7 @@
+# Enables profiling
+# Run zsh with the command: ZPROF=1 zsh -i -c exit
+[ -z "$ZPROF" ] || zmodload zsh/zprof
+
 # Source Prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -169,3 +173,7 @@ zprezto-build-completion() {
 # Starship.rs prompt
 export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
 eval "$(starship init zsh)"
+
+# For profiling zsh
+# Run zsh with the command: ZPROF=1 zsh -i -c exit
+[ -z "$ZPROF" ] || zprof
