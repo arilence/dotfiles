@@ -131,14 +131,6 @@ if command -v atuin &> /dev/null; then
 fi
 
 ###
-# pnpm - node package manager
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-
-###
 # Helper functions
 
 # Reminder to update at least once a week
