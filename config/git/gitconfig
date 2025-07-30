@@ -29,6 +29,11 @@
 	all = true
 [help]
 	autocorrect = prompt
+# Use SSH url instead of HTTPS: or GIT:
+[url "git@github.com:"]
+	insteadOf = "https://github.com/"
+	insteadOf = "git://github.com/"
+	insteadOf = "github:"
 [include]
   path = ~/.config/git/gitlocal-common
   path = ~/.config/git/gitlocal
