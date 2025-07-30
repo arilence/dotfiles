@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+usage() {
+  echo "Usage: $0 <grep query>" >&2
+  echo "  <greq query>: A string to find within $HOME." >&2
+  exit 1 # Exit with an error status
+}
+
+# Command requires a single argument
+if [[ "$#" -ne 1 ]]; then
+  usage
+fi
+
+find $HOME -xdev \
+  -path $HOME/.cache -prune -o \
+  -path $HOME/.config/zsh/.zsh_history -prune -o \
+  -type f -print0 | xargs -0 grep -H "$1"

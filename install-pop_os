@@ -12,6 +12,10 @@ sudo apt-get update
 # create a startup applications folder for later
 mkdir -p $HOME/.config/autostart
 
+# symlink custom scripts
+mkdir -p $HOME/.local/bin
+ln -s $PWD/bin/* $HOME/.local/bin/
+
 # 1password
 if ! command -v 1password &> /dev/null && ! test -f /usr/bin/1password; then
     echo "Please install 1password"
