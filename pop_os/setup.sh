@@ -51,9 +51,15 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "[]"
 gsettings set org.gnome.settings-daemon.plugins.media-keys www "[]"
 gsettings set org.gnome.shell.keybindings toggle-application-view "[]"
 
-# Disable Super-Space keybind for ulauncher
+# Disable Pop OS's default Super-Space keybind
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "[]"
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source "[]"
 
-# Change "overview" shortcut to right super so that left super can be used for ulauncher
+# Change "overview" shortcut to right super so that left super can be used for custom keybindings
 gsettings set org.gnome.mutter overlay-key ""
+
+# Set Super+Space to launch Rofi
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>space'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'rofi -show run'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Launch Rofi'
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/PopLaunch1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"

@@ -151,7 +151,13 @@ if ! command -v ulauncher &> /dev/null && ! test -f /usr/bin/ulauncher; then
     sudo apt-get install -y /tmp/ulauncher.deb
     rm /tmp/ulauncher.deb
 fi
-ln -sf $PWD/config/autostart/ulauncher.desktop $HOME/.config/autostart/ulauncher.desktop
+#ln -sf $PWD/config/autostart/ulauncher.desktop $HOME/.config/autostart/ulauncher.desktop
+
+# rofi
+if ! command -v rofi &> /dev/null && ! test -f /usr/bin/rofi; then
+    echo "Rofi not found. Installing..."
+    sudo apt-get install -y rofi
+fi
 
 # starship
 mkdir -p $HOME/.config/starship
