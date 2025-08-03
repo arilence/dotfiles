@@ -7,13 +7,15 @@ rust = "latest"
 zig = "latest"
 zls = "latest"
 "aqua:ajeetdsouza/zoxide" = "latest"
+"aqua:getsops/sops" = "latest"
 "aqua:jesseduffield/lazydocker" = "latest"
 "aqua:jesseduffield/lazygit" = "latest"
 "aqua:starship/starship" = "latest"
 "aqua:superfly/flyctl" = "latest"
 "npm:@google/gemini-cli" = "latest"
-"ubi:sst/opencode" = "latest"
+"ubi:charmbracelet/crush" = "latest"
 "ubi:openai/codex" = "latest"
+"ubi:sst/opencode" = "latest"
 
 [settings]
 experimental = true
