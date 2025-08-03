@@ -16,6 +16,17 @@ mkdir -p $HOME/.config/autostart
 mkdir -p $HOME/.local/bin
 ln -sf $PWD/bin/* $HOME/.local/bin/
 
+# install nerd font
+NERD_FONT_ARCHIVE="Noto.tar.xz"
+NERD_FONT_DIR="Noto"
+NERD_FONT_NAME="NotoSansM Nerd"
+mkdir -p $HOME/.local/share/fonts
+if command -v fc-list &> /dev/null && ! fc-list | grep -qi "$NERD_FONT_NAME"; then
+  echo "$NERD_FONT_NAME font not found. Installing..."
+  # -J is for .tar.xz | -z is for .tar.gz
+  curl -sL "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$NERD_FONT_ARCHIVE" | tar --one-top-level="$NERD_FONT_DIR" -xJf - -C $HOME/.local/share/fonts
+fi
+
 # 1password
 if ! command -v 1password &> /dev/null && ! test -f /usr/bin/1password; then
     echo "Please install 1password"
