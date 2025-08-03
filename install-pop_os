@@ -142,6 +142,10 @@ if ! command -v kopia-ui &> /dev/null && ! test -f /usr/bin/kopia-ui; then
     sudo apt-get update
     sudo apt-get install -y kopia-ui
 
+    # Allows kopia to backup files all files, regardless of permissions.
+    # I'm using this to backup docker volume data that may have different permissions from the default user who will be running kopia-ui.
+    # This is very dangerous.
+    sudo setcap cap_dac_read_search=+ep /opt/KopiaUI/resources/server/kopia
 fi
 
 # rofi
