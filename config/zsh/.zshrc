@@ -65,6 +65,7 @@ export PATH="$HOME/.local/bin:$PATH"
 # Miscellaneous Aliases
 alias ls='eza --group-directories-first'
 alias c='clear'
+alias ld='lazydocker'
 
 ###
 # Tmux
