@@ -20,7 +20,7 @@
   },
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.defaultProfile.windows": "PowerShell",
-  "terminal.integrated.fontFamily": "Consolas, 'Courier New', monospace",
+  "terminal.integrated.fontFamily": "GeistMono Nerd Font Mono, Consolas, 'Courier New', monospace",
   "terminal.integrated.commandsToSkipShell": [
     "workbench.action.toggleSidebarVisibility",
     "workbench.action.toggleAuxiliaryBar"

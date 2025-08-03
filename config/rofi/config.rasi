@@ -1,5 +1,5 @@
 configuration {
-  font: "NotoSansM Nerd Font Mono 11";
+  font: "GeistMono Nerd Font Mono 11";
   show-icons: true;
   kb-remove-to-eol: ""; // Default value conflicts with Control+k
   kb-accept-entry: "Control+m,Return,KP_Enter"; // Default value conflicts with Control+j
