@@ -164,6 +164,8 @@ if ! command -v rofi &> /dev/null && ! test -f /usr/bin/rofi; then
     echo "Rofi not found. Installing..."
     sudo apt-get install -y rofi
 fi
+mkdir -p $HOME/.config/rofi
+ln -sf $PWD/config/rofi/config.rasi $HOME/.config/rofi/config.rasi
 
 # starship
 mkdir -p $HOME/.config/starship
