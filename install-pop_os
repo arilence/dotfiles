@@ -141,17 +141,8 @@ if ! command -v kopia-ui &> /dev/null && ! test -f /usr/bin/kopia-ui; then
     fi
     sudo apt-get update
     sudo apt-get install -y kopia-ui
-fi
 
-# ulauncher
-if ! command -v ulauncher &> /dev/null && ! test -f /usr/bin/ulauncher; then
-    echo "Ulauncher not found. Installing..."
-    # TODO: Get the latest instead of hardcoded version
-    curl -o /tmp/ulauncher.deb -sL "https://github.com/Ulauncher/Ulauncher/releases/download/v6.0.0-beta20/ulauncher_6.0.0.beta20_all.deb"
-    sudo apt-get install -y /tmp/ulauncher.deb
-    rm /tmp/ulauncher.deb
 fi
-#ln -sf $PWD/config/autostart/ulauncher.desktop $HOME/.config/autostart/ulauncher.desktop
 
 # rofi
 if ! command -v rofi &> /dev/null && ! test -f /usr/bin/rofi; then
