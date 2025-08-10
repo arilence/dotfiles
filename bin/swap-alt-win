@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+usage() {
+  echo "Usage: $0" >&2
+  exit 1 # Exit with an error status
+}
+
+# Command requires a single argument
+if [[ "$1" == "help" || "$1" == "-h" || "$1" == "--help" ]]; then
+  usage
+fi
+
+SCHEMA="org.gnome.desktop.input-sources"
+KEY="xkb-options"
+
+CURRENT_OPTIONS=$(gsettings get "$SCHEMA" "$KEY")
+TARGET_VALUE="altwin:swap_alt_win"
+
+if [[ "$CURRENT_OPTIONS" == *"$TARGET_VALUE"* ]]; then
+  echo "Disabling"
+  NEW_OPTIONS=$(echo "$CURRENT_OPTIONS" \
+    | sed -E "s/(, )?'$TARGET_VALUE'(, )?/\1/" \
+    | sed -E "s/\[ *,/\[/" \
+    | sed -E "s/, *\]/\]/")
+  gsettings set "$SCHEMA" "$KEY" "$NEW_OPTIONS"
+else
+  echo "Enabling"
+  if [[ "$CURRENT_OPTIONS" == "[]" ]]; then
+    NEW_OPTIONS="['${TARGET_VALUE}']"
+  else
+    NEW_OPTIONS=$(echo "$CURRENT_OPTIONS" | sed "s/\]/, '${TARGET_VALUE}']/")
+  fi
+  gsettings set "$SCHEMA" "$KEY" "$NEW_OPTIONS"
+fi
