@@ -66,6 +66,8 @@ export PATH="$HOME/.local/bin:$PATH"
 alias ls='eza --group-directories-first'
 alias c='clear'
 alias ldo='lazydocker'
+# TODO: Only apply this alias if running on linux with flatpak. On macOS we don't use it.
+alias meld='flatpak run --file-forwarding --filesystem=/tmp org.gnome.meld'
 
 ###
 # Tmux
