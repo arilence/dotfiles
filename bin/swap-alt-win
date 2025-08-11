@@ -17,18 +17,18 @@ CURRENT_OPTIONS=$(gsettings get "$SCHEMA" "$KEY")
 TARGET_VALUE="altwin:swap_alt_win"
 
 if [[ "$CURRENT_OPTIONS" == *"$TARGET_VALUE"* ]]; then
-  echo "Disabling"
   NEW_OPTIONS=$(echo "$CURRENT_OPTIONS" \
     | sed -E "s/(, )?'$TARGET_VALUE'(, )?/\1/" \
     | sed -E "s/\[ *,/\[/" \
     | sed -E "s/, *\]/\]/")
   gsettings set "$SCHEMA" "$KEY" "$NEW_OPTIONS"
+  echo "Alt and Win keys are back to normal"
 else
-  echo "Enabling"
   if [[ "$CURRENT_OPTIONS" == "[]" ]]; then
     NEW_OPTIONS="['${TARGET_VALUE}']"
   else
     NEW_OPTIONS=$(echo "$CURRENT_OPTIONS" | sed "s/\]/, '${TARGET_VALUE}']/")
   fi
   gsettings set "$SCHEMA" "$KEY" "$NEW_OPTIONS"
+  echo "Swapped Alt and Win keys"
 fi
