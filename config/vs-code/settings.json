@@ -38,5 +38,6 @@
   "window.restoreWindows": "none",
   "mise.configureExtensionsAutomatically": false,
   "editor.lineNumbers": "relative",
-  "terminal.integrated.defaultLocation": "editor"
+  "terminal.integrated.defaultLocation": "editor",
+  "extensions.ignoreRecommendations": true
 }
