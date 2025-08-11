@@ -7,7 +7,6 @@ usage() {
   exit 1 # Exit with an error status
 }
 
-# Command requires a single argument
 if [[ "$1" == "help" || "$1" == "-h" || "$1" == "--help" ]]; then
   usage
 fi
