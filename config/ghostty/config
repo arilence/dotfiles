@@ -20,6 +20,8 @@ keybind = ctrl+l=goto_split:right
 
 keybind = ctrl+\=new_split:right
 keybind = ctrl+-=new_split:down
+keybind = super+\=new_split:right
+keybind = super+-=new_split:down
 
 keybind = super+t=new_tab
 keybind = super+1=goto_tab:1
