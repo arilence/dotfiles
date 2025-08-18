@@ -2,9 +2,8 @@
   "theme": "GitHub Light",
   "selectedAuthType": "oauth-personal",
   "mcpServers": {
-    "Context7": {
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"]
+    "context7": {
+      "httpUrl": "https://mcp.context7.com/mcp"
     }
   },
   "checkpointing": {
