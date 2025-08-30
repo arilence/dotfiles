@@ -166,6 +166,7 @@ if ! command -v rofi &> /dev/null && ! test -f /usr/bin/rofi; then
 fi
 mkdir -p $HOME/.config/rofi
 ln -sf $PWD/config/rofi/config.rasi $HOME/.config/rofi/config.rasi
+ln -sf $PWD/config/rofi/themes $HOME/.config/rofi/themes
 
 # starship
 mkdir -p $HOME/.config/starship

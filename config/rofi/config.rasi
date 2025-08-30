@@ -145,3 +145,5 @@ configuration {
       sorting-method:    "name";
   }
 }
+/* TODO: System defined dark/light theme swapping */
+@theme "themes/spotlight-dark.rasi"
