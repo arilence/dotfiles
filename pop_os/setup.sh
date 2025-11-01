@@ -37,11 +37,13 @@ gsettings set org.gnome.desktop.interface clock-format '24h'
 # Similar to macOS spaces
 gsettings set org.gnome.shell disabled-extensions "['cosmic-workspaces@system76.com']"
 
-# Add keybinding for maximizing a window
-gsettings set org.gnome.desktop.wm.keybindings maximize "['<Primary><Alt><Super>Up']"
-
-# Add keybinding for restoring a window back to it's original size
-gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Primary><Alt><Super>Down']"
+# Add keybindings for window management
+gsettings set org.gnome.desktop.wm.keybindings maximize "['<Primary><Super>k']"
+gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Primary><Super>j']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-center "['<Primary><Super>space']"
+# Disable keybindings that used the same bindings as what window management is set to
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "[]"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "[]"
 
 # Disable keybindings for some default apps
 gsettings set org.gnome.settings-daemon.plugins.media-keys email "[]"
