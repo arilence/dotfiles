@@ -1,6 +1,7 @@
 {
   "theme": "GitHub Light",
   "selectedAuthType": "oauth-personal",
+  "contextFileName": "AGENTS.md",
   "mcpServers": {
     "context7": {
       "httpUrl": "https://mcp.context7.com/mcp"
