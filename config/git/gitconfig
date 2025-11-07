@@ -21,6 +21,7 @@
 	mnemonicprefix = true
 	renames = true
 [push]
+	default = simple
 	autoSetupRemote = true
 	followTags = true
 [fetch]
@@ -29,6 +30,10 @@
 	all = true
 [help]
 	autocorrect = prompt
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
 # Use SSH url instead of HTTPS: or GIT:
 [url "git@github.com:"]
 	insteadOf = "https://github.com/"
