@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+usage() {
+  echo "Usage: $0" >&2
+  exit 1 # Exit with an error status
+}
+
+# Command requires no arguments
+if [[ "$1" == "help" || "$1" == "-h" || "$1" == "--help" ]]; then
+  usage
+fi
+
+EXPERT_INSTALL_DIR=$HOME/.local/bin
+EXPERT_FILE=$EXPERT_INSTALL_DIR/expert_linux_amd64
+
+if [[ -f $EXPERT_FILE ]]; then
+  # Save datetime into $date
+  printf -v date '%(%Y-%m-%d-%H-%M-%S)T\n' -1
+
+  NEW_FILE_NAME=$EXPERT_INSTALL_DIR/expert_linux_amd64-$date
+
+  echo "Expert already found, backing up old version"
+
+  # TODO: check if this failed (no permissions issues)
+  mv $EXPERT_FILE $NEW_FILE_NAME
+fi
+
+# TODO: check if this failed (no permissions issues)
+# TODO: check if gh command is even installed
+gh release download nightly \
+  --pattern 'expert_linux_amd64' \
+  --repo elixir-lang/expert \
+  --output $EXPERT_FILE
+
+chmod +x $EXPERT_FILE
+
+
