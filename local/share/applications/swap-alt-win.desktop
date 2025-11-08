@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Swap Alt & Win keys
+Comment=swaps the alt & win keys
+Exec=sh -c '"$HOME/.local/bin/swap-alt-win"'
+Icon=utilities-terminal
+Terminal=true
+Categories=Utility;

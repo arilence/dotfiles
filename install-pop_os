@@ -16,6 +16,10 @@ mkdir -p $HOME/.config/autostart
 mkdir -p $HOME/.local/bin
 ln -sf $PWD/bin/* $HOME/.local/bin/
 
+# symlink custom applications to show up in desktop selector
+mkdir -p $HOME/.local/share/applications
+ln -sf $PWD/local/share/applications/* $HOME/.local/share/applications
+
 # install nerd font
 NERD_FONT_ARCHIVE="GeistMono.tar.xz"
 NERD_FONT_DIR="GeistMono"
