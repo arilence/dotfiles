@@ -54,6 +54,8 @@ if ! command -v mise &> /dev/null && ! test -f $HOME/.local/bin/mise
 then
     echo "Mise not found. Installing..."
     curl https://mise.run | sh
+    # Activate mise so we can use it immediately in this script
+    eval "$(~/.local/bin/mise activate)"
 fi
 
 # dependencies for tools installed through mise
