@@ -60,7 +60,7 @@ fi
 
 # dependencies for tools installed through mise
 # erlang
-sudo apt-get install -y automake autoconf libncurses-dev libwxgtk-webview3.0-gtk3-dev inotify-tools libssl-dev
+sudo apt-get install -y automake autoconf libncurses-dev libwxgtk3.2-dev libwxgtk-webview3.2-dev inotify-tools libssl-dev
 
 # add mise to bashrc
 MISE_SEARCH_STRING="mise activate bash"
