@@ -6,6 +6,7 @@ node = "latest"
 rust = "latest"
 zig = "latest"
 zls = "latest"
+fnox = "latest"
 "aqua:ajeetdsouza/zoxide" = "latest"
 "aqua:cli/cli" = "latest" # github cli
 "aqua:getsops/sops" = "latest"
