@@ -16,7 +16,6 @@ fnox = "latest"
 "aqua:superfly/flyctl" = "latest"
 "npm:@google/gemini-cli" = "latest"
 "ubi:charmbracelet/crush" = "latest"
-"ubi:openai/codex" = "latest"
 "ubi:sst/opencode" = "latest"
 
 [settings]
