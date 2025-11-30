@@ -165,15 +165,6 @@ if ! command -v kopia-ui &> /dev/null && ! test -f /usr/bin/kopia-ui; then
     sudo setcap cap_dac_read_search=+ep /opt/KopiaUI/resources/server/kopia
 fi
 
-# rofi
-if ! command -v rofi &> /dev/null && ! test -f /usr/bin/rofi; then
-    echo "Rofi not found. Installing..."
-    sudo apt-get install -y rofi
-fi
-mkdir -p $HOME/.config/rofi
-ln -sf $PWD/config/rofi/config.rasi $HOME/.config/rofi/config.rasi
-ln -sf $PWD/config/rofi/themes $HOME/.config/rofi/themes
-
 # starship
 mkdir -p $HOME/.config/starship
 ln -sf $PWD/config/starship/starship.toml $HOME/.config/starship/starship.toml
