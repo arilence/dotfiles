@@ -120,6 +120,11 @@ ln -sf $PWD/config/lazygit/config.yml $HOME/.config/lazygit/config.yml
 mkdir -p $HOME/.gemini
 ln -sf $PWD/config/gemini/settings.json $HOME/.gemini/settings.json
 
+# gnupg / GPG / PGP
+mkdir -p $HOME/.gnupg
+ln -sf $PWD/gnupg/* $HOME/.gnupg
+sudo apt install -y gnupg gnupg-agent scdaemon pcscd
+
 # syncthing
 # from: https://apt.syncthing.net/
 if ! command -v syncthing &> /dev/null && ! test -f /usr/bin/syncthing; then
