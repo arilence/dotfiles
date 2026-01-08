@@ -97,6 +97,16 @@ then
     export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 fi
 
+# helix editor
+if ! command -v hx &> /dev/null && ! test -f /usr/bin/hx; then
+    HELIX_REPO=ppa:maveonair/helix-editor
+    # Not sure the best way to check if a repository already exists. For now, remove it and then add it back.
+    sudo add-apt-repository -ry $HELIX_REPO
+    sudo add-apt-repository -y $HELIX_REPO
+    # I think add-apt-repository does an apt update
+    sudo apt-get install -y helix
+fi
+
 # editorconfig
 ln -sf $PWD/config/editorconfig $HOME/.editorconfig
 
