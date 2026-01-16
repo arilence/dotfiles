@@ -85,9 +85,7 @@ alias tl='tmux list-sessions'
 
 ###
 # Neovim
-if [[ -d "/opt/nvim-linux-x86_64/bin" ]]; then
-  export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-fi
+# No need to add neovim to path here because mise takes care of it
 alias vim="nvim"
 
 ###
