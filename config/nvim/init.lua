@@ -1,2 +1,16 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
+-- references
+-- - https://tduyng.com/blog/neovim-basic-setup/#optionslua
+
+require("config")
+
+-- Plugins
+vim.pack.add({
+  -- Color scheme
+  "https://github.com/folke/tokyonight.nvim"
+})
+
+require("tokyonight").setup({
+  style = "day",
+  transparent = false,
+})
+vim.cmd.colorscheme("tokyonight")
