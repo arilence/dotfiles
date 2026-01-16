@@ -81,21 +81,11 @@ ln -sf $PWD/config/git/gitconfig $HOME/.config/git/config
 ln -sf $PWD/config/git/gitignore $HOME/.config/git/ignore
 
 # neovim
-if ! command -v nvim &> /dev/null && ! test -d /opt/nvim-linux-x86_64
-then
-    echo "Neovim not found. Installing..."
-    sudo rm -rf /opt/nvim
-    curl -sL "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz" | sudo sh -c 'tar -xzf - -C /opt'
-fi
-
-# add neovim to bashrc
-NEOVIM_SEARCH_STRING="/opt/nvim-linux-x86_64/bin"
-NEOVIM_INSTALL_STRING="\n# neovim\nexport PATH=\"\$PATH:/opt/nvim-linux-x86_64/bin\""
-if ! grep -qiF "$NEOVIM_SEARCH_STRING" $HOME/.bashrc
-then
-    echo -e $NEOVIM_INSTALL_STRING >> $HOME/.bashrc
-    export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-fi
+# neovim needs a clipboard provider to copy/paste to/from the OS
+# wl-clipboard is one that works in wayland
+sudo apt-get install wl-clipboard
+# TODO: make this idempotent
+ln -sf $PWD/config/nvim $HOME/.config/nvim
 
 # helix editor
 if ! command -v hx &> /dev/null && ! test -f /usr/bin/hx; then
