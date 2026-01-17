@@ -192,6 +192,13 @@
     enable = true;
     polkitPolicyOwners = [ "anthony" ];
   };
+  environment.etc."1password/custom_allowed_browsers" = {
+    # Zen must be explicitly allowed to be used with 1Password
+    text = ''
+      .zen-wrapped
+    '';
+    mode = "0755";
+  };
 
   programs.steam.enable = true;
 
@@ -206,6 +213,10 @@
     users.anthony =
       { pkgs, ... }:
       {
+        imports = [
+          inputs.zen-browser.homeModules.beta
+        ];
+
         # This should probably be set to the same version as the NixOS release
         home.stateVersion = "25.11";
 
@@ -274,6 +285,85 @@
             gpg."ssh".program = "${pkgs._1password-gui}/bin/op-ssh-sign";
           };
         };
+
+        programs.zen-browser = {
+          enable = true;
+          nativeMessagingHosts = [ pkgs.firefoxpwa ];
+          policies = {
+            AutofillAddressEnabled = false;
+            AutofillCreditCardEnabled = false;
+            DisableAppUpdate = true;
+            DisableTelemetry = true;
+            DisableFirefoxStudies = true;
+            DontCheckDefaultBrowser = true;
+            OfferToSaveLogins = false;
+            EnableTrackingProtection = {
+              Value = true;
+              Locked = true;
+              Cryptomining = true;
+              Fingerprinting = true;
+            };
+            SanitizeOnShutdown = {
+              FormData = true;
+              Cache = true;
+            };
+            Preferences = {
+              "gfx.webrender.all" = {
+                Value = true;
+                Locked = true;
+              };
+            };
+          };
+          profiles.default = {
+            settings = {
+              "zen.view.sidebar-expanded" = true;
+              "zen.view.use-single-toolbar" = false;
+              "zen.urlbar.behavior" = "float";
+            };
+          };
+        };
+
+        # Set Zen as the default browser
+        xdg.configFile."mimeapps.list".force = true;
+        xdg.mimeApps =
+          let
+            # options for system are: 'x86_64-linux', 'aarch64-linux' and 'aarch64-darwin'
+            value =
+              let
+                zen-browser = inputs.zen-browser.packages.x86_64-linux.beta;
+              in
+              zen-browser.meta.desktopFileName;
+
+            associations = builtins.listToAttrs (
+              map
+                (name: {
+                  inherit name value;
+                })
+                [
+                  "application/x-extension-shtml"
+                  "application/x-extension-xhtml"
+                  "application/x-extension-html"
+                  "application/x-extension-xht"
+                  "application/x-extension-htm"
+                  "x-scheme-handler/unknown"
+                  "x-scheme-handler/mailto"
+                  "x-scheme-handler/chrome"
+                  "x-scheme-handler/about"
+                  "x-scheme-handler/https"
+                  "x-scheme-handler/http"
+                  "application/xhtml+xml"
+                  "application/json"
+                  "text/plain"
+                  "text/html"
+                ]
+            );
+          in
+          {
+            associations.added = associations;
+            defaultApplications = associations;
+            enable = true;
+          };
+
       };
   };
   ## End Home Manager ##
