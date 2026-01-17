@@ -17,10 +17,11 @@
       disko,
       sops-nix,
       ...
-    }:
+    }@inputs:
     {
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           disko.nixosModules.disko
           sops-nix.nixosModules.sops
