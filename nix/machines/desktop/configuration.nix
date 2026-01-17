@@ -10,9 +10,21 @@
     ./disk-config.nix
   ];
 
+  # Let's us rebuild remotely using additional users
+  # Potentially dangerous
+  nix.settings.trusted-users = [
+    "root"
+    "anthony"
+  ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [
+    # Reduces text spam during boot. Remove this if need to debug boot issues.
+    "loglevel=3"
+    "quiet"
+  ];
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
