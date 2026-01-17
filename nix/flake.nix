@@ -9,6 +9,9 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -16,6 +19,7 @@
       nixpkgs,
       disko,
       sops-nix,
+      home-manager,
       ...
     }@inputs:
     {
@@ -25,6 +29,7 @@
         modules = [
           disko.nixosModules.disko
           sops-nix.nixosModules.sops
+          home-manager.nixosModules.home-manager
           ./machines/desktop/configuration.nix
           # Use nixos-facter instead of nixos-generate-config
           { hardware.facter.reportPath = ./machines/desktop/facter.json; }

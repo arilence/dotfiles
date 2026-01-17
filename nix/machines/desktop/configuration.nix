@@ -38,6 +38,9 @@
   sops.defaultSopsFile = ./secrets.sops.yaml;
   sops.age.generateKey = true;
   sops.secrets.user_password.neededForUsers = true;
+  sops.secrets.git_options = {
+    mode = "0444";
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -91,18 +94,6 @@
     shell = pkgs.zsh;
   };
 
-  # Enables zsh, also needs to be set as the user's default shell
-  programs.zsh.enable = true;
-
-  # Install firefox.
-  programs.firefox.enable = true;
-
-  # Install neovim.
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -135,6 +126,8 @@
     interval = "weekly";
     fileSystems = [ "/" ];
   };
+
+  services.flatpak.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -175,4 +168,113 @@
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
   ## End NVIDIA Stuff ##
+
+  ## Start Programs Section ##
+
+  environment.systemPackages = with pkgs; [
+    discord-ptb
+    kopia-ui
+    gnomeExtensions.appindicator # adds system tray icons to gnome
+  ];
+
+  # This also needs to be set as the user's default shell in the user section
+  programs.zsh.enable = true;
+
+  programs.firefox.enable = true;
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "anthony" ];
+  };
+
+  programs.steam.enable = true;
+
+  ## End Programs Section ##
+
+  ## Start Home Manager ##
+  # This should eventually be moved to a separate file
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.anthony =
+      { pkgs, ... }:
+      {
+        # This should probably be set to the same version as the NixOS release
+        home.stateVersion = "25.11";
+
+        programs.zsh.enable = true;
+
+        programs.ssh = {
+          enable = true;
+          # Lets us use 1Password with SSH
+          extraConfig = ''
+            Host *
+              IdentityAgent ~/.1password/agent.sock
+          '';
+          # default values is being deprecated
+          enableDefaultConfig = false;
+          # this is the current value of what enableDefaultConfig does
+          matchBlocks."*" = {
+            forwardAgent = false;
+            addKeysToAgent = "no";
+            compression = false;
+            serverAliveInterval = 0;
+            serverAliveCountMax = 3;
+            hashKnownHosts = false;
+            userKnownHostsFile = "~/.ssh/known_hosts";
+            controlMaster = "no";
+            controlPath = "~/.ssh/master-%r@%n:%p";
+            controlPersist = "no";
+          };
+        };
+
+        programs.git = {
+          enable = true;
+          includes = [
+            # I may want to setup sops-nix within home-manager to symlink this locally
+            # Instead of it being in /run/secrets
+            { path = config.sops.secrets.git_options.path; }
+          ];
+          settings = {
+            user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICji8slXLeYN6Zody5rqrVilgmt8RiGfVkr777WYNm1A";
+            init.defaultBranch = "main";
+            pull.ff = "only";
+            commit.gpgsign = true;
+            commit.verbose = true;
+            gpg.format = "ssh";
+            column.ui = "auto";
+            branch.sort = "-committerdate";
+            tag.sort = "version:refname";
+            diff.algorithm = "histogram";
+            diff.colorMoved = "plain";
+            diff.mnemonicprefix = true;
+            diff.renames = true;
+            push.default = "simple";
+            push.autoSetupRemote = true;
+            push.followTags = true;
+            fetch.prune = true;
+            fetch.pruneTags = true;
+            fetch.all = true;
+            help.autocorrect = "prompt";
+            rebase.autoSquash = true;
+            rebase.autoStash = true;
+            rebase.updateRefs = true;
+            url."git@github.com:".insteadOf = [
+              "https://github.com/"
+              "git://github.com/"
+              "github:"
+            ];
+            gpg."ssh".program = "${pkgs._1password-gui}/bin/op-ssh-sign";
+          };
+        };
+      };
+  };
+  ## End Home Manager ##
 }
