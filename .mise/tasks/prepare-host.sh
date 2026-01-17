@@ -73,7 +73,7 @@ nix run \
   --extra-files "$temp_etc" \
   --disk-encryption-keys /tmp/luks-passphrase "$temp_luks/tmp/luks-passphrase" \
   --flake "${FLAKE_DIR}#${usage_dir?}" \
-  --target-host "root@${usage_hostname?}"
+  --target-host "anthony@${usage_hostname?}"
 
 echo "Removing old host from known_hosts for ${usage_hostname?}"
 ssh-keygen -R "${usage_hostname?}"

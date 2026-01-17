@@ -24,7 +24,9 @@ nix run \
   nixpkgs#nixos-rebuild -- \
   switch \
   --flake "${FLAKE_DIR}#${usage_dir?}" \
-  --target-host "root@${usage_hostname?}"
+  --target-host "anthony@${usage_hostname?}" \
+  --ask-sudo-password \
+  --sudo
 
 echo "Successfully deployed to ${usage_hostname?}"
 echo "You may need to manually reboot to apply all changes"
