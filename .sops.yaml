@@ -1,6 +1,10 @@
----
+keys:
+  - &arilence age1e0zs92gq8428g0ypl72d3yqdty30qjfgs8hqjdyc7nz5d22h7c5sy4kxz6
+  - &desktop age1aluuq5syjefjhm4237a3zlvwccnp0g56lwy78qy5lz9yn2trmvgstjvgwr
+
 creation_rules:
-  - path_regex: .*\.sops\.ya?ml
-    age: age1035xptn7qjc7c2erc7laujyn3cyj3xr94r0p07avqk9ry0nzyglqy7vf5u
-  - path_regex: .*\.sops\.ini
-    age: age1035xptn7qjc7c2erc7laujyn3cyj3xr94r0p07avqk9ry0nzyglqy7vf5u
+  - path_regex: nix/machines/desktop/.*\.sops\.(ya?ml|json|env|ini|bin)$
+    key_groups:
+    - age:
+      - *arilence
+      - *desktop
