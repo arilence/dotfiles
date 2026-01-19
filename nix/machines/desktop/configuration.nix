@@ -41,6 +41,18 @@
   sops.secrets.git_options = {
     mode = "0444";
   };
+  sops.secrets.syncthing-gui-password = {
+    mode = "0444";
+  };
+  sops.secrets.syncthing-key = {
+    mode = "0444";
+  };
+  sops.secrets.syncthing-cert = {
+    mode = "0444";
+  };
+  sops.secrets.syncthing-untrusted-device-password = {
+    mode = "0444";
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -132,6 +144,50 @@
   };
 
   services.flatpak.enable = true;
+
+  services.syncthing = {
+    enable = true;
+    dataDir = "/home/anthony";
+    configDir = "/home/anthony/.local/state/syncthing";
+    user = "anthony";
+    key = config.sops.secrets.syncthing-key.path;
+    cert = config.sops.secrets.syncthing-cert.path;
+    guiPasswordFile = config.sops.secrets.syncthing-gui-password.path;
+    openDefaultPorts = true;
+    overrideFolders = true;
+    overrideDevices = true;
+    settings = {
+      gui = {
+        user = "anthony";
+      };
+      devices = {
+        "anthony-lt" = {
+          id = "PALIULZ-KG5PMCV-2JBB7EY-AONGCPR-7ECDILT-KFDSWSQ-JOMKDQT-4UKERA4";
+        };
+        "anthony-phone" = {
+          id = "7OR6DQX-QLG6LKG-MGWC3CF-6HOC2RC-CN42TRC-QWW2OVM-ML7CSTN-I2F6DA5";
+        };
+        "app-platform" = {
+          id = "GRZAOW2-SUEULUK-CE7IZ6S-Z7KVQG5-JU2ITIF-YP2ICKR-M46DM5F-7FVACAY";
+        };
+      };
+      folders = {
+        "Digital Garden" = {
+          id = "xxs3w-cfqrj";
+          path = "/home/anthony/Digital Garden";
+          devices = [
+            "anthony-lt"
+            "anthony-phone"
+            # App-platform should only have an encrypted copy of this data
+            {
+              name = "app-platform";
+              encryptionPasswordFile = config.sops.secrets.syncthing-untrusted-device-password.path;
+            }
+          ];
+        };
+      };
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
