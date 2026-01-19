@@ -20,8 +20,12 @@ FLAKE_DIR="./nix"
 
 echo "Deploying NixOS configuration to ${usage_hostname?}..."
 
-nix run \
-  nixpkgs#nixos-rebuild -- \
+COMMAND_PREFIX="nix run nixpkgs#nixos-rebuild --"
+if command -v nixos-rebuild >/dev/null 2>&1; then
+  COMMAND_PREFIX="nixos-rebuild"
+fi
+
+${COMMAND_PREFIX} \
   switch \
   --flake "${FLAKE_DIR}#${usage_dir?}" \
   --target-host "anthony@${usage_hostname?}" \

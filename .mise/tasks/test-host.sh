@@ -19,10 +19,13 @@ FLAKE_DIR="./nix"
 
 echo "Testing NixOS configuration for ${usage_dir?}"
 
-nix run \
-  nixpkgs#nixos-rebuild -- \
+COMMAND_PREFIX="nix run nixpkgs#nixos-rebuild --"
+if command -v nixos-rebuild >/dev/null 2>&1; then
+  COMMAND_PREFIX="nixos-rebuild"
+fi
+
+${COMMAND_PREFIX} \
   dry-build \
   --flake "${FLAKE_DIR}#${usage_dir?}"
 
 echo "Configuration test passed for ${usage_dir?}"
-
