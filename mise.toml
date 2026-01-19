@@ -1,9 +1,5 @@
 [tools]
 "aqua:getsops/sops" = "3.11.0"
-"nix:nixfmt" = "1.1.0"
-
-[plugins]
-nix = "https://github.com/jbadeau/mise-nix.git"
 
 [env]
 NIX_CONFIG = "extra-experimental-features = nix-command flakes"
