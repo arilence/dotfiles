@@ -10,12 +10,16 @@
     ./disk-config.nix
   ];
 
-  # Let's us rebuild remotely using additional users
-  # Potentially dangerous
-  nix.settings.trusted-users = [
-    "root"
-    "anthony"
-  ];
+  nix.settings = {
+    # Let's us rebuild remotely using additional users
+    # Potentially dangerous
+    trusted-users = [
+      "root"
+      "anthony"
+    ];
+
+    experimental-features = [ "nix-command" "flakes" ];
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
