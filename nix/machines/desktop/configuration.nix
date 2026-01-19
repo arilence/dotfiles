@@ -239,6 +239,12 @@
   ## Start Programs Section ##
 
   environment.systemPackages = with pkgs; [
+    # CLI Tools
+    nixfmt-rfc-style
+    eza
+    fd
+
+    # Gui Apps
     gnomeExtensions.appindicator # adds system tray icons to gnome
     kopia-ui
     awscli2 # for managing s3 server
@@ -307,7 +313,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     users.anthony =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       {
         imports = [
           inputs.zen-browser.homeModules.beta
@@ -316,8 +322,6 @@
 
         # This should probably be set to the same version as the NixOS release
         home.stateVersion = "25.11";
-
-        programs.zsh.enable = true;
 
         programs.ssh = {
           enable = true;
@@ -341,6 +345,32 @@
             controlPath = "~/.ssh/master-%r@%n:%p";
             controlPersist = "no";
           };
+        };
+
+        programs.zoxide = {
+          enable = true;
+          enableZshIntegration = true;
+        };
+
+        programs.zsh = {
+          enable = true;
+          enableCompletion = true;
+
+          shellAliases = {
+            ls = "eza --group-directories-first";
+            vim = "nvim";
+            lg = "lazygit";
+            gs = "git status";
+            gc = "git commit";
+            ga = "git add";
+            gd = "git diff";
+            gl = "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+          };
+
+          initContent = lib.mkOrder 1200 ''
+            eval "$(mise activate zsh)"
+            eval "$(zoxide init zsh --cmd j)"
+          '';
         };
 
         programs.git = {
