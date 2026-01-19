@@ -303,6 +303,7 @@
       {
         imports = [
           inputs.zen-browser.homeModules.beta
+          ./dotfiles.nix
         ];
 
         # This should probably be set to the same version as the NixOS release
