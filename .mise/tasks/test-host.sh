@@ -2,7 +2,7 @@
 # Check for issues with NixOS configuration using dry-build
 #
 # Mise Task Flags:
-#USAGE arg "<dir>" help="Name of directory where the nix flake is stored. i.e. `app-platform`"
+#USAGE arg "<dir>" help="Name of directory where the nix flake is stored. i.e. `desktop`"
 
 set -euo pipefail
 

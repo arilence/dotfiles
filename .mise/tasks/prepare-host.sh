@@ -4,8 +4,8 @@
 # WARNING: This is a destructive operation that will wipe the target host!
 #
 # Mise Task Flags:
+#USAGE arg "<dir>" help="Name of directory where the nix flake is stored. i.e. `desktop`"
 #USAGE arg "<hostname>" help="Remote server's IP address or domain name"
-#USAGE arg "<dir>" help="Name of directory where the nix flake is stored. i.e. `app-platform`"
 
 set -euo pipefail
 
