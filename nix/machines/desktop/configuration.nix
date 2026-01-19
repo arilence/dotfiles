@@ -118,6 +118,10 @@
     enable = true;
     allowedTCPPorts = [
       22 # SSH
+      57621 # Spotify
+    ];
+    allowedUDPPorts = [
+      5353 # Spotify
     ];
   };
 
@@ -175,6 +179,7 @@
     discord-ptb
     kopia-ui
     gnomeExtensions.appindicator # adds system tray icons to gnome
+    spotify
   ];
 
   # This also needs to be set as the user's default shell in the user section
