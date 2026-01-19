@@ -283,6 +283,11 @@
   environment.etc."1password/custom_allowed_browsers" = {
     # Zen must be explicitly allowed to be used with 1Password
     text = ''
+      zen
+      zen-beta
+      .zen
+      .zen-wrapped
+      .zen-beta
       .zen-wrapped
     '';
     mode = "0755";
