@@ -176,10 +176,29 @@
   ## Start Programs Section ##
 
   environment.systemPackages = with pkgs; [
-    discord-ptb
-    kopia-ui
     gnomeExtensions.appindicator # adds system tray icons to gnome
+    kopia-ui
+    awscli2 # for managing s3 server
+    versitygw # also for s3 server
+    discord-ptb
     spotify
+    feishin
+    moonlight-qt
+    code-cursor
+    jetbrains.idea
+    obsidian
+    ghostty
+    (prismlauncher.override (default: {
+      # According to the wiki, Prism Launcher already comes with JDK 8, 17, and 21
+      # Is there a way to only provide the ones we want in addition to that?
+      # Rather than having to list all of them.
+      jdks = [
+        pkgs.jdk8
+        pkgs.jdk17
+        pkgs.jdk21
+        pkgs.jdk25
+      ];
+    }))
   ];
 
   # This also needs to be set as the user's default shell in the user section
