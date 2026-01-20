@@ -402,9 +402,9 @@
             gd = "git diff";
             gl = "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
             t = "zellij attach --create";
-            ta = "zellij attach";
             tn = "zellij";
             tl = "zellij list-sessions";
+            tk = "zellij kill-session";
           };
 
           initContent = lib.mkOrder 1200 ''

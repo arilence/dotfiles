@@ -325,13 +325,13 @@ copy_on_select false
 // otherwise this will error if such a session exists.
 // Default: <RANDOM>
 //
-session_name "main"
+// session_name "main"
 
 // When `session_name` is provided, attaches to that session
 // if it is already running or creates it otherwise.
 // Default: false
 //
-attach_to_session true
+// attach_to_session true
 
 // Whether to show tips on startup
 // Default: true
