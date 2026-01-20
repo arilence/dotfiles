@@ -297,6 +297,7 @@
     nixfmt-rfc-style
     eza
     fd
+    starship
 
     # Gui Apps
     gnomeExtensions.appindicator # adds system tray icons to gnome
@@ -407,6 +408,19 @@
           enableZshIntegration = true;
         };
 
+        programs.starship = {
+          enable = true;
+          settings = {
+            add_newline = false;
+          };
+        };
+
+        programs.atuin = {
+          enable = true;
+          enableZshIntegration = true;
+          flags = [ "--disable-up-arrow" ];
+        };
+
         programs.zsh = {
           enable = true;
           enableCompletion = true;
@@ -429,6 +443,8 @@
           initContent = lib.mkOrder 1200 ''
             eval "$(mise activate zsh)"
             eval "$(zoxide init zsh --cmd j)"
+            # Keep this at the bottom to load last
+            eval "$(starship init zsh)"
           '';
         };
 
