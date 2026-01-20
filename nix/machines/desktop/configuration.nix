@@ -32,6 +32,11 @@
     # Reduces text spam during boot. Remove this if need to debug boot issues.
     "loglevel=3"
     "quiet"
+    # Enables ZSwap to compress portions of ram before it is swapped to disk
+    "zswap.enabled=1"
+    "zswap.compressor=zstd"
+    "zswap.max_pool_percent=20"
+    "zswap.shrinker_enabled=1"
   ];
 
   # Use latest kernel.
