@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }:
 
@@ -195,6 +196,40 @@
       };
     };
   };
+
+  # Configure GNOME settings
+  programs.dconf.profiles.user.databases = [
+    {
+      lockAll = true; # prevents overriding
+      settings = {
+        "org/gnome/mutter" = {
+          experimental-features = [
+            "variable-refresh-rate" # Enables Variable Refresh Rate (VRR) on compatible displays
+            "xwayland-native-scaling" # Scales Xwayland applications to look crisp on HiDPI screens
+            "autoclose-xwayland" # automatically terminates Xwayland if all relevant X11 clients are gone
+          ];
+        };
+        "org/gnome/shell" = {
+          last-selected-power-profile = "performance";
+        };
+        "org/gnome/desktop/session" = {
+          idle-delay = lib.gvariant.mkUint32 0; # Disable screen timeout
+        };
+        "org/gnome/desktop/interface" = {
+          enable-hot-corners = false;
+          clock-show-date = true;
+          clock-show-weekday = true;
+        };
+        "org/gnome/desktop/peripherals/mouse" = {
+          accel-profile = "flat";
+          speed = 0.35;
+        };
+        "org/gtk/settings/file-chooser" = {
+          clock-format = "24h";
+        };
+      };
+    }
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
