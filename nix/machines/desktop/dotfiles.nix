@@ -2,11 +2,6 @@
 
 {
   xdg.configFile = {
-    "mise/config.toml" = {
-      source = ../../../config/mise/config.toml;
-      force = true;
-    };
-
     "lazygit/config.yml" = {
       source = ../../../config/lazygit/config.yml;
       force = true;
