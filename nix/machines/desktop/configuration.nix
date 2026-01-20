@@ -523,11 +523,12 @@
             rebase.autoSquash = true;
             rebase.autoStash = true;
             rebase.updateRefs = true;
-            url."git@github.com:".insteadOf = [
-              "https://github.com/"
-              "git://github.com/"
-              "github:"
-            ];
+            # TODO: this breaks installing packages through rust cargo
+            # url."git@github.com:".insteadOf = [
+            #   "https://github.com/"
+            #   "git://github.com/"
+            #   "github:"
+            # ];
             gpg."ssh".program = "${pkgs._1password-gui}/bin/op-ssh-sign";
           };
         };
