@@ -35,4 +35,11 @@
       force = true;
     };
   };
+
+  home.file = {
+    ".editorconfig" = {
+      source = ../../../config/editorconfig;
+      force = true;
+    };
+  };
 }
