@@ -302,6 +302,8 @@
     eza
     fd
     starship
+    wl-clipboard
+    cliphist
 
     # Gui Apps
     gnomeExtensions.appindicator # adds system tray icons to gnome
@@ -623,6 +625,10 @@
               Categories=Utility;Archiving;
             '';
           };
+        };
+
+        services.cliphist = {
+          enable = true;
         };
 
       };
