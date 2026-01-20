@@ -12,6 +12,11 @@
       force = true;
     };
 
+    "zellij/config.kdl" = {
+      source = ../../../config/zellij/config.kdl;
+      force = true;
+    };
+
     "vs-code/User/keybindings.json" = {
       source = ../../../config/vs-code/keybindings.json;
       force = true;

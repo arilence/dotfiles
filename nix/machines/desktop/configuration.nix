@@ -296,6 +296,7 @@
     vlc
     lazygit
     todoist-electron
+    zellij
     (prismlauncher.override (default: {
       # According to the wiki, Prism Launcher already comes with JDK 8, 17, and 21
       # Is there a way to only provide the ones we want in addition to that?
@@ -400,6 +401,10 @@
             ga = "git add";
             gd = "git diff";
             gl = "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+            t = "zellij attach --create";
+            ta = "zellij attach";
+            tn = "zellij";
+            tl = "zellij list-sessions";
           };
 
           initContent = lib.mkOrder 1200 ''
