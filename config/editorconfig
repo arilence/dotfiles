@@ -22,7 +22,7 @@ max_line_length = 100
 trim_trailing_whitespace = true
 
 # Following coding style of elixir's phoenix framework
-[*.ex]
+[*.{ex,exs,heex,eex,leex}]
 indent_size = 2
 indent_style = space
 
