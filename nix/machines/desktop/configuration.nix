@@ -227,6 +227,17 @@
         "org/gtk/settings/file-chooser" = {
           clock-format = "24h";
         };
+        "org/gnome/shell" = {
+          # Sets the apps to show in the "dock"
+          favorite-apps = [
+            "org.gnome.Nautilus.desktop"
+            "zen-beta.desktop"
+            "com.mitchellh.ghostty.desktop"
+            "obsidian.desktop"
+            "cursor.desktop"
+            "spotify.desktop"
+          ];
+        };
       };
     }
   ];
