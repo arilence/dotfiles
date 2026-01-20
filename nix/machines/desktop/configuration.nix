@@ -406,10 +406,12 @@
         programs.zoxide = {
           enable = true;
           enableZshIntegration = true;
+          options = [ "--cmd j" ];
         };
 
         programs.starship = {
           enable = true;
+          enableZshIntegration = true;
           settings = {
             add_newline = false;
           };
@@ -421,9 +423,30 @@
           flags = [ "--disable-up-arrow" ];
         };
 
+        programs.mise = {
+          enable = true;
+          enableZshIntegration = true;
+        };
+
+        programs.ghostty = {
+          enable = true;
+          enableZshIntegration = true;
+        };
+
+        programs.lazygit = {
+          enable = true;
+          enableZshIntegration = true;
+        };
+
+        programs.zellij = {
+          enable = true;
+          enableZshIntegration = true;
+        };
+
         programs.zsh = {
           enable = true;
           enableCompletion = true;
+          autocd = true;
 
           shellAliases = {
             ls = "eza --group-directories-first";
@@ -441,10 +464,8 @@
           };
 
           initContent = lib.mkOrder 1200 ''
-            eval "$(mise activate zsh)"
-            eval "$(zoxide init zsh --cmd j)"
-            # Keep this at the bottom to load last
-            eval "$(starship init zsh)"
+            # auto-complete ".." into "../"
+            zstyle ':completion:*' special-dirs true
           '';
         };
 
