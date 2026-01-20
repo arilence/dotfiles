@@ -38,6 +38,9 @@
     "zswap.max_pool_percent=20"
     "zswap.shrinker_enabled=1"
   ];
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 35;
+  };
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
