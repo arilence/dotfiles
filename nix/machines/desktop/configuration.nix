@@ -333,6 +333,7 @@
     zellij
     meld
     gearlever # appimage launcher
+    bottles
     (prismlauncher.override (default: {
       # According to the wiki, Prism Launcher already comes with JDK 8, 17, and 21
       # Is there a way to only provide the ones we want in addition to that?
