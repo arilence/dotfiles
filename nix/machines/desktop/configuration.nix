@@ -312,7 +312,9 @@
     starship
     wl-clipboard
     cliphist
+    ydotool # for most STT tools
     fzf
+    dig # nslookup successor
 
     # Gui Apps
     gnomeExtensions.appindicator # adds system tray icons to gnome
