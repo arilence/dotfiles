@@ -377,6 +377,8 @@
 
   programs.steam.enable = true;
 
+  programs.talon.enable = true;
+
   ## End Programs Section ##
 
   ## Start Home Manager ##
