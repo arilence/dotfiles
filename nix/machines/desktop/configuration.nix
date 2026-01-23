@@ -458,6 +458,9 @@
           enableZshIntegration = true;
           settings = {
             font-family = "GeistMono Nerd Font Mono";
+            # Fixes `WARNING: terminal is not fully functional` when using SSH
+            # See: https://ghostty.org/docs/help/terminfo#ssh
+            shell-integration-features = "ssh-env";
           };
         };
 
@@ -495,11 +498,17 @@
             tn = "zellij";
             tl = "zellij list-sessions";
             tk = "zellij kill-session";
+            tdd = "zellij delete-all-sessions";
+            nixd = "nix develop -c $SHELL";
           };
 
           initContent = lib.mkOrder 1200 ''
             # auto-complete ".." into "../"
             zstyle ':completion:*' special-dirs true
+
+            ## case insensitive path-completion
+            zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+            zstyle ':completion:*' menu select
           '';
         };
 
