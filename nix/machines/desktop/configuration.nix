@@ -53,8 +53,8 @@
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   sops.defaultSopsFile = ./secrets.sops.yaml;
   sops.age.generateKey = true;
-  sops.secrets.user_password.neededForUsers = true;
-  sops.secrets.git_options = {
+  sops.secrets.user-password.neededForUsers = true;
+  sops.secrets.git-options = {
     mode = "0444";
   };
   sops.secrets.syncthing-gui-password = {
@@ -110,7 +110,7 @@
   users.users.anthony = {
     isNormalUser = true;
     description = "Anthony Smith";
-    hashedPasswordFile = config.sops.secrets.user_password.path;
+    hashedPasswordFile = config.sops.secrets.user-password.path;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -499,7 +499,7 @@
           includes = [
             # I may want to setup sops-nix within home-manager to symlink this locally
             # Instead of it being in /run/secrets
-            { path = config.sops.secrets.git_options.path; }
+            { path = config.sops.secrets.git-options.path; }
           ];
           settings = {
             user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICji8slXLeYN6Zody5rqrVilgmt8RiGfVkr777WYNm1A";
