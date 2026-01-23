@@ -57,6 +57,9 @@
   sops.secrets.git-options = {
     mode = "0444";
   };
+  sops.secrets.ssh-extra-config = {
+    mode = "0444";
+  };
   sops.secrets.syncthing-gui-password = {
     mode = "0444";
   };
@@ -408,6 +411,9 @@
             Host *
               IdentityAgent ~/.1password/agent.sock
           '';
+          includes = [
+            config.sops.secrets.ssh-extra-config.path
+          ];
           # default values is being deprecated
           enableDefaultConfig = false;
           # this is the current value of what enableDefaultConfig does
