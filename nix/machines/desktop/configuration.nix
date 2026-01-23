@@ -312,6 +312,7 @@
     starship
     wl-clipboard
     cliphist
+    fzf
 
     # Gui Apps
     gnomeExtensions.appindicator # adds system tray icons to gnome
@@ -467,7 +468,13 @@
 
         programs.zellij = {
           enable = true;
+          enableZshIntegration = false;
+        };
+
+        programs.fzf = {
+          enable = true;
           enableZshIntegration = true;
+          defaultCommand = "FZF_CTRL_T_COMMAND='' fd --type f";
         };
 
         programs.zsh = {
