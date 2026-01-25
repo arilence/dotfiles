@@ -261,6 +261,26 @@
     nerd-fonts.geist-mono
   ];
 
+  virtualisation.docker = {
+    enable = true;
+    storageDriver = "btrfs";
+    daemon.settings = {
+      default-address-pools = [
+        {
+          base = "172.17.0.0/12";
+          size = 20;
+        }
+      ];
+    };
+    autoPrune = {
+      enable = true;
+      dates = "weekly";
+    };
+  };
+  # Disable docker from starting on boot
+  systemd.services.docker.wantedBy = lib.mkForce [ ];
+  systemd.sockets.docker.wantedBy = lib.mkForce [ ];
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
