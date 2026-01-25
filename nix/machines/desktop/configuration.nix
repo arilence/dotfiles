@@ -493,6 +493,8 @@
             # Fixes `WARNING: terminal is not fully functional` when using SSH
             # See: https://ghostty.org/docs/help/terminfo#ssh
             shell-integration-features = "ssh-env";
+            window-width = 120;
+            window-height = 40;
           };
         };
 
