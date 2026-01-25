@@ -128,6 +128,10 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.overlays = [
+    inputs.neovim-nightly-overlay.overlays.default
+  ];
+
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
@@ -358,11 +362,6 @@
 
   programs.firefox.enable = true;
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
-
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
@@ -403,6 +402,11 @@
 
         # This should probably be set to the same version as the NixOS release
         home.stateVersion = "25.11";
+
+        programs.neovim = {
+          enable = true;
+          defaultEditor = true;
+        };
 
         programs.ssh = {
           enable = true;
