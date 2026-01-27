@@ -9,6 +9,7 @@
 {
   imports = [
     ./disk-config.nix
+    ./apps/mise.nix
   ];
 
   nix.settings = {
@@ -348,7 +349,6 @@
     kopia-ui
     awscli2 # for managing s3 server
     versitygw # also for s3 server
-    mise
     discord-ptb
     spotify
     feishin
@@ -473,16 +473,6 @@
           enable = true;
           enableZshIntegration = true;
           flags = [ "--disable-up-arrow" ];
-        };
-
-        programs.mise = {
-          enable = true;
-          enableZshIntegration = true;
-          globalConfig = {
-            settings = {
-              experimental = true;
-            };
-          };
         };
 
         programs.ghostty = {
