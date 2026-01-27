@@ -552,6 +552,12 @@
             zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
             zstyle ':completion:*' menu select
           '';
+
+          envExtra = ''
+            export EDITOR='nvim'
+            export VISUAL='nvim'
+            export LANG='en_US.UTF-8'
+          '';
         };
 
         programs.git = {
