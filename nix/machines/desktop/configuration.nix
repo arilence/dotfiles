@@ -10,6 +10,7 @@
   imports = [
     ./disk-config.nix
     ./apps/mise.nix
+    ./apps/zed-editor.nix
     ./apps/android.nix
     ./apps/godot.nix
   ];
