@@ -539,6 +539,8 @@
             tl = "zellij list-sessions";
             tk = "zellij kill-session";
             tdd = "zellij delete-all-sessions";
+            start = "xdg-open";
+            open = "xdg-open";
             nixd = "nix develop -c $SHELL";
           };
 
