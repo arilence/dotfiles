@@ -10,6 +10,8 @@
   imports = [
     ./disk-config.nix
     ./apps/mise.nix
+    ./apps/android.nix
+    ./apps/godot.nix
   ];
 
   nix.settings = {
