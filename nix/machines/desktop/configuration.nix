@@ -254,6 +254,9 @@
         "org/gtk/settings/file-chooser" = {
           clock-format = "24h";
         };
+        "org/gnome/nautilus/preferences" = {
+          show-image-thumbnails = "always";
+        };
         "org/gnome/shell" = {
           # Sets the apps to show in the "dock"
           favorite-apps = [
