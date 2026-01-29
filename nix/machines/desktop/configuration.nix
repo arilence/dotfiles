@@ -134,6 +134,7 @@
 
   nixpkgs.overlays = [
     inputs.neovim-nightly-overlay.overlays.default
+    inputs.claude-code.overlays.default
   ];
 
   # Enable the OpenSSH daemon.
@@ -357,6 +358,7 @@
     ydotool # for most STT tools
     fzf
     dig # nslookup successor
+    claude-code
 
     # Gui Apps
     gnomeExtensions.appindicator # adds system tray icons to gnome

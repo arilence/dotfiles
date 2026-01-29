@@ -22,6 +22,9 @@
 
     talon-nix.url = "github:nix-community/talon-nix";
     talon-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    claude-code.url = "github:sadjow/claude-code-nix";
+    claude-code.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
