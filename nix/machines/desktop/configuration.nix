@@ -10,6 +10,7 @@
   imports = [
     ./disk-config.nix
     ./apps/mise.nix
+    ./apps/neovim
     ./apps/zed-editor.nix
     ./apps/android.nix
     ./apps/godot.nix
@@ -133,7 +134,6 @@
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.overlays = [
-    inputs.neovim-nightly-overlay.overlays.default
     inputs.claude-code.overlays.default
   ];
 
@@ -431,11 +431,6 @@
 
         # This should probably be set to the same version as the NixOS release
         home.stateVersion = "25.11";
-
-        programs.neovim = {
-          enable = true;
-          defaultEditor = true;
-        };
 
         programs.ssh = {
           enable = true;

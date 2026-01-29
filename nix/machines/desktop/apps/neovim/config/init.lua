@@ -1,8 +1,6 @@
 -- references
 -- - https://tduyng.com/blog/neovim-basic-setup/#optionslua
 
-require("config")
-
 -- Plugins
 vim.pack.add({
   -- Color scheme
