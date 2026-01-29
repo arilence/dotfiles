@@ -154,7 +154,7 @@
   };
 
   # Open ports in the firewall.
-  networking.firewall = rec {
+  networking.firewall = {
     enable = true;
     allowedTCPPorts = [
       22 # SSH
@@ -163,14 +163,6 @@
     allowedUDPPorts = [
       5353 # Spotify
     ];
-    # KDE Connect / GSConnect
-    allowedTCPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      }
-    ];
-    allowedUDPPortRanges = allowedTCPPortRanges;
   };
 
   services.btrfs.autoScrub = {
@@ -420,11 +412,6 @@
   programs.steam.enable = true;
 
   programs.talon.enable = true;
-
-  programs.kdeconnect = {
-    enable = true;
-    package = pkgs.gnomeExtensions.gsconnect;
-  };
 
   ## End Programs Section ##
 
