@@ -231,6 +231,12 @@
         };
         "org/gnome/shell" = {
           last-selected-power-profile = "performance";
+          disable-user-extensions = false;
+          disabled-extensions = "disabled";
+          enabled-extensions = [
+            "appindicatorsupport@rgcjonas.gmail.com"
+            "dash-to-dock@micxgx.gmail.com"
+          ];
           # Sets the apps to show in the "dock"
           favorite-apps = [
             "org.gnome.Nautilus.desktop"
@@ -260,8 +266,25 @@
         "org/gnome/nautilus/preferences" = {
           show-image-thumbnails = "always";
         };
-        "org/gnome/shell" = {
+        "org/gnome/shell/extensions/dash-to-dock" = {
+          multi-monitor = false;
+          dock-position = "BOTTOM";
+          intellihide-mode = "FOCUS_APPLICATION_WINDOWS";
+          height-fraction = 0.9;
+          extend-height = false;
+          dash-max-icon-size = lib.gvariant.mkUint32 64;
+          isolate-workspaces = false;
+          custom-theme-shrink = false;
+          disable-overview-on-startup = true;
+          apply-custom-theme = false;
+          hot-keys = false;
+          dock-fixed = false;
+          require-pressure-to-show = true;
+          intellihide = true;
+          show-mounts-network = false;
+          show-mounts-only-mounted = true;
         };
+
       };
     }
   ];
@@ -355,6 +378,7 @@
 
     # Gui Apps
     gnomeExtensions.appindicator # adds system tray icons to gnome
+    gnomeExtensions.dash-to-dock
     kopia-ui
     awscli2 # for managing s3 server
     versitygw # also for s3 server
