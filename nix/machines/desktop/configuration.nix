@@ -285,6 +285,30 @@
           show-mounts-only-mounted = true;
         };
 
+        # Keybindings
+        "org/gnome/mutter/keybindings" = {
+          toggle-tiled-left = [ "<Control><Alt>h" ];
+          toggle-tiled-right = [ "<Control><Alt>l" ];
+        };
+        "org/gnome/shell/keybindings" = {
+          show-screenshot-ui = [ "<Shift><Super>s" ];
+        };
+        "org/gnome/desktop/wm/keybindings" = {
+          # Disable default keybindings
+          activate-window-menu = [ "disable" ];
+          begin-move = [ "disable" ];
+          begin-resize = [ "disable" ];
+          minimize = [ "disable" ];
+          toggle-maximized = [ "disable" ];
+          switch-applications = [ "disable" ];
+          switch-applications-backward = [ "disable" ];
+          # Customize keybindings
+          maximize = [ "<Control><Alt>k" ];
+          unmaximize = [ "<Control><Alt>j" ];
+          move-to-center = [ "<Control><Alt>space" ];
+          switch-windows = [ "<Alt>Tab" ];
+          switch-windows-backward = [ "<Shift><Alt>Tab" ];
+        };
       };
     }
   ];
