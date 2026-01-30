@@ -231,6 +231,16 @@
         };
         "org/gnome/shell" = {
           last-selected-power-profile = "performance";
+          # Sets the apps to show in the "dock"
+          favorite-apps = [
+            "org.gnome.Nautilus.desktop"
+            "zen-beta.desktop"
+            "com.mitchellh.ghostty.desktop"
+            "obsidian.desktop"
+            "todoist.desktop"
+            "discord-ptb.desktop"
+            "spotify.desktop"
+          ];
         };
         "org/gnome/desktop/session" = {
           idle-delay = lib.gvariant.mkUint32 0; # Disable screen timeout
@@ -251,15 +261,6 @@
           show-image-thumbnails = "always";
         };
         "org/gnome/shell" = {
-          # Sets the apps to show in the "dock"
-          favorite-apps = [
-            "org.gnome.Nautilus.desktop"
-            "zen-beta.desktop"
-            "com.mitchellh.ghostty.desktop"
-            "obsidian.desktop"
-            "cursor.desktop"
-            "spotify.desktop"
-          ];
         };
       };
     }
