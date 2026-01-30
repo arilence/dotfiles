@@ -343,3 +343,7 @@ show_startup_tips false
 //
 show_release_notes false
 
+// Whether to show pane frames around the panes
+// Default: true
+//
+pane_frames false
