@@ -10,6 +10,7 @@
   imports = [
     ./disk-config.nix
     ./apps/mise.nix
+    ./dev/elixir.nix
     ./apps/neovim
     ./apps/zed-editor.nix
     ./apps/android.nix
@@ -390,6 +391,7 @@
   environment.systemPackages = with pkgs; [
     # CLI Tools
     nixfmt-rfc-style
+    inotify-tools
     eza
     fd
     starship

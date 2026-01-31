@@ -25,6 +25,10 @@
 
     claude-code.url = "github:sadjow/claude-code-nix";
     claude-code.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Elixir LSP
+    expert.url = "github:elixir-lang/expert";
+    expert.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
