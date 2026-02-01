@@ -638,6 +638,7 @@
             fetch.pruneTags = true;
             fetch.all = true;
             help.autocorrect = "prompt";
+            merge.conflictStyle = "zdiff3";
             rebase.autoSquash = true;
             rebase.autoStash = true;
             rebase.updateRefs = true;
@@ -648,6 +649,17 @@
               "github:"
             ];
             gpg."ssh".program = "${pkgs._1password-gui}/bin/op-ssh-sign";
+          };
+        };
+
+        # "Better" Git diff viewer
+        programs.delta = {
+          enable = true;
+          enableGitIntegration = true;
+          options = {
+            line-numbers = true;
+            hyperlinks = true;
+            hyperlinks-file-link-format = "vscode://file/{path}:{line}";
           };
         };
 
