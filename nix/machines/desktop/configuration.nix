@@ -11,6 +11,7 @@
     ./disk-config.nix
     ./apps/mise.nix
     ./dev/elixir.nix
+    ./apps/vscode.nix
     ./apps/neovim
     ./apps/zed-editor.nix
     ./apps/android.nix
@@ -255,6 +256,7 @@
             "todoist.desktop"
             "discord-ptb.desktop"
             "spotify.desktop"
+            "code.desktop"
           ];
         };
         "org/gnome/desktop/session" = {

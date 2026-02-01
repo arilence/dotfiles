@@ -12,15 +12,6 @@
       force = true;
     };
 
-    "vs-code/User/keybindings.json" = {
-      source = ../../../config/vs-code/keybindings.json;
-      force = true;
-    };
-    "vs-code/User/settings.json" = {
-      source = ../../../config/vs-code/settings.json;
-      force = true;
-    };
-
     "Cursor/User/keybindings.json" = {
       source = ../../../config/Cursor/keybindings.json;
       force = true;
