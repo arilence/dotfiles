@@ -30,6 +30,10 @@
       "nix-command"
       "flakes"
     ];
+
+    # Larger buffer just makes download large packages easier
+    # And removes the warning "download buffer is full; consider increasing the 'download-buffer-size' setting"
+    download-buffer-size = 536870912; # 512 MiB
   };
 
   # Bootloader.
