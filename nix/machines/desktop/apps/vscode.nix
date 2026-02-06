@@ -3,6 +3,7 @@
 {
   home-manager.users.anthony.programs.vscode = {
     enable = true;
+    # This needs to stay mutable so additional extensions not available on nixpkgs can be installed
     mutableExtensionsDir = true;
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
@@ -16,6 +17,7 @@
         #tonsky.theme-alabaster
         #hverlin.mise-vscode
         #tombi-toml.tombi # primarily for mise
+        #anthropic.claude-code
       ];
       userSettings = {
         "[typescriptreact]" = {
@@ -62,6 +64,7 @@
 
         # Extension related settings
         "mise.configureExtensionsAutomatically" = false;
+        "claudeCode.preferredLocation" = "panel";
       };
       keybindings = [
         {
