@@ -6,6 +6,7 @@
 # Mise Task Flags:
 #USAGE arg "<dir>" help="Name of directory where the nix flake is stored. i.e. `desktop`"
 #USAGE arg "<hostname>" help="Remote server's IP address or domain name"
+#USAGE option "-u --user" help="Remote user on the target host" default="nixos"
 
 set -euo pipefail
 
@@ -67,13 +68,12 @@ chmod 600 "$temp_luks/tmp/luks-passphrase"
 
 echo "Running nixos-anywhere on ${usage_hostname?}"
 
-# TODO: Add a flag to specify the user to use for the target host
 nix run \
   github:nix-community/nixos-anywhere -- \
   --extra-files "$temp_etc" \
   --disk-encryption-keys /tmp/luks-passphrase "$temp_luks/tmp/luks-passphrase" \
   --flake "${FLAKE_DIR}#${usage_dir?}" \
-  --target-host "anthony@${usage_hostname?}"
+  --target-host "${usage_user}@${usage_hostname?}"
 
 echo "Removing old host from known_hosts for ${usage_hostname?}"
 ssh-keygen -R "${usage_hostname?}"
