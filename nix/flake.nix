@@ -37,7 +37,6 @@
       disko,
       sops-nix,
       home-manager,
-      talon-nix,
       ...
     }@inputs:
     {
@@ -48,7 +47,6 @@
           disko.nixosModules.disko
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
-          inputs.talon-nix.nixosModules.talon
           ./machines/desktop/configuration.nix
           # Use nixos-facter instead of nixos-generate-config
           { hardware.facter.reportPath = ./machines/desktop/facter.json; }

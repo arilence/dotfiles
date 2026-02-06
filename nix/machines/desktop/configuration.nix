@@ -8,6 +8,7 @@
 
 {
   imports = [
+    inputs.talon-nix.nixosModules.talon
     ./disk-config.nix
     ./apps/mise.nix
     ./dev/elixir.nix
