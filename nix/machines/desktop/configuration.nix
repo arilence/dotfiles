@@ -57,6 +57,13 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Allows this machine (x86-64) to build aarch64 packages
+  # I primarily have this set so I can build NixOS for my Raspberry Pi
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+  ];
+  nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
+
   # Better SSD performance
   # Must match the name of the LUKS device in disk-config.nix
   boot.initrd.luks.devices."crypted".bypassWorkqueues = true;
