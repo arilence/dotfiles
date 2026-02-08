@@ -145,13 +145,6 @@
     shell = pkgs.zsh;
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  nixpkgs.overlays = [
-    inputs.claude-code.overlays.default
-  ];
-
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
@@ -403,6 +396,13 @@
   ## End NVIDIA Stuff ##
 
   ## Start Programs Section ##
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.overlays = [
+    inputs.claude-code.overlays.default
+  ];
 
   # This is a workaround to allow programs that need dynamic libraries to work
   # Such as: Mise, Handy.Computer, etc.
