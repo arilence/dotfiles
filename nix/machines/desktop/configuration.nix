@@ -365,6 +365,15 @@
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
+    extraPackages = with pkgs; [
+      # Nvidia doesn't support accelerated video playback on Linux.
+      # Installing intel driver to use that instead.
+      intel-vaapi-driver # For older processors. LIBVA_DRIVER_NAME=i965
+      #intel-media-driver # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
+    ];
+  };
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "i965";
   };
 
   # Load nvidia driver for Xorg and Wayland
