@@ -612,6 +612,7 @@
             start = "xdg-open";
             open = "xdg-open";
             nixd = "nix develop -c $SHELL";
+            c = "code";
           };
 
           initContent = lib.mkOrder 1200 ''
