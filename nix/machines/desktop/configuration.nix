@@ -565,7 +565,10 @@
           enable = true;
           enableZshIntegration = true;
           settings = {
+            theme = "dark:Cobalt Next Dark,light:Catppuccin Latte";
             font-family = "GeistMono Nerd Font Mono";
+            # Disables font ligatures
+            font-feature = "-calt, -liga, -dlig";
             # Fixes `WARNING: terminal is not fully functional` when using SSH
             # See: https://ghostty.org/docs/help/terminfo#ssh
             shell-integration-features = "ssh-env";
