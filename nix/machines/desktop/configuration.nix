@@ -596,6 +596,13 @@
             attach_to_session = true;
             show_startup_tips = false;
             show_release_notes = false;
+            keybinds = {
+              normal = {
+                "bind \"Ctrl Shift c\"" = {
+                  Copy = { };
+                };
+              };
+            };
           };
         };
 
