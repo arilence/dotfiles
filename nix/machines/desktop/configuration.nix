@@ -585,6 +585,18 @@
         programs.zellij = {
           enable = true;
           enableZshIntegration = false;
+          settings = {
+            on_force_close = "quit";
+            simplified_ui = true; # maybe disables ligatures?
+            pane_frames = false;
+            theme = "catppuccin-latte";
+            mouse_mode = true;
+            copy_on_select = false;
+            session_name = "main";
+            attach_to_session = true;
+            show_startup_tips = false;
+            show_release_notes = false;
+          };
         };
 
         programs.fzf = {
@@ -607,8 +619,7 @@
             ga = "git add";
             gd = "git diff";
             gl = "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-            t = "zellij attach --create";
-            tn = "zellij";
+            t = "zellij";
             tl = "zellij list-sessions";
             tk = "zellij kill-session";
             tdd = "zellij delete-all-sessions";

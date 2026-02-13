@@ -7,11 +7,6 @@
       force = true;
     };
 
-    "zellij/config.kdl" = {
-      source = ../../../config/zellij/config.kdl;
-      force = true;
-    };
-
     "Cursor/User/keybindings.json" = {
       source = ../../../config/Cursor/keybindings.json;
       force = true;
