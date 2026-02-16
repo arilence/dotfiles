@@ -414,14 +414,6 @@
     inputs.claude-code.overlays.default
   ];
 
-  # This is a workaround to allow programs that need dynamic libraries to work
-  # Such as: Mise, Handy.Computer, etc.
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-  ];
-
   environment.systemPackages = with pkgs; [
     # CLI Tools
     nixfmt-rfc-style
