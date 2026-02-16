@@ -104,6 +104,45 @@
           };
         };
       };
+
+      storage = {
+        type = "disk";
+        device = lib.mkDefault "/dev/disk/by-id/ata-Samsung_SSD_850_PRO_512GB_S39FNX0J804183J";
+        content = {
+          type = "gpt";
+          partitions = {
+            luks = {
+              size = "100%";
+              content = {
+                type = "luks";
+                name = "crypted-storage";
+                passwordFile = "/tmp/luks-passphrase";
+                settings = {
+                  allowDiscards = true;
+                };
+                content = {
+                  type = "btrfs";
+                  extraArgs = [ "-f" ];
+
+                  subvolumes = {
+                    "@storage" = {
+                      mountpoint = "/storage";
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                        # prevents blocking boot if disk fails to mount
+                        "nofail"
+                        # make the disk show up in file explorer (nautilus)
+                        "x-gvfs-show"
+                      ];
+                    };
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
     };
   };
 }

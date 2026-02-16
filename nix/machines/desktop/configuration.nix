@@ -67,6 +67,10 @@
   # Better SSD performance
   # Must match the name of the LUKS device in disk-config.nix
   boot.initrd.luks.devices."crypted".bypassWorkqueues = true;
+  boot.initrd.luks.devices."crypted-storage".bypassWorkqueues = true;
+
+  # Use the same passphrase for multiple disks
+  boot.initrd.luks.reusePassphrases = true;
 
   # Sops for secrets
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
