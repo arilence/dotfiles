@@ -588,7 +588,8 @@
 
         programs.zellij = {
           enable = true;
-          enableZshIntegration = false;
+          enableZshIntegration = true;
+          attachExistingSession = true;
           settings = {
             on_force_close = "quit";
             simplified_ui = true; # maybe disables ligatures?
