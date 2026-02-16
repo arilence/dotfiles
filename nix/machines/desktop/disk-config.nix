@@ -126,6 +126,8 @@
 
                   subvolumes = {
                     "@storage" = {
+                      # This mountpoint is important as there are some things set in configuration.nix
+                      # with this value hardcoded to it.
                       mountpoint = "/storage";
                       mountOptions = [
                         "compress=zstd"

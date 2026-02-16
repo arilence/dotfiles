@@ -184,6 +184,12 @@
     ];
   };
 
+  # Set /storage to world-writable so that the non-root users can access files
+  systemd.tmpfiles.rules = [
+    # The value of this is important and needs to match the mountpoint of the secondary drive specified in disk-config.nix
+    "d /storage 1777 root root -"
+  ];
+
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
