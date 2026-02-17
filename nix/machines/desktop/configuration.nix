@@ -318,6 +318,7 @@
         };
         "org/gnome/shell/keybindings" = {
           show-screenshot-ui = [ "<Shift><Super>s" ];
+          toggle-overview = [ "<Alt>space" ];
         };
         "org/gnome/desktop/wm/keybindings" = {
           # Disable default keybindings
