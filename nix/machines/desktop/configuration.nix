@@ -17,6 +17,7 @@
     ./apps/zed-editor.nix
     ./apps/android.nix
     ./apps/godot.nix
+    ./modules/virtual-machines.nix
   ];
 
   nix.settings = {
