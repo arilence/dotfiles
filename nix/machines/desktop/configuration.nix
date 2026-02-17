@@ -17,6 +17,7 @@
     ./apps/zed-editor.nix
     ./apps/android.nix
     ./apps/godot.nix
+    ./apps/zellij.nix
     ./modules/virtual-machines.nix
   ];
 
@@ -453,7 +454,6 @@
     vlc
     lazygit
     todoist-electron
-    zellij
     meld
     gearlever # appimage launcher
     bottles
@@ -586,31 +586,6 @@
           enableZshIntegration = true;
         };
 
-        programs.zellij = {
-          enable = true;
-          enableZshIntegration = true;
-          attachExistingSession = true;
-          settings = {
-            on_force_close = "quit";
-            simplified_ui = true; # maybe disables ligatures?
-            pane_frames = false;
-            theme = "catppuccin-latte";
-            mouse_mode = true;
-            copy_on_select = false;
-            session_name = "main";
-            attach_to_session = true;
-            show_startup_tips = false;
-            show_release_notes = false;
-            keybinds = {
-              normal = {
-                "bind \"Ctrl Shift c\"" = {
-                  Copy = { };
-                };
-              };
-            };
-          };
-        };
-
         programs.fzf = {
           enable = true;
           enableZshIntegration = true;
@@ -631,10 +606,6 @@
             ga = "git add";
             gd = "git diff";
             gl = "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-            t = "zellij";
-            tl = "zellij list-sessions";
-            tk = "zellij kill-session";
-            tdd = "zellij delete-all-sessions";
             start = "xdg-open";
             open = "xdg-open";
             nixd = "nix develop -c $SHELL";

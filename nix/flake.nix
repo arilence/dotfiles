@@ -31,6 +31,10 @@
     # Elixir LSP
     expert.url = "github:elixir-lang/expert";
     expert.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Zellij custom status bar
+    zjstatus.url = "github:dj95/zjstatus";
+    zjstatus.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
