@@ -5,6 +5,10 @@
     (final: prev: {
       zjstatus = inputs.zjstatus.packages.${prev.stdenv.hostPlatform.system}.default;
     })
+    (final: prev: {
+      vim-zellij-navigator =
+        inputs.vim-zellij-navigator.packages.${prev.stdenv.hostPlatform.system}.default;
+    })
   ];
 
   environment.systemPackages = with pkgs; [
@@ -35,14 +39,80 @@
         show_startup_tips = false;
         show_release_notes = false;
         default_layout = "default";
-        keybinds = {
-          normal = {
-            "bind \"Ctrl Shift c\"" = {
-              Copy = { };
-            };
-          };
-        };
+        # Don't set keybinds here, set them inside of extraConfig instead.
+        # Main reason is I don't like having to manually convert kdl syntax to nix
+        # keybinds = {};
       };
+      # I don't like needing to manual convert kdl settings to nix
+      extraConfig = ''
+        keybinds {
+          shared_except "locked" {
+            bind "Ctrl Shift c" {
+              Copy
+            }
+
+            bind "Ctrl h" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "left";
+              };
+            }
+
+            bind "Ctrl j" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "down";
+              };
+            }
+
+            bind "Ctrl k" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "up";
+              };
+            }
+
+            bind "Ctrl l" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "right";
+              };
+            }
+
+            bind "Alt h" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                name "resize";
+                payload "left";
+                resize_mod "alt";
+              };
+            }
+
+            bind "Alt j" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                name "resize";
+                payload "down";
+                resize_mod "alt";
+              };
+            }
+
+            bind "Alt k" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                name "resize";
+                payload "up";
+                resize_mod "alt";
+              };
+            }
+
+            bind "Alt l" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                name "resize";
+                payload "right";
+                resize_mod "alt";
+              };
+            }
+          }
+        }
+      '';
     };
 
     # Home Manager does have `programs.zellij.layouts` but I found it mangled the .kdl too much

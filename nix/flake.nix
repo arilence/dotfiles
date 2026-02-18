@@ -29,9 +29,11 @@
     expert.url = "github:elixir-lang/expert";
     expert.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Zellij custom status bar
+    # Zellij custom plugins
     zjstatus.url = "github:dj95/zjstatus";
     zjstatus.inputs.nixpkgs.follows = "nixpkgs";
+    vim-zellij-navigator.url = "github:arilence/vim-zellij-navigator/feat/add-nix-flake";
+    vim-zellij-navigator.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
