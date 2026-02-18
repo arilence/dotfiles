@@ -626,6 +626,18 @@
             export VISUAL='nvim'
             export LANG='en_US.UTF-8'
           '';
+
+          siteFunctions = {
+            # "nix develop" uses bash by default, this changes it to use $SHELL
+            nix = ''
+              if [[ "$1" == "develop" ]]; then
+                shift
+                command nix develop -c "$SHELL" "$@"
+              else
+                command nix "$@"
+              fi
+            '';
+          };
         };
 
         programs.git = {
