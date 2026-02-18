@@ -16,8 +16,6 @@
   users.groups.kvm.members = [ "anthony" ];
 
   environment.systemPackages = with pkgs; [
-    # VM management
-    gnome-boxes
     # VM networking
     dnsmasq
   ];
