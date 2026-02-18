@@ -8,7 +8,6 @@
 
 {
   imports = [
-    inputs.talon-nix.nixosModules.talon
     ./disk-config.nix
     ./apps/mise.nix
     ./dev/elixir.nix
@@ -496,8 +495,6 @@
   };
 
   programs.steam.enable = true;
-
-  programs.talon.enable = true;
 
   ## End Programs Section ##
 
