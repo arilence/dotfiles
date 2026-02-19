@@ -605,7 +605,7 @@
             gl = "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
             start = "xdg-open";
             open = "xdg-open";
-            nixd = "nix develop -c $SHELL";
+            nixdev = "nix develop -c $SHELL";
             c = "code";
           };
 
