@@ -34,6 +34,8 @@ vim.lsp.config('expert', {
 })
 -- Nix
 vim.lsp.enable('nixd')
+-- Rust
+vim.lsp.enable('rust_analyzer')
 
 -----
 -- Zellij Pane Navigation

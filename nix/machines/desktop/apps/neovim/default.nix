@@ -10,6 +10,7 @@
   environment.systemPackages = with pkgs; [
     # language server
     nixd
+    rust-analyzer
   ];
 
   home-manager.users.anthony.programs.neovim = {
