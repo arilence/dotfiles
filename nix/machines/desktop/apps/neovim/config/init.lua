@@ -3,23 +3,27 @@
 
 -- Plugins
 vim.pack.add({
-  -- LSP
-  "https://github.com/neovim/nvim-lspconfig",
-
   -- Color scheme
   "https://github.com/folke/tokyonight.nvim",
+
+  -- LSP
+  "https://github.com/neovim/nvim-lspconfig",
 
   -- Zellij Pane Navigation
   "https://github.com/mrjones2014/smart-splits.nvim"
 })
 
+-----
+-- Color scheme
 require("tokyonight").setup({
   style = "day",
   transparent = false,
 })
 vim.cmd.colorscheme("tokyonight")
 
--- LSP
+-----
+-- LSP Configs
+-- Elixir
 vim.lsp.enable('expert')
 vim.lsp.config('expert', {
   settings = {
@@ -29,6 +33,7 @@ vim.lsp.config('expert', {
   }
 })
 
+-----
 -- Zellij Pane Navigation
 require('smart-splits').setup({
   -- Desired behavior when your cursor is at an edge and you
