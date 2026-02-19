@@ -32,6 +32,8 @@ vim.lsp.config('expert', {
     }
   }
 })
+-- Nix
+vim.lsp.enable('nixd')
 
 -----
 -- Zellij Pane Navigation

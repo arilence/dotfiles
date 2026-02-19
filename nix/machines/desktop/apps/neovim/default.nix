@@ -7,6 +7,11 @@
     inputs.neovim-nightly-overlay.overlays.default
   ];
 
+  environment.systemPackages = with pkgs; [
+    # language server
+    nixd
+  ];
+
   home-manager.users.anthony.programs.neovim = {
     enable = true;
     defaultEditor = true;
