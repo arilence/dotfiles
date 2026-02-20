@@ -39,6 +39,9 @@ opt.cursorline = true
 -- Disable wordwrap
 opt.wrap = false
 
+-- Enables smooth scrolling? not sure how/if this works
+opt.smoothscroll = true
+
 -- Start scrolling when we're getting close to margins
 opt.scrolloff = 10
 opt.sidescrolloff = 8
@@ -88,9 +91,6 @@ opt.mouse = "a"
 
 -- Use the system clipboard for easier copy+pasting
 opt.clipboard = "unnamedplus"
-
--- Enables smooth scrolling? not sure how/if this works
-opt.smoothscroll = true
 
 -- Make horizontal and vertical splitting feel better
 opt.splitbelow = true
