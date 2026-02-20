@@ -578,6 +578,7 @@
             shell-integration-features = "ssh-env";
             window-width = 120;
             window-height = 40;
+            mouse-scroll-multiplier = 1;
           };
         };
 
