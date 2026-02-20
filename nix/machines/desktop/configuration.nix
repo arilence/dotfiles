@@ -264,14 +264,16 @@
             "dash-to-dock@micxgx.gmail.com"
           ];
           # Sets the apps to show in the "dock"
+          # Use the following command to find the name of .desktop file:
+          # ls /run/current-system/sw/share/applications/ | grep -i <appname>`
           favorite-apps = [
             "org.gnome.Nautilus.desktop"
             "zen-beta.desktop"
-            "com.mitchellh.ghostty.desktop"
             "obsidian.desktop"
             "todoist.desktop"
             "discord-ptb.desktop"
             "spotify.desktop"
+            "com.mitchellh.ghostty.desktop"
             "code.desktop"
           ];
         };
