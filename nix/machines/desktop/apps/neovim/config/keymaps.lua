@@ -18,6 +18,10 @@ map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, 
 -- Clear current search with //
 map("n", "//", ":nohlsearch <CR>")
 
+-- Toggle comments
+map("n", "<C-/>", "gcc", { remap = true } )
+map("v", "<C-/>", "gc", { remap = true })
+
 -- Stay in visual mode when indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
@@ -25,10 +29,6 @@ map("v", ">", ">gv")
 -- Prevents (P)aste from overwriting value in buffer. This is handy when pasting a
 -- value to multiple locations.
 map("v", "p", '"_dP')
-
--- Change the default Split Window Right
---vim.keymap.del("n", "<leader>|")
-map("n", "<leader>\\", "<C-W>v", { desc = "Split Window Right", remap = true })
 
 -- Moving between splits (requires smart-splits.nvim plugin)
 map('n', '<C-h>', require('smart-splits').move_cursor_left)
