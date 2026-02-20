@@ -502,6 +502,7 @@
 
   ## Start Home Manager ##
   # This should eventually be moved to a separate file
+  # A nice tool to search all options: https://home-manager-options.extranix.com/
 
   home-manager = {
     useGlobalPkgs = true;
@@ -583,6 +584,9 @@
         programs.lazygit = {
           enable = true;
           enableZshIntegration = true;
+          settings = {
+            promptToReturnFromSubprocess = false;
+          };
         };
 
         programs.fzf = {

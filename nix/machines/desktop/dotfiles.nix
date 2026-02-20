@@ -2,11 +2,6 @@
 
 {
   xdg.configFile = {
-    "lazygit/config.yml" = {
-      source = ../../../config/lazygit/config.yml;
-      force = true;
-    };
-
     "Cursor/User/keybindings.json" = {
       source = ../../../config/Cursor/keybindings.json;
       force = true;
