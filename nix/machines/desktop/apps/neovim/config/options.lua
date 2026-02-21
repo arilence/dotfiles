@@ -27,6 +27,9 @@ endif
 -- vim-lumen handles automatically changing background colour based on system theme
 -- opt.background = "light"
 
+-- Sets the leader key to use as a prefix for most things
+vim.g.mapleader = " "
+
 -- Show line numbers
 opt.number = true
 

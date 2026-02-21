@@ -11,6 +11,8 @@
     # language server
     nixd
     rust-analyzer
+    # plugin prerequisites
+    ripgrep
   ];
 
   home-manager.users.anthony.programs.neovim = {

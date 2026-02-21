@@ -439,6 +439,7 @@
     cliphist
     ydotool # for most STT tools
     fzf
+    ripgrep
     dig # nslookup successor
     claude-code
 

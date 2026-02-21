@@ -13,7 +13,10 @@ vim.pack.add({
   "https://github.com/numToStr/Comment.nvim",
 
   -- Zellij Pane Navigation
-  "https://github.com/mrjones2014/smart-splits.nvim"
+  "https://github.com/mrjones2014/smart-splits.nvim",
+
+  -- Collection of QoL Plugins
+  "https://github.com/folke/snacks.nvim"
 })
 
 -----
@@ -57,4 +60,10 @@ require('smart-splits').setup({
   -- In Zellij, set this to true if you would like to move to the next *tab*
   -- when the current pane is at the edge of the zellij tab/window
   zellij_move_focus_or_tab = false,
+})
+
+-----
+-- Collection of QoL Plugins
+require('snacks').setup({
+  picker = { enabled = true }
 })
