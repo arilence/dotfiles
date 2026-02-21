@@ -3,7 +3,6 @@
     # Change the value of nixpkgs.url to set the NixOS version
     # List of available versions: https://channels.nixos.org/
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -15,8 +14,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    # This needs to be nixpkgs-unstable or else sometimes hardware acceleration breaks
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     zen-browser.inputs.home-manager.follows = "home-manager";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";

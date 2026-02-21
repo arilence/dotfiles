@@ -55,8 +55,11 @@
     "vm.swappiness" = 35;
   };
 
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # This sets the kernel to the latest, but I ran into compilation issues with
+  # the NVIDIA proprietary driver against the bleeding-edge kernels.
+  # So we're gonna use the default that nixpkgs provides for now.
+  #
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Allows this machine (x86-64) to build aarch64 packages
   # I primarily have this set so I can build NixOS for my Raspberry Pi
@@ -732,6 +735,8 @@
               "zen.urlbar.behavior" = "float";
             };
           };
+          # Needed for versions >18.18.6b
+          suppressXdgMigrationWarning = true;
         };
 
         # Set Zen as the default browser
