@@ -9,6 +9,9 @@ vim.pack.add({
   -- LSP
   "https://github.com/neovim/nvim-lspconfig",
 
+  -- Better code commenting
+  "https://github.com/numToStr/Comment.nvim",
+
   -- Zellij Pane Navigation
   "https://github.com/mrjones2014/smart-splits.nvim"
 })
@@ -36,6 +39,10 @@ vim.lsp.config('expert', {
 vim.lsp.enable('nixd')
 -- Rust
 vim.lsp.enable('rust_analyzer')
+
+-----
+-- Better code commenting
+require('Comment').setup()
 
 -----
 -- Zellij Pane Navigation
