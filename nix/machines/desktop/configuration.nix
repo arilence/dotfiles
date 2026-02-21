@@ -319,6 +319,18 @@
           show-mounts-only-mounted = true;
         };
 
+        # Desktop Wallpaper
+        # TODO: Declaratively set the wallpaper...
+        "org/gnome/desktop/background" = {
+          color-shading-type = "solid";
+          picture-options = "zoom";
+          picture-uri = "file:///home/anthony/Pictures/Wallpapers/dan-otis-OYFHT4X5isg.jpg";
+          picture-uri-dark = "file:///home/anthony/Pictures/Wallpapers/dan-otis-OYFHT4X5isg.jpg";
+        };
+        "org/gnome/desktop/screensaver" = {
+          picture-uri = "file:///home/anthony/Pictures/Wallpapers/dan-otis-OYFHT4X5isg.jpg";
+        };
+
         # Keybindings
         "org/gnome/mutter/keybindings" = {
           toggle-tiled-left = [ "<Control><Alt>h" ];
