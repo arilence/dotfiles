@@ -32,6 +32,10 @@
     zjstatus.inputs.nixpkgs.follows = "nixpkgs";
     vim-zellij-navigator.url = "github:arilence/vim-zellij-navigator/feat/add-nix-flake";
     vim-zellij-navigator.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Private Internet Access VPN
+    pia.url = "github:arilence/pia.nix";
+    pia.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -40,6 +44,7 @@
       disko,
       sops-nix,
       home-manager,
+      pia,
       ...
     }@inputs:
     {
@@ -50,6 +55,7 @@
           disko.nixosModules.disko
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
+          pia.nixosModules.default
           ./machines/desktop/configuration.nix
           # Use nixos-facter instead of nixos-generate-config
           { hardware.facter.reportPath = ./machines/desktop/facter.json; }

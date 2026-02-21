@@ -9,6 +9,7 @@
 {
   imports = [
     ./disk-config.nix
+    ./apps/pia.nix
     ./apps/mise.nix
     ./dev/elixir.nix
     ./apps/vscode.nix
