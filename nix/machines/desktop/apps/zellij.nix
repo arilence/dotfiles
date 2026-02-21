@@ -16,6 +16,13 @@
   ];
 
   home-manager.users.anthony = {
+    # Autostart zellij
+    programs.zsh.initContent = ''
+      if [[ -z "$ZELLIJ" ]]; then
+        zellij attach -c main
+      fi
+    '';
+
     programs.zsh.shellAliases = {
       t = "zellij";
       tl = "zellij list-sessions";
@@ -25,10 +32,11 @@
 
     programs.zellij = {
       enable = true;
-      enableZshIntegration = true;
-      attachExistingSession = true;
+      # Unfortunately, enabling this breaks the "session_name" option of zellij,
+      # For now I've added an autostart command to `initContent` as a workaround.
+      enableZshIntegration = false;
       settings = {
-        on_force_close = "quit";
+        on_force_close = "detach";
         simplified_ui = true; # maybe disables ligatures?
         pane_frames = false;
         theme = "catppuccin-latte";
