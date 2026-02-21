@@ -54,7 +54,6 @@ opt.shiftwidth = 4
 opt.softtabstop = 0
 opt.expandtab = true
 opt.smarttab = true
-opt.smartindent = true
 opt.autoindent = true
 
 -- Search immediately after each character
