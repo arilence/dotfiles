@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   nixpkgs.overlays = [
@@ -16,18 +21,19 @@
   ];
 
   home-manager.users.anthony = {
-    # Autostart zellij
-    programs.zsh.initContent = ''
-      if [[ -z "$ZELLIJ" ]]; then
-        zellij attach -c main
-      fi
-    '';
+    programs.zsh = {
+      shellAliases = {
+        t = "zellij";
+        tl = "zellij list-sessions";
+        tk = "zellij kill-session";
+        tdd = "zellij delete-all-sessions";
+      };
 
-    programs.zsh.shellAliases = {
-      t = "zellij";
-      tl = "zellij list-sessions";
-      tk = "zellij kill-session";
-      tdd = "zellij delete-all-sessions";
+      # Autostart zellij when terminal starts
+      initContent = lib.mkOrder 1500 ''
+        export ZELLIJ_AUTO_EXIT=true
+        eval "$(zellij setup --generate-auto-start zsh)"
+      '';
     };
 
     programs.zellij = {
