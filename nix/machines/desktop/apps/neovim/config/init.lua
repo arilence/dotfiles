@@ -4,19 +4,19 @@
 -- Plugins
 vim.pack.add({
   -- Color scheme
-  "https://github.com/folke/tokyonight.nvim",
+  "git@github.com:folke/tokyonight.nvim",
 
   -- LSP
-  "https://github.com/neovim/nvim-lspconfig",
+  "git@github.com:neovim/nvim-lspconfig",
 
   -- Better code commenting
-  "https://github.com/numToStr/Comment.nvim",
+  "git@github.com:numToStr/Comment.nvim",
 
   -- Zellij Pane Navigation
-  "https://github.com/mrjones2014/smart-splits.nvim",
+  "git@github.com:mrjones2014/smart-splits.nvim",
 
   -- Collection of QoL Plugins
-  "https://github.com/folke/snacks.nvim"
+  "git@github.com:folke/snacks.nvim",
 })
 
 -----
