@@ -229,6 +229,24 @@
         "type": "github"
       }
     },
+    "flake-utils_5": {
+      "inputs": {
+        "systems": "systems_5"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -358,17 +376,17 @@
     },
     "pia": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils_3",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1768414864,
-        "narHash": "sha256-9b6AfIa1t4pvTHpRpI5l7ElmGQMplOPbu2xZZuabOpk=",
+        "lastModified": 1771911276,
+        "narHash": "sha256-lhEVGbVWzUIPq/UvVWOalLTyQLf0Z+7Rh6cWyNqAWwI=",
         "owner": "arilence",
         "repo": "pia.nix",
-        "rev": "98aaa1667a6f1b006425f26d3f59115df13d7fa8",
+        "rev": "8b155509a0138db54efb8a861c3ed0cc323a62e8",
         "type": "github"
       },
       "original": {
@@ -383,6 +401,7 @@
         "disko": "disko",
         "expert": "expert",
         "home-manager": "home-manager",
+        "mise": "mise",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs",
         "pia": "pia",
@@ -511,10 +530,25 @@
         "type": "github"
       }
     },
+    "systems_5": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "vim-zellij-navigator": {
       "inputs": {
         "crane": "crane",
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -561,7 +595,7 @@
     "zjstatus": {
       "inputs": {
         "crane": "crane_2",
-        "flake-utils": "flake-utils_4",
+        "flake-utils": "flake-utils_5",
         "nixpkgs": [
           "nixpkgs"
         ],
