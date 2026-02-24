@@ -8,7 +8,8 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    # language server
+    # language servers
+    lua-language-server
     nixd
     rust-analyzer
     # plugin prerequisites

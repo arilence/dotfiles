@@ -32,6 +32,17 @@ vim.cmd.colorscheme("tokyonight")
 
 -----
 -- LSP Configs
+vim.lsp.enable('lua_ls')
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" }
+      }
+    }
+  }
+})
+
 -- Elixir
 vim.lsp.enable('expert')
 vim.lsp.config('expert', {
@@ -41,10 +52,13 @@ vim.lsp.config('expert', {
     }
   }
 })
+
 -- Nix
 vim.lsp.enable('nixd')
+
 -- Rust
 vim.lsp.enable('rust_analyzer')
+
 -- Godot Engine
 vim.lsp.enable('gdscript')
 
