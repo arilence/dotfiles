@@ -462,7 +462,6 @@
     kopia-ui
     awscli2 # for managing s3 server
     versitygw # also for s3 server
-    discord-ptb
     spotify
     feishin
     moonlight-qt
@@ -479,6 +478,9 @@
     localsend # android airdrop
     bruno # rest api client
     itch # itch.io desktop client
+    (discord-ptb.override {
+      commandLineArgs = "--ignore-gpu-blocklist --disable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy";
+    })
     (prismlauncher.override (default: {
       # According to the wiki, Prism Launcher already comes with JDK 8, 17, and 21
       # Is there a way to only provide the ones we want in addition to that?
