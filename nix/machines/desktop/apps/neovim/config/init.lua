@@ -42,6 +42,8 @@ vim.lsp.config('expert', {
 vim.lsp.enable('nixd')
 -- Rust
 vim.lsp.enable('rust_analyzer')
+-- Godot Engine
+vim.lsp.enable('gdscript')
 
 -----
 -- Better code commenting
