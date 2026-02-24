@@ -27,6 +27,9 @@
     expert.url = "github:elixir-lang/expert";
     expert.inputs.nixpkgs.follows = "nixpkgs";
 
+    mise.url = "github:jdx/mise";
+    mise.inputs.nixpkgs.follows = "nixpkgs";
+
     # Zellij custom plugins
     zjstatus.url = "github:dj95/zjstatus";
     zjstatus.inputs.nixpkgs.follows = "nixpkgs";

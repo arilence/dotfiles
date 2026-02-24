@@ -1,10 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
     yq-go
     unzip
-    mise
   ];
 
   # for dynamically linked libraries
@@ -12,6 +11,7 @@
 
   home-manager.users.anthony.programs.mise = {
     enable = true;
+    package = inputs.mise.packages.x86_64-linux.mise;
     enableZshIntegration = true;
     globalConfig = {
       settings = {
