@@ -25,7 +25,9 @@ vim.pack.add({
 -----
 -- Color scheme
 require("tokyonight").setup({
+  -- Style should be set to "moon" once zellij supports light/dark mode detection (CSI 2031)
   style = "day",
+  light_style = "day",
   transparent = false,
 })
 vim.cmd.colorscheme("tokyonight")
