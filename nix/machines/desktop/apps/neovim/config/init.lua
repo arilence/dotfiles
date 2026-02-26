@@ -75,6 +75,8 @@ require('blink.cmp').setup({
   completion = {
     documentation = { auto_show = true },
   },
+  -- TODO: rust implementation fails to install on nixos
+  fuzzy = { implementation = "lua" },
   signature = { enabled = true },
 })
 
