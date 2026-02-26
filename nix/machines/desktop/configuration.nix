@@ -590,7 +590,7 @@
           enable = true;
           enableZshIntegration = true;
           settings = {
-            theme = "dark:Cobalt Next Dark,light:Catppuccin Latte";
+            theme = "dark:TokyoNight Moon,light:Catppuccin Latte";
             font-family = "GeistMono Nerd Font Mono";
             # Disables font ligatures
             font-feature = "-calt, -liga, -dlig";
