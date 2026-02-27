@@ -11,6 +11,9 @@
       zjstatus = inputs.zjstatus.packages.${prev.stdenv.hostPlatform.system}.default;
     })
     (final: prev: {
+      zjstatus-hints = inputs.zjstatus-hints.packages.${prev.stdenv.hostPlatform.system}.default;
+    })
+    (final: prev: {
       vim-zellij-navigator =
         inputs.vim-zellij-navigator.packages.${prev.stdenv.hostPlatform.system}.default;
     })
@@ -75,6 +78,23 @@
       };
       # I don't like needing to manual convert kdl settings to nix
       extraConfig = ''
+        plugins {
+          zjstatus-hints location="file:${pkgs.zjstatus-hints}/bin/zjstatus-hints.wasm" {
+            // Maximum number of characters to display
+            max_length 50 // 0 = unlimited
+            // String to append when truncated
+            overflow_str "..." // default
+            // Name of the pipe for zjstatus integration
+            pipe_name "zjstatus_hints" // default
+            // Hide hints in base mode (a.k.a. default mode)
+            hide_in_base_mode true
+          }
+        }
+
+        load_plugins {
+          zjstatus-hints
+        }
+
         keybinds {
           shared_except "locked" {
             bind "Ctrl Shift c" {
@@ -82,35 +102,37 @@
             }
 
             bind "Ctrl h" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
                 name "move_focus";
                 payload "left";
               };
             }
 
             bind "Ctrl j" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
                 name "move_focus";
                 payload "down";
+                forward_commands "nvim,vim,atuin,fzf";
               };
             }
 
             bind "Ctrl k" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
                 name "move_focus";
                 payload "up";
+                forward_commands "nvim,vim,atuin,fzf";
               };
             }
 
             bind "Ctrl l" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
                 name "move_focus";
                 payload "right";
               };
             }
 
             bind "Alt h" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
                 name "resize";
                 payload "left";
                 resize_mod "alt";
@@ -118,7 +140,7 @@
             }
 
             bind "Alt j" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
                 name "resize";
                 payload "down";
                 resize_mod "alt";
@@ -126,7 +148,7 @@
             }
 
             bind "Alt k" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
                 name "resize";
                 payload "up";
                 resize_mod "alt";
@@ -134,7 +156,7 @@
             }
 
             bind "Alt l" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
                 name "resize";
                 payload "right";
                 resize_mod "alt";
@@ -155,10 +177,15 @@
             children
             pane size=1 borderless=true {
               plugin location="file:${pkgs.zjstatus}/bin/zjstatus.wasm" {
+                // TODO: enable zjstatus-hints when it support better dynamic widths
                 format_left   "{mode}#[fg=#6C6F85]"
                 format_center "{tabs}"
                 format_right  "{session} "
                 format_space  ""
+
+                // Note: this is necessary to show zjstatus-hints
+                // or else zjstatus won't render the pipe:
+                pipe_zjstatus_hints_format "{output}"
 
                 border_enabled  "false"
                 border_char     "─"
