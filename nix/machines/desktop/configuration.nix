@@ -201,6 +201,11 @@
     fileSystems = [ "/" ];
   };
 
+  services.fstrim = {
+    enable = true;
+    interval = "weekly";
+  };
+
   services.flatpak.enable = true;
 
   services.syncthing = {
