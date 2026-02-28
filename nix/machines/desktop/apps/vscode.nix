@@ -2,11 +2,6 @@
 
 {
   home-manager.users.anthony = {
-    home.packages = with pkgs; [
-      # Required by anthropic.claude-code extension
-      nodejs_24
-    ];
-
     programs.vscode = {
       enable = true;
       # Makes it easy to use extensions at the cost of breaking nix reproducibility

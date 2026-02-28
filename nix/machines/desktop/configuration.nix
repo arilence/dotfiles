@@ -442,10 +442,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.overlays = [
-    inputs.claude-code.overlays.default
-  ];
-
   environment.systemPackages = with pkgs; [
     # CLI Tools
     nixfmt-rfc-style
@@ -459,7 +455,6 @@
     fzf
     ripgrep
     dig # nslookup successor
-    claude-code
 
     # Gui Apps
     gnomeExtensions.appindicator # adds system tray icons to gnome
