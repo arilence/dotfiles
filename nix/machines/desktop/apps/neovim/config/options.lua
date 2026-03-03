@@ -39,6 +39,9 @@ opt.relativenumber = true
 -- Enable cursorline
 opt.cursorline = true
 
+-- Show a singular global status bar at bottom instead of one for each open file
+opt.laststatus = 3
+
 -- Disable wordwrap
 opt.wrap = false
 
