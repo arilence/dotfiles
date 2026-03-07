@@ -329,11 +329,11 @@
         "org/gnome/desktop/background" = {
           color-shading-type = "solid";
           picture-options = "zoom";
-          picture-uri = "file:///home/anthony/Pictures/Wallpapers/dan-otis-OYFHT4X5isg.jpg";
-          picture-uri-dark = "file:///home/anthony/Pictures/Wallpapers/dan-otis-OYFHT4X5isg.jpg";
+          picture-uri = "file:///home/anthony/Pictures/Wallpapers/eric-sloane-connecticut-spring.jpg";
+          picture-uri-dark = "file:///home/anthony/Pictures/Wallpapers/eric-sloane-connecticut-spring.jpg";
         };
         "org/gnome/desktop/screensaver" = {
-          picture-uri = "file:///home/anthony/Pictures/Wallpapers/dan-otis-OYFHT4X5isg.jpg";
+          picture-uri = "file:///home/anthony/Pictures/Wallpapers/eric-sloane-connecticut-spring.jpg";
         };
 
         # Keybindings
