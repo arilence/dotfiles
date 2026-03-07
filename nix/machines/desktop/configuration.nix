@@ -633,7 +633,6 @@
             gl = "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
             start = "xdg-open";
             open = "xdg-open";
-            nixdev = "nix develop -c $SHELL";
             c = "code";
           };
 
