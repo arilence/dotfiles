@@ -653,18 +653,26 @@
 
           siteFunctions = {
             # "nix develop" uses bash by default, this changes it to use $SHELL
+            # NOTE: this may cause issues in the future if a nix develop setup expects Bash
             nix = ''
               if [[ "$1" == "develop" ]]; then
                 shift
-                command nix develop -c "$SHELL" "$@"
+                local zsh_path=$(which zsh)
+                # We tell nix develop to export the variable AND then exec zsh
+                # Otherwise nix develop starts in zsh but with $SHELL set to bash
+                command nix develop "$@" -c env SHELL="$zsh_path" zsh
               else
                 command nix "$@"
               fi
             '';
 
             # "nix-shell" uses bash by default, this changes it to use $SHELL
+            # NOTE: this may cause issues in the future if a nix-shell setup expects Bash
             nix-shell = ''
-              command nix-shell --command "$SHELL" "$@"
+              local zsh_path=$(which zsh)
+              # We tell nix-shell to export the variable AND then exec zsh
+              # Otherwise nix-shell starts in zsh but with $SHELL set to bash
+              command nix-shell "$@" --command "export SHELL=$zsh_path; exec zsh"
             '';
           };
         };
