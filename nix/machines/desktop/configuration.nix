@@ -661,6 +661,11 @@
                 command nix "$@"
               fi
             '';
+
+            # "nix-shell" uses bash by default, this changes it to use zsh
+            nix-shell = ''
+              command nix-shell --command "$SHELL" "$@"
+            '';
           };
         };
 
