@@ -102,37 +102,37 @@
             }
 
             bind "Ctrl h" {
-              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                 name "move_focus";
                 payload "left";
               };
             }
 
             bind "Ctrl j" {
-              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                 name "move_focus";
                 payload "down";
-                forward_commands "nvim,vim,atuin,fzf";
+                passthrough_commands "nvim,vim,atuin,fzf";
               };
             }
 
             bind "Ctrl k" {
-              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                 name "move_focus";
                 payload "up";
-                forward_commands "nvim,vim,atuin,fzf";
+                passthrough_commands "nvim,vim,atuin,fzf";
               };
             }
 
             bind "Ctrl l" {
-              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                 name "move_focus";
                 payload "right";
               };
             }
 
             bind "Alt h" {
-              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                 name "resize";
                 payload "left";
                 resize_mod "alt";
@@ -140,7 +140,7 @@
             }
 
             bind "Alt j" {
-              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                 name "resize";
                 payload "down";
                 resize_mod "alt";
@@ -148,7 +148,7 @@
             }
 
             bind "Alt k" {
-              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                 name "resize";
                 payload "up";
                 resize_mod "alt";
@@ -156,7 +156,7 @@
             }
 
             bind "Alt l" {
-              MessagePlugin "file:/home/anthony/.config/zellij/vim-zellij-navigator.wasm" {
+              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                 name "resize";
                 payload "right";
                 resize_mod "alt";

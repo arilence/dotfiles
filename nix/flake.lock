@@ -586,16 +586,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1771456384,
-        "narHash": "sha256-MxUKWy8vx1wid/t3fExsoyHkqCNKxC1dU/AQ353MgIs=",
+        "lastModified": 1772681790,
+        "narHash": "sha256-mooPO/8bdRNjyUcs1PmwWyRWeWMHS+pny8stol7q6KU=",
         "owner": "arilence",
         "repo": "vim-zellij-navigator",
-        "rev": "52f024eafff7d433640d6af98cb9af22f7ad15d1",
+        "rev": "c7106b8e970a77800d14a1aebfebf1e2d0cd715a",
         "type": "github"
       },
       "original": {
         "owner": "arilence",
-        "ref": "feat/add-nix-flake",
+        "ref": "feat/add-passthrough-commands",
         "repo": "vim-zellij-navigator",
         "type": "github"
       }
