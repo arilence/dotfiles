@@ -28,7 +28,7 @@ map("v", ">", ">gv")
 
 -- Prevents (P)aste from overwriting value in buffer. This is handy when pasting a
 -- value to multiple locations.
-map("v", "p", '"_dP')
+map("v", "p", '"_dp')
 
 -- Moving between splits (requires smart-splits.nvim plugin)
 map('n', '<C-h>', require('smart-splits').move_cursor_left)
