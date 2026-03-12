@@ -19,7 +19,7 @@ map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, 
 map("n", "//", ":nohlsearch <CR>")
 
 -- Toggle comments
-map("n", "<C-/>", "gcc", { remap = true } )
+map("n", "<C-/>", "gcc", { remap = true })
 map("v", "<C-/>", "gc", { remap = true })
 
 -- Stay in visual mode when indenting
