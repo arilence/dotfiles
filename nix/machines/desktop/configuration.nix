@@ -177,9 +177,11 @@
     enable = true;
     allowedTCPPorts = [
       22 # SSH
+      53317 # LocalSend
       57621 # Spotify
     ];
     allowedUDPPorts = [
+      53317 # LocalSend
       5353 # Spotify
     ];
   };
