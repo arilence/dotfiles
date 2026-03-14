@@ -621,6 +621,10 @@
           autocd = true;
 
           shellAliases = {
+            # Tells shell to expand any aliases when using sudo. To be honest I don't get why this works.
+            # But without this, I can't use `sudo vim` because root doesn't have the same aliases.
+            sudo = "sudo "; # trailing space is intentional
+
             ls = "eza --group-directories-first";
             vim = "nvim";
             lg = "lazygit";
