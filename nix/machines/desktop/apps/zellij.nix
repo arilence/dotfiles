@@ -210,7 +210,7 @@
                 mode_tmux          "#[fg=#FE640B,bold] tmux "
 
                 tab_normal    "#[fg=#ACB0BE] {name} "
-                tab_active    "#[fg=#4C4F69,bold] {name} "
+                tab_active    "#[fg=#4C4F69,bold,reverse] {name} "
                 tab_separator "#[fg=#BCC0CC] • "
               }
             }
