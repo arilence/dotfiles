@@ -13,12 +13,18 @@
     nixd
     rust-analyzer
     # plugin prerequisites
+    gcc
     ripgrep
+    tree-sitter
   ];
 
   home-manager.users.anthony.programs.neovim = {
     enable = true;
     defaultEditor = true;
+    plugins = with pkgs.vimPlugins; [
+      nvim-treesitter
+      nvim-treesitter.withAllGrammars
+    ];
     extraLuaConfig = ''
       ${builtins.readFile ./config/init.lua}
       ${builtins.readFile ./config/options.lua}

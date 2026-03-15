@@ -104,3 +104,9 @@ require('smart-splits').setup({
 require('snacks').setup({
   picker = { enabled = true }
 })
+
+-----
+-- Syntax Highlighting
+require("nvim-treesitter.configs").setup({
+  highlight = { enable = true },
+})
