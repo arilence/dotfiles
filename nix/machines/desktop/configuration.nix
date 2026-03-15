@@ -11,6 +11,7 @@
     ./disk-config.nix
 
     ./apps/android.nix
+    ./apps/appimage.nix
     ./apps/godot.nix
     ./apps/heroic.nix
     ./apps/mise.nix
@@ -472,7 +473,6 @@
     lazygit
     todoist-electron
     meld
-    gearlever # appimage launcher
     bottles
     localsend # android airdrop
     bruno # rest api client
