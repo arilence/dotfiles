@@ -18,6 +18,7 @@
     ./apps/android.nix
     ./apps/godot.nix
     ./apps/zellij.nix
+    ./apps/heroic.nix
     ./modules/virtual-machines.nix
   ];
 
