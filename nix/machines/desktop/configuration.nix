@@ -9,16 +9,17 @@
 {
   imports = [
     ./disk-config.nix
-    ./apps/pia.nix
-    ./apps/mise.nix
-    ./dev/elixir.nix
-    ./apps/vscode.nix
-    ./apps/neovim
-    ./apps/zed-editor.nix
+
     ./apps/android.nix
     ./apps/godot.nix
-    ./apps/zellij.nix
     ./apps/heroic.nix
+    ./apps/mise.nix
+    ./apps/neovim
+    ./apps/pia.nix
+    ./apps/vscode.nix
+    ./apps/zed-editor.nix
+    ./apps/zellij.nix
+    ./dev/elixir.nix
     ./modules/virtual-machines.nix
   ];
 
