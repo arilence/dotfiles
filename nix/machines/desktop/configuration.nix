@@ -517,6 +517,9 @@
 
   programs.steam.enable = true;
 
+  # For STT like OpenWhispr
+  programs.ydotool.enable = true;
+
   ## End Programs Section ##
 
   ## Start Home Manager ##
