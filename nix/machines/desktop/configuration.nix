@@ -14,6 +14,7 @@
     ./apps/appimage.nix
     ./apps/godot.nix
     ./apps/heroic.nix
+    ./apps/lutris.nix
     ./apps/mise.nix
     ./apps/neovim
     ./apps/pia.nix

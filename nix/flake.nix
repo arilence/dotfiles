@@ -3,6 +3,7 @@
     # Change the value of nixpkgs.url to set the NixOS version
     # List of available versions: https://channels.nixos.org/
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -43,6 +44,7 @@
   outputs =
     {
       nixpkgs,
+      nixpkgs-unstable,
       disko,
       sops-nix,
       home-manager,
@@ -54,6 +56,18 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
+          {
+            # Provides nixpkgs-unstable if needed for specific apps
+            # i.e. can now use "pkgs.package" or "pkgs.unstable.package"
+            nixpkgs.overlays = [
+              (final: prev: {
+                unstable = import nixpkgs-unstable {
+                  inherit (final) config;
+                  inherit (final.stdenv.hostPlatform) system;
+                };
+              })
+            ];
+          }
           disko.nixosModules.disko
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
