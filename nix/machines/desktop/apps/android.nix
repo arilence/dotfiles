@@ -7,10 +7,9 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    android-tools
     android-studio
   ];
-
-  programs.adb.enable = true;
 
   # for dynamically linked libraries
   programs.nix-ld.enable = true;
