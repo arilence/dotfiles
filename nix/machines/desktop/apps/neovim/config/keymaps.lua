@@ -43,5 +43,5 @@ map('n', '<A-k>', require('smart-splits').resize_up)
 map('n', '<A-l>', require('smart-splits').resize_right)
 
 -- Snacks.nvim - Collection of QoL Plugins
-map('n', '<leader>p', require('snacks').picker.smart, { desc = "Smart Find Files", noremap = true })
-map('n', '<leader>/', require('snacks').picker.grep, { desc = "Grep Files", noremap = true })
+map('n', '<C-o>', require('snacks').picker.smart, { desc = "Smart Find Files", noremap = true })
+map('n', '<C-S-f>', require('snacks').picker.grep, { desc = "Grep Files", noremap = true })
