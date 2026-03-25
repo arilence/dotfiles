@@ -6,6 +6,11 @@
   ...
 }:
 
+let
+  # Only used for home-manager. The global nixos `config` gets shadowed by home-manager's `config`.
+  # This is available to access the global value while nested inside of home-manager.
+  nixosConfig = config;
+in
 {
   imports = [
     ./disk-config.nix
@@ -534,7 +539,12 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     users.anthony =
-      { pkgs, lib, ... }:
+      {
+        pkgs,
+        lib,
+        config,
+        ...
+      }:
       {
         imports = [
           inputs.zen-browser.homeModules.beta
@@ -544,6 +554,25 @@
         # This should probably be set to the same version as the NixOS release
         home.stateVersion = "25.11";
 
+        # Creates home directories like Desktop, Document, Downloads, Pictures, etc.
+        xdg.userDirs = {
+          enable = true;
+          createDirectories = true;
+        };
+        # This makes them show up in the sidebar of the Nautilus file manager.
+        gtk = {
+          enable = true;
+          gtk3.bookmarks = [
+            "file://${config.xdg.userDirs.desktop}"
+            "file://${config.xdg.userDirs.documents}"
+            "file://${config.xdg.userDirs.download}"
+            "file://${config.xdg.userDirs.pictures}"
+            "file://${config.xdg.userDirs.music}"
+            "smb://10.0.10.10/files/ NAS Files"
+            "smb://10.0.10.10/media/ NAS Media"
+          ];
+        };
+
         programs.ssh = {
           enable = true;
           # Lets us use 1Password with SSH
@@ -552,7 +581,7 @@
               IdentityAgent ~/.1password/agent.sock
           '';
           includes = [
-            config.sops.secrets.ssh-extra-config.path
+            nixosConfig.sops.secrets.ssh-extra-config.path
           ];
           # default values is being deprecated
           enableDefaultConfig = false;
@@ -691,7 +720,7 @@
           includes = [
             # I may want to setup sops-nix within home-manager to symlink this locally
             # Instead of it being in /run/secrets
-            { path = config.sops.secrets.git-options.path; }
+            { path = nixosConfig.sops.secrets.git-options.path; }
           ];
           settings = {
             user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICji8slXLeYN6Zody5rqrVilgmt8RiGfVkr777WYNm1A";
