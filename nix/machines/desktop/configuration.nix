@@ -456,6 +456,7 @@
     fzf
     ripgrep
     dig # nslookup successor
+    devcontainer
 
     # Gui Apps
     gnomeExtensions.appindicator # adds system tray icons to gnome
