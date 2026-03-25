@@ -102,7 +102,25 @@ require('smart-splits').setup({
 -----
 -- Collection of QoL Plugins
 require('snacks').setup({
-  picker = { enabled = true }
+  explorer = {
+    enabled = true,
+    auto_close = true,
+    replace_netrw = false,
+    trash = true -- Use the system trash when deleting files
+  },
+  picker = {
+    enabled = true,
+    sources = {
+      explorer = {
+        layout = {
+          cycle = false,
+          layout = {
+            position = "right"
+          }
+        }
+      }
+    }
+  },
 })
 
 -----
