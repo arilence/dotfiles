@@ -27,6 +27,7 @@ in
     ./apps/zed-editor.nix
     ./apps/zellij.nix
     ./dev/elixir.nix
+    ./modules/nvidia-gpu.nix
     ./modules/virtual-machines.nix
   ];
 
@@ -403,46 +404,6 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
 
-  ## Start NVIDIA Stuff ##
-  # Enable OpenGL
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      # Nvidia doesn't support accelerated video playback on Linux.
-      # Installing intel driver to use that instead.
-      intel-vaapi-driver # For older processors.
-      #intel-media-driver # For Broadwell (2014) or newer processors.
-      # Also, I found setting the env var LIBVA_DRIVER_NAME broke hardware acceleration in zen browser.
-      # even though it was recommended
-    ];
-  };
-
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-    # Modesetting is required.
-    modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
-    # of just the bare essentials.
-    powerManagement.enable = true;
-
-    # Use the Nvidia open source kernel module.
-    # Must be set to false with my old GTX 1060, otherwise it should be set to true for newer GPUs.
-    open = false;
-
-    # Enable the Nvidia settings menu,
-    # accessible via `nvidia-settings`.
-    nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
-  };
-  ## End NVIDIA Stuff ##
-
   ## Start Programs Section ##
 
   # Allow unfree packages
@@ -800,6 +761,35 @@ in
                 Value = true;
                 Locked = true;
               };
+              # Start NVIDIA Hardware Acceleration
+              # These prefs are required when using NVIDIA for HW Accel
+              # See: https://wiki.nixos.org/wiki/Accelerated_Video_Playback#NVIDIA
+              "media.ffmpeg.vaapi.enabled" = {
+                Value = true;
+                Locked = true;
+              };
+              "media.hardware-video-decoding.force-enabled" = {
+                Value = true;
+                Locked = true;
+              };
+              "media.rdd-ffmpeg.enabled" = {
+                Value = true;
+                Locked = true;
+              };
+              "gfx.x11-egl.force-enabled" = {
+                Value = true;
+                Locked = true;
+              };
+              "widget.dmabuf.force-enabled" = {
+                Value = true;
+                Locked = true;
+              };
+              # Enable this if your GPU supports AV1, my GTX 1060 does not
+              "media.av1.enabled" = {
+                Value = false;
+                Locked = true;
+              };
+              # End NVIDIA Hardware Acceleration
             };
           };
           profiles.default = {
