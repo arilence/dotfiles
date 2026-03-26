@@ -530,6 +530,7 @@ in
         gtk = {
           enable = true;
           gtk3.bookmarks = [
+            "file://${config.home.homeDirectory}/projects Projects"
             "file://${config.xdg.userDirs.desktop}"
             "file://${config.xdg.userDirs.documents}"
             "file://${config.xdg.userDirs.download}"
