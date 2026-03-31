@@ -738,6 +738,7 @@ in
 
         programs.zen-browser = {
           enable = true;
+          setAsDefaultBrowser = true;
           nativeMessagingHosts = [ pkgs.firefoxpwa ];
           policies = {
             AutofillAddressEnabled = false;
@@ -800,50 +801,11 @@ in
               "zen.urlbar.behavior" = "float";
             };
           };
-          # Needed for versions >18.18.6b
-          suppressXdgMigrationWarning = true;
         };
 
-        # Set Zen as the default browser
-        xdg.configFile."mimeapps.list".force = true;
-        xdg.mimeApps =
-          let
-            # options for system are: 'x86_64-linux', 'aarch64-linux' and 'aarch64-darwin'
-            value =
-              let
-                zen-browser = inputs.zen-browser.packages.x86_64-linux.beta;
-              in
-              zen-browser.meta.desktopFileName;
-
-            associations = builtins.listToAttrs (
-              map
-                (name: {
-                  inherit name value;
-                })
-                [
-                  "application/x-extension-shtml"
-                  "application/x-extension-xhtml"
-                  "application/x-extension-html"
-                  "application/x-extension-xht"
-                  "application/x-extension-htm"
-                  "x-scheme-handler/unknown"
-                  "x-scheme-handler/mailto"
-                  "x-scheme-handler/chrome"
-                  "x-scheme-handler/about"
-                  "x-scheme-handler/https"
-                  "x-scheme-handler/http"
-                  "application/xhtml+xml"
-                  "application/json"
-                  "text/plain"
-                  "text/html"
-                ]
-            );
-          in
-          {
-            associations.added = associations;
-            defaultApplications = associations;
-            enable = true;
-          };
+        # Zen can set itself as the default browser but it won't work without some help.
+        # This is required even when `programs.zen-browser.setAsDefaultBrowser` is true.
+        xdg.mimeApps.enable = true;
 
         xdg.configFile = {
           # Autostart apps on login
