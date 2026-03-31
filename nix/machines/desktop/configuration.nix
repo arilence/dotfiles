@@ -493,6 +493,7 @@ in
   };
 
   programs.steam.enable = true;
+  programs.steam.protontricks.enable = true;
 
   # For STT like OpenWhispr
   programs.ydotool.enable = true;
