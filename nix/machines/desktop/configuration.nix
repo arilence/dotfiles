@@ -374,6 +374,7 @@ in
 
   fonts.packages = with pkgs; [
     nerd-fonts.geist-mono
+    nerd-fonts.monaspace
   ];
 
   virtualisation.docker = {
@@ -595,7 +596,7 @@ in
           enableZshIntegration = true;
           settings = {
             theme = "dark:TokyoNight Moon,light:Catppuccin Latte";
-            font-family = "GeistMono Nerd Font Mono";
+            font-family = "MonaspiceNe Nerd Font Mono";
             # Disables font ligatures
             font-feature = "-calt, -liga, -dlig";
             # Fixes `WARNING: terminal is not fully functional` when using SSH
