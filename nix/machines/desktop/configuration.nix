@@ -594,6 +594,7 @@ in
         programs.ghostty = {
           enable = true;
           enableZshIntegration = true;
+          clearDefaultKeybinds = true;
           settings = {
             theme = "dark:TokyoNight Moon,light:Catppuccin Latte";
             font-family = "MonaspiceNe Nerd Font Mono";
@@ -605,6 +606,10 @@ in
             window-width = 120;
             window-height = 40;
             mouse-scroll-multiplier = 1;
+            keybind = [
+              "ctrl+shift+v=paste_from_clipboard"
+              "paste=paste_from_clipboard"
+            ];
           };
         };
 
