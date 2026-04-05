@@ -464,12 +464,6 @@ in
     }))
   ];
 
-  # Potentially fixes electron apps running on wayland not updating in the background
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    ELECTRON_OZONE_PLATFORM_HINT = "auto";
-  };
-
   # This also needs to be set as the user's default shell in the user section
   programs.zsh.enable = true;
 
