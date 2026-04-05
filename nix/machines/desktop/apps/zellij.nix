@@ -97,11 +97,13 @@
         }
 
         keybinds clear-defaults=true {
-          shared_except "locked" {
+          shared {
             bind "Ctrl Shift c" {
               Copy
             }
+          }
 
+          shared_among "locked" {
             bind "Ctrl h" {
               MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                 name "move_focus";
