@@ -448,6 +448,7 @@ in
     itch # itch.io desktop client
     pureref # reference image organizer
     ludusavi # game save backup tool
+    apotris # homebrew tetris game
     (discord-ptb.override {
       commandLineArgs = "--ignore-gpu-blocklist --disable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy";
     })
