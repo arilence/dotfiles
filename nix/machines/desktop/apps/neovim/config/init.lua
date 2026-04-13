@@ -64,6 +64,9 @@ vim.lsp.enable('rust_analyzer')
 -- Godot Engine
 vim.lsp.enable('gdscript')
 
+-- Typescript
+vim.lsp.enable('ts_ls')
+
 -----
 -- Code Completion
 require('blink.cmp').setup({
