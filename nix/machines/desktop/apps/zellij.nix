@@ -11,9 +11,6 @@
       zjstatus = inputs.zjstatus.packages.${prev.stdenv.hostPlatform.system}.default;
     })
     (final: prev: {
-      zjstatus-hints = inputs.zjstatus-hints.packages.${prev.stdenv.hostPlatform.system}.default;
-    })
-    (final: prev: {
       vim-zellij-navigator =
         inputs.vim-zellij-navigator.packages.${prev.stdenv.hostPlatform.system}.default;
     })
@@ -79,23 +76,6 @@
       };
       # I don't like needing to manual convert kdl settings to nix
       extraConfig = ''
-        plugins {
-          zjstatus-hints location="file:${pkgs.zjstatus-hints}/bin/zjstatus-hints.wasm" {
-            // Maximum number of characters to display
-            max_length 50 // 0 = unlimited
-            // String to append when truncated
-            overflow_str "..." // default
-            // Name of the pipe for zjstatus integration
-            pipe_name "zjstatus_hints" // default
-            // Hide hints in base mode (a.k.a. default mode)
-            hide_in_base_mode true
-          }
-        }
-
-        load_plugins {
-          zjstatus-hints
-        }
-
         keybinds clear-defaults=true {
           shared {
             bind "Ctrl Shift c" {

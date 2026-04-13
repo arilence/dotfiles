@@ -31,8 +31,6 @@
     # Zellij custom plugins
     zjstatus.url = "github:dj95/zjstatus";
     zjstatus.inputs.nixpkgs.follows = "nixpkgs";
-    zjstatus-hints.url = "github:arilence/zjstatus-hints/fix/flake-nix-rust-toolchain";
-    # zjstatus-hints.inputs.nixpkgs.follows = "nixpkgs"; # Fails to build when this is set
     vim-zellij-navigator.url = "github:arilence/vim-zellij-navigator/feat/add-passthrough-commands";
     vim-zellij-navigator.inputs.nixpkgs.follows = "nixpkgs";
 
