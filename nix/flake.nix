@@ -31,8 +31,6 @@
     # Zellij custom plugins
     zjstatus.url = "github:dj95/zjstatus";
     zjstatus.inputs.nixpkgs.follows = "nixpkgs";
-    vim-zellij-navigator.url = "github:arilence/vim-zellij-navigator/feat/add-passthrough-commands";
-    vim-zellij-navigator.inputs.nixpkgs.follows = "nixpkgs";
 
     # Private Internet Access VPN
     pia.url = "github:arilence/pia.nix";

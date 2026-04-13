@@ -10,10 +10,6 @@
     (final: prev: {
       zjstatus = inputs.zjstatus.packages.${prev.stdenv.hostPlatform.system}.default;
     })
-    (final: prev: {
-      vim-zellij-navigator =
-        inputs.vim-zellij-navigator.packages.${prev.stdenv.hostPlatform.system}.default;
-    })
   ];
 
   environment.systemPackages = with pkgs; [
@@ -84,67 +80,6 @@
           }
 
           shared_among "locked" {
-            bind "Ctrl h" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
-                name "move_focus";
-                payload "left";
-              };
-            }
-
-            bind "Ctrl j" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
-                name "move_focus";
-                payload "down";
-                passthrough_commands "nvim,vim,atuin,fzf";
-              };
-            }
-
-            bind "Ctrl k" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
-                name "move_focus";
-                payload "up";
-                passthrough_commands "nvim,vim,atuin,fzf";
-              };
-            }
-
-            bind "Ctrl l" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
-                name "move_focus";
-                payload "right";
-              };
-            }
-
-            bind "Alt h" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
-                name "resize";
-                payload "left";
-                resize_mod "alt";
-              };
-            }
-
-            bind "Alt j" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
-                name "resize";
-                payload "down";
-                resize_mod "alt";
-              };
-            }
-
-            bind "Alt k" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
-                name "resize";
-                payload "up";
-                resize_mod "alt";
-              };
-            }
-
-            bind "Alt l" {
-              MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
-                name "resize";
-                payload "right";
-                resize_mod "alt";
-              };
-            }
           }
 
 
