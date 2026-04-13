@@ -407,6 +407,13 @@ in
 
   ## Start Programs Section ##
 
+  # https://github.com/NixOS/nixpkgs/issues/149812
+  # The issue mentions Plasma but I ran into this issue on GNOME too
+  # Fixes error: 'org.gtk.Settings.FileChooser' is not installed
+  environment.sessionVariables.XDG_DATA_DIRS = [
+    "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
+  ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
