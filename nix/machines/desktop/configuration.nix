@@ -292,6 +292,7 @@ in
             "feishin.desktop"
             "com.mitchellh.ghostty.desktop"
             "code.desktop"
+            "claude-desktop.desktop"
           ];
         };
         "org/gnome/desktop/session" = {

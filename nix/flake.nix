@@ -35,6 +35,9 @@
     # Private Internet Access VPN
     pia.url = "github:arilence/pia.nix";
     pia.inputs.nixpkgs.follows = "nixpkgs";
+
+    claude-desktop.url = "github:aaddrick/claude-desktop-debian";
+    claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -45,6 +48,7 @@
       sops-nix,
       home-manager,
       pia,
+      claude-desktop,
       ...
     }@inputs:
     {
@@ -68,6 +72,13 @@
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           pia.nixosModules.default
+          (
+            { pkgs, ... }:
+            {
+              nixpkgs.overlays = [ claude-desktop.overlays.default ];
+              environment.systemPackages = [ pkgs.claude-desktop ];
+            }
+          )
           ./machines/desktop/configuration.nix
           # Use nixos-facter instead of nixos-generate-config
           { hardware.facter.reportPath = ./machines/desktop/facter.json; }
