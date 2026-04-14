@@ -86,7 +86,7 @@
           // These are the "unlock-first" keybinds preset, where the default state is "locked"
           // Make sure `default_mode` is set to `locked` in the zellij config
           locked {
-            bind "Ctrl g" { SwitchToMode "normal"; }
+            bind "Ctrl a" { SwitchToMode "normal"; }
           }
           pane {
             bind "left" { MoveFocus "left"; }
