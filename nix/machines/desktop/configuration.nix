@@ -608,10 +608,22 @@ in
             shell-integration-features = "ssh-env";
             window-width = 120;
             window-height = 40;
-            mouse-scroll-multiplier = 1;
+            # Disable dimming unfocused splits
+            unfocused-split-opacity = 1;
             keybind = [
+              "ctrl+shift+c=copy_to_clipboard"
+              "copy=copy_to_clipboard"
               "ctrl+shift+v=paste_from_clipboard"
               "paste=paste_from_clipboard"
+              "alt+backslash=new_split:right"
+              "alt+-=new_split:down"
+              "ctrl+shift+t=new_tab"
+              "alt+1=goto_tab:1"
+              "alt+2=goto_tab:2"
+              "alt+3=goto_tab:3"
+              "alt+4=goto_tab:4"
+              "alt+5=goto_tab:5"
+              "alt+6=goto_tab:6"
             ];
           };
         };
