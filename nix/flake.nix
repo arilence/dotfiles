@@ -28,10 +28,6 @@
     mise.url = "github:jdx/mise";
     mise.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Zellij custom plugins
-    zjstatus.url = "github:dj95/zjstatus";
-    zjstatus.inputs.nixpkgs.follows = "nixpkgs";
-
     # Private Internet Access VPN
     pia.url = "github:arilence/pia.nix";
     pia.inputs.nixpkgs.follows = "nixpkgs";

@@ -15,9 +15,6 @@ vim.pack.add({
   -- Better code commenting
   "git@github.com:numToStr/Comment.nvim",
 
-  -- Zellij Pane Navigation
-  "git@github.com:mrjones2014/smart-splits.nvim",
-
   -- Collection of QoL Plugins
   "git@github.com:folke/snacks.nvim",
 })
@@ -25,8 +22,7 @@ vim.pack.add({
 -----
 -- Color scheme
 require("tokyonight").setup({
-  -- Style should be set to "moon" once zellij supports light/dark mode detection (CSI 2031)
-  style = "day",
+  style = "moon",
   light_style = "day",
   transparent = false,
 })
@@ -86,21 +82,6 @@ require('blink.cmp').setup({
 -----
 -- Better code commenting
 require('Comment').setup()
-
------
--- Zellij Pane Navigation
-require('smart-splits').setup({
-  -- Desired behavior when your cursor is at an edge and you
-  -- are moving towards that same edge:
-  at_edge = 'stop',
-  -- when moving cursor between splits left or right,
-  -- place the cursor on the same row of the *screen*
-  -- regardless of line numbers.
-  move_cursor_same_row = false,
-  -- In Zellij, set this to true if you would like to move to the next *tab*
-  -- when the current pane is at the edge of the zellij tab/window
-  zellij_move_focus_or_tab = false,
-})
 
 -----
 -- Collection of QoL Plugins
