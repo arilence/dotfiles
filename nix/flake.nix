@@ -38,6 +38,9 @@
 
     claude-desktop.url = "github:aaddrick/claude-desktop-debian";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Session persistence for terminal processes
+    zmx.url = "github:neurosnap/zmx";
   };
 
   outputs =

@@ -26,6 +26,7 @@ in
     ./apps/vscode.nix
     ./apps/zed-editor.nix
     ./apps/zellij.nix
+    ./apps/zmx.nix
     ./dev/elixir.nix
     ./modules/nvidia-gpu.nix
     ./modules/virtual-machines.nix
