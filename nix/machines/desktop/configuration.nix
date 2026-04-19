@@ -608,6 +608,7 @@ in
             shell-integration-features = "ssh-env";
             window-width = 120;
             window-height = 40;
+            cursor-style = "block";
             # Disable dimming unfocused splits
             unfocused-split-opacity = 1;
             keybind = [
@@ -624,6 +625,12 @@ in
               "alt+4=goto_tab:4"
               "alt+5=goto_tab:5"
               "alt+6=goto_tab:6"
+              # TODO: Figure out how to achieve something like
+              # smart-splits.nvim or vim-tmux-navigator within Ghostty
+              "performable:ctrl+h=goto_split:left"
+              "performable:ctrl+j=goto_split:down"
+              "performable:ctrl+k=goto_split:up"
+              "performable:ctrl+l=goto_split:right"
             ];
           };
         };
