@@ -330,6 +330,7 @@ in
           intellihide = true;
           show-mounts-network = false;
           show-mounts-only-mounted = true;
+          click-action = "focus-minimize-or-appspread";
         };
 
         # Desktop Wallpaper
