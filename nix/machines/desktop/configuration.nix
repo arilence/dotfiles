@@ -564,10 +564,11 @@ in
           createDirectories = true;
         };
         # This makes them show up in the sidebar of the Nautilus file manager.
+        xdg.configFile."gtk-3.0/bookmarks".force = true;
         gtk = {
           enable = true;
           gtk3.bookmarks = [
-            "file://${config.home.homeDirectory}/projects Projects"
+            "file://${config.home.homeDirectory}/code Code"
             "file://${config.xdg.userDirs.desktop}"
             "file://${config.xdg.userDirs.documents}"
             "file://${config.xdg.userDirs.download}"
