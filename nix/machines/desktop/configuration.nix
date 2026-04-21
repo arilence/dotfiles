@@ -53,21 +53,35 @@ in
     consoleLogLevel = 3;
 
     initrd = {
+      systemd.enable = true;
+      verbose = false;
+
       luks = {
         # Better SSD performance
         # Must match the name of the LUKS device in disk-config.nix
         devices."crypted".bypassWorkqueues = true;
         devices."crypted-storage".bypassWorkqueues = true;
 
-        # Use the same passphrase for multiple disks
-        reusePassphrases = true;
+        # When using initrd.systemd, this is the default behaviour and will
+        # result in an error if explicitely set.
+        # Otherwise, enable this to only require entering the password once
+        # for multiple disks
+        # reusePassphrases = true;
       };
     };
 
     kernelParams = [
+      "quiet"
+      "splash"
       # Reduces text spam during boot. Remove this if need to debug boot issues.
       "loglevel=3"
-      "quiet"
+      # As per: https://discourse.nixos.org/t/how-to-configure-a-graphical-boot-screen-with-luks-unlock/63357/5
+      # Possibly fixes BIOS crash
+      "intremap=on"
+      # Misc
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
     ];
 
     kernel.sysctl = {
@@ -77,6 +91,11 @@ in
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
+    };
+
+    # LUKS password graphical interface
+    plymouth = {
+      enable = true;
     };
   };
 
