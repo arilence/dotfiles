@@ -586,6 +586,10 @@ in
           enableZshIntegration = true;
           settings = {
             add_newline = false;
+            env_var.ZMX_SESSION = {
+              format = "[zmx:$env_value]($style) ";
+              style = "bold yellow";
+            };
           };
         };
 
