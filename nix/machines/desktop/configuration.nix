@@ -49,16 +49,35 @@ in
     download-buffer-size = 536870912; # 512 MiB
   };
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [
-    # Reduces text spam during boot. Remove this if need to debug boot issues.
-    "loglevel=3"
-    "quiet"
-  ];
-  boot.kernel.sysctl = {
-    "vm.swappiness" = 35;
+  boot = {
+    consoleLogLevel = 3;
+
+    initrd = {
+      luks = {
+        # Better SSD performance
+        # Must match the name of the LUKS device in disk-config.nix
+        devices."crypted".bypassWorkqueues = true;
+        devices."crypted-storage".bypassWorkqueues = true;
+
+        # Use the same passphrase for multiple disks
+        reusePassphrases = true;
+      };
+    };
+
+    kernelParams = [
+      # Reduces text spam during boot. Remove this if need to debug boot issues.
+      "loglevel=3"
+      "quiet"
+    ];
+
+    kernel.sysctl = {
+      "vm.swappiness" = 35;
+    };
+
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
 
   # This sets the kernel to the latest, but I ran into compilation issues with
@@ -73,14 +92,6 @@ in
     "aarch64-linux"
   ];
   nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
-
-  # Better SSD performance
-  # Must match the name of the LUKS device in disk-config.nix
-  boot.initrd.luks.devices."crypted".bypassWorkqueues = true;
-  boot.initrd.luks.devices."crypted-storage".bypassWorkqueues = true;
-
-  # Use the same passphrase for multiple disks
-  boot.initrd.luks.reusePassphrases = true;
 
   # Sops for secrets
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
