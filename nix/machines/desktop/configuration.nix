@@ -98,6 +98,10 @@ in
     };
   };
 
+  # Periodically optimises the nix store (cleans up disk usage)
+  nix.optimise.automatic = true;
+  #nix.optimise.dates = [ "03:45" ];
+
   # This sets the kernel to the latest, but I ran into compilation issues with
   # the NVIDIA proprietary driver against the bleeding-edge kernels.
   # So we're gonna use the default that nixpkgs provides for now.
