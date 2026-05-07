@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -11,7 +11,7 @@
 
   home-manager.users.anthony.programs.mise = {
     enable = true;
-    package = inputs.mise.packages.x86_64-linux.mise;
+    package = pkgs.unstable.mise;
     enableZshIntegration = true;
     globalConfig = {
       settings = {

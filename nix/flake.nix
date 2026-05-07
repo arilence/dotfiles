@@ -25,9 +25,6 @@
     expert.url = "github:elixir-lang/expert";
     expert.inputs.nixpkgs.follows = "nixpkgs";
 
-    mise.url = "github:jdx/mise";
-    mise.inputs.nixpkgs.follows = "nixpkgs";
-
     # Private Internet Access VPN
     pia.url = "github:arilence/pia.nix";
     pia.inputs.nixpkgs.follows = "nixpkgs";
