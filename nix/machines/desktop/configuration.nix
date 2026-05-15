@@ -118,7 +118,7 @@ in
   # Sops for secrets
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   sops.defaultSopsFile = ./secrets.sops.yaml;
-  sops.age.generateKey = true;
+  sops.age.generateKey = false;
   sops.secrets.user-password.neededForUsers = true;
   sops.secrets.git-options = {
     mode = "0444";
