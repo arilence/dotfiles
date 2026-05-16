@@ -81,6 +81,11 @@ in
       "boot.shell_on_fail"
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
+      # Enable zswap, compresses pages inside of ram
+      "zswap.enabled=1"
+      "zswap.compressor=lz4" # lz4 potentially has less CPU overhead that zstd
+      "zswap.max_pool_percent=20" # maximum percentage of RAM that zswap is allowed to use
+      "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
     ];
 
     kernel.sysctl = {
