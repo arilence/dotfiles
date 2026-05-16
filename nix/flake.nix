@@ -27,6 +27,8 @@
     pia.url = "github:arilence/pia.nix";
     pia.inputs.nixpkgs.follows = "nixpkgs";
 
+    llm-agents.url = "github:numtide/llm-agents.nix";
+
     claude-desktop.url = "github:aaddrick/claude-desktop-debian";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -71,6 +73,14 @@
             {
               nixpkgs.overlays = [ claude-desktop.overlays.default ];
               environment.systemPackages = [ pkgs.claude-desktop ];
+            }
+          )
+          (
+            { pkgs, ... }:
+            {
+              environment.systemPackages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
+                codex
+              ];
             }
           )
           ./machines/desktop/configuration.nix
