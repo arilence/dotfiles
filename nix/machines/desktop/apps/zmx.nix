@@ -8,6 +8,7 @@
 {
   environment.systemPackages = [
     inputs.zmx.packages.${pkgs.stdenv.hostPlatform.system}.default
+    pkgs.gum
   ];
 
   home-manager.users.anthony = {
@@ -19,21 +20,35 @@
         tk = "zmx kill";
       };
 
-      # Autostart a zmx session called "main" when terminal starts.
-      # If already in use, create a new session "main.N" where N incremented by 1
       initContent = lib.mkOrder 1500 ''
-        if [[ $- == *i* ]] && [[ -z "$ZMX_SESSION" ]]; then
+        __zmx_attach_prompt() {
+          local __zmx_list
+          __zmx_list="$(zmx list --short 2>/dev/null)"
+
           local -a __zmx_sessions
-          __zmx_sessions=("''${(@f)$(zmx list --short 2>/dev/null)}")
-          local __zmx_name=main
-          if (( ''${__zmx_sessions[(Ie)main]} )); then
-            local __zmx_n=1
-            while (( ''${__zmx_sessions[(Ie)main.$__zmx_n]} )); do
-              (( __zmx_n++ ))
-            done
-            __zmx_name="main.$__zmx_n"
+          __zmx_sessions=(''${(f)__zmx_list})
+
+          local __zmx_name
+          if (( ''${#__zmx_sessions} )); then
+            __zmx_name="$(print -r -l -- "$__zmx_sessions[@]" | gum filter --no-strict --fuzzy --fuzzy-sort --header 'choose zmx session' --prompt 'name: ')"
+          else
+            __zmx_name="$(gum input --prompt 'zmx shell name: ' --placeholder main)"
           fi
-          exec zmx attach "$__zmx_name"
+
+          local __zmx_status=$?
+          if (( __zmx_status == 0 )); then
+            [[ -n "$__zmx_name" ]] || __zmx_name=main
+            exec zmx attach "$__zmx_name"
+          fi
+        }
+
+        ts() {
+          __zmx_attach_prompt
+        }
+
+        # Ask for the zmx session name when a terminal starts.
+        if [[ $- == *i* ]] && [[ -z "$ZMX_SESSION" ]]; then
+          __zmx_attach_prompt
         fi
       '';
     };
