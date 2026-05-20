@@ -19,6 +19,7 @@ in
     ./apps/appimage.nix
     ./apps/godot.nix
     ./apps/heroic.nix
+    ./apps/kitty.nix
     ./apps/mise.nix
     ./apps/neovim
     ./apps/pia.nix
@@ -329,6 +330,7 @@ in
             "spotify.desktop"
             "feishin.desktop"
             "com.mitchellh.ghostty.desktop"
+            "kitty.desktop"
             "code.desktop"
             "claude-desktop.desktop"
           ];
