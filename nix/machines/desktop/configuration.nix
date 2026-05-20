@@ -333,6 +333,7 @@ in
             "kitty.desktop"
             "code.desktop"
             "claude-desktop.desktop"
+            "codex-desktop.desktop"
           ];
         };
         "org/gnome/desktop/session" = {

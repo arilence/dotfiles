@@ -32,6 +32,8 @@
     claude-desktop.url = "github:aaddrick/claude-desktop-debian";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
 
+    codex-desktop-linux.url = "github:ilysenko/codex-desktop-linux/b4f584b0a91897208b41e73c5d7c7e645da92358";
+
     # Session persistence for terminal processes
     zmx.url = "github:neurosnap/zmx";
   };
@@ -80,6 +82,14 @@
             {
               environment.systemPackages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
                 codex
+              ];
+            }
+          )
+          (
+            { pkgs, ... }:
+            {
+              environment.systemPackages = [
+                inputs.codex-desktop-linux.packages.${pkgs.stdenv.hostPlatform.system}.codex-desktop
               ];
             }
           )
