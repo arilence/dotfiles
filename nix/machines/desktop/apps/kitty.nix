@@ -13,6 +13,10 @@ in
       "kitty/dark-theme.auto.conf".source = "${kittyThemes}/Alabaster_Dark.conf";
       "kitty/light-theme.auto.conf".source = "${kittyThemes}/Alabaster.conf";
       "kitty/no-preference-theme.auto.conf".source = "${kittyThemes}/Alabaster.conf";
+      "kitty/neighboring_window.py".source =
+        "${pkgs.vimPlugins.smart-splits-nvim}/kitty/neighboring_window.py";
+      "kitty/relative_resize.py".source = "${pkgs.vimPlugins.smart-splits-nvim}/kitty/relative_resize.py";
+      "kitty/split_window.py".source = "${pkgs.vimPlugins.smart-splits-nvim}/kitty/split_window.py";
     };
 
     programs.kitty = {
@@ -25,6 +29,7 @@ in
       };
 
       settings = {
+        allow_remote_control = true;
         clear_all_shortcuts = true;
         cursor_shape = "block";
         disable_ligatures = "always";
@@ -32,6 +37,7 @@ in
         inactive_text_alpha = "1.0";
         initial_window_width = "120c";
         initial_window_height = "40c";
+        listen_on = "unix:@mykitty";
       };
 
       keybindings = {
@@ -52,7 +58,23 @@ in
         "ctrl+j" = "neighboring_window down";
         "ctrl+k" = "neighboring_window up";
         "ctrl+l" = "neighboring_window right";
+        "alt+h" = "kitten relative_resize.py left 3";
+        "alt+j" = "kitten relative_resize.py down 3";
+        "alt+k" = "kitten relative_resize.py up 3";
+        "alt+l" = "kitten relative_resize.py right 3";
       };
+
+      extraConfig = ''
+        # Conditionally enable/disable shortcuts using smart-splits.nvim
+        map --when-focus-on var:IS_NVIM ctrl+h
+        map --when-focus-on var:IS_NVIM ctrl+j
+        map --when-focus-on var:IS_NVIM ctrl+k
+        map --when-focus-on var:IS_NVIM ctrl+l
+        map --when-focus-on var:IS_NVIM alt+h
+        map --when-focus-on var:IS_NVIM alt+j
+        map --when-focus-on var:IS_NVIM alt+k
+        map --when-focus-on var:IS_NVIM alt+l
+      '';
     };
   };
 }

@@ -22,6 +22,7 @@
     enable = true;
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
+      smart-splits-nvim
       nvim-treesitter
       nvim-treesitter.withAllGrammars
     ];

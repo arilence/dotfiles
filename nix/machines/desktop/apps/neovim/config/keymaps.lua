@@ -26,6 +26,18 @@ map("v", "<C-/>", "gc", { remap = true })
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
+-- Moving between splits (requires smart-splits.nvim plugin)
+local smart_splits = require("smart-splits")
+map("n", "<C-h>", smart_splits.move_cursor_left, { desc = "Move to left split", noremap = true })
+map("n", "<C-j>", smart_splits.move_cursor_down, { desc = "Move to lower split", noremap = true })
+map("n", "<C-k>", smart_splits.move_cursor_up, { desc = "Move to upper split", noremap = true })
+map("n", "<C-l>", smart_splits.move_cursor_right, { desc = "Move to right split", noremap = true })
+-- Resizing splits (requires smart-splits.nvim plugin)
+map("n", "<A-h>", smart_splits.resize_left, { desc = "Resize split left", noremap = true })
+map("n", "<A-j>", smart_splits.resize_down, { desc = "Resize split down", noremap = true })
+map("n", "<A-k>", smart_splits.resize_up, { desc = "Resize split up", noremap = true })
+map("n", "<A-l>", smart_splits.resize_right, { desc = "Resize split right", noremap = true })
+
 -- Prevents (P)aste from overwriting value in buffer. This is handy when pasting a
 -- value to multiple locations.
 map("v", "p", 'P')
