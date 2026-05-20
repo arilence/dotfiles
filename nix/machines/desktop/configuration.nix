@@ -732,6 +732,7 @@ in
             export EDITOR='nvim'
             export VISUAL='nvim'
             export LANG='en_US.UTF-8'
+            export SOPS_AGE_KEY_CMD='op read "op://Personal/3sspl4mcj6marm3iugininsub4/AGE Secret Key"'
           '';
 
           siteFunctions = {
