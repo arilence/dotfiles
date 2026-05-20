@@ -8,7 +8,7 @@
 {
   environment.systemPackages = [
     inputs.zmx.packages.${pkgs.stdenv.hostPlatform.system}.default
-    pkgs.gum
+    pkgs.fzf
   ];
 
   home-manager.users.anthony = {
@@ -30,9 +30,9 @@
 
           local __zmx_name
           if (( ''${#__zmx_sessions} )); then
-            __zmx_name="$(print -r -l -- "$__zmx_sessions[@]" | gum filter --no-strict --fuzzy --fuzzy-sort --header 'choose zmx session' --prompt 'name: ')"
+            __zmx_name="$(print -r -l -- "$__zmx_sessions[@]" | fzf --header 'choose zmx session' --prompt 'name: ' --bind 'enter:accept-or-print-query')"
           else
-            __zmx_name="$(gum input --prompt 'zmx shell name: ' --placeholder main)"
+            __zmx_name="$(fzf --prompt 'zmx shell name: ' --bind 'enter:accept-or-print-query' < /dev/null)"
           fi
 
           local __zmx_status=$?
