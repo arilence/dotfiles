@@ -35,6 +35,7 @@ in
         disable_ligatures = "always";
         enabled_layouts = "splits";
         inactive_text_alpha = "1.0";
+        remember_window_size = false;
         initial_window_width = "120c";
         initial_window_height = "40c";
         listen_on = "unix:@mykitty";
