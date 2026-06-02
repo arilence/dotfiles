@@ -26,6 +26,7 @@ in
 
       font = {
         name = "MonaspiceNe Nerd Font Mono";
+        size = 12;
       };
 
       settings = {
@@ -39,6 +40,7 @@ in
         initial_window_width = "120c";
         initial_window_height = "40c";
         listen_on = "unix:@mykitty";
+        text_composition_strategy = "1.0 10";
       };
 
       keybindings = {
