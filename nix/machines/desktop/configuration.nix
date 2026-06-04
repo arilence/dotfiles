@@ -761,6 +761,21 @@ in
               # Otherwise nix-shell starts in zsh but with $SHELL set to bash
               command nix-shell "$@" --command "export SHELL=$zsh_path; exec zsh"
             '';
+
+            # Fixes "'xterm-kitty': unknown terminal type" on remote SSH sessions.
+            # Similar to Ghostty's "shell-integration-features = ssh-env"
+            # See: https://sw.kovidgoyal.net/kitty/faq/#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-or-functional-keys-like-arrow-keys-don-t-work
+            ssh = ''
+              if [[ "$TERM" == "xterm-kitty" ]]; then
+                if command -v kitten >/dev/null 2>&1; then
+                  command kitten ssh "$@"
+                else
+                  TERM=xterm-256color command ssh "$@"
+                fi
+              else
+                command ssh "$@"
+              fi
+            '';
           };
         };
 
