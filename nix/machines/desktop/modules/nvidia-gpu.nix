@@ -5,6 +5,18 @@
   ...
 }:
 
+let
+  # GTX 1060 is Pascal/GP10x. NVIDIA's 580 legacy series is the last Linux
+  # branch that supports Pascal, so pin the newest patched 580 driver instead
+  # of following the moving `latest` alias into an unsupported branch.
+  latestPascalDriver = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+    version = "580.159.03";
+    sha256_64bit = "sha256-MshdmbD2QMlQH2GzndrSCP0CiNAVxPvF/QQ1wHeD+nc=";
+    openSha256 = "sha256-HlGJyfcmXWqKJw1NRjp35clLucQtCIWAxjJvicgI4zM=";
+    settingsSha256 = "sha256-kP3J87uUVPOOJHmTdRNm4+GdIyniZYrtgehrYSXcX9A=";
+    persistencedSha256 = "sha256-cQ+qz4aSYeonKviufdQOHo0quun8yPBTSgOvRkdN6og=";
+  };
+in
 {
   # Enable Hardware Acceleration
   environment.variables = {
@@ -45,7 +57,7 @@
     # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    # Latest supported branch for the GTX 1060.
+    package = latestPascalDriver;
   };
 }
