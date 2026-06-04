@@ -32,7 +32,7 @@
     claude-desktop.url = "github:aaddrick/claude-desktop-debian";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
 
-    codex-desktop-linux.url = "github:ilysenko/codex-desktop-linux/b4f584b0a91897208b41e73c5d7c7e645da92358";
+    codex-desktop-linux.url = "github:ilysenko/codex-desktop-linux";
 
     # Session persistence for terminal processes
     zmx.url = "github:neurosnap/zmx";
