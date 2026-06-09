@@ -484,6 +484,7 @@ in
     kopia-ui
     awscli2 # for managing s3 server
     versitygw # also for s3 server
+    cryptomator
     spotify
     feishin
     moonlight-qt
