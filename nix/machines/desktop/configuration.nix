@@ -332,10 +332,7 @@ in
             "discord-ptb.desktop"
             "spotify.desktop"
             "feishin.desktop"
-            "com.mitchellh.ghostty.desktop"
             "kitty.desktop"
-            "code.desktop"
-            "claude-desktop.desktop"
             "codex-desktop.desktop"
           ];
         };
