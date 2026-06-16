@@ -358,9 +358,10 @@ in
           multi-monitor = false;
           dock-position = "BOTTOM";
           intellihide-mode = "FOCUS_APPLICATION_WINDOWS";
-          height-fraction = 0.9;
+          height-fraction = 1.0;
           extend-height = false;
-          dash-max-icon-size = lib.gvariant.mkUint32 64;
+          dash-max-icon-size = lib.gvariant.mkInt32 48;
+          show-running = true;
           isolate-workspaces = false;
           custom-theme-shrink = false;
           disable-overview-on-startup = true;
