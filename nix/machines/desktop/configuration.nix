@@ -898,9 +898,31 @@ in
           };
         };
 
-        # Zen can set itself as the default browser but it won't work without some help.
-        # This is required even when `programs.zen-browser.setAsDefaultBrowser` is true.
-        xdg.mimeApps.enable = true;
+        xdg.mimeApps =
+          let
+            textEditor = "org.gnome.TextEditor.desktop";
+            textFileMimeTypes = [
+              "application/json"
+              "application/toml"
+              "application/x-shellscript"
+              "application/x-yaml"
+              "application/yaml"
+              "text/csv"
+              "text/markdown"
+              "text/plain"
+              "text/x-markdown"
+              "text/yaml"
+            ];
+          in
+          {
+            # Zen can set itself as the default browser but it won't work without setting
+            # `xdg.mimeApps.enable` = true even when `programs.zen-browser.setAsDefaultBrowser` is true.
+            enable = true;
+
+            # For some reason Zen overwrites opening plain text files, where I still want them to
+            # open in Text Editor.
+            defaultApplications = lib.genAttrs textFileMimeTypes (_: textEditor);
+          };
 
         xdg.configFile = {
           # Autostart apps on login
