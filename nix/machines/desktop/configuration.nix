@@ -28,6 +28,7 @@ in
     ./apps/zmx.nix
     ./dev/elixir.nix
     ./modules/nvidia-gpu.nix
+    ./modules/scripts.nix
     ./modules/virtual-machines.nix
   ];
 
