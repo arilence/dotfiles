@@ -79,8 +79,35 @@
           __zmx_attach_prompt
         }
 
+        # Launch a named zmx session in a new kitty tab.
+        # Swap to it if the name already exists.
+        kzmx() {
+          if (( $# < 1 || $# > 3 )); then
+            printf 'usage: kzmx <zmx-session> [tab-title] [cwd]\n' >&2
+            return 2
+          fi
+
+          local session_name="$1"
+          local tab_title="''${2:-$session_name}"
+          local cwd="''${3:-$PWD}"
+          local session_id
+          session_id=$(printf '%s' "$session_name" | sha256sum | awk '{print $1}')
+
+          kitten @ focus-tab --match "var:zmx_session_id=$session_id" 2>/dev/null \
+            || kitten @ launch \
+              --type=tab \
+              --tab-title "$tab_title" \
+              --cwd "$cwd" \
+              --env ZMX_AUTO_ATTACH=0 \
+              --var "zmx_session=$session_name" \
+              --var "zmx_session_id=$session_id" \
+              zmx attach "$session_name"
+        }
+
         # Ask for the zmx session name when a terminal starts.
-        if command -v zmx &> /dev/null && command -v fzf &> /dev/null && [[ -z "$ZMX_SESSION" ]]; then
+        if command -v zmx &> /dev/null \
+          && command -v fzf &> /dev/null \
+          && [[ -z "$ZMX_SESSION" && "''${ZMX_AUTO_ATTACH:-1}" != 0 ]]; then
           __zmx_attach_prompt && exit
         fi
       '';
