@@ -489,7 +489,6 @@ in
     moonlight-qt
     code-cursor
     jetbrains.idea
-    obsidian
     ghostty
     vlc
     lazygit
@@ -502,8 +501,27 @@ in
     pureref # reference image organizer
     ludusavi # game save backup tool
     apotris # homebrew tetris game
+    (obsidian.override {
+      # Fixes rendering/performance issues by forcing Wayland
+      commandLineArgs = lib.concatStringsSep " " [
+        "--ozone-platform=wayland"
+        "--enable-wayland-ime=true"
+        "--wayland-text-input-version=3"
+        "--enable-features=WaylandWindowDecorations"
+        "--enable-gpu-rasterization"
+        "--ignore-gpu-blocklist"
+      ];
+    })
     (discord-ptb.override {
-      commandLineArgs = "--ignore-gpu-blocklist --disable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy";
+      # Fixes rendering/performance issues by forcing Wayland
+      commandLineArgs = lib.concatStringsSep " " [
+        "--ozone-platform=wayland"
+        "--enable-wayland-ime=true"
+        "--enable-features=WaylandWindowDecorations"
+        "--enable-gpu-rasterization"
+        "--enable-zero-copy"
+        "--ignore-gpu-blocklist"
+      ];
     })
     (prismlauncher.override (default: {
       # According to the wiki, Prism Launcher already comes with JDK 8, 17, and 21
