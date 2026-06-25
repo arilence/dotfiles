@@ -48,6 +48,15 @@ in
     # Larger buffer just makes download large packages easier
     # And removes the warning "download buffer is full; consider increasing the 'download-buffer-size' setting"
     download-buffer-size = 536870912; # 512 MiB
+
+    extra-substituters = [
+      "https://cache.numtide.com"
+      "https://codex-desktop-linux.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+      "codex-desktop-linux.cachix.org-1:nX/xy6AdK9hQE24A8ALGjkCKj2ObFmcnemiL5Cid4nk="
+    ];
   };
 
   boot = {
