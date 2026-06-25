@@ -77,22 +77,6 @@
               environment.systemPackages = [ pkgs.claude-desktop ];
             }
           )
-          (
-            { pkgs, ... }:
-            {
-              environment.systemPackages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
-                codex
-              ];
-            }
-          )
-          (
-            { pkgs, ... }:
-            {
-              environment.systemPackages = [
-                inputs.codex-desktop-linux.packages.${pkgs.stdenv.hostPlatform.system}.codex-desktop
-              ];
-            }
-          )
           ./machines/desktop/configuration.nix
           # Use nixos-facter instead of nixos-generate-config
           { hardware.facter.reportPath = ./machines/desktop/facter.json; }

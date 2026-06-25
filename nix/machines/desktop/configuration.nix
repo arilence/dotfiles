@@ -17,6 +17,7 @@ in
 
     ./apps/android.nix
     ./apps/appimage.nix
+    ./apps/codex.nix
     ./apps/godot.nix
     ./apps/heroic.nix
     ./apps/kitty.nix
