@@ -15,6 +15,7 @@
     # plugin prerequisites
     gcc
     ripgrep
+    sops
     tree-sitter
   ];
 

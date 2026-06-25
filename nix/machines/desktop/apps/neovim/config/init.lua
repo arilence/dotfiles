@@ -17,6 +17,12 @@ vim.pack.add({
 
   -- Collection of QoL Plugins
   "git@github.com:folke/snacks.nvim",
+
+  -- Encrypt/Decrypt files using SOPS
+  {
+    src = "git@github.com:arilence/sops.nvim",
+    version = "feature/add-bin-filetype",
+  },
 })
 
 -----
@@ -106,6 +112,10 @@ require('snacks').setup({
     }
   },
 })
+
+-----
+-- Encrypt/Decrypt files using SOPS
+require("sops").setup({})
 
 -----
 -- Syntax Highlighting
