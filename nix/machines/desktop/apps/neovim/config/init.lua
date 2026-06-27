@@ -119,6 +119,16 @@ require("sops").setup({})
 
 -----
 -- Syntax Highlighting
-require("nvim-treesitter.configs").setup({
-  highlight = { enable = true },
+-- nvim-treesitter is deprecated, which means this won't work: require('nvim-treesitter.configs').setup()
+-- This is apparently a workaround that seems to work on nvim 0.12
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function(event)
+    local filetype = vim.bo[event.buf].filetype
+    local language = vim.treesitter.language.get_lang(filetype)
+
+    if language and vim.treesitter.language.add(language) then
+      vim.treesitter.start(event.buf, language)
+    end
+  end,
 })

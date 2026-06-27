@@ -170,12 +170,12 @@ in
   i18n.defaultLocale = "en_CA.UTF-8";
 
   # Disable hibernation
-  systemd.sleep.extraConfig = ''
-    AllowSuspend=no
-    AllowHibernation=no
-    AllowHybridSleep=no
-    AllowSuspendThenHibernate=no
-  '';
+  systemd.sleep.settings.Sleep = {
+    AllowSuspend = false;
+    AllowHibernation = false;
+    AllowHybridSleep = false;
+    AllowSuspendThenHibernate = false;
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -474,7 +474,7 @@ in
 
   environment.systemPackages = with pkgs; [
     # CLI Tools
-    nixfmt-rfc-style
+    nixfmt
     inotify-tools
     eza
     fd
@@ -508,7 +508,7 @@ in
     localsend # android airdrop
     bruno # rest api client
     itch # itch.io desktop client
-    pureref # reference image organizer
+    # pureref # reference image organizer (broken on nixos 26.05)
     ludusavi # game save backup tool
     apotris # homebrew tetris game
     (obsidian.override {
@@ -604,6 +604,7 @@ in
         xdg.userDirs = {
           enable = true;
           createDirectories = true;
+          setSessionVariables = false;
         };
         # This makes them show up in the sidebar of the Nautilus file manager.
         xdg.configFile."gtk-3.0/bookmarks".force = true;
@@ -634,7 +635,7 @@ in
           # default values is being deprecated
           enableDefaultConfig = false;
           # this is the current value of what enableDefaultConfig does
-          matchBlocks."*" = {
+          settings."*" = {
             forwardAgent = false;
             addKeysToAgent = "no";
             compression = false;

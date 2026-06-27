@@ -22,12 +22,13 @@
   home-manager.users.anthony.programs.neovim = {
     enable = true;
     defaultEditor = true;
+    withRuby = true;
+    withPython3 = true;
     plugins = with pkgs.vimPlugins; [
       smart-splits-nvim
-      nvim-treesitter
       nvim-treesitter.withAllGrammars
     ];
-    extraLuaConfig = ''
+    initLua = ''
       ${builtins.readFile ./config/init.lua}
       ${builtins.readFile ./config/options.lua}
       ${builtins.readFile ./config/keymaps.lua}
