@@ -4,6 +4,7 @@
 # Mise Task Flags:
 #USAGE arg "<dir>" help="Name of directory where the nix flake is stored. i.e. `desktop`"
 #USAGE arg "[hostname]" help="Optional remote server's IP address or domain name. If omitted, rebuilds locally"
+#USAGE flag "-b --boot" help="Make the configuration the default for the next boot without activating it"
 
 set -euo pipefail
 
@@ -27,7 +28,12 @@ else
   BUILD_TARGET="local machine"
 fi
 
-echo "Deploying NixOS configuration to ${BUILD_TARGET}..."
+REBUILD_ACTION="switch"
+if [[ "${usage_boot:-false}" == "true" ]]; then
+  REBUILD_ACTION="boot"
+fi
+
+echo "Running nixos-rebuild ${REBUILD_ACTION} for ${BUILD_TARGET}..."
 
 COMMAND_PREFIX="nix run nixpkgs#nixos-rebuild --"
 if command -v nixos-rebuild >/dev/null 2>&1; then
@@ -37,19 +43,23 @@ fi
 # Build the command arguments based on local vs remote build
 if [[ "${IS_LOCAL_BUILD}" == "true" ]]; then
   ${COMMAND_PREFIX} \
-    switch \
+    "${REBUILD_ACTION}" \
     --flake "${FLAKE_DIR}#${usage_dir?}" \
     --sudo \
     --ask-sudo-password
 else
   ${COMMAND_PREFIX} \
-    switch \
+    "${REBUILD_ACTION}" \
     --flake "${FLAKE_DIR}#${usage_dir?}" \
     --target-host "anthony@${usage_hostname}" \
     --use-remote-sudo \
     --ask-sudo-password
 fi
 
-echo "Successfully deployed to ${BUILD_TARGET}"
-echo "You may need to manually reboot to apply all changes"
-
+if [[ "${REBUILD_ACTION}" == "boot" ]]; then
+  echo "Successfully made the new configuration the default for the next boot on ${BUILD_TARGET}"
+  echo "Reboot ${BUILD_TARGET} to activate it"
+else
+  echo "Successfully deployed to ${BUILD_TARGET}"
+  echo "You may need to manually reboot to apply all changes"
+fi
