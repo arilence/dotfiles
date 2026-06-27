@@ -481,7 +481,6 @@ in
     starship
     wl-clipboard
     cliphist
-    ydotool # for most STT tools
     fzf
     ripgrep
     dig # nslookup successor
@@ -571,9 +570,6 @@ in
 
   programs.steam.enable = true;
   programs.steam.protontricks.enable = true;
-
-  # For STT like OpenWhispr
-  programs.ydotool.enable = true;
 
   ## End Programs Section ##
 
