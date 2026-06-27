@@ -489,7 +489,8 @@ in
     # Gui Apps
     gnomeExtensions.appindicator # adds system tray icons to gnome
     gnomeExtensions.dash-to-dock
-    kopia-ui
+    kopia-ui # requires ludusavi
+    ludusavi # game save backup tool, required by kopia
     awscli2 # for managing s3 server
     versitygw # also for s3 server
     cryptomator
@@ -508,7 +509,6 @@ in
     bruno # rest api client
     itch # itch.io desktop client
     # pureref # reference image organizer (broken on nixos 26.05)
-    ludusavi # game save backup tool
     apotris # homebrew tetris game
     (obsidian.override {
       # Fixes rendering/performance issues by forcing Wayland
