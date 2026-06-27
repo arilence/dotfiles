@@ -9,12 +9,13 @@ let
   # GTX 1060 is Pascal/GP10x. NVIDIA's 580 legacy series is the last Linux
   # branch that supports Pascal, so pin the newest patched 580 driver instead
   # of following the moving `latest` alias into an unsupported branch.
+  # Run `mise run nvidia-hashes <version>` to get the hashes for the new version.
   latestPascalDriver = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-    version = "580.159.03";
-    sha256_64bit = "sha256-MshdmbD2QMlQH2GzndrSCP0CiNAVxPvF/QQ1wHeD+nc=";
-    openSha256 = "sha256-HlGJyfcmXWqKJw1NRjp35clLucQtCIWAxjJvicgI4zM=";
-    settingsSha256 = "sha256-kP3J87uUVPOOJHmTdRNm4+GdIyniZYrtgehrYSXcX9A=";
-    persistencedSha256 = "sha256-cQ+qz4aSYeonKviufdQOHo0quun8yPBTSgOvRkdN6og=";
+    version = "580.173.02";
+    sha256_64bit = "sha256-jY65AB4FqaimY9PV0wT+tk7yhE7hhczf2VJ4aCD0bhs=";
+    openSha256 = "sha256-lhloZdf6XbaAFTZBF1DxE0Nv9VC6obY8UPf0VyfVepE=";
+    settingsSha256 = "sha256-dfdu/3tnwHUfP7WoeQFNOMalMlpmUWjeMDIOnu+yi8E=";
+    persistencedSha256 = "sha256-j8YM1w231X+JIP3c3TpUNurEBumEu1stVjzFGWu1JXE=";
   };
 in
 {
