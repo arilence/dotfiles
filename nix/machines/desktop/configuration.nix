@@ -10,6 +10,17 @@ let
   # Only used for home-manager. The global nixos `config` gets shadowed by home-manager's `config`.
   # This is available to access the global value while nested inside of home-manager.
   nixosConfig = config;
+
+  prismLauncherWithExtraJdks =
+    extraJdks:
+    pkgs.prismlauncher.overrideAttrs (oldAttrs: {
+      # Preserve Prism Launcher's default JDKs and add the requested ones to its search path.
+      qtWrapperArgs =
+        oldAttrs.qtWrapperArgs
+        ++ lib.optionals (extraJdks != [ ]) [
+          "--prefix PRISMLAUNCHER_JAVA_PATHS : ${lib.makeSearchPath "bin/java" extraJdks}"
+        ];
+    });
 in
 {
   imports = [
@@ -532,17 +543,10 @@ in
         "--ignore-gpu-blocklist"
       ];
     })
-    (prismlauncher.override (default: {
-      # According to the wiki, Prism Launcher already comes with JDK 8, 17, and 21
-      # Is there a way to only provide the ones we want in addition to that?
-      # Rather than having to list all of them.
-      jdks = [
-        pkgs.jdk8
-        pkgs.jdk17
-        pkgs.jdk21
-        pkgs.jdk25
-      ];
-    }))
+    (prismLauncherWithExtraJdks [
+      # Add JDK packages not already included by Prism Launcher here.
+      # pkgs.jdk11
+    ])
   ];
 
   # This also needs to be set as the user's default shell in the user section
