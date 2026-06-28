@@ -520,7 +520,6 @@ in
     bruno # rest api client
     itch # itch.io desktop client
     # pureref # reference image organizer (broken on nixos 26.05)
-    apotris # homebrew tetris game
     (obsidian.override {
       # Fixes rendering/performance issues by forcing Wayland
       commandLineArgs = lib.concatStringsSep " " [
