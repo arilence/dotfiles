@@ -22,7 +22,7 @@ vim.pack.add({
   -- Encrypt/Decrypt files using SOPS
   {
     src = "git@github.com:arilence/sops.nvim",
-    version = "feature/add-bin-filetype",
+    version = "fork",
   },
 })
 
@@ -113,10 +113,6 @@ require('snacks').setup({
     }
   },
 })
-
------
--- Encrypt/Decrypt files using SOPS
-require("sops").setup({})
 
 -----
 -- Syntax Highlighting
