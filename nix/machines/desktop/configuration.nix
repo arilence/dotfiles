@@ -593,7 +593,6 @@ in
       {
         imports = [
           inputs.zen-browser.homeModules.beta
-          ./dotfiles.nix
         ];
 
         # This should probably be set to the same version as the NixOS release
@@ -619,6 +618,49 @@ in
             "smb://10.0.10.10/files/ NAS Files"
             "smb://10.0.10.10/media/ NAS Media"
           ];
+        };
+
+        editorconfig = {
+          enable = true;
+          settings = {
+            "*" = {
+              charset = "utf-8";
+              end_of_line = "lf";
+              indent_size = 2;
+              indent_style = "space";
+              insert_final_newline = true;
+              trim_trailing_whitespace = true;
+            };
+
+            "Makefile" = {
+              indent_style = "tab";
+            };
+
+            "*.rs" = {
+              charset = "utf-8";
+              end_of_line = "lf";
+              indent_size = 4;
+              indent_style = "space";
+              insert_final_newline = true;
+              max_line_length = 100;
+              trim_trailing_whitespace = true;
+            };
+
+            "*.{ex,exs,heex,eex,leex}" = {
+              indent_size = 2;
+              indent_style = "space";
+            };
+
+            "*.yml" = {
+              indent_size = 2;
+              indent_style = "space";
+            };
+
+            "*.{md,markdown,txt}" = {
+              indent_style = "space";
+              trim_trailing_whitespace = false;
+            };
+          };
         };
 
         programs.ssh = {
