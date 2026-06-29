@@ -67,6 +67,9 @@ vim.lsp.enable('rust_analyzer')
 -- Godot Engine
 vim.lsp.enable('gdscript')
 
+-- Go Lang
+vim.lsp.enable('gopls')
+
 -- Typescript
 vim.lsp.enable('ts_ls')
 
