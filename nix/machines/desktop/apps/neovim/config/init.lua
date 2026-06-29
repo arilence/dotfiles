@@ -10,6 +10,7 @@ vim.pack.add({
   "git@github.com:neovim/nvim-lspconfig",
 
   -- Code Completion
+  "git@github.com:saghen/blink.lib",
   "git@github.com:saghen/blink.cmp",
 
   -- Better code commenting
