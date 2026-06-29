@@ -1,5 +1,2 @@
-[tools]
-"aqua:getsops/sops" = "3.11.0"
-
 [env]
 NIX_CONFIG = "extra-experimental-features = nix-command flakes"

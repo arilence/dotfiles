@@ -1,7 +1,0 @@
-[submodule "dotbot"]
-	path = dotbot
-	url = https://github.com/anishathalye/dotbot
-	ignore = dirty
-[submodule "dotbot-crossplatform"]
-	path = dotbot-crossplatform
-	url = git@github.com:msdrigg/dotbot-crossplatform.git
