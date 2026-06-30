@@ -36,6 +36,7 @@ in
     ./apps/neovim
     ./apps/pia.nix
     ./apps/vscode.nix
+    ./apps/wsf.nix
     ./apps/zed-editor.nix
     ./apps/zmx.nix
     ./dev/elixir.nix
