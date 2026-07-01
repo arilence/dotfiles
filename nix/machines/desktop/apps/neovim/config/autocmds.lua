@@ -52,6 +52,22 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Wrap comments while they are being typed. Respect filetype-specific widths
+-- (for example, 72 for git commits) and use 100 as the fallback.
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("comment_wrapping"),
+  pattern = "*",
+  callback = function()
+    if vim.bo.textwidth == 0 then
+      vim.opt_local.textwidth = 100
+      vim.opt_local.formatoptions:remove("t")
+      vim.opt_local.formatoptions:remove("a")
+    end
+
+    vim.opt_local.formatoptions:append("cqj")
+  end,
+})
+
 -- LSP format on save
 -- Credit: https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
 vim.api.nvim_create_autocmd("LspAttach", {
