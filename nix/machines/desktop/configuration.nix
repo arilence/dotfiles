@@ -358,6 +358,9 @@ in
             "codex-desktop.desktop"
           ];
         };
+        "org/gnome/shell/window-switcher" = {
+          current-workspace-only = false;
+        };
         "org/gnome/desktop/session" = {
           idle-delay = lib.gvariant.mkUint32 0; # Disable screen timeout
         };
