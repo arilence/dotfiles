@@ -105,6 +105,13 @@ require('snacks').setup({
   picker = {
     enabled = true,
     sources = {
+      files = {
+        -- Some config files start with a dot which counts as a hidden file.
+        -- However, I want to see files like `.sops.yaml` or `.mise.toml`
+        -- .git is excluded by default.
+        hidden = true,
+        ignored = false
+      },
       explorer = {
         layout = {
           cycle = false,
