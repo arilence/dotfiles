@@ -766,6 +766,10 @@ in
           enableZshIntegration = true;
           settings = {
             promptToReturnFromSubprocess = false;
+            gui = {
+              mainPanelSplitMode = "horizontal";
+              sidePanelWidth = 0.3;
+            };
           };
         };
 
