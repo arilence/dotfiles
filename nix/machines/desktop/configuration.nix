@@ -887,6 +887,9 @@ in
             rebase.autoSquash = true;
             rebase.autoStash = true;
             rebase.updateRefs = true;
+            # Lets you typo `git git git status`, it'll recursively fix itself to `git status`
+            # From: https://caiustheory.com/git-git-git-git-git/
+            alias."git" = "!exec git";
             # TODO: this breaks installing packages through rust cargo
             url."git@github.com:".insteadOf = [
               "https://github.com/"
