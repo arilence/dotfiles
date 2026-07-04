@@ -413,11 +413,11 @@ in
         "org/gnome/desktop/background" = {
           color-shading-type = "solid";
           picture-options = "zoom";
-          picture-uri = "file:///home/anthony/Pictures/Wallpapers/eric-sloane-connecticut-spring.jpg";
-          picture-uri-dark = "file:///home/anthony/Pictures/Wallpapers/eric-sloane-connecticut-spring.jpg";
+          picture-uri = "file:///home/anthony/Pictures/Dotfiles-Photos/wallpaper.jpg";
+          picture-uri-dark = "file:///home/anthony/Pictures/Dotfiles-Photos/wallpaper.jpg";
         };
         "org/gnome/desktop/screensaver" = {
-          picture-uri = "file:///home/anthony/Pictures/Wallpapers/eric-sloane-connecticut-spring.jpg";
+          picture-uri = "file:///home/anthony/Pictures/Dotfiles-Photos/wallpaper.jpg";
         };
 
         # Keybindings
@@ -608,6 +608,10 @@ in
 
         # This should probably be set to the same version as the NixOS release
         home.stateVersion = "25.11";
+
+        # Account picture shown by GDM on the login screen.
+        home.file.".face".source =
+          config.lib.file.mkOutOfStoreSymlink "/home/anthony/Pictures/Dotfiles-Photos/avatar.jpg";
 
         # Creates home directories like Desktop, Document, Downloads, Pictures, etc.
         xdg.userDirs = {
