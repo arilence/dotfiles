@@ -727,7 +727,15 @@ in
           enable = true;
           enableZshIntegration = true;
           flags = [ "--disable-up-arrow" ];
+          settings = {
+            auto_sync = true;
+            enter_accept = true;
+            sync_frequency = "1h";
+            sync_address = "https://atuin.home.arilence.com";
+            sync.records = true;
+          };
         };
+        xdg.configFile."atuin/config.toml".force = lib.mkForce true;
 
         programs.ghostty = {
           enable = true;
