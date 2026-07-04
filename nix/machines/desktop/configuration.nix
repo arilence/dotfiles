@@ -104,15 +104,17 @@ in
       "boot.shell_on_fail"
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
-      # Enable zswap, compresses pages inside of ram
+      # Keep swapped pages compressed in RAM where possible to reduce disk I/O.
       "zswap.enabled=1"
-      "zswap.compressor=lz4" # lz4 potentially has less CPU overhead that zstd
+      "zswap.compressor=zstd"
       "zswap.max_pool_percent=20" # maximum percentage of RAM that zswap is allowed to use
-      "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
+      # Do not proactively evict cold zswap pages to the disk-backed swapfile.
+      "zswap.shrinker_enabled=0"
     ];
 
     kernel.sysctl = {
-      "vm.swappiness" = 35;
+      # Prefer reclaiming filesystem cache before swapping anonymous memory.
+      "vm.swappiness" = 10;
     };
 
     loader = {
