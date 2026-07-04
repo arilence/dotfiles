@@ -96,6 +96,9 @@ require('Comment').setup()
 -----
 -- Collection of QoL Plugins
 require('snacks').setup({
+  scroll = {
+    enabled = true,
+  },
   explorer = {
     enabled = true,
     auto_close = true,
@@ -120,6 +123,22 @@ require('snacks').setup({
           }
         }
       }
+    },
+    actions = {
+      clear_input = function(picker)
+        picker.input:set("", "")
+      end,
+    },
+    win = {
+      input = {
+        keys = {
+          ["<C-u>"] = {
+            "clear_input",
+            mode = { "i", "n" },
+            desc = "Clear search",
+          },
+        },
+      },
     }
   },
 })
