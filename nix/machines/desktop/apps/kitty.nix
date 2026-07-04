@@ -41,6 +41,7 @@ in
         initial_window_height = "40c";
         listen_on = "unix:@mykitty";
         text_composition_strategy = "1.0 10";
+        touch_scroll_multiplier = "2.85";
       };
 
       keybindings = {
