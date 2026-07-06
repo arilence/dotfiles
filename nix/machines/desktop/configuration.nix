@@ -33,6 +33,7 @@ in
     ./apps/heroic.nix
     ./apps/kitty.nix
     ./apps/mise.nix
+    ./apps/moonlight.nix
     ./apps/neovim
     ./apps/pia.nix
     ./apps/vscode.nix
@@ -518,7 +519,6 @@ in
     cryptomator
     spotify
     feishin
-    moonlight-qt
     code-cursor
     jetbrains.idea
     ghostty
