@@ -921,10 +921,25 @@ in
           };
         };
 
+        programs.jujutsu = {
+          enable = true;
+          settings = {
+            # Lets you typo `jj jj jj status`, it'll recursively fix itself to `jj status`
+            # From: https://caiustheory.com/jj-jj-jj-jj-jj/
+            aliases.jj = [
+              "util"
+              "exec"
+              "--"
+              "jj"
+            ];
+          };
+        };
+
         # "Better" Git diff viewer
         programs.delta = {
           enable = true;
           enableGitIntegration = true;
+          enableJujutsuIntegration = true;
           options = {
             line-numbers = true;
             hyperlinks = true;
