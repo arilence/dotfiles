@@ -121,6 +121,17 @@ require('snacks').setup({
           layout = {
             position = "right"
           }
+        },
+        win = {
+          list = {
+            keys = {
+              -- Snacks overwrites the Ctrl-H keybind
+              -- This restores functionality to use smart-splits.nvim
+              ["<C-h>"] = function()
+                vim.cmd("wincmd h")
+              end,
+            },
+          },
         }
       }
     },
