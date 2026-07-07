@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   ...
 }:
@@ -78,7 +79,34 @@ in
         map --when-focus-on var:IS_NVIM alt+j
         map --when-focus-on var:IS_NVIM alt+k
         map --when-focus-on var:IS_NVIM alt+l
+
+        # Let Atuin handle list navigation when its TUI is open.
+        map --when-focus-on var:IS_ATUIN ctrl+j
+        map --when-focus-on var:IS_ATUIN ctrl+k
       '';
     };
+
+    # Atuin uses Ctrl+J/Ctrl+K for list navigation, but those keys are also Kitty
+    # split navigation bindings. While Atuin's TUI is open, set a Kitty user var
+    # so the conditional maps above pass those keys through to Atuin.
+    programs.zsh.initContent = lib.mkOrder 1300 ''
+      if (( $+functions[__atuin_search_cmd] )); then
+        functions -c __atuin_search_cmd __atuin_search_cmd_without_kitty_var
+
+        __atuin_search_cmd() {
+          if [[ -n "$KITTY_WINDOW_ID" ]]; then
+            printf '\033]1337;SetUserVar=IS_ATUIN=MQ==\007' > /dev/tty
+          fi
+
+          {
+            __atuin_search_cmd_without_kitty_var "$@"
+          } always {
+            if [[ -n "$KITTY_WINDOW_ID" ]]; then
+              printf '\033]1337;SetUserVar=IS_ATUIN\007' > /dev/tty
+            fi
+          }
+        }
+      fi
+    '';
   };
 }
