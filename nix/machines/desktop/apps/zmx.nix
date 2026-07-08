@@ -49,8 +49,10 @@
           output=$({ [[ -n "$display" ]] && printf '%s\n' "$display"; } | fzf \
             --print-query \
             --expect=ctrl-n \
-            --height=80% \
-            --reverse \
+            --layout=default \
+            --border=rounded \
+            --margin=8%,10% \
+            --padding=1,2 \
             --prompt="zmx> " \
             --header="Enter: select | Ctrl-N: create new" \
             --preview='zmx history {1}' \
