@@ -35,7 +35,7 @@ in
         clear_all_shortcuts = true;
         cursor_shape = "block";
         disable_ligatures = "always";
-        enabled_layouts = "splits";
+        enabled_layouts = "splits,stack";
         inactive_text_alpha = "1.0";
         remember_window_size = false;
         initial_window_width = "120c";
@@ -53,6 +53,7 @@ in
         "shift+insert" = "paste_from_clipboard";
         "ctrl+shift+backslash" = "launch --cwd=current --location=vsplit";
         "ctrl+shift+minus" = "launch --cwd=current --location=hsplit";
+        "ctrl+shift+z" = "toggle_layout stack";
         "ctrl+shift+t" = "new_tab_with_cwd";
         "alt+1" = "goto_tab 1";
         "alt+2" = "goto_tab 2";
