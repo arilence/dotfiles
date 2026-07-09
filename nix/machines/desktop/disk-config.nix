@@ -4,7 +4,7 @@
     disk = {
       main = {
         type = "disk";
-        device = lib.mkDefault "/dev/nvme0n1";
+        device = lib.mkDefault "/dev/disk/by-id/nvme-WDS500G3X0C-00SJG0_21045B800563";
         content = {
           type = "gpt";
           partitions = {
