@@ -44,9 +44,7 @@ map("v", "p", 'P')
 
 -- Snacks.nvim - Collection of QoL Plugins
 map('n', '<C-o>', require('snacks').picker.smart, { desc = "Smart Find Files", noremap = true })
-map('n', '<C-S-f>', function()
-  require('snacks').picker.resume('grep')
-end, { desc = "Grep Files", noremap = true })
+map('n', '<C-S-f>', function() require('snacks').picker.resume('grep') end, { desc = "Grep Files", noremap = true })
 map('n', '<C-]>', require('snacks').picker.explorer, { desc = "Toggle file explorer", noremap = true })
 map('n', '<leader>gg', require('snacks').lazygit.open, { desc = "Open Lazygit Popup", noremap = true })
 map('n', '<leader>z', function() require('snacks').zen.zoom() end, { desc = "Toggle split fullscreen", noremap = true })
