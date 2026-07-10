@@ -11,6 +11,9 @@ let
   # This is available to access the global value while nested inside of home-manager.
   nixosConfig = config;
 
+  desktopWallpaper = ../../assets/wallpaper.png;
+  accountAvatar = ../../assets/avatar.png;
+
   prismLauncherWithExtraJdks =
     extraJdks:
     pkgs.prismlauncher.overrideAttrs (oldAttrs: {
@@ -265,10 +268,16 @@ in
     ];
   };
 
-  # Set /storage to world-writable so that the non-root users can access files
   systemd.tmpfiles.rules = [
-    # The value of this is important and needs to match the mountpoint of the secondary drive specified in disk-config.nix
+    # Set /storage to world-writable so that non-root users can access files. The path must match
+    # the secondary drive mountpoint specified in disk-config.nix.
     "d /storage 1777 root root -"
+
+    # Set the account picture used by AccountsService and GDM.
+    # Files must be in PNG format to work apparently...
+    # From: https://discourse.nixos.org/t/setting-the-user-profile-image-under-gnome/36233/10
+    "f+ /var/lib/AccountsService/users/${config.users.users.anthony.name} 0600 root root - [User]\\nIcon=/var/lib/AccountsService/icons/${config.users.users.anthony.name}\\n"
+    "L+ /var/lib/AccountsService/icons/${config.users.users.anthony.name} - - - - ${accountAvatar}"
   ];
 
   services.btrfs.autoScrub = {
@@ -414,16 +423,15 @@ in
           click-action = "focus-minimize-or-appspread";
         };
 
-        # Desktop Wallpaper
-        # TODO: Declaratively set the wallpaper...
+        # Desktop wallpaper
         "org/gnome/desktop/background" = {
           color-shading-type = "solid";
           picture-options = "zoom";
-          picture-uri = "file:///home/anthony/Pictures/Dotfiles-Photos/wallpaper.jpg";
-          picture-uri-dark = "file:///home/anthony/Pictures/Dotfiles-Photos/wallpaper.jpg";
+          picture-uri = "file://${desktopWallpaper}";
+          picture-uri-dark = "file://${desktopWallpaper}";
         };
         "org/gnome/desktop/screensaver" = {
-          picture-uri = "file:///home/anthony/Pictures/Dotfiles-Photos/wallpaper.jpg";
+          picture-uri = "file://${desktopWallpaper}";
         };
 
         # Keybindings
@@ -613,10 +621,6 @@ in
 
         # This should probably be set to the same version as the NixOS release
         home.stateVersion = "25.11";
-
-        # Account picture shown by GDM on the login screen.
-        home.file.".face".source =
-          config.lib.file.mkOutOfStoreSymlink "/home/anthony/Pictures/Dotfiles-Photos/avatar.jpg";
 
         # Creates home directories like Desktop, Document, Downloads, Pictures, etc.
         xdg.userDirs = {
