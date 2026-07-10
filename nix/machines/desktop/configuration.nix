@@ -204,6 +204,7 @@ in
   services.xserver.xkb = {
     layout = "us";
     variant = "";
+    options = "ctrl:nocaps";
   };
 
   # Enable CUPS to print documents.
@@ -372,6 +373,9 @@ in
           enable-hot-corners = false;
           clock-show-date = true;
           clock-show-weekday = true;
+        };
+        "org/gnome/desktop/input-sources" = {
+          xkb-options = [ "ctrl:nocaps" ];
         };
         "org/gnome/desktop/peripherals/mouse" = {
           accel-profile = "flat";
