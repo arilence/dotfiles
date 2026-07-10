@@ -2,7 +2,7 @@
 # Deploy NixOS flake changes to a remote host or local machine using nixos-rebuild
 #
 # Mise Task Flags:
-#USAGE arg "<dir>" help="Name of directory where the nix flake is stored. i.e. `desktop`"
+#USAGE arg "<host>" help="Name of the NixOS host configuration. i.e. `desktop`"
 #USAGE arg "[hostname]" help="Optional remote server's IP address or domain name. If omitted, rebuilds locally"
 #USAGE flag "-b --boot" help="Make the configuration the default for the next boot without activating it"
 
@@ -14,10 +14,10 @@ set -euo pipefail
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "${SCRIPT_DIR}/lib.sh"
 
-validate_host_dir "${usage_dir?}"
+validate_host "${usage_host?}"
 require_commands nix
 
-FLAKE_DIR="./nix"
+FLAKE_DIR="$(project_root)"
 
 # Determine if this is a local or remote build
 if [[ -n "${usage_hostname:-}" ]]; then
@@ -44,13 +44,13 @@ fi
 if [[ "${IS_LOCAL_BUILD}" == "true" ]]; then
   ${COMMAND_PREFIX} \
     "${REBUILD_ACTION}" \
-    --flake "${FLAKE_DIR}#${usage_dir?}" \
+    --flake "${FLAKE_DIR}#${usage_host?}" \
     --sudo \
     --ask-sudo-password
 else
   ${COMMAND_PREFIX} \
     "${REBUILD_ACTION}" \
-    --flake "${FLAKE_DIR}#${usage_dir?}" \
+    --flake "${FLAKE_DIR}#${usage_host?}" \
     --target-host "anthony@${usage_hostname}" \
     --use-remote-sudo \
     --ask-sudo-password

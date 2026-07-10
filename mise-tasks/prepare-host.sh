@@ -4,9 +4,9 @@
 # WARNING: This is a destructive operation that will wipe the target host!
 #
 # Mise Task Flags:
-#USAGE arg "<dir>" help="Name of directory where the nix flake is stored. i.e. `desktop`"
+#USAGE arg "<host>" help="Name of the NixOS host configuration. i.e. `desktop`"
 #USAGE arg "<hostname>" help="Remote server's IP address or domain name"
-#USAGE option "-u --user" help="Remote user on the target host" default="nixos"
+#USAGE flag "-u --user <user>" help="Remote user on the target host" default="nixos"
 
 set -euo pipefail
 
@@ -16,10 +16,10 @@ set -euo pipefail
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "${SCRIPT_DIR}/lib.sh"
 
-validate_host_dir "${usage_dir?}"
+validate_host "${usage_host?}"
 require_commands op nix ssh-keygen
 
-FLAKE_DIR="./nix"
+FLAKE_DIR="$(project_root)"
 
 echo "Setting up ssh private key"
 
@@ -44,7 +44,7 @@ install -d -m700 "$temp_luks/tmp"
 
 # This *should* fail if the user denies the read request
 echo "Reading SSH private key from 1Password..."
-op_output_ssh=$(op read "op://Personal/${usage_dir?}/private key?ssh-format=openssh")
+op_output_ssh=$(op read "op://Personal/${usage_host?}/private key?ssh-format=openssh")
 if [[ -z "$op_output_ssh" ]]; then
   echo "Error: Failed to read SSH private key from 1Password" >&2
   exit 1
@@ -58,7 +58,7 @@ chmod 600 "$temp_etc/etc/ssh/ssh_host_ed25519_key"
 
 # TODO: Create a function to read a secret from 1Password
 echo "Reading LUKS passphrase from 1Password..."
-op_output_luks=$(op read "op://Personal/${usage_dir?}/luks passphrase")
+op_output_luks=$(op read "op://Personal/${usage_host?}/luks passphrase")
 if [[ -z "$op_output_luks" ]]; then
   echo "Error: Failed to read LUKS passphrase from 1Password" >&2
   exit 1
@@ -72,7 +72,7 @@ nix run \
   github:nix-community/nixos-anywhere -- \
   --extra-files "$temp_etc" \
   --disk-encryption-keys /tmp/luks-passphrase "$temp_luks/tmp/luks-passphrase" \
-  --flake "${FLAKE_DIR}#${usage_dir?}" \
+  --flake "${FLAKE_DIR}#${usage_host?}" \
   --target-host "${usage_user}@${usage_hostname?}"
 
 echo "Removing old host from known_hosts for ${usage_hostname?}"

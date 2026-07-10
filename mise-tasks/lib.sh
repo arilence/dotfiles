@@ -2,20 +2,37 @@
 
 set -euo pipefail
 
-# Validate that a host directory exists and contains a flake.nix
-# Arguments: $1 = host_dir name
-validate_host_dir() {
-  local host_dir="$1"
-  local flake_dir="./nix"
-  local machine_dir="${flake_dir}/machines/${host_dir}"
+# Return the repository root. Mise provides MISE_PROJECT_ROOT; when the script is
+# run directly, fall back to the parent directory of mise-tasks.
+project_root() {
+  if [[ -n "${MISE_PROJECT_ROOT:-}" ]]; then
+    echo "${MISE_PROJECT_ROOT}"
+  else
+    cd "${SCRIPT_DIR}/.." && pwd
+  fi
+}
 
-  if [[ ! -f "$flake_dir/flake.nix" ]]; then
-    echo "Error: No flake.nix found in '$flake_dir'" >&2
+# Validate that a host exists in nix/machines and can be referenced from the root flake.
+# Arguments: $1 = host name
+validate_host() {
+  local host="$1"
+  local root
+  root="$(project_root)"
+  local host_dir="${root}/nix/machines/${host}"
+  local root_flake="${root}/flake.nix"
+
+  if [[ ! -f "$root_flake" ]]; then
+    echo "Error: Root flake '$root_flake' does not exist" >&2
     exit 1
   fi
 
-  if [[ ! -d "$machine_dir" ]]; then
-    echo "Error: Host directory '$flake_dir' does not exist" >&2
+  if [[ ! -d "$host_dir" ]]; then
+    echo "Error: Host directory '$host_dir' does not exist" >&2
+    exit 1
+  fi
+
+  if [[ ! -f "$host_dir/configuration.nix" ]]; then
+    echo "Error: No configuration.nix found in '$host_dir'" >&2
     exit 1
   fi
 }
@@ -30,4 +47,3 @@ require_commands() {
     fi
   done
 }
-

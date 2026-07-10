@@ -54,37 +54,39 @@
       ...
     }@inputs:
     {
-      nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          {
-            # Provides nixpkgs-unstable if needed for specific apps
-            # i.e. can now use "pkgs.package" or "pkgs.unstable.package"
-            nixpkgs.overlays = [
-              (final: prev: {
-                unstable = import nixpkgs-unstable {
-                  inherit (final) config;
-                  inherit (final.stdenv.hostPlatform) system;
-                };
-              })
-            ];
-          }
-          disko.nixosModules.disko
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          pia.nixosModules.default
-          (
-            { pkgs, ... }:
+      nixosConfigurations = {
+        desktop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
             {
-              nixpkgs.overlays = [ claude-desktop.overlays.default ];
-              environment.systemPackages = [ pkgs.claude-desktop ];
+              # Provides nixpkgs-unstable if needed for specific apps
+              # i.e. can now use "pkgs.package" or "pkgs.unstable.package"
+              nixpkgs.overlays = [
+                (final: prev: {
+                  unstable = import nixpkgs-unstable {
+                    inherit (final) config;
+                    inherit (final.stdenv.hostPlatform) system;
+                  };
+                })
+              ];
             }
-          )
-          ./machines/desktop/configuration.nix
-          # Use nixos-facter instead of nixos-generate-config
-          { hardware.facter.reportPath = ./machines/desktop/facter.json; }
-        ];
+            disko.nixosModules.disko
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            pia.nixosModules.default
+            (
+              { pkgs, ... }:
+              {
+                nixpkgs.overlays = [ claude-desktop.overlays.default ];
+                environment.systemPackages = [ pkgs.claude-desktop ];
+              }
+            )
+            ./nix/machines/desktop/configuration.nix
+            # Use nixos-facter instead of nixos-generate-config
+            { hardware.facter.reportPath = ./nix/machines/desktop/facter.json; }
+          ];
+        };
       };
     };
 }

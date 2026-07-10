@@ -2,7 +2,7 @@
 # Check for issues with NixOS configuration using dry-build
 #
 # Mise Task Flags:
-#USAGE arg "<dir>" help="Name of directory where the nix flake is stored. i.e. `desktop`"
+#USAGE arg "<host>" help="Name of the NixOS host configuration. i.e. `desktop`"
 
 set -euo pipefail
 
@@ -12,12 +12,12 @@ set -euo pipefail
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "${SCRIPT_DIR}/lib.sh"
 
-validate_host_dir "${usage_dir?}"
+validate_host "${usage_host?}"
 require_commands nix
 
-FLAKE_DIR="./nix"
+FLAKE_DIR="$(project_root)"
 
-echo "Testing NixOS configuration for ${usage_dir?}"
+echo "Testing NixOS configuration for ${usage_host?}"
 
 COMMAND_PREFIX="nix run nixpkgs#nixos-rebuild --"
 if command -v nixos-rebuild >/dev/null 2>&1; then
@@ -26,6 +26,6 @@ fi
 
 ${COMMAND_PREFIX} \
   dry-build \
-  --flake "${FLAKE_DIR}#${usage_dir?}"
+  --flake "${FLAKE_DIR}#${usage_host?}"
 
-echo "Configuration test passed for ${usage_dir?}"
+echo "Configuration test passed for ${usage_host?}"
