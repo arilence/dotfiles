@@ -39,6 +39,7 @@ in
     ./apps/moonlight.nix
     ./apps/neovim
     ./apps/pia.nix
+    ./apps/vicinae.nix
     ./apps/vscode.nix
     ./apps/wsf.nix
     ./apps/zmx.nix
@@ -441,7 +442,6 @@ in
         };
         "org/gnome/shell/keybindings" = {
           show-screenshot-ui = [ "<Shift><Super>s" ];
-          toggle-overview = [ "<Alt>space" ];
         };
         "org/gnome/desktop/wm/keybindings" = {
           # Disable default keybindings
