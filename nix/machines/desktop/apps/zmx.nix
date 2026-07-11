@@ -106,6 +106,24 @@
               zmx attach "$session_name"
         }
 
+        dev() {
+          if (( $# != 1 )); then
+            printf 'usage: dev <directory-name>\n' >&2
+            return 2
+          fi
+
+          local name="$1"
+          local cwd
+          cwd=$(zoxide query -- "$name") || {
+            printf 'dev: no directory found for %q\n' "$name" >&2
+            return 1
+          }
+
+          kzmx "$name.vim" "$name.vim" "$cwd"
+          kzmx "$name.zsh" "$name.zsh" "$cwd"
+          kzmx "$name.git" "$name.git" "$cwd"
+        }
+
         # Ask for the zmx session name when a terminal starts.
         if command -v zmx &> /dev/null \
           && command -v fzf &> /dev/null \
