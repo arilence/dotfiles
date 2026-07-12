@@ -399,7 +399,8 @@ in
         "org/gnome/desktop/peripherals/touchpad" = {
           click-method = "fingers";
           speed = 0.19;
-          tap-to-click = false;
+          tap-to-click = true;
+          tap-and-drag = false;
           natural-scroll = true;
         };
         "org/gtk/settings/file-chooser" = {
