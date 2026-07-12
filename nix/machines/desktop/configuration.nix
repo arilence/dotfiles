@@ -228,6 +228,8 @@ in
   users.users.anthony = {
     isNormalUser = true;
     description = "Anthony Smith";
+    # preserve zmx sessions even if I log out of gnome
+    linger = true;
     hashedPasswordFile = config.sops.secrets.user-password.path;
     extraGroups = [
       "networkmanager"
