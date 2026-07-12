@@ -32,6 +32,7 @@ in
     ./apps/android.nix
     ./apps/appimage.nix
     ./apps/codex.nix
+    ./apps/gamemode.nix
     ./apps/godot.nix
     ./apps/heroic.nix
     ./apps/kitty.nix
@@ -597,6 +598,8 @@ in
 
   programs.steam.enable = true;
   programs.steam.protontricks.enable = true;
+
+  programs.gamescope.enable = true;
 
   ## End Programs Section ##
 
