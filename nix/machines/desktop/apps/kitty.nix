@@ -44,6 +44,7 @@ in
         tab_bar_edge = "top";
         text_composition_strategy = "1.0 10";
         touch_scroll_multiplier = "2.85";
+        confirm_os_window_close = 0;
       };
 
       keybindings = {
