@@ -535,6 +535,7 @@ in
     ludusavi # game save backup tool, required by kopia
     awscli2 # for managing s3 server
     versitygw # also for s3 server
+    easyeffects # pipewire realtime effects gui (equalizer, etc)
     cryptomator
     spotify
     feishin
