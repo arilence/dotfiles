@@ -3,6 +3,7 @@
 {
   virtualisation.libvirtd = {
     enable = true;
+    allowedBridges = [ "virbr0" ];
 
     # Enable TPM emulation (for Windows 11)
     qemu = {

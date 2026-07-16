@@ -45,6 +45,7 @@ in
     ./apps/wsf.nix
     ./apps/zmx.nix
     ./dev/elixir.nix
+    ./modules/com-arilence-box-vm-network.nix
     ./modules/nvidia-gpu.nix
     ./modules/scripts.nix
     ./modules/virtual-machines.nix
