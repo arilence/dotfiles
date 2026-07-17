@@ -860,9 +860,19 @@ in
             nix = ''
               if [[ "$1" == "develop" ]]; then
                 shift
+
+                # When commands are explicitly supplied to `nix develop`, don't start zsh.
+                local arg
+                for arg in "$@"; do
+                  if [[ "$arg" == "-c" || "$arg" == "--command" ]]; then
+                    command nix develop "$@"
+                    return
+                  fi
+                done
+
                 local zsh_path=$(which zsh)
-                # We tell nix develop to export the variable AND then exec zsh
-                # Otherwise nix develop starts in zsh but with $SHELL set to bash
+                # We have to set $SHELL before starting zsh or else nix develop starts in zsh but
+                # with the $SHELL set to bash.
                 command nix develop "$@" -c env SHELL="$zsh_path" zsh
               else
                 command nix "$@"
