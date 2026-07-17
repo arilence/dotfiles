@@ -166,9 +166,6 @@ in
   sops.secrets.git-options = {
     mode = "0444";
   };
-  sops.secrets.ssh-extra-config = {
-    mode = "0444";
-  };
   sops.secrets.syncthing-gui-password = {
     mode = "0444";
   };
@@ -705,7 +702,9 @@ in
               IdentityAgent ~/.1password/agent.sock
           '';
           includes = [
-            nixosConfig.sops.secrets.ssh-extra-config.path
+            # 1Password automatically manages host *.pub files to avoid the [Six-Key
+            # Limit](https://www.1password.dev/ssh/agent/advanced#ssh-server-six-key-limit)
+            "~/.ssh/1Password/config"
           ];
           # default values is being deprecated
           enableDefaultConfig = false;
