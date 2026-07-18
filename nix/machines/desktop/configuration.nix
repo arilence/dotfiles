@@ -181,6 +181,8 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
+  # NetworkManager manages DHCP for this interface.
+  networking.interfaces.eno1.useDHCP = false;
   networking.hostName = "anthony-desktop";
 
   # Set your time zone.
