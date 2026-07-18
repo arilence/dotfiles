@@ -85,13 +85,19 @@
         # Swap to it if the name already exists.
         kzmx() {
           if (( $# < 1 || $# > 3 )); then
-            printf 'usage: kzmx <zmx-session> [tab-title] [cwd]\n' >&2
+            printf 'usage: kzmx <zmx-session> [cwd]\n       kzmx <zmx-session> <tab-title> <cwd>\n' >&2
             return 2
           fi
 
           local session_name="$1"
-          local tab_title="''${2:-$session_name}"
-          local cwd="''${3:-$PWD}"
+          local tab_title="$session_name"
+          local cwd="$PWD"
+          if (( $# == 2 )); then
+            cwd="$2"
+          elif (( $# == 3 )); then
+            tab_title="$2"
+            cwd="$3"
+          fi
           local session_id
           session_id=$(printf '%s' "$session_name" | sha256sum | awk '{print $1}')
 
@@ -119,9 +125,9 @@
             return 1
           }
 
-          kzmx "$name.vim" "$name.vim" "$cwd"
-          kzmx "$name.zsh" "$name.zsh" "$cwd"
-          kzmx "$name.git" "$name.git" "$cwd"
+          kzmx "$name.vim" "$cwd"
+          kzmx "$name.zsh" "$cwd"
+          kzmx "$name.git" "$cwd"
         }
 
         # Ask for the zmx session name when a terminal starts.
