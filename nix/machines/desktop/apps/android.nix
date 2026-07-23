@@ -5,12 +5,4 @@
     "kvm" # hardware virtualization for android emulators
     "adbusers" # android debug bridge (ADB)
   ];
-
-  environment.systemPackages = with pkgs; [
-    android-tools
-    android-studio
-  ];
-
-  # for dynamically linked libraries
-  programs.nix-ld.enable = true;
 }

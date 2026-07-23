@@ -33,7 +33,6 @@ in
     ./apps/appimage.nix
     ./apps/codex.nix
     ./apps/gamemode.nix
-    ./apps/godot.nix
     ./apps/heroic.nix
     ./apps/kitty.nix
     ./apps/mise.nix
