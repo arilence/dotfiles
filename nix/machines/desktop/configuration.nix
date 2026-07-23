@@ -376,6 +376,7 @@ in
             "feishin.desktop"
             "kitty.desktop"
             "codex-desktop.desktop"
+            "t3code.desktop"
           ];
         };
         "org/gnome/shell/window-switcher" = {
@@ -547,6 +548,7 @@ in
     todoist-electron
     meld
     bottles
+    nixpkgsUnstable.t3code
     localsend # android airdrop
     bruno # rest api client
     itch # itch.io desktop client
