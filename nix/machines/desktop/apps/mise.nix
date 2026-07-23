@@ -11,7 +11,7 @@
 
   home-manager.users.anthony.programs.mise = {
     enable = true;
-    package = pkgs.unstable.mise;
+    package = pkgs.nixpkgsUnstable.mise;
     enableZshIntegration = true;
     globalConfig = {
       settings = {

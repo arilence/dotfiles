@@ -3,7 +3,13 @@
     # Change the value of nixpkgs.url to set the NixOS version
     # List of available versions: https://channels.nixos.org/
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+
+    # These unstable channels advance independently. nixpkgs-unstable usually
+    # updates more frequently, making it useful for selecting the newest package
+    # versions. nixos-unstable waits for broader NixOS integration testing, making
+    # it the better choice when using unstable as the basis of a complete system.
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -46,6 +52,7 @@
     {
       nixpkgs,
       nixos-unstable,
+      nixpkgs-unstable,
       disko,
       sops-nix,
       home-manager,
@@ -60,11 +67,14 @@
           specialArgs = { inherit inputs; };
           modules = [
             {
-              # Provides nixos-unstable if needed for specific apps
-              # i.e. can now use "pkgs.package" or "pkgs.unstable.package"
+              # Provides both unstable channels for selecting newer app versions.
               nixpkgs.overlays = [
                 (final: prev: {
-                  unstable = import nixos-unstable {
+                  nixosUnstable = import nixos-unstable {
+                    inherit (final) config;
+                    inherit (final.stdenv.hostPlatform) system;
+                  };
+                  nixpkgsUnstable = import nixpkgs-unstable {
                     inherit (final) config;
                     inherit (final.stdenv.hostPlatform) system;
                   };
