@@ -22,6 +22,7 @@ in
 
     programs.kitty = {
       enable = true;
+      package = pkgs.nixpkgsUnstable.kitty;
 
       shellIntegration.enableZshIntegration = true;
 
