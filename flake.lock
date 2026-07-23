@@ -415,7 +415,7 @@
         "type": "github"
       }
     },
-    "nixpkgs-unstable": {
+    "nixos-unstable": {
       "locked": {
         "lastModified": 1782467914,
         "narHash": "sha256-pGvFkM8N0xEkIIXDe5YYfbEAvHrk4IxBrjB/x8OomhE=",
@@ -541,7 +541,7 @@
         "llm-agents": "llm-agents",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs_4",
-        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nixos-unstable": "nixos-unstable",
         "pia": "pia",
         "sops-nix": "sops-nix",
         "wsf": "wsf",
