@@ -13,6 +13,7 @@ let
 
   desktopWallpaper = ../../assets/wallpaper.png;
   accountAvatar = ../../assets/avatar.png;
+  primaryModifier = config.arilence.workstation.keybindings.primaryModifier;
 
   prismLauncherWithExtraJdks =
     extraJdks:
@@ -28,6 +29,8 @@ in
 {
   imports = [
     ../storage/encrypted-btrfs.nix
+
+    ./keybindings.nix
 
     ./apps/appimage.nix
     ./apps/codex.nix
@@ -405,8 +408,8 @@ in
 
         # Keybindings
         "org/gnome/mutter/keybindings" = {
-          toggle-tiled-left = [ "<Control><Alt>h" ];
-          toggle-tiled-right = [ "<Control><Alt>l" ];
+          toggle-tiled-left = [ "<Control><${primaryModifier}>h" ];
+          toggle-tiled-right = [ "<Control><${primaryModifier}>l" ];
         };
         "org/gnome/shell/keybindings" = {
           show-screenshot-ui = [ "<Shift><Super>s" ];
@@ -421,11 +424,17 @@ in
           switch-applications = [ "disable" ];
           switch-applications-backward = [ "disable" ];
           # Customize keybindings
-          maximize = [ "<Control><Alt>k" ];
-          unmaximize = [ "<Control><Alt>j" ];
-          move-to-center = [ "<Control><Alt>space" ];
-          switch-windows = [ "<Alt>Tab" ];
-          switch-windows-backward = [ "<Shift><Alt>Tab" ];
+          maximize = [ "<Control><${primaryModifier}>k" ];
+          unmaximize = [ "<Control><${primaryModifier}>j" ];
+          move-to-center = [ "<Control><${primaryModifier}>space" ];
+          switch-windows = [ "<${primaryModifier}>Tab" ];
+          switch-windows-backward = [ "<Shift><${primaryModifier}>Tab" ];
+        }
+        // lib.optionalAttrs (primaryModifier == "Super") {
+          # Super+Space is GNOME's default input-source switcher. Disable it so
+          # the host-specific Vicinae shortcut can claim the combination.
+          switch-input-source = [ "disable" ];
+          switch-input-source-backward = [ "disable" ];
         };
       };
     }

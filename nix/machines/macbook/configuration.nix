@@ -7,6 +7,7 @@
   ];
 
   arilence.storage.systemDisk = lib.mkDefault "/dev/sda";
+  arilence.workstation.keybindings.primaryModifier = "Super";
 
   powerManagement.cpuFreqGovernor = "schedutil";
 

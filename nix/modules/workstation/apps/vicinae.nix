@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
@@ -21,7 +22,7 @@
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/vicinae" = {
           name = "Toggle Vicinae";
           command = "${pkgs.vicinae}/bin/vicinae toggle";
-          binding = "<Alt>space";
+          binding = "<${config.arilence.workstation.keybindings.primaryModifier}>space";
         };
       };
     }
