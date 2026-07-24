@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   pkgs,
   ...
 }:
@@ -60,5 +59,34 @@ in
 
     # Latest supported branch for the GTX 1060.
     package = latestPascalDriver;
+  };
+
+  # Browser preferences specific to VA-API through the desktop's NVIDIA GPU.
+  home-manager.users.anthony.programs.zen-browser.policies.Preferences = {
+    "media.ffmpeg.vaapi.enabled" = {
+      Value = true;
+      Locked = true;
+    };
+    "media.hardware-video-decoding.force-enabled" = {
+      Value = true;
+      Locked = true;
+    };
+    "media.rdd-ffmpeg.enabled" = {
+      Value = true;
+      Locked = true;
+    };
+    "gfx.x11-egl.force-enabled" = {
+      Value = true;
+      Locked = true;
+    };
+    "widget.dmabuf.force-enabled" = {
+      Value = true;
+      Locked = true;
+    };
+    # The GTX 1060 does not support AV1 decoding.
+    "media.av1.enabled" = {
+      Value = false;
+      Locked = true;
+    };
   };
 }

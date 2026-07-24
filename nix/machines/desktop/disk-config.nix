@@ -1,146 +1,31 @@
 { lib, ... }:
+
 {
-  disko.devices = {
-    disk = {
-      main = {
-        type = "disk";
-        device = lib.mkDefault "/dev/disk/by-id/nvme-WDS500G3X0C-00SJG0_21045B800563";
+  arilence.storage.systemDisk = lib.mkDefault "/dev/disk/by-id/nvme-WDS500G3X0C-00SJG0_21045B800563";
+
+  disko.devices.disk.storage = {
+    type = "disk";
+    device = lib.mkDefault "/dev/disk/by-id/ata-Samsung_SSD_850_PRO_512GB_S39FNX0J804183J";
+    content = {
+      type = "gpt";
+      partitions.luks = {
+        size = "100%";
         content = {
-          type = "gpt";
-          partitions = {
-            ESP = {
-              priority = 1;
-              name = "ESP";
-              start = "1M";
-              end = "1G";
-              type = "EF00";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-                mountOptions = [ "umask=0077" ];
-              };
-            };
-
-            luks = {
-              size = "100%";
-              content = {
-                type = "luks";
-                name = "crypted";
-                passwordFile = "/tmp/luks-passphrase";
-                settings = {
-                  allowDiscards = true;
-                };
-                content = {
-                  type = "btrfs";
-                  extraArgs = [ "-f" ]; # Override existing partition
-
-                  # Subvolumes must set a mountpoint in order to be mounted,
-                  # unless their parent is mounted
-                  subvolumes = {
-                    "@" = {
-                      mountpoint = "/";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                        "space_cache=v2"
-                      ];
-                    };
-
-                    "@data" = {
-                      mountpoint = "/data";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
-
-                    "@home" = {
-                      mountpoint = "/home";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
-
-                    "@nix" = {
-                      mountpoint = "/nix";
-                      mountOptions = [
-                        "noatime"
-                      ];
-                    };
-
-                    # Persist logs during rollback
-                    "@log" = {
-                      mountpoint = "/var/log";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
-
-                    "@snapshots" = {
-                      mountpoint = "/.snapshots";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
-
-                    "@swap" = {
-                      mountpoint = "/.swapvol";
-                      swap = {
-                        swapfile.size = "16G";
-                      };
-                      mountOptions = [
-                        "noatime"
-                        "nodatacow"
-                      ];
-                    };
-                  };
-                };
-              };
-            };
-          };
-        };
-      };
-
-      storage = {
-        type = "disk";
-        device = lib.mkDefault "/dev/disk/by-id/ata-Samsung_SSD_850_PRO_512GB_S39FNX0J804183J";
-        content = {
-          type = "gpt";
-          partitions = {
-            luks = {
-              size = "100%";
-              content = {
-                type = "luks";
-                name = "crypted-storage";
-                passwordFile = "/tmp/luks-passphrase";
-                settings = {
-                  allowDiscards = true;
-                };
-                content = {
-                  type = "btrfs";
-                  extraArgs = [ "-f" ];
-
-                  subvolumes = {
-                    "@storage" = {
-                      # This mountpoint is important as there are some things set in configuration.nix
-                      # with this value hardcoded to it.
-                      mountpoint = "/storage";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                        # prevents blocking boot if disk fails to mount
-                        "nofail"
-                        # make the disk show up in file explorer (nautilus)
-                        "x-gvfs-show"
-                      ];
-                    };
-                  };
-                };
-              };
+          type = "luks";
+          name = "crypted-storage";
+          passwordFile = "/tmp/luks-passphrase";
+          settings.allowDiscards = true;
+          content = {
+            type = "btrfs";
+            extraArgs = [ "-f" ];
+            subvolumes."@storage" = {
+              mountpoint = "/storage";
+              mountOptions = [
+                "compress=zstd"
+                "noatime"
+                "nofail"
+                "x-gvfs-show"
+              ];
             };
           };
         };

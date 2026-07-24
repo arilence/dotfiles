@@ -1,6 +1,7 @@
 keys:
   - &arilence age1e0zs92gq8428g0ypl72d3yqdty30qjfgs8hqjdyc7nz5d22h7c5sy4kxz6
   - &desktop age1aluuq5syjefjhm4237a3zlvwccnp0g56lwy78qy5lz9yn2trmvgstjvgwr
+  - &macbook age1z5cdaqqa35a0xe2rs8j789mmw2vrenlhvac6alewjtw5679scdnqxe20l3
 
 creation_rules:
   - path_regex: nix/machines/desktop/.*\.sops\.(ya?ml|json|env|ini|bin)$
@@ -8,3 +9,8 @@ creation_rules:
     - age:
       - *arilence
       - *desktop
+  - path_regex: nix/machines/macbook/.*\.sops\.(ya?ml|json|env|ini|bin)$
+    key_groups:
+    - age:
+      - *arilence
+      - *macbook

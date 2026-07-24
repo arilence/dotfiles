@@ -17,6 +17,8 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -54,6 +56,7 @@
       nixos-unstable,
       nixpkgs-unstable,
       disko,
+      nixos-hardware,
       sops-nix,
       home-manager,
       pia,
@@ -61,42 +64,57 @@
       ...
     }@inputs:
     {
-      nixosConfigurations = {
-        desktop = nixpkgs.lib.nixosSystem {
+      nixosConfigurations =
+        let
           system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            {
-              # Provides both unstable channels for selecting newer app versions.
-              nixpkgs.overlays = [
-                (final: prev: {
-                  nixosUnstable = import nixos-unstable {
-                    inherit (final) config;
-                    inherit (final.stdenv.hostPlatform) system;
-                  };
-                  nixpkgsUnstable = import nixpkgs-unstable {
-                    inherit (final) config;
-                    inherit (final.stdenv.hostPlatform) system;
-                  };
-                })
-              ];
-            }
-            disko.nixosModules.disko
-            sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
-            pia.nixosModules.default
-            (
-              { pkgs, ... }:
-              {
-                nixpkgs.overlays = [ claude-desktop.overlays.default ];
-                environment.systemPackages = [ pkgs.claude-desktop ];
-              }
-            )
+
+          mkWorkstation =
+            hostModules:
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              specialArgs = { inherit inputs; };
+              modules = [
+                {
+                  # Provides both unstable channels for selecting newer app versions.
+                  nixpkgs.overlays = [
+                    (final: prev: {
+                      nixosUnstable = import nixos-unstable {
+                        inherit (final) config;
+                        inherit (final.stdenv.hostPlatform) system;
+                      };
+                      nixpkgsUnstable = import nixpkgs-unstable {
+                        inherit (final) config;
+                        inherit (final.stdenv.hostPlatform) system;
+                      };
+                    })
+                  ];
+                }
+                disko.nixosModules.disko
+                sops-nix.nixosModules.sops
+                home-manager.nixosModules.home-manager
+                pia.nixosModules.default
+                (
+                  { pkgs, ... }:
+                  {
+                    nixpkgs.overlays = [ claude-desktop.overlays.default ];
+                    environment.systemPackages = [ pkgs.claude-desktop ];
+                  }
+                )
+              ]
+              ++ hostModules;
+            };
+        in
+        {
+          desktop = mkWorkstation [
             ./nix/machines/desktop/configuration.nix
-            # Use nixos-facter instead of nixos-generate-config
+            # Use nixos-facter instead of nixos-generate-config.
             { hardware.facter.reportPath = ./nix/machines/desktop/facter.json; }
           ];
+
+          macbook = mkWorkstation [
+            nixos-hardware.nixosModules.apple-macbook-pro-11-1
+            ./nix/machines/macbook/configuration.nix
+          ];
         };
-      };
     };
 }
