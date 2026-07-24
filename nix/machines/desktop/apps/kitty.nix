@@ -42,7 +42,9 @@ in
         initial_window_width = "120c";
         initial_window_height = "40c";
         listen_on = "unix:@mykitty";
-        tab_bar_edge = "top";
+        tab_bar_edge = "left";
+        tab_title_max_length = 18;
+        tab_bar_margin_height = "0 1";
         text_composition_strategy = "1.0 10";
         touch_scroll_multiplier = "2.85";
         confirm_os_window_close = 0;
