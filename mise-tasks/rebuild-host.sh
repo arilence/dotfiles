@@ -52,7 +52,7 @@ else
     "${REBUILD_ACTION}" \
     --flake "${FLAKE_DIR}#${usage_host?}" \
     --target-host "anthony@${usage_hostname}" \
-    --use-remote-sudo \
+    --sudo \
     --ask-sudo-password
 fi
 
