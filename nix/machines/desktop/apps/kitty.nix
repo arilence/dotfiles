@@ -11,9 +11,32 @@ in
   home-manager.users.anthony = {
     # kitty.themeFile exists but doesn't allow for setting a dark and light theme separately.
     xdg.configFile = {
-      "kitty/dark-theme.auto.conf".source = "${kittyThemes}/Alabaster_Dark.conf";
-      "kitty/light-theme.auto.conf".source = "${kittyThemes}/Alabaster.conf";
-      "kitty/no-preference-theme.auto.conf".source = "${kittyThemes}/Alabaster.conf";
+      "kitty/dark-theme.auto.conf".text = ''
+        include ${kittyThemes}/Alabaster_Dark.conf
+
+        # Make the selected vertical tab the filled, high-contrast item.
+        active_tab_foreground #cecece
+        active_tab_background #323738
+        inactive_tab_foreground #8a8a8a
+        inactive_tab_background #0e1415
+      '';
+      "kitty/light-theme.auto.conf".text = ''
+        include ${kittyThemes}/Alabaster.conf
+
+        # Make the selected vertical tab the filled, high-contrast item.
+        active_tab_foreground #000000
+        active_tab_background #dedede
+        inactive_tab_foreground #666666
+        inactive_tab_background #f7f7f7
+      '';
+      "kitty/no-preference-theme.auto.conf".text = ''
+        include ${kittyThemes}/Alabaster.conf
+
+        active_tab_foreground #000000
+        active_tab_background #dedede
+        inactive_tab_foreground #666666
+        inactive_tab_background #f7f7f7
+      '';
       "kitty/neighboring_window.py".source =
         "${pkgs.vimPlugins.smart-splits-nvim}/kitty/neighboring_window.py";
       "kitty/relative_resize.py".source = "${pkgs.vimPlugins.smart-splits-nvim}/kitty/relative_resize.py";
