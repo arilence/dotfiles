@@ -35,6 +35,7 @@ in
     ./apps/appimage.nix
     ./apps/codex.nix
     ./apps/kitty.nix
+    ./apps/ludusavi.nix
     ./apps/mise.nix
     ./apps/neovim
     ./apps/pia.nix
@@ -495,7 +496,6 @@ in
     gnomeExtensions.appindicator # adds system tray icons to gnome
     gnomeExtensions.dash-to-dock
     kopia-ui # requires ludusavi
-    ludusavi # game save backup tool, required by kopia
     awscli2 # for managing s3 server
     versitygw # also for s3 server
     easyeffects # pipewire realtime effects gui (equalizer, etc)
