@@ -11,6 +11,10 @@ in
   home-manager.users.anthony = {
     # kitty.themeFile exists but doesn't allow for setting a dark and light theme separately.
     xdg.configFile = {
+      "kitty/startup.session".text = ''
+        # Show the zmx selector in the initial shell of a new kitty instance.
+        launch --env ZMX_AUTO_ATTACH=1
+      '';
       "kitty/dark-theme.auto.conf".text = ''
         include ${kittyThemes}/Alabaster_Dark.conf
 
@@ -65,6 +69,7 @@ in
         initial_window_width = "140c";
         initial_window_height = "40c";
         listen_on = "unix:@mykitty";
+        startup_session = "startup.session";
         tab_bar_edge = "left";
         tab_bar_style = "separator";
         tab_title_max_length = 18;
@@ -82,7 +87,8 @@ in
         "ctrl+shift+backslash" = "launch --cwd=current --location=vsplit";
         "ctrl+shift+minus" = "launch --cwd=current --location=hsplit";
         "ctrl+shift+z" = "toggle_layout stack";
-        "ctrl+shift+t" = "new_tab_with_cwd";
+        # Only terminals opened with this shortcut should show the zmx selector.
+        "ctrl+shift+t" = "launch --type=tab --cwd=current --env ZMX_AUTO_ATTACH=1";
         "alt+1" = "goto_tab 1";
         "alt+2" = "goto_tab 2";
         "alt+3" = "goto_tab 3";

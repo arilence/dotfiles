@@ -130,10 +130,10 @@
           kzmx "$name.git" "$cwd"
         }
 
-        # Ask for the zmx session name when a terminal starts.
+        # Ask for the zmx session name only when the terminal explicitly opts in.
         if command -v zmx &> /dev/null \
           && command -v fzf &> /dev/null \
-          && [[ -z "$ZMX_SESSION" && "''${ZMX_AUTO_ATTACH:-1}" != 0 ]]; then
+          && [[ -z "$ZMX_SESSION" && "''${ZMX_AUTO_ATTACH:-0}" == 1 ]]; then
           __zmx_attach_prompt && exit
         fi
       '';
