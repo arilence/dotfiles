@@ -28,16 +28,21 @@
     }
   ];
 
-  home-manager.users.anthony = {
-    programs.vicinae = {
-      enable = true;
-      extensions = [
-        inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}.nix
-      ];
-      systemd = {
+  home-manager.users.anthony =
+    { config, ... }:
+    {
+      programs.vicinae = {
         enable = true;
-        autoStart = true;
+        extensions = [
+          inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}.nix
+          inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}.timer
+          # Add Raycast extensions with:
+          # config.lib.vicinae.mkRayCastExtension
+        ];
+        systemd = {
+          enable = true;
+          autoStart = true;
+        };
       };
     };
-  };
 }
