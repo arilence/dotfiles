@@ -66,6 +66,7 @@ in
         initial_window_height = "40c";
         listen_on = "unix:@mykitty";
         tab_bar_edge = "left";
+        tab_bar_style = "separator";
         tab_title_max_length = 18;
         tab_bar_margin_height = "0 1";
         text_composition_strategy = "1.0 10";
