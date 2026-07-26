@@ -119,13 +119,19 @@ in
         # Let Atuin handle list navigation when its TUI is open.
         map --when-focus-on var:IS_ATUIN ctrl+j
         map --when-focus-on var:IS_ATUIN ctrl+k
+
+        # Let fzf handle list navigation while a selector is open.
+        map --when-focus-on var:IS_FZF ctrl+j
+        map --when-focus-on var:IS_FZF ctrl+k
       '';
     };
 
-    # Atuin uses Ctrl+J/Ctrl+K for list navigation, but those keys are also Kitty
-    # split navigation bindings. While Atuin's TUI is open, set a Kitty user var
-    # so the conditional maps above pass those keys through to Atuin.
+    # Applications like Atuin and fzf use Ctrl+J/Ctrl+K for list navigation, but those keys are also
+    # used for Kitty's split navigation.
+    # Here we're setting up some zsh wrappers to set Kitty user vars to conditionally ignore the
+    # split navigation while these apps are open.
     programs.zsh.initContent = lib.mkOrder 1300 ''
+      # Atuin zsh wrapper to set Kitty user vars to allow Ctrl+J/Ctrl+K for list navigation
       if (( $+functions[__atuin_search_cmd] )); then
         functions -c __atuin_search_cmd __atuin_search_cmd_without_kitty_var
 
@@ -143,6 +149,21 @@ in
           }
         }
       fi
+
+      # fzf zsh wrapper to set Kitty user vars to allow Ctrl+J/Ctrl+K for list navigation
+      fzf() {
+        if [[ -n "$KITTY_WINDOW_ID" ]]; then
+          printf '\033]1337;SetUserVar=IS_FZF=MQ==\007' > /dev/tty
+        fi
+
+        {
+          command fzf "$@"
+        } always {
+          if [[ -n "$KITTY_WINDOW_ID" ]]; then
+            printf '\033]1337;SetUserVar=IS_FZF\007' > /dev/tty
+          fi
+        }
+      }
     '';
   };
 }
