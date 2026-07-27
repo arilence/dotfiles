@@ -3,6 +3,7 @@
 {
   imports = [
     ../../modules/workstation
+    ../../modules/workstation/gnome.nix
     ./hardware.nix
   ];
 

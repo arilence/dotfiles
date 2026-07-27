@@ -7,7 +7,7 @@
 }:
 
 {
-  programs.dconf.profiles.user.databases = [
+  programs.dconf.profiles.user.databases = lib.mkIf config.services.desktopManager.gnome.enable [
     {
       lockAll = true;
       settings = {

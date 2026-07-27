@@ -11,10 +11,6 @@ let
   # This is available to access the global value while nested inside of home-manager.
   nixosConfig = config;
 
-  desktopWallpaper = ../../assets/wallpaper.png;
-  accountAvatar = ../../assets/avatar.png;
-  primaryModifier = config.arilence.workstation.keybindings.primaryModifier;
-
   prismLauncherWithExtraJdks =
     extraJdks:
     pkgs.prismlauncher.overrideAttrs (oldAttrs: {
@@ -169,13 +165,6 @@ in
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -199,7 +188,7 @@ in
   users.users.anthony = {
     isNormalUser = true;
     description = "Anthony Smith";
-    # preserve zmx sessions even if I log out of gnome
+    # Preserve zmx sessions across desktop logouts.
     linger = true;
     hashedPasswordFile = config.sops.secrets.user-password.path;
     extraGroups = [
@@ -242,14 +231,6 @@ in
       5353 # Spotify
     ];
   };
-
-  systemd.tmpfiles.rules = [
-    # Set the account picture used by AccountsService and GDM.
-    # Files must be in PNG format to work apparently...
-    # From: https://discourse.nixos.org/t/setting-the-user-profile-image-under-gnome/36233/10
-    "f+ /var/lib/AccountsService/users/${config.users.users.anthony.name} 0600 root root - [User]\\nIcon=/var/lib/AccountsService/icons/${config.users.users.anthony.name}\\n"
-    "L+ /var/lib/AccountsService/icons/${config.users.users.anthony.name} - - - - ${accountAvatar}"
-  ];
 
   services.btrfs.autoScrub = {
     enable = true;
@@ -313,139 +294,6 @@ in
     };
   };
 
-  # Configure GNOME settings
-  programs.dconf.profiles.user.databases = [
-    {
-      lockAll = true; # prevents overriding
-      settings = {
-        "org/gnome/mutter" = {
-          experimental-features = [
-            "variable-refresh-rate" # Enables Variable Refresh Rate (VRR) on compatible displays
-            "xwayland-native-scaling" # Scales Xwayland applications to look crisp on HiDPI screens
-            "autoclose-xwayland" # automatically terminates Xwayland if all relevant X11 clients are gone
-          ];
-        };
-        "org/gnome/shell" = {
-          last-selected-power-profile = "performance";
-          disable-user-extensions = false;
-          disabled-extensions = "disabled";
-          enabled-extensions = [
-            "appindicatorsupport@rgcjonas.gmail.com"
-            "dash-to-dock@micxgx.gmail.com"
-          ];
-          # Sets the apps to show in the "dock"
-          # Use the following command to find the name of .desktop file:
-          # ls /run/current-system/sw/share/applications/ | grep -i <appname>
-          favorite-apps = [
-            "org.gnome.Nautilus.desktop"
-            "zen-beta.desktop"
-            "obsidian.desktop"
-            "todoist.desktop"
-            "discord-ptb.desktop"
-            "spotify.desktop"
-            "feishin.desktop"
-            "kitty.desktop"
-            "codex-desktop.desktop"
-            "t3code.desktop"
-          ];
-        };
-        "org/gnome/shell/window-switcher" = {
-          current-workspace-only = false;
-        };
-        "org/gnome/desktop/session" = {
-          idle-delay = lib.gvariant.mkUint32 0; # Disable screen timeout
-        };
-        "org/gnome/desktop/interface" = {
-          enable-hot-corners = false;
-          clock-show-date = true;
-          clock-show-weekday = true;
-        };
-        "org/gnome/desktop/input-sources" = {
-          xkb-options = [ "ctrl:nocaps" ];
-        };
-        "org/gnome/desktop/peripherals/mouse" = {
-          accel-profile = "flat";
-          speed = 0.35;
-        };
-        "org/gnome/desktop/peripherals/touchpad" = {
-          click-method = "fingers";
-          speed = 0.19;
-          tap-to-click = true;
-          tap-and-drag = false;
-          natural-scroll = true;
-        };
-        "org/gtk/settings/file-chooser" = {
-          clock-format = "24h";
-        };
-        "org/gnome/nautilus/preferences" = {
-          show-image-thumbnails = "always";
-        };
-        "org/gnome/shell/extensions/dash-to-dock" = {
-          multi-monitor = false;
-          dock-position = "BOTTOM";
-          intellihide-mode = "FOCUS_APPLICATION_WINDOWS";
-          height-fraction = 1.0;
-          extend-height = false;
-          dash-max-icon-size = lib.gvariant.mkInt32 48;
-          show-running = true;
-          isolate-workspaces = false;
-          custom-theme-shrink = false;
-          disable-overview-on-startup = true;
-          apply-custom-theme = false;
-          hot-keys = false;
-          dock-fixed = false;
-          require-pressure-to-show = true;
-          intellihide = true;
-          show-mounts-network = false;
-          show-mounts-only-mounted = true;
-          click-action = "focus-minimize-or-appspread";
-        };
-
-        # Desktop wallpaper
-        "org/gnome/desktop/background" = {
-          color-shading-type = "solid";
-          picture-options = "zoom";
-          picture-uri = "file://${desktopWallpaper}";
-          picture-uri-dark = "file://${desktopWallpaper}";
-        };
-        "org/gnome/desktop/screensaver" = {
-          picture-uri = "file://${desktopWallpaper}";
-        };
-
-        # Keybindings
-        "org/gnome/mutter/keybindings" = {
-          toggle-tiled-left = [ "<Control><${primaryModifier}>h" ];
-          toggle-tiled-right = [ "<Control><${primaryModifier}>l" ];
-        };
-        "org/gnome/shell/keybindings" = {
-          show-screenshot-ui = [ "<Shift><Super>s" ];
-        };
-        "org/gnome/desktop/wm/keybindings" = {
-          # Disable default keybindings
-          activate-window-menu = [ "disable" ];
-          begin-move = [ "disable" ];
-          begin-resize = [ "disable" ];
-          minimize = [ "disable" ];
-          toggle-maximized = [ "disable" ];
-          switch-applications = [ "disable" ];
-          switch-applications-backward = [ "disable" ];
-          # Customize keybindings
-          maximize = [ "<Control><${primaryModifier}>k" ];
-          unmaximize = [ "<Control><${primaryModifier}>j" ];
-          move-to-center = [ "<Control><${primaryModifier}>space" ];
-          switch-windows = [ "<${primaryModifier}>Tab" ];
-          switch-windows-backward = [ "<Shift><${primaryModifier}>Tab" ];
-        }
-        // lib.optionalAttrs (primaryModifier == "Super") {
-          # Super+Space is GNOME's default input-source switcher. Disable it so
-          # the host-specific Vicinae shortcut can claim the combination.
-          switch-input-source = [ "disable" ];
-          switch-input-source-backward = [ "disable" ];
-        };
-      };
-    }
-  ];
-
   fonts.packages = with pkgs; [
     nerd-fonts.geist-mono
     nerd-fonts.monaspace
@@ -473,13 +321,6 @@ in
 
   ## Start Programs Section ##
 
-  # https://github.com/NixOS/nixpkgs/issues/149812
-  # The issue mentions Plasma but I ran into this issue on GNOME too
-  # Fixes error: 'org.gtk.Settings.FileChooser' is not installed
-  environment.sessionVariables.XDG_DATA_DIRS = [
-    "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
-  ];
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -498,8 +339,6 @@ in
     devcontainer
 
     # Gui Apps
-    gnomeExtensions.appindicator # adds system tray icons to gnome
-    gnomeExtensions.dash-to-dock
     kopia-ui # requires ludusavi
     awscli2 # for managing s3 server
     versitygw # also for s3 server
@@ -600,22 +439,6 @@ in
           createDirectories = true;
           setSessionVariables = false;
         };
-        # This makes them show up in the sidebar of the Nautilus file manager.
-        xdg.configFile."gtk-3.0/bookmarks".force = true;
-        gtk = {
-          enable = true;
-          gtk3.bookmarks = [
-            "file://${config.home.homeDirectory}/code Code"
-            "file://${config.xdg.userDirs.desktop}"
-            "file://${config.xdg.userDirs.documents}"
-            "file://${config.xdg.userDirs.download}"
-            "file://${config.xdg.userDirs.pictures}"
-            "file://${config.xdg.userDirs.music}"
-            "smb://10.0.10.10/files/ NAS Files"
-            "smb://10.0.10.10/media/ NAS Media"
-          ];
-        };
-
         editorconfig = {
           enable = true;
           settings = {
@@ -978,31 +801,9 @@ in
           };
         };
 
-        xdg.mimeApps =
-          let
-            textEditor = "org.gnome.TextEditor.desktop";
-            textFileMimeTypes = [
-              "application/json"
-              "application/toml"
-              "application/x-shellscript"
-              "application/x-yaml"
-              "application/yaml"
-              "text/csv"
-              "text/markdown"
-              "text/plain"
-              "text/x-markdown"
-              "text/yaml"
-            ];
-          in
-          {
-            # Zen can set itself as the default browser but it won't work without setting
-            # `xdg.mimeApps.enable` = true even when `programs.zen-browser.setAsDefaultBrowser` is true.
-            enable = true;
-
-            # For some reason Zen overwrites opening plain text files, where I still want them to
-            # open in Text Editor.
-            defaultApplications = lib.genAttrs textFileMimeTypes (_: textEditor);
-          };
+        # Zen can set itself as the default browser but it won't work without setting
+        # `xdg.mimeApps.enable` = true even when `programs.zen-browser.setAsDefaultBrowser` is true.
+        xdg.mimeApps.enable = true;
 
         xdg.configFile = {
           # Autostart apps on login
