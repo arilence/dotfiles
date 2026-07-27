@@ -2,6 +2,7 @@
 
 let
   primaryModifier = config.arilence.workstation.keybindings.primaryModifier;
+  inversePrimaryModifier = if primaryModifier == "Alt" then "Super" else "Alt";
 in
 {
   programs.niri.enable = true;
@@ -15,6 +16,8 @@ in
     spawn-at-startup "noctalia"
 
     prefer-no-csd
+
+    screenshot-path "~/Pictures/Screenshots/Screenshot From %Y-%m-%d %H-%M-%S.png"
 
     input {
       mod-key "${primaryModifier}"
@@ -35,7 +38,7 @@ in
       Mod+W repeat=false allow-inhibiting=false { close-window; }
       Mod+Ctrl+K allow-inhibiting=false { maximize-column; }
       Mod+Ctrl+Space allow-inhibiting=false { center-column; }
-      Super+Shift+S { screenshot; }
+      ${inversePrimaryModifier}+Shift+S { screenshot; }
 
       // Applications such as remote-desktop clients and software KVM switches may
       // request that niri stops processing the keyboard shortcuts defined here
