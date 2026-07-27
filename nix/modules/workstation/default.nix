@@ -802,6 +802,7 @@ in
               "zen.view.sidebar-expanded" = true;
               "zen.view.use-single-toolbar" = false;
               "zen.urlbar.behavior" = "float";
+              "zen.mediacontrols.enabled" = false;
             };
           };
         };
