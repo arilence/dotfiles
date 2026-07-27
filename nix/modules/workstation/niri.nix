@@ -6,6 +6,11 @@ in
 {
   programs.niri.enable = true;
 
+  environment.systemPackages = [
+    # Xwayland support for apps like Steam
+    pkgs.xwayland-satellite
+  ];
+
   home-manager.users.anthony.xdg.configFile."niri/config.kdl".text = ''
     spawn-at-startup "noctalia"
 
