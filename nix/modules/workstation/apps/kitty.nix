@@ -84,8 +84,8 @@ in
         "ctrl+insert" = "copy_to_clipboard";
         "ctrl+shift+v" = "paste_from_clipboard";
         "shift+insert" = "paste_from_clipboard";
-        "ctrl+shift+backslash" = "launch --cwd=current --location=vsplit";
-        "ctrl+shift+minus" = "launch --cwd=current --location=hsplit";
+        "ctrl+shift+backslash" = "launch --cwd=current --location=vsplit --env ZMX_AUTO_ATTACH=1";
+        "ctrl+shift+minus" = "launch --cwd=current --location=hsplit --env ZMX_AUTO_ATTACH=1";
         "ctrl+shift+z" = "toggle_layout stack";
         # Only terminals opened with this shortcut should show the zmx selector.
         "ctrl+shift+t" = "launch --type=tab --cwd=current --env ZMX_AUTO_ATTACH=1";
