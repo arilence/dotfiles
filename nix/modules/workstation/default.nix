@@ -278,10 +278,14 @@ in
     settings = {
       gui = {
         user = "anthony";
+        useTLS = true;
       };
       devices = {
         "anthony-desktop" = {
           id = "U42NJPT-BY5JH45-FVJCMC4-CMBKFT6-JEDZFRS-EEGHK5P-JL4L2JU-WGLDPAF";
+        };
+        "anthony-macbook" = {
+          id = "PALIULZ-KG5PMCV-2JBB7EY-AONGCPR-7ECDILT-KFDSWSQ-JOMKDQT-4UKERA4";
         };
         "anthony-phone" = {
           id = "7OR6DQX-QLG6LKG-MGWC3CF-6HOC2RC-CN42TRC-QWW2OVM-ML7CSTN-I2F6DA5";
@@ -296,6 +300,7 @@ in
           path = "/home/anthony/Digital Garden";
           devices = [
             "anthony-desktop"
+            "anthony-macbook"
             "anthony-phone"
             # App-platform should only have an encrypted copy of this data
             {
