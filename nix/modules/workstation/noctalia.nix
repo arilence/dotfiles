@@ -5,13 +5,17 @@
   inputs,
   ...
 }:
+let
+  desktopWallpaper = ../../assets/wallpaper.png;
+  noctaliaPackage = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+in
 {
   imports = [
     inputs.noctalia.nixosModules.default
   ];
 
   environment.systemPackages = [
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    noctaliaPackage
   ];
 
   programs.noctalia = {
@@ -34,6 +38,13 @@
         };
 
         theme.mode = "light";
+
+        hooks.started = "${lib.getExe noctaliaPackage} msg wallpaper-set ${desktopWallpaper}";
+
+        wallpaper = {
+          enabled = true;
+          default.path = "${desktopWallpaper}";
+        };
       };
     };
   };
