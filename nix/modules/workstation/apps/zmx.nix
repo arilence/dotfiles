@@ -5,9 +5,62 @@
   ...
 }:
 
+let
+  zmx = inputs.zmx.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
+  zmx-kill-all-worker = pkgs.writeShellApplication {
+    name = "zmx-kill-all-worker";
+    runtimeInputs = [ zmx ];
+    text = ''
+      while IFS= read -r session; do
+        zmx kill "$session"
+      done < <(zmx list --short)
+    '';
+  };
+
+  zmx-kill-all = pkgs.writeShellApplication {
+    name = "zmx-kill-all";
+    runtimeInputs = [
+      pkgs.systemd
+      zmx
+    ];
+    text = ''
+      sessions=$(zmx list --short)
+
+      if [[ -z "$sessions" ]]; then
+        echo "No active zmx sessions."
+        exit 0
+      fi
+
+      echo "The following zmx sessions will be killed:"
+      printf '  %s\n' "$sessions"
+      printf 'Continue? [y/N] '
+      IFS= read -r reply || true
+
+      case "$reply" in
+        y | Y | yes | YES | Yes) ;;
+        *)
+          echo "Cancelled."
+          exit 0
+          ;;
+      esac
+
+      systemd-run \
+        --user \
+        --unit=zmx-kill-all \
+        --collect \
+        --quiet \
+        --setenv=ZMX_SESSION= \
+        ${zmx-kill-all-worker}/bin/zmx-kill-all-worker
+
+      echo "Killing all zmx sessions outside the zmx process tree."
+    '';
+  };
+in
 {
   environment.systemPackages = [
-    inputs.zmx.packages.${pkgs.stdenv.hostPlatform.system}.default
+    zmx
+    zmx-kill-all
     pkgs.fzf
   ];
 
@@ -18,6 +71,7 @@
         ta = "zmx attach";
         tl = "zmx list";
         tk = "zmx kill";
+        tkall = "zmx-kill-all";
       };
 
       initContent = lib.mkOrder 1500 ''
