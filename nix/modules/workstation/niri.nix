@@ -38,6 +38,7 @@ in
       Mod+W repeat=false allow-inhibiting=false { close-window; }
       Mod+Ctrl+K allow-inhibiting=false { maximize-column; }
       Mod+Ctrl+Space allow-inhibiting=false { center-column; }
+      Mod+Ctrl+M allow-inhibiting=false { fullscreen-window; }
       ${inversePrimaryModifier}+Shift+S { screenshot; }
 
       // Applications such as remote-desktop clients and software KVM switches may
