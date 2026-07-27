@@ -7,6 +7,7 @@
 }:
 
 {
+  # Add GNOME specific keybinds when GNOME is enabled
   programs.dconf.profiles.user.databases = lib.mkIf config.services.desktopManager.gnome.enable [
     {
       lockAll = true;
@@ -29,7 +30,7 @@
   ];
 
   home-manager.users.anthony =
-    { config, ... }:
+    { ... }:
     {
       programs.vicinae = {
         enable = true;

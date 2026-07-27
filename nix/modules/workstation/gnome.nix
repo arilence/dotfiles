@@ -65,6 +65,7 @@ in
           idle-delay = lib.gvariant.mkUint32 0; # Disable screen timeout
         };
         "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-light";
           enable-hot-corners = false;
           clock-show-date = true;
           clock-show-weekday = true;
