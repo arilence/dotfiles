@@ -90,6 +90,8 @@ in
         # Use Noctalia for graphical Polkit authentication prompts.
         shell.polkit_agent = true;
 
+        shell.clipboard_enabled = true;
+
         idle.behavior = {
           lock = {
             enabled = true;

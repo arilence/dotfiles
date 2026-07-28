@@ -346,7 +346,6 @@ in
     fd
     starship
     wl-clipboard
-    cliphist
     fzf
     ripgrep
     dig # nslookup successor
@@ -758,10 +757,6 @@ in
             hyperlinks = true;
             hyperlinks-file-link-format = "vscode://file/{path}:{line}";
           };
-        };
-
-        services.cliphist = {
-          enable = true;
         };
 
       };
