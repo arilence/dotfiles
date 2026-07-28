@@ -82,6 +82,12 @@ in
         open-floating false
       }
 
+      // Disable blurred wallpaper on overview screen
+      layer-rule {
+        match namespace="^noctalia-backdrop"
+        place-within-backdrop true
+      }
+
       input {
         mod-key "${primaryModifier}"
 
@@ -114,6 +120,13 @@ in
         // It's a good idea to bind an escape hatch to toggle the inhibitor,
         // so a buggy application can't hold your session hostage.
         Mod+Ctrl+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+        // Audio & Brightness
+        XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
+        XF86AudioLowerVolume { spawn-sh "noctalia msg volume-down"; }
+        XF86AudioMute { spawn-sh "noctalia msg volume-mute"; }
+        XF86MonBrightnessUp { spawn-sh "noctalia msg brightness-up"; }
+        XF86MonBrightnessDown { spawn-sh "noctalia msg brightness-down"; }
       }
     '';
   };
