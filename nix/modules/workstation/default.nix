@@ -26,7 +26,7 @@ in
   imports = [
     ../storage/encrypted-btrfs.nix
 
-    ./gnome.nix
+    # ./gnome.nix
     ./niri.nix
     ./noctalia.nix
     ./keybindings.nix

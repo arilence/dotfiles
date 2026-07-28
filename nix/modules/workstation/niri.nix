@@ -6,6 +6,10 @@ let
 in
 {
   programs.niri.enable = true;
+  services.greetd = {
+    enable = true;
+    settings.default_session.user = "greeter";
+  };
 
   environment.systemPackages = [
     # Xwayland support for apps like Steam

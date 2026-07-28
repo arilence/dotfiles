@@ -12,6 +12,7 @@ in
 {
   imports = [
     inputs.noctalia.nixosModules.default
+    inputs.noctalia-greeter.nixosModules.default
   ];
 
   environment.systemPackages = [
@@ -23,6 +24,16 @@ in
 
     # Enables NetworkManager, Bluetooth, UPower, and a power profile service.
     recommendedServices.enable = true;
+  };
+
+  programs.noctalia-greeter = {
+    enable = true;
+
+    # preselect niri
+    greeter-args = "--session niri";
+
+    # preselect user
+    settings.user.default = "anthony";
   };
 
   home-manager.users.anthony = {
