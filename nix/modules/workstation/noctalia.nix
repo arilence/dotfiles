@@ -34,6 +34,12 @@ in
 
     # preselect user
     settings.user.default = "anthony";
+
+    settings.cursor = {
+      package = pkgs.adwaita-icon-theme;
+      theme = "Adwaita";
+      size = 24;
+    };
   };
 
   home-manager.users.anthony = {
