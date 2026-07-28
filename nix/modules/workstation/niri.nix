@@ -14,10 +14,35 @@ in
 
   home-manager.users.anthony.xdg.configFile."niri/config.kdl".text = ''
     spawn-at-startup "noctalia"
+    spawn-at-startup "${pkgs._1password-gui}/bin/1password" "--silent"
+    spawn-at-startup "${pkgs.kopia-ui}/bin/kopia-ui"
 
     prefer-no-csd
 
     screenshot-path "~/Pictures/Screenshots/Screenshot From %Y-%m-%d %H-%M-%S.png"
+
+    window-rule {
+      match app-id="steam" title=r#"^Steam$"#
+      open-maximized true
+    }
+
+    window-rule {
+      match app-id="discord"
+      open-maximized true
+    }
+
+    window-rule {
+      match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+      default-floating-position x=10 y=10 relative-to="bottom-right"
+    }
+
+    // Keep Proton and conventionally identified Steam game windows out of
+    // the always-on-top floating layout.
+    window-rule {
+      match app-id=r#"(?i)\.exe$"#
+      match app-id=r#"^steam_app_[0-9]+$"#
+      open-floating false
+    }
 
     input {
       mod-key "${primaryModifier}"

@@ -32,12 +32,34 @@ in
       enable = true;
       settings = {
         bar.main = {
+          # Keep the top bar flush and square against the screen edges.
+          radius = 0;
+
           # Remove the end insets so the bar spans the screen width.
           margin_ends = 0;
-          start = [ "workspaces" ];
+          widget_spacing = 12;
+          start = [
+            "workspaces"
+            "media"
+          ];
+          center = [
+            "clock"
+            "notifications"
+          ];
+          end = [
+            "tray"
+            "network"
+            "volume"
+            "battery"
+            "control-center"
+            "session"
+          ];
         };
 
         theme.mode = "light";
+
+        # Disables showing a notification every time media changes.
+        osd.kinds.media = false;
 
         hooks.started = "${lib.getExe noctaliaPackage} msg wallpaper-set ${desktopWallpaper}";
 
