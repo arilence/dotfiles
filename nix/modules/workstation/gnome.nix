@@ -49,7 +49,6 @@ in
             "org.gnome.Nautilus.desktop"
             "zen-beta.desktop"
             "obsidian.desktop"
-            "todoist.desktop"
             "discord-ptb.desktop"
             "spotify.desktop"
             "feishin.desktop"

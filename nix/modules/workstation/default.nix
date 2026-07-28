@@ -365,7 +365,6 @@ in
     ghostty
     vlc
     lazygit
-    todoist-electron
     meld
     bottles
     localsend # android airdrop
