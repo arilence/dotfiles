@@ -40,6 +40,7 @@ in
           widget_spacing = 12;
           start = [
             "workspaces"
+            "weather"
             "media"
           ];
           center = [
@@ -56,6 +57,8 @@ in
           ];
         };
 
+        widget.clock.format = "{:%b %-d %H:%M}";
+
         theme.mode = "light";
 
         # Disables showing a notification every time media changes.
@@ -68,6 +71,15 @@ in
         ];
 
         hooks.started = "${lib.getExe noctaliaPackage} msg wallpaper-set ${desktopWallpaper}";
+
+        location = {
+          auto_locate = true;
+        };
+
+        weather = {
+          enabled = true;
+          unit = "metric";
+        };
 
         wallpaper = {
           enabled = true;
