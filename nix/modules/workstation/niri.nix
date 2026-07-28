@@ -14,8 +14,6 @@ in
 
   home-manager.users.anthony.xdg.configFile."niri/config.kdl".text = ''
     spawn-at-startup "noctalia"
-    spawn-at-startup "${pkgs._1password-gui}/bin/1password" "--silent"
-    spawn-at-startup "${pkgs.kopia-ui}/bin/kopia-ui"
 
     prefer-no-csd
 

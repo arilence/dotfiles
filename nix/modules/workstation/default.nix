@@ -34,9 +34,11 @@ in
     ./apps/appimage.nix
     ./apps/codex.nix
     ./apps/kitty.nix
+    ./apps/kopia.nix
     ./apps/ludusavi.nix
     ./apps/mise.nix
     ./apps/neovim
+    ./apps/onepassword.nix
     ./apps/pia.nix
     ./apps/t3code.nix
     ./apps/vicinae.nix
@@ -810,37 +812,6 @@ in
         # Zen can set itself as the default browser but it won't work without setting
         # `xdg.mimeApps.enable` = true even when `programs.zen-browser.setAsDefaultBrowser` is true.
         xdg.mimeApps.enable = true;
-
-        xdg.configFile = {
-          # Autostart apps on login
-          "autostart/1password.desktop" = {
-            text = ''
-              [Desktop Entry]
-              Name=1Password
-              Exec=${pkgs._1password-gui}/bin/1password --silent
-              Terminal=false
-              Type=Application
-              Icon=1password
-              StartupWMClass=1Password
-              Comment=Password manager and secure wallet
-              MimeType=x-scheme-handler/onepassword;x-scheme-handler/onepassword8;
-              Categories=Office;
-            '';
-          };
-
-          "autostart/kopia-ui.desktop" = {
-            text = ''
-              [Desktop Entry]
-              Name=Kopia
-              Exec=${pkgs.kopia-ui}/bin/kopia-ui
-              Terminal=false
-              Type=Application
-              Icon=kopia
-              Comment=Backup and restore tool
-              Categories=Utility;Archiving;
-            '';
-          };
-        };
 
         services.cliphist = {
           enable = true;
