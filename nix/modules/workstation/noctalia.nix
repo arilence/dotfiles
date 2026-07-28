@@ -87,6 +87,29 @@ in
           "zen"
         ];
 
+        # Use Noctalia for graphical Polkit authentication prompts.
+        shell.polkit_agent = true;
+
+        idle.behavior = {
+          lock = {
+            enabled = true;
+            timeout = 600;
+            action = "lock";
+          };
+
+          "screen-off" = {
+            enabled = true;
+            timeout = 660;
+            action = "screen_off";
+          };
+
+          suspend = {
+            enabled = true;
+            timeout = 1800;
+            action = "lock_and_suspend";
+          };
+        };
+
         hooks.started = "${lib.getExe noctaliaPackage} msg wallpaper-set ${desktopWallpaper}";
 
         location = {

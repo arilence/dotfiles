@@ -182,6 +182,12 @@ in
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Explicitly enable this for environments that don't enable it by default
+  security.polkit.enable = true;
+
+  # Support file browsing, removable media, and network locations.
+  services.gvfs.enable = true;
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -346,6 +352,7 @@ in
     devcontainer
 
     # Gui Apps
+    nautilus
     kopia-ui # requires ludusavi
     awscli2 # for managing s3 server
     versitygw # also for s3 server

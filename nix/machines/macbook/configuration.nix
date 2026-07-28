@@ -11,6 +11,13 @@
 
   powerManagement.cpuFreqGovernor = "schedutil";
 
+  # Let Niri and Noctalia handle lid-close locking and suspension without racing systemd-logind's
+  # built-in suspend action.
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+  };
+
   networking.hostName = "macbook";
   # The BCM4360 requires the unmaintained proprietary wl driver. Keep this
   # exception host-local and version-specific so an update requires review.

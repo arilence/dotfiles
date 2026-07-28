@@ -101,6 +101,17 @@ in
         }
       }
 
+      switch-events {
+        lid-close { spawn "noctalia" "msg" "session" "lock-and-suspend"; }
+      }
+
+      recent-windows {
+        previews {
+          max-height 240
+          max-scale 0.25
+        }
+      }
+
       binds {
         Mod+Space allow-inhibiting=false { spawn "${pkgs.vicinae}/bin/vicinae" "toggle"; }
         Mod+Q repeat=false allow-inhibiting=false { quit; }
