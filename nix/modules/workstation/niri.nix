@@ -124,6 +124,9 @@ in
         // Specifically set as Super rather than primaryModifier
         Super+L repeat=false allow-inhibiting=false { spawn "noctalia" "msg" "session" "lock"; }
 
+        // Handy speech-to-text. Press once to record and again to transcribe.
+        Mod+Shift+Space repeat=false allow-inhibiting=false { spawn "handy-toggle"; }
+
         // Window management
         Mod+Ctrl+H allow-inhibiting=false { focus-column-left; }
         Mod+Ctrl+L allow-inhibiting=false { focus-column-right; }

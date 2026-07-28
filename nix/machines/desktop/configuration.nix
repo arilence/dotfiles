@@ -12,6 +12,8 @@
     ./modules/nvidia-gpu.nix
   ];
 
+  arilence.workstation.apps.handy.autoStart = true;
+
   networking = {
     hostName = "anthony-desktop";
 
