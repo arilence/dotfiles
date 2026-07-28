@@ -38,7 +38,7 @@ in
     settings.cursor = {
       package = pkgs.adwaita-icon-theme;
       theme = "Adwaita";
-      size = 24;
+      size = lib.mkDefault 24;
     };
   };
 

@@ -37,6 +37,10 @@ in
         xcursor-size 24
       }
 
+      hotkey-overlay {
+        skip-at-startup
+      }
+
       // Catch-all Rule
       window-rule {
         // Rounded corners for a modern look.
@@ -116,14 +120,18 @@ in
         Mod+Space allow-inhibiting=false { spawn "${pkgs.vicinae}/bin/vicinae" "toggle"; }
         Mod+Q repeat=false allow-inhibiting=false { quit; }
         Mod+W repeat=false allow-inhibiting=false { close-window; }
-        Mod+Ctrl+H allow-inhibiting=false { focus-column-left; }
-        Mod+Ctrl+L allow-inhibiting=false { focus-column-right; }
-        Mod+Ctrl+K allow-inhibiting=false { maximize-column; }
-        Mod+Ctrl+Space allow-inhibiting=false { center-column; }
-        Mod+Ctrl+M allow-inhibiting=false { fullscreen-window; }
         ${inversePrimaryModifier}+Shift+S { screenshot; }
         // Specifically set as Super rather than primaryModifier
         Super+L repeat=false allow-inhibiting=false { spawn "noctalia" "msg" "session" "lock"; }
+
+        // Window management
+        Mod+Ctrl+H allow-inhibiting=false { focus-column-left; }
+        Mod+Ctrl+L allow-inhibiting=false { focus-column-right; }
+        Mod+Ctrl+K allow-inhibiting=false { focus-workspace-up; }
+        Mod+Ctrl+J allow-inhibiting=false { focus-workspace-down; }
+        Mod+Ctrl+Shift+K allow-inhibiting=false { maximize-column; }
+        Mod+Ctrl+Space allow-inhibiting=false { center-column; }
+        Mod+Ctrl+M allow-inhibiting=false { fullscreen-window; }
 
         // Applications such as remote-desktop clients and software KVM switches may
         // request that niri stops processing the keyboard shortcuts defined here
