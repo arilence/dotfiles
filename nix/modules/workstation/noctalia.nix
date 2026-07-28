@@ -61,6 +61,12 @@ in
         # Disables showing a notification every time media changes.
         osd.kinds.media = false;
 
+        # Keep browser media sessions from overriding Spotify in the media widget.
+        shell.mpris.blacklist = [
+          "firefox"
+          "zen"
+        ];
+
         hooks.started = "${lib.getExe noctaliaPackage} msg wallpaper-set ${desktopWallpaper}";
 
         wallpaper = {
