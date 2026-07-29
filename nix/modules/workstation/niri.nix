@@ -28,6 +28,11 @@ in
     xdg.configFile."niri/config.kdl".text = ''
       spawn-at-startup "noctalia"
 
+      workspace "media"
+      workspace "main"
+
+      spawn-at-startup "niri" "msg" "action" "focus-workspace" "main"
+
       prefer-no-csd
 
       screenshot-path "~/Pictures/Screenshots/Screenshot From %Y-%m-%d %H-%M-%S.png"
@@ -41,49 +46,13 @@ in
         skip-at-startup
       }
 
-      // Catch-all Rule
-      window-rule {
-        // Rounded corners for a modern look.
-        geometry-corner-radius 10
-
-        // Clips window contents to the rounded corner boundaries.
-        clip-to-geometry true
-      }
-
-      // Floating Noctalia settings window.
-      window-rule {
-        match app-id="dev.noctalia.Noctalia"
-        open-floating true
-        default-column-width { fixed 1080; }
-        default-window-height { fixed 920; }
+      layout {
+          always-center-single-column
       }
 
       debug {
         // Allows notification actions and window activation from Noctalia.
         honor-xdg-activation-with-invalid-serial
-      }
-
-      window-rule {
-        match app-id="steam" title=r#"^Steam$"#
-        open-maximized true
-      }
-
-      window-rule {
-        match app-id="discord"
-        open-maximized true
-      }
-
-      window-rule {
-        match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
-        default-floating-position x=10 y=10 relative-to="bottom-right"
-      }
-
-      // Keep Proton and conventionally identified Steam game windows out of
-      // the always-on-top floating layout.
-      window-rule {
-        match app-id=r#"(?i)\.exe$"#
-        match app-id=r#"^steam_app_[0-9]+$"#
-        open-floating false
       }
 
       // Disable blurred wallpaper on overview screen
@@ -149,6 +118,54 @@ in
         XF86AudioMute { spawn-sh "noctalia msg volume-mute"; }
         XF86MonBrightnessUp { spawn-sh "noctalia msg brightness-up"; }
         XF86MonBrightnessDown { spawn-sh "noctalia msg brightness-down"; }
+      }
+
+      // Catch-all Rule
+      window-rule {
+        // Rounded corners for a modern look.
+        geometry-corner-radius 10
+
+        // Clips window contents to the rounded corner boundaries.
+        clip-to-geometry true
+      }
+
+      // Floating Noctalia settings window.
+      window-rule {
+        match app-id="dev.noctalia.Noctalia"
+        open-floating true
+        default-column-width { fixed 1080; }
+        default-window-height { fixed 920; }
+      }
+
+      window-rule {
+        match app-id="steam" title=r#"^Steam$"#
+        open-maximized true
+      }
+
+      window-rule {
+        match app-id="discord"
+        open-maximized true
+        open-on-workspace "media"
+        open-focused true
+      }
+
+      window-rule {
+        match app-id="Spotify"
+        open-on-workspace "media"
+        open-focused true
+      }
+
+      window-rule {
+        match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+        default-floating-position x=10 y=10 relative-to="bottom-right"
+      }
+
+      // Keep Proton and conventionally identified Steam game windows out of
+      // the always-on-top floating layout.
+      window-rule {
+        match app-id=r#"(?i)\.exe$"#
+        match app-id=r#"^steam_app_[0-9]+$"#
+        open-floating false
       }
     '';
   };
