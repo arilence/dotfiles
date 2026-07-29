@@ -11,9 +11,9 @@ let
 
   handyToggle = pkgs.writeShellApplication {
     name = "handy-toggle";
-    runtimeInputs = [ pkgs.systemd ];
+    runtimeInputs = [ handy ];
     text = ''
-      systemctl --user kill --kill-whom=main --signal=USR2 handy.service
+      exec handy --toggle-transcription
     '';
   };
 in

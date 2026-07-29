@@ -132,9 +132,9 @@ in
         Mod+Ctrl+L allow-inhibiting=false { focus-column-right; }
         Mod+Ctrl+K allow-inhibiting=false { focus-workspace-up; }
         Mod+Ctrl+J allow-inhibiting=false { focus-workspace-down; }
-        Mod+Ctrl+Shift+K allow-inhibiting=false { maximize-column; }
         Mod+Ctrl+Space allow-inhibiting=false { center-column; }
-        Mod+Ctrl+M allow-inhibiting=false { fullscreen-window; }
+        Mod+Ctrl+Shift+K allow-inhibiting=false { maximize-column; }
+        Mod+Ctrl+Shift+F allow-inhibiting=false { fullscreen-window; }
 
         // Applications such as remote-desktop clients and software KVM switches may
         // request that niri stops processing the keyboard shortcuts defined here
