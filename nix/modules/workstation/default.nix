@@ -353,7 +353,8 @@ in
     devcontainer
 
     # Gui Apps
-    nautilus
+    nautilus # file explorer
+    loupe # image viewer
     kopia-ui # requires ludusavi
     awscli2 # for managing s3 server
     versitygw # also for s3 server
