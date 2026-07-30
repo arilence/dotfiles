@@ -137,6 +137,10 @@
             "zen.urlbar.behavior" = "float";
             "zen.mediacontrols.enabled" = false;
           };
+          mods = [
+            "906c6915-5677-48ff-9bfc-096a02a72379" # Floating Status Bar
+            "ad97bb70-0066-4e42-9b5f-173a5e42c6fc" # SuperPins
+          ];
           # Find shortcut IDs in ~/.config/zen/default/zen-keyboard-shortcuts.json
           # Get version from about:config -> zen.keyboard.shortcuts.version
           # Activation fails if version changes (prevents silent breakage).
