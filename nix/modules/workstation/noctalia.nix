@@ -112,7 +112,12 @@ in
           };
         };
 
-        hooks.started = "${lib.getExe noctaliaPackage} msg wallpaper-set ${desktopWallpaper}";
+        hooks.started = [
+          "${lib.getExe noctaliaPackage} msg wallpaper-set ${desktopWallpaper}"
+        ]
+        ++ lib.optionals config.arilence.workstation.apps.handy.autoStart [
+          "${pkgs.systemd}/bin/systemctl --user start handy.service"
+        ];
 
         location = {
           auto_locate = true;

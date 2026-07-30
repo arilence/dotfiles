@@ -1,12 +1,10 @@
 {
-  config,
   lib,
   pkgs,
   ...
 }:
 
 let
-  cfg = config.arilence.workstation.apps.handy;
   handy = pkgs.nixpkgsUnstable.handy;
 
   handyToggle = pkgs.writeShellApplication {
@@ -41,8 +39,6 @@ in
         Restart = "on-failure";
         RestartSec = 5;
       };
-
-      Install.WantedBy = lib.optionals cfg.autoStart [ "graphical-session.target" ];
     };
   };
 }
