@@ -16,6 +16,11 @@ let
 in
 {
   home-manager.users.anthony.home.packages = [
+    # T3 Code's provider health checks and non-Nix distributions (such as the
+    # nightly AppImage) resolve these tools from the user's PATH.
+    agentPackages.claude-code
+    agentPackages.opencode
+    pkgs.nixpkgsUnstable.github-cli
     t3code
   ];
 }
