@@ -21,6 +21,13 @@
     interfaces.eno1.useDHCP = false;
   };
 
+  # Open desktop specific ports.
+  networking.firewall = {
+    allowedTCPPorts = [
+      3773 # T3 Code
+    ];
+  };
+
   sops.defaultSopsFile = ./secrets.sops.yaml;
 
   # This workstation should stay awake and available for remote access.
