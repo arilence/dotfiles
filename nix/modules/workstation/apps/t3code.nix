@@ -4,6 +4,9 @@ let
   agentPackages = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 
   t3code = pkgs.nixpkgsUnstable.t3code.override {
+    enableClaude = true;
+    claude-code = agentPackages.claude-code;
+
     enableCodex = true;
     codex = agentPackages.codex;
 
