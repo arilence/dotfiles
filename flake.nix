@@ -43,9 +43,6 @@
 
     llm-agents.url = "github:numtide/llm-agents.nix";
 
-    claude-desktop.url = "github:aaddrick/claude-desktop-debian";
-    claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
-
     codex-desktop-linux.url = "github:ilysenko/codex-desktop-linux";
 
     # Session persistence for terminal processes
@@ -66,7 +63,6 @@
       sops-nix,
       home-manager,
       pia,
-      claude-desktop,
       ...
     }@inputs:
     {
@@ -99,13 +95,6 @@
                 sops-nix.nixosModules.sops
                 home-manager.nixosModules.home-manager
                 pia.nixosModules.default
-                (
-                  { pkgs, ... }:
-                  {
-                    nixpkgs.overlays = [ claude-desktop.overlays.default ];
-                    environment.systemPackages = [ pkgs.claude-desktop ];
-                  }
-                )
               ]
               ++ hostModules;
             };
