@@ -74,7 +74,7 @@ in
           ];
         };
 
-        widget.clock.format = "{:%b %-d %H:%M}";
+        widget.clock.format = "{:%a %b %-d %H:%M}";
 
         theme.mode = "light";
 

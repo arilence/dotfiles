@@ -70,7 +70,7 @@ in
         initial_window_height = "40c";
         listen_on = "unix:@mykitty";
         startup_session = "startup.session";
-        tab_bar_edge = "left";
+        # tab_bar_edge = "left";
         tab_bar_style = "separator";
         tab_title_max_length = 18;
         tab_bar_margin_height = "0 1";
