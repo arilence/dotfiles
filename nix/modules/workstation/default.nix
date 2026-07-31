@@ -33,6 +33,7 @@ in
 
     ./apps/appimage.nix
     ./apps/codex.nix
+    ./apps/direnv.nix
     ./apps/handy.nix
     ./apps/kitty.nix
     ./apps/kopia.nix
