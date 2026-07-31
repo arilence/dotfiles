@@ -1,12 +1,11 @@
 {
-  inputs,
   lib,
   pkgs,
   ...
 }:
 
 let
-  zmx = inputs.zmx.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  zmx = pkgs.nixosUnstable.zmx;
 
   zmx-kill-all-worker = pkgs.writeShellApplication {
     name = "zmx-kill-all-worker";

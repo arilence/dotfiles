@@ -39,9 +39,6 @@
 
     codex-desktop-linux.url = "github:ilysenko/codex-desktop-linux";
 
-    # Session persistence for terminal processes
-    zmx.url = "github:neurosnap/zmx";
-
     # Provides variable scroll speed using a trackpad
     wsf.url = "github:daniel-g-carrasco/wayland-scroll-factor";
     wsf.inputs.nixpkgs.follows = "nixpkgs";
