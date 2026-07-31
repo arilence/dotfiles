@@ -5,7 +5,7 @@
 }:
 
 let
-  handy = pkgs.nixpkgsUnstable.handy;
+  handy = pkgs.nixosUnstable.handy;
 
   handyToggle = pkgs.writeShellApplication {
     name = "handy-toggle";

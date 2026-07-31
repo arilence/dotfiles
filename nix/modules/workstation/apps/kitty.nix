@@ -49,7 +49,7 @@ in
 
     programs.kitty = {
       enable = true;
-      package = pkgs.nixpkgsUnstable.kitty;
+      package = pkgs.nixosUnstable.kitty;
 
       shellIntegration.enableZshIntegration = true;
 

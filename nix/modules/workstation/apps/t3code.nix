@@ -43,7 +43,7 @@ let
             agentPackages.claude-code
             agentPackages.codex
             agentPackages.opencode
-            pkgs.nixpkgsUnstable.github-cli
+            pkgs.nixosUnstable.github-cli
             pkgs.git
           ]
         }
@@ -56,7 +56,7 @@ in
     agentPackages.claude-code
     agentPackages.codex
     agentPackages.opencode
-    pkgs.nixpkgsUnstable.github-cli
+    pkgs.nixosUnstable.github-cli
     t3code
   ];
 }

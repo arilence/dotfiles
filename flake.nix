@@ -4,11 +4,9 @@
     # List of available versions: https://channels.nixos.org/
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
-    # These unstable channels advance independently. nixpkgs-unstable usually
-    # updates more frequently, making it useful for selecting the newest package
-    # versions. nixos-unstable waits for broader NixOS integration testing, making
-    # it the better choice when using unstable as the basis of a complete system.
-    nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # Prefer to use nixOS-unstable when adding a package that's not yet available in stable nixpkgs.
+    # nixPKGS-unstable is closer to the master branch and therefore has less rigorous testing.
+    nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # <- prefer this one when unsure.
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     home-manager.url = "github:nix-community/home-manager/release-26.05";
