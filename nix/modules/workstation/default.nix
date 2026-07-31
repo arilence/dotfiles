@@ -48,7 +48,6 @@ in
     ./apps/wsf.nix
     ./apps/zen-browser.nix
     ./apps/zmx.nix
-    ./dev/elixir.nix
     ./scripts.nix
   ];
 

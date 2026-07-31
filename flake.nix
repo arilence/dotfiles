@@ -33,10 +33,6 @@
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
-    # Elixir LSP
-    expert.url = "github:elixir-lang/expert";
-    expert.inputs.nixpkgs.follows = "nixpkgs";
-
     # Private Internet Access VPN
     pia.url = "github:arilence/pia.nix";
     pia.inputs.nixpkgs.follows = "nixpkgs";

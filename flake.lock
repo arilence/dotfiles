@@ -1,30 +1,5 @@
 {
   "nodes": {
-    "beam-flakes": {
-      "inputs": {
-        "flake-parts": [
-          "expert",
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "expert",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1771594669,
-        "narHash": "sha256-bjqfo3IobpY0se/LOL6U7J0AodvMTZjZad1x3XLc7HY=",
-        "owner": "elixir-tools",
-        "repo": "nix-beam-flakes",
-        "rev": "da950d6652b5b4bc43ee7c440a39097b4d96e448",
-        "type": "github"
-      },
-      "original": {
-        "owner": "elixir-tools",
-        "repo": "nix-beam-flakes",
-        "type": "github"
-      }
-    },
     "bun2nix": {
       "inputs": {
         "flake-parts": [
@@ -97,28 +72,6 @@
         "type": "github"
       }
     },
-    "expert": {
-      "inputs": {
-        "beam-flakes": "beam-flakes",
-        "flake-parts": "flake-parts",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1782470177,
-        "narHash": "sha256-Rx1kAL5smQsiCdfnNt6U+JTKyIR6kemr2jYh85LhKEU=",
-        "owner": "elixir-lang",
-        "repo": "expert",
-        "rev": "63dc1f31807d4a87b7d8ae842f1e942dacfe839f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "elixir-lang",
-        "repo": "expert",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -136,24 +89,6 @@
       }
     },
     "flake-parts": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib"
-      },
-      "locked": {
-        "lastModified": 1769996383,
-        "narHash": "sha256-AnYjnFWgS49RlqX7LrC4uA+sCCDBj0Ry/WOJ5XWAsa0=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "57928607ea566b5db3ad13af0e57e921e6b12381",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": [
           "llm-agents",
@@ -174,7 +109,7 @@
         "type": "github"
       }
     },
-    "flake-parts_3": {
+    "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": [
           "neovim-nightly-overlay",
@@ -291,7 +226,7 @@
     "llm-agents": {
       "inputs": {
         "bun2nix": "bun2nix",
-        "flake-parts": "flake-parts_2",
+        "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs_2",
         "systems": "systems_2",
         "treefmt-nix": "treefmt-nix"
@@ -312,7 +247,7 @@
     },
     "neovim-nightly-overlay": {
       "inputs": {
-        "flake-parts": "flake-parts_3",
+        "flake-parts": "flake-parts_2",
         "neovim-src": "neovim-src",
         "nixpkgs": "nixpkgs_3"
       },
@@ -394,21 +329,6 @@
         "owner": "NixOS",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-lib": {
-      "locked": {
-        "lastModified": 1769909678,
-        "narHash": "sha256-cBEymOf4/o3FD5AZnzC3J9hLbiZ+QDT/KDuyHXVJOpM=",
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "rev": "72716169fe93074c333e8d0173151350670b824c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
         "type": "github"
       }
     },
@@ -607,7 +527,6 @@
       "inputs": {
         "codex-desktop-linux": "codex-desktop-linux",
         "disko": "disko",
-        "expert": "expert",
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
