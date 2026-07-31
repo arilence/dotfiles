@@ -155,6 +155,18 @@ in
         open-focused true
       }
 
+      // Keep Android Emulator windows in the tiled layout.
+      // Fixes the toolbar from floating in the center of the screen.
+      window-rule {
+        match app-id="Emulator"
+        open-floating false
+      }
+      window-rule {
+        match app-id="Emulator" title=r#"^Android Emulator - "#
+        tiled-state true
+        default-column-width {}
+      }
+
       window-rule {
         match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
         default-floating-position x=10 y=10 relative-to="bottom-right"
