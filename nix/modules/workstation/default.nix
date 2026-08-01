@@ -187,6 +187,9 @@ in
   # Explicitly enable this for environments that don't enable it by default
   security.polkit.enable = true;
 
+  # Provide a Secret Service backend for desktop applications under Niri.
+  services.gnome.gnome-keyring.enable = true;
+
   # Support file browsing, removable media, and network locations.
   services.gvfs.enable = true;
 

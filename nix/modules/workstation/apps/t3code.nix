@@ -37,7 +37,9 @@ let
     paths = [ t3codeAppimage ];
     nativeBuildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
+      # --add-flags is a temp fix on Niri WM: https://github.com/pingdotgg/t3code/pull/2916
       wrapProgram $out/bin/t3code \
+        --add-flags "--password-store=gnome-libsecret" \
         --prefix PATH : ${
           lib.makeBinPath [
             agentPackages.claude-code
