@@ -51,6 +51,66 @@ let
     '';
   };
 
+  firewall-port = pkgs.writeShellApplication {
+    name = "firewall-port";
+    runtimeInputs = with pkgs; [
+      iptables
+      nftables
+      nixos-firewall-tool
+    ];
+    text = ''
+      usage() {
+        echo "Usage: $0 <open|close> <port>" >&2
+        echo "  Temporarily opens or closes a TCP port in the NixOS firewall." >&2
+        exit "$1"
+      }
+
+      if [[ "''${1:-}" == "help" || "''${1:-}" == "-h" || "''${1:-}" == "--help" ]]; then
+        usage 0
+      fi
+
+      [[ "$#" -eq 2 ]] || usage 1
+
+      action="$1"
+      port="$2"
+
+      if [[ ! "$port" =~ ^[0-9]+$ ]] || ((port < 1 || port > 65535)); then
+        echo "firewall-port: port must be an integer between 1 and 65535" >&2
+        exit 2
+      fi
+
+      if [[ "$action" != "open" && "$action" != "close" ]]; then
+        usage 1
+      fi
+
+      if [[ "$EUID" -ne 0 ]]; then
+        exec /run/wrappers/bin/sudo -- "$0" "$@"
+      fi
+
+      case "$action" in
+        open)
+          nixos-firewall-tool open tcp "$port"
+          ;;
+        # nixos-firewall-tool doesn't have a "close" option. instead we directly call either
+        # iptables or nft depending on the backend being used.
+        close)
+          if [[ -e /etc/systemd/system/firewall.service ]]; then
+            iptables -w -D nixos-fw -p tcp --dport "$port" -j nixos-fw-accept
+            ip6tables -w -D nixos-fw -p tcp --dport "$port" -j nixos-fw-accept
+          elif [[ -e /etc/systemd/system/nftables.service ]]; then
+            nft delete element inet nixos-fw temp-ports "{ tcp . $port }"
+          else
+            echo "firewall-port: cannot detect the NixOS firewall backend" >&2
+            exit 2
+          fi
+          ;;
+        *)
+          usage 1
+          ;;
+      esac
+    '';
+  };
+
   diff-remote = pkgs.writeTextFile {
     name = "diff-remote";
     destination = "/bin/diff-remote";
@@ -150,6 +210,7 @@ in
   home-manager.users.anthony.home.packages = [
     diff-remote
     e
+    firewall-port
     yt-audio-tracks
   ];
 }
