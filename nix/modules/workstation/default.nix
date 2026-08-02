@@ -34,6 +34,7 @@ in
     ./apps/appimage.nix
     ./apps/codex.nix
     ./apps/direnv.nix
+    ./apps/easyeffects.nix
     ./apps/handy.nix
     ./apps/kitty.nix
     ./apps/kopia.nix
@@ -361,7 +362,6 @@ in
     kopia-ui # requires ludusavi
     awscli2 # for managing s3 server
     versitygw # also for s3 server
-    easyeffects # pipewire realtime effects gui (equalizer, etc)
     cryptomator
     spotify
     feishin
