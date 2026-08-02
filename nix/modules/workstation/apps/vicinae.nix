@@ -34,6 +34,13 @@
     {
       programs.vicinae = {
         enable = true;
+        settings = {
+          theme.dark.name = "vicinae-light";
+          launcher_window = {
+            client_side_decorations.enabled = true;
+            compact_mode.enabled = true;
+          };
+        };
         extensions = [
           inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}.nix
           inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}.timer
@@ -45,5 +52,8 @@
           autoStart = true;
         };
       };
+
+      # Replace the existing imperative settings file with Home Manager's version.
+      xdg.configFile."vicinae/settings.json".force = true;
     };
 }
