@@ -165,42 +165,4 @@ in
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
   ];
-
-  home-manager.users.anthony =
-    { config, lib, ... }:
-    let
-      textEditor = "org.gnome.TextEditor.desktop";
-      textFileMimeTypes = [
-        "application/json"
-        "application/toml"
-        "application/x-shellscript"
-        "application/x-yaml"
-        "application/yaml"
-        "text/csv"
-        "text/markdown"
-        "text/plain"
-        "text/x-markdown"
-        "text/yaml"
-      ];
-    in
-    {
-      # These bookmarks appear in the Nautilus sidebar.
-      xdg.configFile."gtk-3.0/bookmarks".force = true;
-      gtk = {
-        enable = true;
-        gtk3.bookmarks = [
-          "file://${config.home.homeDirectory}/code Code"
-          "file://${config.xdg.userDirs.desktop}"
-          "file://${config.xdg.userDirs.documents}"
-          "file://${config.xdg.userDirs.download}"
-          "file://${config.xdg.userDirs.pictures}"
-          "file://${config.xdg.userDirs.music}"
-          "smb://10.0.10.10/files/ NAS Files"
-          "smb://10.0.10.10/media/ NAS Media"
-        ];
-      };
-
-      # Keep GNOME Text Editor as the default after Zen registers its MIME handlers.
-      xdg.mimeApps.defaultApplications = lib.genAttrs textFileMimeTypes (_: textEditor);
-    };
 }

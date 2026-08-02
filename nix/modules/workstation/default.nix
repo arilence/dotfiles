@@ -35,11 +35,14 @@ in
     ./apps/codex.nix
     ./apps/direnv.nix
     ./apps/easyeffects.nix
+    ./apps/gnome-text-editor.nix
     ./apps/handy.nix
     ./apps/kitty.nix
     ./apps/kopia.nix
+    ./apps/loupe.nix
     ./apps/ludusavi.nix
     ./apps/mise.nix
+    ./apps/nautilus.nix
     ./apps/neovim
     ./apps/onepassword.nix
     ./apps/pia.nix
@@ -357,8 +360,6 @@ in
     devcontainer
 
     # Gui Apps
-    nautilus # file explorer
-    loupe # image viewer
     kopia-ui # requires ludusavi
     awscli2 # for managing s3 server
     versitygw # also for s3 server
