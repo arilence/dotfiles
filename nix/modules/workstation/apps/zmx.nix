@@ -93,13 +93,21 @@ in
               }
 
               if (name != "") {
-                printf "%-20s  pid:%-8s  clients:%-2s  %s\n", name, pid, clients, dir
+                if (pid ~ /^[[:digit:]]+$/) {
+                  command = "readlink -- /proc/" pid "/cwd 2>/dev/null"
+                  # Display the current directory instead of the starting directory
+                  if ((command | getline current_dir) > 0) dir = current_dir
+                  close(command)
+                }
+
+                printf "%-20s  clients:%-2s  %s\n", name, clients, dir
               }
             }
           ')
 
           local output query key selected session_name
           output=$({ [[ -n "$display" ]] && printf '%s\n' "$display"; } | fzf \
+            --nth=1 \
             --print-query \
             --expect=ctrl-n \
             --layout=default \
