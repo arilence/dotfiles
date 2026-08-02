@@ -40,6 +40,18 @@
             client_side_decorations.enabled = true;
             compact_mode.enabled = true;
           };
+          # Launch applications as transient user services instead of inheriting Vicinae's
+          # environment. i.e. before this change, opening any terminal emulator through Vicinae
+          # would end up putting `node` (and who know's what other tools) into the PATH.
+          providers.applications.preferences.launchPrefix = lib.concatStringsSep " " [
+            "${pkgs.systemd}/bin/systemd-run"
+            "--user"
+            "--collect"
+            "--service-type=exec"
+            "--same-dir"
+            "--expand-environment=no"
+            "--"
+          ];
         };
         extensions = [
           inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}.nix
