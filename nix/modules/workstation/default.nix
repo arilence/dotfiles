@@ -643,7 +643,6 @@ in
             gd = "git diff";
             gl = "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
             start = "xdg-open";
-            open = "xdg-open";
             c = "code";
           };
 
@@ -664,6 +663,11 @@ in
           '';
 
           siteFunctions = {
+            # Launch desktop applications without tying them to the terminal.
+            open = ''
+              command xdg-open "$@" </dev/null >/dev/null 2>&1 &!
+            '';
+
             # "nix develop" uses bash by default, this changes it to use $SHELL
             # NOTE: this may cause issues in the future if a nix develop setup expects Bash
             nix = ''
