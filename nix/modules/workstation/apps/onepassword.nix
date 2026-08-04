@@ -15,7 +15,5 @@
       Restart = "on-failure";
       RestartSec = 5;
     };
-
-    Install.WantedBy = [ "graphical-session.target" ];
   };
 }
