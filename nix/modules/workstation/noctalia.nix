@@ -76,6 +76,8 @@ in
 
         widget.clock.format = "{:%a %b %-d %H:%M}";
 
+        widget.media.hide_when_no_media = true;
+
         theme.mode = "light";
 
         # Disables showing a notification every time media changes.
