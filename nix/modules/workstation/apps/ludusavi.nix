@@ -14,7 +14,7 @@ in
 {
   environment.systemPackages = [ pkgs.ludusavi ];
 
-  home-manager.users.anthony.xdg.configFile."kopia/ludusavi-backup.sh" = {
+  home-manager.users.anthony.xdg.configFile."kopia/actions/ludusavi-backup" = {
     source = "${ludusavi-backup}/bin/ludusavi-backup";
     force = true;
   };
