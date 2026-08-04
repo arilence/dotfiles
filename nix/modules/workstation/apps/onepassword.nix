@@ -10,7 +10,6 @@
 
     Service = {
       Type = "simple";
-      ExecStartPre = "${pkgs.glib}/bin/gdbus wait --session org.kde.StatusNotifierWatcher";
       ExecStart = "${pkgs._1password-gui}/bin/1password --silent";
       Restart = "on-failure";
       RestartSec = 5;

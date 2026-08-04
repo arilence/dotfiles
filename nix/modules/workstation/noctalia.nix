@@ -112,8 +112,12 @@ in
           };
         };
 
+        # TODO: should we handle starting these services inside their respective services file?
         hooks.started = [
           "${lib.getExe noctaliaPackage} msg wallpaper-set ${desktopWallpaper}"
+          "${pkgs.systemd}/bin/systemctl --user start easyeffects.service"
+          "${pkgs.systemd}/bin/systemctl --user start 1password.service"
+          "${pkgs.systemd}/bin/systemctl --user start kopia-ui.service"
         ]
         ++ lib.optionals config.arilence.workstation.apps.handy.autoStart [
           "${pkgs.systemd}/bin/systemctl --user start handy.service"
