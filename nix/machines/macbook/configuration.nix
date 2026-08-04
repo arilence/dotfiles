@@ -18,7 +18,8 @@
     HandleLidSwitchExternalPower = "ignore";
   };
 
-  networking.hostName = "macbook";
+  networking.hostName = "anthony-macbook";
+
   # The BCM4360 requires the unmaintained proprietary wl driver. Keep this
   # exception host-local and version-specific so an update requires review.
   nixpkgs.config.permittedInsecurePackages = [
