@@ -144,6 +144,12 @@ in
       }
 
       window-rule {
+        match app-id="obsidian"
+        open-maximized true
+        open-focused true
+      }
+
+      window-rule {
         match app-id="steam" title=r#"^Steam$"#
         open-maximized true
       }
