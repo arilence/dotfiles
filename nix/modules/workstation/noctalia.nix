@@ -49,6 +49,9 @@ in
       enable = true;
       settings = {
         bar.main = {
+          # Disables opening the control center when right-clicking empty bar space.
+          dead_zone.actions.right = "none";
+
           # Keep the top bar flush and square against the screen edges.
           radius = 0;
 
