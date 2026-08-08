@@ -7,11 +7,11 @@
 
 let
   agentPackages = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
-  version = "0.0.32-nightly.20260801.974";
+  version = "0.0.33-nightly.20260808.1029";
 
   src = pkgs.fetchurl {
     url = "https://github.com/pingdotgg/t3code/releases/download/v${version}/T3-Code-${version}-x86_64.AppImage";
-    hash = "sha256:9efd24e72b1797e4b16d085097b9ba6406403259972d1b9f48f422f15fe63cfc";
+    hash = "sha256:6541338281b3e3bf5d4b4b38183600308982edb828fbbc619bee9245a7d91878";
   };
 
   appimageContents = pkgs.appimageTools.extractType2 {
