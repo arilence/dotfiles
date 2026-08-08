@@ -375,7 +375,6 @@ in
     cryptomator
     spotify
     feishin
-    code-cursor
     jetbrains.idea
     ghostty
     vlc
