@@ -48,6 +48,7 @@ in
     ./apps/pia.nix
     ./apps/t3code.nix
     ./apps/vicinae.nix
+    ./apps/vlc.nix
     ./apps/vscode.nix
     ./apps/wsf.nix
     ./apps/zen-browser.nix
@@ -377,7 +378,6 @@ in
     feishin
     jetbrains.idea
     ghostty
-    vlc
     lazygit
     meld
     bottles
