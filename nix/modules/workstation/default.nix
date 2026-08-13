@@ -382,6 +382,7 @@ in
     meld
     bottles
     tableplus
+    google-chrome
     localsend # android airdrop
     bruno # rest api client
     itch # itch.io desktop client
