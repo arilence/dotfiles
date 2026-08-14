@@ -35,6 +35,7 @@ in
 
       Service = {
         Type = "simple";
+        ExecStartPre = "${pkgs.glib}/bin/gdbus wait --session org.kde.StatusNotifierWatcher";
         ExecStart = "${handy}/bin/handy --start-hidden";
         Restart = "on-failure";
         RestartSec = 5;

@@ -389,6 +389,7 @@ in
 
       Service = {
         Type = "simple";
+        ExecStartPre = "${pkgs.glib}/bin/gdbus wait --session org.kde.StatusNotifierWatcher";
         ExecStart = "${pkgs.kopia-ui}/bin/kopia-ui";
         Restart = "on-failure";
         RestartSec = 5;
