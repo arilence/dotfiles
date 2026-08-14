@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -6,6 +7,7 @@
 
 let
   kittyThemes = "${pkgs.kitty-themes}/share/kitty-themes/themes";
+  primaryModifier = lib.strings.toLower config.arilence.workstation.keybindings.primaryModifier;
 in
 {
   home-manager.users.anthony = {
@@ -389,12 +391,12 @@ in
         "ctrl+shift+z" = "toggle_layout stack";
         # Only terminals opened with this shortcut should show the zmx selector.
         "ctrl+shift+t" = "launch --type=tab --cwd=current --env ZMX_AUTO_ATTACH=1";
-        "alt+1" = "goto_tab 1";
-        "alt+2" = "goto_tab 2";
-        "alt+3" = "goto_tab 3";
-        "alt+4" = "goto_tab 4";
-        "alt+5" = "goto_tab 5";
-        "alt+6" = "goto_tab 6";
+        "${primaryModifier}+1" = "goto_tab 1";
+        "${primaryModifier}+2" = "goto_tab 2";
+        "${primaryModifier}+3" = "goto_tab 3";
+        "${primaryModifier}+4" = "goto_tab 4";
+        "${primaryModifier}+5" = "goto_tab 5";
+        "${primaryModifier}+6" = "goto_tab 6";
         "ctrl+h" = "neighboring_window left";
         "ctrl+j" = "neighboring_window down";
         "ctrl+k" = "neighboring_window up";
