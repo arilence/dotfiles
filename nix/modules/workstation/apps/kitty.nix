@@ -9,38 +9,188 @@ let
 in
 {
   home-manager.users.anthony = {
-    # kitty.themeFile exists but doesn't allow for setting a dark and light theme separately.
     xdg.configFile = {
       "kitty/startup.session".text = ''
         # Show the zmx selector in the initial shell of a new kitty instance.
         launch --env ZMX_AUTO_ATTACH=1
       '';
+
+      "kitty/tab_bar.py".text = ''
+        import os
+
+        import kitty.tab_bar as kitty_tab_bar
+        from kitty.fast_data_types import Screen, get_boss, wcswidth
+        from kitty.rgb import alpha_blend, color_from_int
+        from kitty.tab_bar import DrawData, ExtraData, TabBarData, as_rgb
+        from kitty.utils import color_as_int, sanitize_title
+
+        INDENT = "  "
+        ACTIVITY_MARKER = "● "
+        ACCENT = as_rgb(0x168EEA)
+
+        # Default is only 2 lines / row of text
+        MAX_TAB_LINES = 4
+        kitty_tab_bar.MAX_VERTICAL_TAB_LINES = MAX_TAB_LINES
+
+        def fit(text: str, width: int, *, keep_right: bool = False) -> str:
+            """Truncate text to a cell width, preserving the useful end of paths."""
+            text = sanitize_title(text)
+            if width <= 0:
+                return ""
+            if wcswidth(text) <= width:
+                return text
+            if width == 1:
+                return "…"
+
+            if keep_right:
+                while text and wcswidth(text) > width - 1:
+                    text = text[1:]
+                return "…" + text
+
+            while text and wcswidth(text) > width - 1:
+                text = text[:-1]
+            return text + "…"
+
+        def take_cells(text: str, width: int) -> tuple[str, str]:
+            used = 0
+            for index, character in enumerate(text):
+                character_width = max(0, wcswidth(character))
+                if used + character_width > width:
+                    return text[:index], text[index:]
+                used += character_width
+            return text, ""
+
+        def wrap_cwd(text: str, width: int, max_lines: int) -> list[str]:
+            """Wrap a path on directory boundaries when possible."""
+            text = sanitize_title(text)
+            lines = []
+            while text and len(lines) < max_lines:
+                if len(lines) == max_lines - 1:
+                    lines.append(fit(text, width))
+                    break
+
+                line, remainder = take_cells(text, width)
+                if remainder:
+                    # Prefer wrapping after a slash, unless that would leave a
+                    # very short line such as just the leading ~/.
+                    slash = line.rfind("/")
+                    if slash >= max(1, len(line) // 3):
+                        split = slash + 1
+                        remainder = line[split:] + remainder
+                        line = line[:split]
+                lines.append(line)
+                text = remainder
+            return lines
+
+        def cwd_for_tab(tab_id: int) -> str:
+            tab = get_boss().tab_for_id(tab_id)
+            cwd = (tab.get_cwd_of_active_window() if tab else "") or ""
+            home = os.path.expanduser("~")
+            if cwd == home:
+                return "~"
+            if cwd.startswith(home + os.sep):
+                return "~" + cwd[len(home):]
+            return cwd
+
+        def tab_line_height(draw_data: DrawData, screen: Screen) -> int:
+            tab_manager = get_boss().os_window_map.get(draw_data.os_window_id)
+            tab_count = len(tab_manager.tab_bar.last_laid_out_tabs) if tab_manager else 0
+            return max(1, min(MAX_TAB_LINES, screen.lines // max(1, tab_count)))
+
+        def clear_row(screen: Screen) -> None:
+            screen.cursor.x = 0
+            screen.draw(" " * screen.columns)
+            screen.cursor.x = 0
+
+        def draw_tab(
+            draw_data: DrawData,
+            screen: Screen,
+            tab: TabBarData,
+            before: int,
+            max_tab_length: int,
+            index: int,
+            is_last: bool,
+            extra_data: ExtraData,
+        ) -> int:
+            del before, index, is_last, extra_data
+
+            original_fg = screen.cursor.fg
+            original_bg = screen.cursor.bg
+            content_width = min(max_tab_length, screen.columns)
+            show_activity = tab.needs_attention or tab.has_activity_since_last_focus
+
+            clear_row(screen)
+            screen.cursor.bold = True
+            screen.draw(INDENT)
+            if show_activity:
+                screen.cursor.fg = ACCENT
+                screen.draw(ACTIVITY_MARKER)
+                screen.cursor.fg = original_fg
+            title_width = content_width - wcswidth(INDENT) - (
+                wcswidth(ACTIVITY_MARKER) if show_activity else 0
+            )
+            screen.draw(fit(tab.title, title_width))
+
+            line_height = tab_line_height(draw_data, screen)
+            cwd_width = content_width - wcswidth(INDENT)
+            cwd_lines = wrap_cwd(cwd_for_tab(tab.tab_id), cwd_width, line_height - 1)
+            for line_number in range(1, line_height):
+                screen.cursor.y += 1
+                screen.cursor.bg = original_bg
+                screen.cursor.bold = False
+                clear_row(screen)
+
+                if line_number <= len(cwd_lines):
+                    foreground = color_from_int(original_fg >> 8)
+                    background = color_from_int(original_bg >> 8)
+                    muted = alpha_blend(foreground, background, 0.68)
+                    screen.cursor.fg = as_rgb(color_as_int(muted))
+                    screen.draw(INDENT + cwd_lines[line_number - 1])
+
+            screen.cursor.bold = False
+            # Kitty clears the unused sidebar rows before setting up the next
+            # tab. Do not leave the active tab's blue background on the
+            # cursor, or that clear will paint the rest of the sidebar blue.
+            screen.cursor.fg = 0
+            screen.cursor.bg = 0
+            return screen.cursor.x
+      '';
+
+      # kitty.themeFile exists but doesn't allow for setting a dark and light theme separately.
       "kitty/dark-theme.auto.conf".text = ''
         include ${kittyThemes}/Alabaster_Dark.conf
 
-        # Make the selected vertical tab the filled, high-contrast item.
-        active_tab_foreground #cecece
-        active_tab_background #323738
-        inactive_tab_foreground #8a8a8a
-        inactive_tab_background #0e1415
+        # A dark sidebar with a bright, cmux-like selected tab.
+        active_tab_foreground #ffffff
+        active_tab_background #168eea
+        inactive_tab_foreground #c3c4c1
+        inactive_tab_background #20221e
+        tab_bar_background #20221e
+        tab_bar_margin_color #20221e
       '';
+
       "kitty/light-theme.auto.conf".text = ''
         include ${kittyThemes}/Alabaster.conf
 
-        # Make the selected vertical tab the filled, high-contrast item.
-        active_tab_foreground #000000
-        active_tab_background #dedede
-        inactive_tab_foreground #666666
-        inactive_tab_background #f7f7f7
+        active_tab_foreground #ffffff
+        active_tab_background #168eea
+        inactive_tab_foreground #454545
+        inactive_tab_background #eeeeea
+        tab_bar_background #eeeeea
+        tab_bar_margin_color #eeeeea
       '';
+
       "kitty/no-preference-theme.auto.conf".text = ''
         include ${kittyThemes}/Alabaster.conf
 
-        active_tab_foreground #000000
-        active_tab_background #dedede
-        inactive_tab_foreground #666666
-        inactive_tab_background #f7f7f7
+        active_tab_foreground #ffffff
+        active_tab_background #168eea
+        inactive_tab_foreground #454545
+        inactive_tab_background #eeeeea
+        tab_bar_background #eeeeea
+        tab_bar_margin_color #eeeeea
       '';
+
       "kitty/neighboring_window.py".source =
         "${pkgs.vimPlugins.smart-splits-nvim}/kitty/neighboring_window.py";
       "kitty/relative_resize.py".source = "${pkgs.vimPlugins.smart-splits-nvim}/kitty/relative_resize.py";
@@ -70,9 +220,10 @@ in
         initial_window_height = "40c";
         listen_on = "unix:@mykitty";
         startup_session = "startup.session";
-        # tab_bar_edge = "left";
-        tab_bar_style = "separator";
-        tab_title_max_length = 18;
+        tab_bar_edge = "left";
+        tab_bar_style = "custom";
+        tab_bar_min_tabs = 1;
+        tab_title_max_length = 24;
         tab_bar_margin_height = "0 1";
         text_composition_strategy = "1.0 10";
         touch_scroll_multiplier = "2.85";
