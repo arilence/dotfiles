@@ -158,7 +158,7 @@
           ];
           # In order to avoid breaking changes here, sometimes when you upgrade you should be asked
           # to bump this version
-          keyboardShortcutsVersion = 19;
+          keyboardShortcutsVersion = 20;
         };
 
         # HACK: This is a hack to add keybindings to the URL bar.
