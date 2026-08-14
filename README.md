@@ -1,37 +1,22 @@
 # dotfiles
 
-My personal configuration files. Built on [Dotbot](https://github.com/anishathalye/dotbot) for cross-platform compatibility.
+My personal NixOS configurations, managed as a Nix flake with Home Manager.
 
-## Installation
+Host-specific configurations live in `nix/machines`, while shared system and application modules live in `nix/modules`.
 
-For linux and macOS:
+## Usage
 
-```bash
-./install
-```
-
-For windows:
-
-```powershell
-.\install.ps1
-```
-
-## Updating
-
-### Dotbot + Plugins
+With [Nix](https://nixos.org/) and [mise](https://mise.jdx.dev/) installed:
 
 ```bash
-git submodule update --remote
+# Check a host configuration
+mise run test-host desktop
+
+# Rebuild the local machine
+mise run rebuild-host desktop
+
+# Provision a remote machine (destructive)
+mise run prepare-host desktop <hostname>
 ```
 
-## Completions
-
-```bash
-zprezto-build-completion
-```
-
-## Inspiration
-
-- <https://github.com/knowler/dotfiles>
-- <https://github.com/tcmmichaelb139/.dotfiles/>
-- <https://github.com/mhanberg/.dotfiles>
+Available hosts are defined in `flake.nix`.
