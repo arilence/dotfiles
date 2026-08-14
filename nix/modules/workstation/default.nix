@@ -51,7 +51,7 @@ in
     ./apps/vicinae.nix
     ./apps/vlc.nix
     ./apps/vscode.nix
-    ./apps/wsf.nix
+    # ./apps/wsf.nix # Re-enable this once it has support for Niri
     ./apps/zen-browser.nix
     ./apps/zmx.nix
     ./scripts.nix
