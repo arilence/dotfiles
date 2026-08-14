@@ -54,6 +54,7 @@
           ];
         };
         extensions = [
+          inputs.vicinae-music-links.packages.${pkgs.stdenv.hostPlatform.system}.default
           inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}.nix
           inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}.timer
           # Add Raycast extensions with:
