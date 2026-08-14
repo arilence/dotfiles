@@ -33,6 +33,7 @@
 
       Service = {
         Type = "simple";
+        ExecStartPre = "${pkgs.glib}/bin/gdbus wait --session org.kde.StatusNotifierWatcher";
         ExecStart = "${pkgs.easyeffects}/bin/easyeffects --hide-window --service-mode";
         Restart = "on-failure";
         RestartSec = 5;
