@@ -30,6 +30,7 @@ in
 
       workspace "media"
       workspace "main"
+      workspace "notes"
 
       spawn-at-startup "niri" "msg" "action" "focus-workspace" "main"
 
@@ -147,6 +148,13 @@ in
         match app-id="obsidian"
         open-maximized true
         open-focused true
+        open-on-workspace "notes"
+      }
+
+      window-rule {
+        match app-id="org.gnome.TextEditor"
+        open-focused true
+        open-on-workspace "notes"
       }
 
       window-rule {
