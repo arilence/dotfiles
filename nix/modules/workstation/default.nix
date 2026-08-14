@@ -31,6 +31,7 @@ in
     ./noctalia.nix
     ./keybindings.nix
 
+    ./apps/amp.nix
     ./apps/appimage.nix
     ./apps/codex.nix
     ./apps/direnv.nix
