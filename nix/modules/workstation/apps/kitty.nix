@@ -21,16 +21,24 @@ in
         import kitty.tab_bar as kitty_tab_bar
         from kitty.fast_data_types import Screen, get_boss, wcswidth
         from kitty.rgb import alpha_blend, color_from_int
-        from kitty.tab_bar import DrawData, ExtraData, TabBarData, as_rgb
-        from kitty.utils import color_as_int, sanitize_title
+        from kitty.tab_bar import (
+            CellRange,
+            DrawData,
+            ExtraData,
+            TabBarData,
+            TabExtent,
+            as_rgb,
+        )
+        from kitty.utils import color_as_int, path_from_osc7_url, sanitize_title
 
         INDENT = "  "
         ACTIVITY_MARKER = "● "
         ACCENT = as_rgb(0x168EEA)
 
-        # Default is only 2 lines / row of text
+        # Let long CWDs use extra rows without reserving them for every tab.
         MAX_TAB_LINES = 4
         kitty_tab_bar.MAX_VERTICAL_TAB_LINES = MAX_TAB_LINES
+        TAB_LINE_HEIGHTS: dict[int, int] = {}
 
         def fit(text: str, width: int, *, keep_right: bool = False) -> str:
             """Truncate text to a cell width, preserving the useful end of paths."""
@@ -82,9 +90,45 @@ in
                 text = remainder
             return lines
 
+        def kitty_tab(tab_id: int):
+            return get_boss().tab_for_id(tab_id)
+
+        def zmx_session_for_tab(tab_id: int) -> str:
+            """Return the session from the active `zmx attach SESSION` process."""
+            tab = kitty_tab(tab_id)
+            window = tab.active_window if tab else None
+            if not window:
+                return ""
+
+            for process in window.child.foreground_processes:
+                command = process.get("cmdline") or ()
+                if len(command) < 3 or os.path.basename(command[0]) != "zmx":
+                    continue
+                if command[1] in ("attach", "a"):
+                    return command[2]
+            return ""
+
+        def title_for_tab(tab: TabBarData) -> str:
+            kitty_tab_data = kitty_tab(tab.tab_id)
+            # Preserve explicit Kitty tab titles (including kzmx's optional
+            # display title). Otherwise use the zmx session name instead of
+            # the inner shell's CWD-based window title.
+            if kitty_tab_data and kitty_tab_data.name:
+                return kitty_tab_data.name
+            return zmx_session_for_tab(tab.tab_id) or tab.title
+
         def cwd_for_tab(tab_id: int) -> str:
             tab = get_boss().tab_for_id(tab_id)
-            cwd = (tab.get_cwd_of_active_window() if tab else "") or ""
+            window = tab.active_window if tab else None
+            reported_cwd = (
+                path_from_osc7_url(window.screen.last_reported_cwd)
+                if window and window.screen.last_reported_cwd
+                else ""
+            )
+            # A zmx client remains in the directory from which it attached, so
+            # /proc reports that stale directory. Kitty shell integration's
+            # OSC 7 value comes from the shell inside zmx and stays current.
+            cwd = reported_cwd or ((tab.get_cwd_of_active_window() if tab else "") or "")
             home = os.path.expanduser("~")
             if cwd == home:
                 return "~"
@@ -92,10 +136,115 @@ in
                 return "~" + cwd[len(home):]
             return cwd
 
-        def tab_line_height(draw_data: DrawData, screen: Screen) -> int:
-            tab_manager = get_boss().os_window_map.get(draw_data.os_window_id)
-            tab_count = len(tab_manager.tab_bar.last_laid_out_tabs) if tab_manager else 0
-            return max(1, min(MAX_TAB_LINES, screen.lines // max(1, tab_count)))
+        def desired_tab_height(tab: TabBarData, max_tab_length: int) -> int:
+            cwd_width = max(0, max_tab_length - wcswidth(INDENT))
+            cwd_lines = wrap_cwd(cwd_for_tab(tab.tab_id), cwd_width, MAX_TAB_LINES - 1)
+            return 1 + len(cwd_lines)
+
+        def allocate_tab_heights(
+            data: list[TabBarData] | tuple[TabBarData, ...],
+            available_lines: int,
+            max_tab_length: int,
+        ) -> tuple[list[int], bool]:
+            """Allocate only the rows each tab needs, within the sidebar height."""
+            if not data or available_lines <= 0:
+                return [], False
+
+            if len(data) > available_lines:
+                if available_lines == 1:
+                    return [1], False
+                return [1] * (available_lines - 1), True
+
+            desired = [desired_tab_height(tab, max_tab_length) for tab in data]
+            heights = [1] * len(data)
+            remaining = available_lines - len(data)
+
+            # Give every tab its second line before assigning third or fourth
+            # lines. This preserves as much CWD information as possible when
+            # the sidebar is too short for every wrapped path.
+            for line_height in range(2, MAX_TAB_LINES + 1):
+                for index, desired_height in enumerate(desired):
+                    if remaining == 0:
+                        return heights, False
+                    if desired_height >= line_height:
+                        heights[index] += 1
+                        remaining -= 1
+            return heights, False
+
+        def update_vertical(self, data) -> bool:
+            """Kitty's vertical layout, with a separate height for each tab."""
+            screen = self.screen
+            self.last_laid_out_tabs = data
+            self.tab_extents = ()
+            screen.cursor.x = screen.cursor.y = 0
+            screen.erase_in_display(2, False)
+            if not data:
+                return self._update_edge_defaults(True)
+
+            max_tab_length = max(1, screen.columns - 1)
+            heights, draw_ellipsis = allocate_tab_heights(
+                data, screen.lines, max_tab_length
+            )
+            rows_to_draw = len(heights)
+            total_lines = sum(heights) + int(draw_ellipsis)
+            if self.tab_bar_align == "center":
+                start_row = max(0, (screen.lines - total_lines) // 2)
+            elif self.tab_bar_align == "end":
+                start_row = max(0, screen.lines - total_lines)
+            else:
+                start_row = 0
+
+            TAB_LINE_HEIGHTS.clear()
+            TAB_LINE_HEIGHTS.update(
+                (tab.tab_id, height)
+                for tab, height in zip(data[:rows_to_draw], heights)
+            )
+
+            extents = []
+            row = start_row
+            for index, (tab, height) in enumerate(
+                zip(data[:rows_to_draw], heights)
+            ):
+                screen.cursor.x = 0
+                screen.cursor.y = row
+                screen.cursor.bg = as_rgb(self.draw_data.tab_bg(tab))
+                screen.cursor.fg = as_rgb(self.draw_data.tab_fg(tab))
+                screen.cursor.bold, screen.cursor.italic = (
+                    self.active_font_style
+                    if tab.is_active
+                    else self.inactive_font_style
+                )
+                self.draw_func(
+                    self.draw_data,
+                    screen,
+                    tab,
+                    0,
+                    max_tab_length,
+                    index + 1,
+                    True,
+                    ExtraData(),
+                )
+                extents.append(
+                    TabExtent(
+                        tab_id=tab.tab_id,
+                        x=CellRange(0, screen.columns - 1),
+                        y=CellRange(row, min(screen.lines - 1, row + height - 1)),
+                    )
+                )
+                row += height
+
+            if draw_ellipsis:
+                screen.cursor.x = 0
+                screen.cursor.y = row
+                screen.cursor.bg = as_rgb(color_as_int(self.draw_data.default_bg))
+                screen.cursor.fg = as_rgb(0xFF0000)
+                screen.draw("…")
+            self.tab_extents = tuple(extents)
+            return self._update_edge_defaults(True)
+
+        # Kitty's built-in vertical layout uses one fixed height for every tab.
+        # Install the variable-height version before Kitty loads draw_tab below.
+        kitty_tab_bar.TabBar.update_vertical = update_vertical
 
         def clear_row(screen: Screen) -> None:
             screen.cursor.x = 0
@@ -129,9 +278,9 @@ in
             title_width = content_width - wcswidth(INDENT) - (
                 wcswidth(ACTIVITY_MARKER) if show_activity else 0
             )
-            screen.draw(fit(tab.title, title_width))
+            screen.draw(fit(title_for_tab(tab), title_width))
 
-            line_height = tab_line_height(draw_data, screen)
+            line_height = TAB_LINE_HEIGHTS.get(tab.tab_id, 1)
             cwd_width = content_width - wcswidth(INDENT)
             cwd_lines = wrap_cwd(cwd_for_tab(tab.tab_id), cwd_width, line_height - 1)
             for line_number in range(1, line_height):
