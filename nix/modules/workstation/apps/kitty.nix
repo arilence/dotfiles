@@ -374,7 +374,7 @@ in
         tab_bar_edge = "left";
         tab_bar_style = "custom";
         tab_bar_min_tabs = 1;
-        tab_title_max_length = 24;
+        tab_title_max_length = 20;
         tab_bar_margin_height = "4 4";
         text_composition_strategy = "1.0 10";
         touch_scroll_multiplier = "2.85";
