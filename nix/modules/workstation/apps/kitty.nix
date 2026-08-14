@@ -397,6 +397,9 @@ in
         "${primaryModifier}+4" = "goto_tab 4";
         "${primaryModifier}+5" = "goto_tab 5";
         "${primaryModifier}+6" = "goto_tab 6";
+        "${primaryModifier}+7" = "goto_tab 7";
+        "${primaryModifier}+8" = "goto_tab 8";
+        "${primaryModifier}+9" = "goto_tab 9";
         "ctrl+h" = "neighboring_window left";
         "ctrl+j" = "neighboring_window down";
         "ctrl+k" = "neighboring_window up";
