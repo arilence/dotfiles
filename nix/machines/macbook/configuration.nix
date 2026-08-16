@@ -23,7 +23,7 @@
   # The BCM4360 requires the unmaintained proprietary wl driver. Keep this
   # exception host-local and version-specific so an update requires review.
   nixpkgs.config.permittedInsecurePackages = [
-    "broadcom-sta-6.30.223.271-59-6.18.41"
+    "broadcom-sta-6.30.223.271-59-6.18.44"
   ];
   sops.defaultSopsFile = ./secrets.sops.yaml;
 
