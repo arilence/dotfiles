@@ -355,6 +355,8 @@ in
   ## Start Programs Section ##
 
   # Allow unfree packages
+  # If you change this, you'll probably want to also change `xdg.configFile."nixpkgs/config.nix"`
+  # found inside the home-manager section.
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -445,6 +447,13 @@ in
       {
         # This should probably be set to the same version as the NixOS release
         home.stateVersion = "25.11";
+
+        # Commands such as `nix-shell -p` don't follow the system configuration.
+        # If you change this, you'll probably want to also change `nixpkgs.config.allowUnfree` for
+        # system-wide configuration.
+        xdg.configFile."nixpkgs/config.nix".text = ''
+          { allowUnfree = true; }
+        '';
 
         # Trust GitHub's published SSH host keys without requiring an interactive first-connection
         # prompt (for example, while Neovim installs plugins).
