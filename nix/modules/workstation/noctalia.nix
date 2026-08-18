@@ -36,7 +36,7 @@ in
     settings.user.default = "anthony";
 
     settings.cursor = {
-      package = pkgs.adwaita-icon-theme;
+      path = "${pkgs.adwaita-icon-theme}/share/icons";
       theme = "Adwaita";
       size = lib.mkDefault 24;
     };
