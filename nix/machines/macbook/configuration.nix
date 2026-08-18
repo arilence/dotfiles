@@ -9,6 +9,10 @@
   arilence.storage.systemDisk = lib.mkDefault "/dev/sda";
   arilence.workstation.keybindings.primaryModifier = "Super";
 
+  # Noctalia-greeter renders all UI elements except for mouse cursor on hidpi screens.
+  # Set this to 2x the default values (currently 24)
+  programs.noctalia-greeter.settings.cursor.size = 48;
+
   powerManagement.cpuFreqGovernor = "schedutil";
 
   # Let Niri and Noctalia handle lid-close locking and suspension without racing systemd-logind's
