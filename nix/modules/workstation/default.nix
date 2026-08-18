@@ -28,6 +28,7 @@ in
 
     # ./gnome.nix
     ./niri.nix
+    ./noctalia-greeter.nix
     ./noctalia.nix
     ./keybindings.nix
 
