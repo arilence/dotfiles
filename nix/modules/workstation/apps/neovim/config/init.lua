@@ -109,6 +109,8 @@ require('snacks').setup({
         ignored = false
       },
       explorer = {
+        hidden = true,
+        ignored = true,
         layout = {
           cycle = false,
           layout = {
