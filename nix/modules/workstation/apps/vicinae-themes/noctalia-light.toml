@@ -1,0 +1,89 @@
+# A fixed Vicinae port of Noctalia's built-in light palette.
+#
+# The semantic mapping follows Noctalia's community Vicinae template. Colors
+# are expanded from the built-in palette shipped by Noctalia 5.0.0.
+
+[meta]
+name = "Noctalia Light"
+description = "Vicinae theme matching Noctalia's built-in light palette"
+variant = "light"
+inherits = "vicinae-light"
+
+[colors.core]
+accent = "#5d65f5"
+accent_foreground = "#dadcff"
+background = "#e6e8fa"
+foreground = "#0e0e43"
+secondary_background = "#eff0ff"
+border = "#b8bbf5"
+
+[colors.main_window]
+border = "colors.core.border"
+footer = { background = "colors.core.secondary_background" }
+
+[colors.settings_window]
+border = "#757aec"
+
+[colors.accents]
+blue = "#5d65f5"
+green = "#0e0e43"
+magenta = "#8e93d8"
+orange = { name = "#fd4663", lighter = 40 }
+purple = "#8e93d8"
+red = "#fd4663"
+yellow = { name = "#0e0e43", lighter = 80 }
+cyan = { name = "#5d65f5", lighter = 50 }
+
+[colors.shortcut]
+border = "colors.core.border"
+
+[colors.text]
+default = "colors.core.foreground"
+muted = "#4b55c8"
+danger = "#fd4663"
+success = "#0e0e43"
+placeholder = { name = "#4b55c8", opacity = 0.6 }
+selection = { background = "colors.core.accent", foreground = "colors.core.accent_foreground" }
+
+[colors.text.links]
+default = "colors.core.accent"
+visited = { name = "#0e0e43", darker = 20 }
+
+[colors.input]
+border = "#757aec"
+border_focus = "colors.core.accent"
+border_error = "#fd4663"
+
+[colors.button.primary]
+background = "#dbddff"
+foreground = "colors.core.foreground"
+hover = { background = "#c6caff" }
+focus = { outline = "colors.core.accent" }
+
+[colors.list.item.hover]
+background = { name = "#bfc1f3", opacity = 0.25 }
+foreground = "colors.core.foreground"
+secondary_foreground = "colors.core.foreground"
+
+[colors.list.item.selection]
+background = { name = "#bfc1f3", opacity = 0.5 }
+foreground = "#040848"
+secondary_background = "#bfc1f3"
+secondary_foreground = "#040848"
+
+[colors.grid.item]
+background = "colors.core.secondary_background"
+hover = { outline = { name = "#8e93d8", opacity = 0.8 } }
+selection = { outline = "colors.core.accent" }
+
+[colors.scrollbars]
+background = { name = "colors.core.accent", opacity = 0.2 }
+
+[colors.tooltip]
+background = "colors.core.secondary_background"
+foreground = "colors.core.foreground"
+border = "colors.core.border"
+
+[colors.loading]
+bar = "colors.core.accent"
+spinner = "colors.core.accent"

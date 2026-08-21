@@ -34,8 +34,11 @@
     {
       programs.vicinae = {
         enable = true;
+        themes.noctalia-light = builtins.fromTOML (
+          builtins.readFile ./vicinae-themes/noctalia-light.toml
+        );
         settings = {
-          theme.dark.name = "vicinae-light";
+          theme.dark.name = "noctalia-light";
           launcher_window = {
             client_side_decorations.enabled = true;
             compact_mode.enabled = true;
