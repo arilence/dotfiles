@@ -38,6 +38,10 @@
           builtins.readFile ./vicinae-themes/noctalia-light.toml
         );
         settings = {
+          font.normal = {
+            family = "sans-serif";
+            size = 10;
+          };
           theme.dark.name = "noctalia-light";
           launcher_window = {
             client_side_decorations.enabled = true;
