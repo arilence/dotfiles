@@ -9,9 +9,10 @@ let
 
   handyToggle = pkgs.writeShellApplication {
     name = "handy-toggle";
-    runtimeInputs = [ handy ];
+    runtimeInputs = [ pkgs.procps ];
     text = ''
-      exec handy --toggle-transcription
+      # Nix runs Handy as .handy-wrapped, so an exact process-name match will fail.
+      exec pkill -USR2 -n handy
     '';
   };
 in
