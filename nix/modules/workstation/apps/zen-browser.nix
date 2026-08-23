@@ -155,6 +155,12 @@
                 accel = true;
               };
             }
+            # Firefox also assigns Ctrl+[ to its secondary Back shortcut. Having both
+            # active makes Zen's shortcut ordering decide which command wins.
+            {
+              id = "goBackKb2";
+              disabled = true;
+            }
           ];
           # In order to avoid breaking changes here, sometimes when you upgrade you should be asked
           # to bump this version
