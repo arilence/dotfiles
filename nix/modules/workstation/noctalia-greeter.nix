@@ -56,7 +56,6 @@ in
       cursor = {
         path = "${pkgs.adwaita-icon-theme}/share/icons";
         theme = "Adwaita";
-        size = lib.mkDefault 24;
       };
     };
   };
