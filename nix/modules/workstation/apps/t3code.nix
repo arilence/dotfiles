@@ -7,11 +7,11 @@
 
 let
   agentPackages = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
-  version = "0.0.34-nightly.20260810.1059";
+  version = "0.0.34-nightly.20260823.1169";
 
   src = pkgs.fetchurl {
     url = "https://github.com/pingdotgg/t3code/releases/download/v${version}/T3-Code-${version}-x86_64.AppImage";
-    hash = "sha256:bfeb93bd509ff77c547d5de515be54cfee303790b0d2343c9d09951888ef4758";
+    hash = "sha256:3c6d65860f3bfbbf40712b580a1407fb850d3427ccd8873b456c3b7199ef3526";
   };
 
   appimageContents = pkgs.appimageTools.extractType2 {
@@ -37,9 +37,7 @@ let
     paths = [ t3codeAppimage ];
     nativeBuildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
-      # --add-flags is a temp fix on Niri WM: https://github.com/pingdotgg/t3code/pull/2916
       wrapProgram $out/bin/t3code \
-        --add-flags "--password-store=gnome-libsecret" \
         --prefix PATH : ${
           lib.makeBinPath [
             agentPackages.claude-code
