@@ -18,12 +18,6 @@ vim.pack.add({
 
   -- Collection of QoL Plugins
   "git@github.com:folke/snacks.nvim",
-
-  -- Encrypt/Decrypt files using SOPS
-  {
-    src = "git@github.com:arilence/sops.nvim",
-    version = "fork",
-  },
 })
 
 -----
