@@ -30,44 +30,6 @@ require("tokyonight").setup({
 vim.cmd.colorscheme("tokyonight")
 
 -----
--- LSP Configs
-vim.lsp.enable('lua_ls')
-vim.lsp.config("lua_ls", {
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" }
-      }
-    }
-  }
-})
-
--- Elixir
-vim.lsp.enable('expert')
-vim.lsp.config('expert', {
-  settings = {
-    workspaceSymbols = {
-      minQueryLength = 0
-    }
-  }
-})
-
--- Nix
-vim.lsp.enable('nixd')
-
--- Rust
-vim.lsp.enable('rust_analyzer')
-
--- Godot Engine
-vim.lsp.enable('gdscript')
-
--- Go Lang
-vim.lsp.enable('gopls')
-
--- Typescript
-vim.lsp.enable('ts_ls')
-
------
 -- Code Completion
 require('blink.cmp').setup({
   keymap = {

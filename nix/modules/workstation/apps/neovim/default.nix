@@ -30,6 +30,7 @@
     ];
     initLua = ''
       ${builtins.readFile ./config/init.lua}
+      ${builtins.readFile ./config/lspconfig.lua}
       ${builtins.readFile ./config/options.lua}
       ${builtins.readFile ./config/keymaps.lua}
       ${builtins.readFile ./config/autocmds.lua}
