@@ -37,10 +37,7 @@ vim.cmd.colorscheme("tokyonight")
 
 -----
 -- LSP Configs
--- Manually enabling the LSP is not required in most cases. I have an autocmd in autocmds.lua that
--- tries to call lsp.enable on recognized file types. For the ones that don't auto enable, they can
--- be explicitly enabled here.
-
+vim.lsp.enable('lua_ls')
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
@@ -52,6 +49,7 @@ vim.lsp.config("lua_ls", {
 })
 
 -- Elixir
+vim.lsp.enable('expert')
 vim.lsp.config('expert', {
   settings = {
     workspaceSymbols = {
@@ -60,8 +58,17 @@ vim.lsp.config('expert', {
   }
 })
 
+-- Nix
+vim.lsp.enable('nixd')
+
+-- Rust
+vim.lsp.enable('rust_analyzer')
+
 -- Godot Engine
 vim.lsp.enable('gdscript')
+
+-- Go Lang
+vim.lsp.enable('gopls')
 
 -- Typescript
 vim.lsp.enable('ts_ls')

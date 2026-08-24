@@ -68,32 +68,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Enable installed language servers that support the current filetype.
--- Configs with dynamic commands remain explicitly enabled in init.lua.
-local checked_lsp_filetypes = {}
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("auto_enable_lsp"),
-  callback = function(event)
-    local filetype = vim.bo[event.buf].filetype
-    if checked_lsp_filetypes[filetype] then
-      return
-    end
-    checked_lsp_filetypes[filetype] = true
-
-    for _, config in ipairs(vim.lsp.get_configs({
-      filetype = filetype,
-      enabled = false,
-    })) do
-      local cmd = config.cmd
-      if type(cmd) == "table"
-          and type(cmd[1]) == "string"
-          and vim.fn.executable(cmd[1]) == 1 then
-        vim.lsp.enable(config.name)
-      end
-    end
-  end,
-})
-
 -- LSP format on save
 -- Credit: https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
 vim.api.nvim_create_autocmd("LspAttach", {
