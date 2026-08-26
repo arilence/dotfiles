@@ -32,9 +32,8 @@ in
     ./noctalia.nix
     ./keybindings.nix
 
-    ./apps/amp.nix
+    ./apps/ai.nix
     ./apps/appimage.nix
-    ./apps/codex.nix
     ./apps/direnv.nix
     ./apps/easyeffects.nix
     ./apps/gnome-text-editor.nix
