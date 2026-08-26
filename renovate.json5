@@ -6,4 +6,27 @@
   "nix": {
     "enabled": true,
   },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^nix/modules/workstation/apps/t3code\\.nix$/",
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s+releaseVersion = \\\"(?<currentValue>[^\\\"]+)\\\";[\\s\\S]*?hash = \\\"sha256:(?<currentDigest>[a-f0-9]{64})\\\";",
+      ],
+      "versioningTemplate": "semver",
+    },
+  ],
+  "packageRules": [
+    {
+      "description": "Follow T3Code nightly releases after a three-day delay",
+      "matchManagers": ["custom.regex"],
+      "matchPackageNames": ["pingdotgg/t3code"],
+      "allowedVersions": "/^v\\d+\\.\\d+\\.\\d+-nightly\\.\\d{8}\\.\\d+$/",
+      "ignoreUnstable": false,
+      "respectLatest": false,
+      "minimumReleaseAge": "3 days",
+    },
+  ],
 }
