@@ -166,6 +166,7 @@ in
       window-rule {
         match app-id="steam" title=r#"^Steam$"#
         open-maximized true
+        open-focused true
       }
 
       window-rule {
@@ -196,6 +197,7 @@ in
       window-rule {
         match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
         default-floating-position x=10 y=10 relative-to="bottom-right"
+        open-focused false
       }
 
       // Keep Proton and conventionally identified Steam game windows out of
