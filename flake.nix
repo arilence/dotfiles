@@ -15,7 +15,7 @@
     vicinae-extensions.url = "github:vicinaehq/extensions";
     vicinae-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
-    vicinae-music-links.url = "git+ssh://git@github.com/arilence/vicinae-music-links.git";
+    vicinae-music-links.url = "github:arilence/vicinae-music-links";
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";

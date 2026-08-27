@@ -660,17 +660,17 @@
         "vicinae": "vicinae_2"
       },
       "locked": {
-        "lastModified": 1786740873,
-        "narHash": "sha256-CZzeJ5HXWJ2XWdHVHjj3ClSMkwNz5qA1AUoIKqSZwuw=",
-        "ref": "refs/heads/main",
-        "rev": "dc656c4f39bd42d138cc2188f1a97a7d8783fca1",
-        "revCount": 13,
-        "type": "git",
-        "url": "ssh://git@github.com/arilence/vicinae-music-links.git"
+        "lastModified": 1787786313,
+        "narHash": "sha256-eu1ipIXLpbk8vB9zQtBDaIIbgGwYxE0O4UdIjR7MJLE=",
+        "owner": "arilence",
+        "repo": "vicinae-music-links",
+        "rev": "25b354658f755dc3fbc98c4a1a347ad0a91ff8fb",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/arilence/vicinae-music-links.git"
+        "owner": "arilence",
+        "repo": "vicinae-music-links",
+        "type": "github"
       }
     },
     "vicinae_2": {
