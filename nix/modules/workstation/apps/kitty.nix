@@ -346,6 +346,46 @@ in
         "${pkgs.vimPlugins.smart-splits-nvim}/kitty/neighboring_window.py";
       "kitty/relative_resize.py".source = "${pkgs.vimPlugins.smart-splits-nvim}/kitty/relative_resize.py";
       "kitty/split_window.py".source = "${pkgs.vimPlugins.smart-splits-nvim}/kitty/split_window.py";
+      "kitty/toggle_tab_bar.py".text = ''
+        from kitty.boss import Boss
+        from kitty.constants import is_wayland
+        from kitty.fast_data_types import apply_options_update, get_options, set_options
+        from kittens.tui.handler import result_handler
+
+
+        def main(args: list[str]) -> None:
+            pass
+
+
+        @result_handler(no_ui=True)
+        def handle_result(
+            args: list[str],
+            answer: str,
+            target_window_id: int,
+            boss: Boss,
+        ) -> None:
+            opts = get_options()
+            is_hidden = opts.tab_bar_style == "hidden"
+            opts.tab_bar_style = "custom" if is_hidden else "hidden"
+
+            set_options(
+                opts,
+                is_wayland(),
+                boss.args.debug_rendering,
+                boss.args.debug_font_fallback,
+            )
+            apply_options_update()
+            for tab_manager in boss.all_tab_managers:
+                tab_manager.apply_options()
+                if not is_hidden:
+                    # With a hidden tab bar, TabBar.layout() returns before it
+                    # replaces these rectangles. Clear the cached visible-bar
+                    # geometry so its top/bottom fill strips are not painted.
+                    tab_manager.tab_bar.blank_rects = ()
+                    tab_manager.tab_bar._last_viewport = None
+                    tab_manager.tab_bar.laid_out_once = False
+                tab_manager.resize()
+      '';
     };
 
     programs.kitty = {
@@ -389,6 +429,7 @@ in
         "ctrl+shift+backslash" = "launch --cwd=current --location=vsplit --env ZMX_AUTO_ATTACH=1";
         "ctrl+shift+minus" = "launch --cwd=current --location=hsplit --env ZMX_AUTO_ATTACH=1";
         "ctrl+shift+z" = "toggle_layout stack";
+        "ctrl+[" = "kitten toggle_tab_bar.py";
         # Only terminals opened with this shortcut should show the zmx selector.
         "ctrl+shift+t" = "launch --type=tab --cwd=current --env ZMX_AUTO_ATTACH=1";
         "${primaryModifier}+1" = "goto_tab 1";
