@@ -12,6 +12,7 @@
       Type = "simple";
       ExecStartPre = "${pkgs.glib}/bin/gdbus wait --session org.kde.StatusNotifierWatcher";
       ExecStart = "${pkgs._1password-gui}/bin/1password --silent";
+      KillMode = "mixed";
       Restart = "on-failure";
       RestartSec = 5;
     };
