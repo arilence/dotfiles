@@ -11,6 +11,15 @@ in
     settings.default_session.user = "greeter";
   };
 
+  services.pipewire = {
+    # When xwayland-satellite exits while PipeWire is stopping, the X11 bell module crashes the
+    # entire PipeWire process when the X11 display disappears. This is only helpful in a true X11
+    # set up. Since we're using xwayland-satellite, this is not needed to be enabled.
+    extraConfig.pipewire."10-disable-x11-bell" = {
+      "context.properties"."module.x11.bell" = false;
+    };
+  };
+
   environment.systemPackages = [
     # Xwayland support for apps like Steam
     pkgs.xwayland-satellite
