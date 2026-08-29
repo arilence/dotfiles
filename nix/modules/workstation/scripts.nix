@@ -28,7 +28,7 @@ let
     text = ''
       usage() {
         echo "Usage: $0 <youtube-url>" >&2
-        echo "  Downloads a YouTube video as split audio tracks into the current directory." >&2
+        echo "  Downloads a YouTube video as split audio tracks into a directory named after the video." >&2
         exit 1
       }
 
@@ -45,8 +45,8 @@ let
         --write-info-json \
         --write-description \
         --embed-metadata \
-        -o "%(title).200B [%(id)s].%(ext)s" \
-        -o "chapter:%(section_number)02d - %(section_title).200B.%(ext)s" \
+        -o "%(title).200B [%(id)s]/%(title).200B [%(id)s].%(ext)s" \
+        -o "chapter:%(title).200B [%(id)s]/%(section_number)02d - %(section_title).200B.%(ext)s" \
         "$1"
     '';
   };
