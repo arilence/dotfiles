@@ -27,7 +27,14 @@
     systemd.user.services.easyeffects = {
       Unit = {
         Description = "Easy Effects Service";
-        After = [ "graphical-session.target" ];
+        # EasyEffects aborts if PipeWire vanishes while it is shutting down.
+        After = [
+          "graphical-session.target"
+          "dbus.service"
+          "pipewire.service"
+          "pipewire-pulse.service"
+          "wireplumber.service"
+        ];
         PartOf = [ "graphical-session.target" ];
       };
 
