@@ -21,10 +21,8 @@
   networking.hostName = "anthony-macbook";
 
   # The BCM4360 requires the unmaintained proprietary wl driver. Keep this
-  # exception host-local and version-specific so an update requires review.
-  nixpkgs.config.permittedInsecurePackages = [
-    "broadcom-sta-6.30.223.271-59-6.18.44"
-  ];
+  # exception host-local, but allow its kernel-coupled version to change.
+  nixpkgs.config.allowInsecurePredicate = pkg: lib.getName pkg == "broadcom-sta";
   sops.defaultSopsFile = ./secrets.sops.yaml;
 
   system.stateVersion = "26.05";
