@@ -62,6 +62,11 @@
         let
           system = "x86_64-linux";
 
+          # Record where each NixOS generation came from so a deployed system
+          # can be traced back to the exact repository revision that built it.
+          configurationRepository = "https://github.com/arilence/dotfiles";
+          configurationRevision = inputs.self.rev or inputs.self.dirtyRev or "dirty";
+
           mkWorkstation =
             hostModules:
             nixpkgs.lib.nixosSystem {
@@ -69,6 +74,13 @@
               specialArgs = { inherit inputs; };
               modules = [
                 {
+                  system.configurationRevision = configurationRevision;
+
+                  environment.etc."nixos-configuration-source".text = builtins.toJSON {
+                    repository = configurationRepository;
+                    revision = configurationRevision;
+                  };
+
                   # Provides both unstable channels for selecting newer app versions.
                   nixpkgs.overlays = [
                     (final: prev: {
