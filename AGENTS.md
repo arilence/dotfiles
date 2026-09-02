@@ -12,3 +12,9 @@ Use this order:
 4. Only add a source patch or trigger a local package build after cached package options have been ruled out, or when the user explicitly chooses that tradeoff.
 
 For potentially large source builds, explain the expected compilation and download cost before starting. Do not assume that building a patched dependency locally is acceptable merely because the patch is technically correct.
+
+## Git Commits
+
+- Use the [Conventional Commits](https://www.conventionalcommits.org/) format for every commit message.
+- Keep each commit focused on a single logical change. Avoid mixing unrelated refactors, formatting, or behavior changes.
+- Do not commit secrets, credentials, local environment files (such as `.env`), or generated build artifacts.
