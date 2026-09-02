@@ -57,7 +57,9 @@ in
       }
 
       layout {
-          always-center-single-column
+        default-column-width { proportion 0.66666; }
+        center-focused-column "always"
+        always-center-single-column
       }
 
       debug {
@@ -168,7 +170,6 @@ in
 
       window-rule {
         match app-id="kitty"
-        open-maximized true
         open-focused true
       }
 
@@ -180,7 +181,6 @@ in
 
       window-rule {
         match app-id="discord"
-        open-maximized true
         open-on-workspace "media"
         open-focused true
       }
