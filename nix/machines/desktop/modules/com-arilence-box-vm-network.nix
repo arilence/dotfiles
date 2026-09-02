@@ -1,3 +1,5 @@
+{ config, ... }:
+
 {
   networking.networkmanager.ensureProfiles.profiles.vmbr0 = {
     connection = {
@@ -20,7 +22,7 @@
   networking.nat = {
     enable = true;
     internalInterfaces = [ "vmbr0" ];
-    externalInterface = "eno1";
+    externalInterface = config.arilence.networking.primaryInterface;
   };
 
   virtualisation.libvirtd.allowedBridges = [ "vmbr0" ];

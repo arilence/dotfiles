@@ -9,24 +9,11 @@
 
     ./disk-config.nix
     ./modules/com-arilence-box-vm-network.nix
+    ./modules/networking.nix
     ./modules/nvidia-gpu.nix
   ];
 
   arilence.workstation.apps.handy.autoStart = true;
-
-  networking = {
-    hostName = "anthony-desktop";
-
-    # NetworkManager manages DHCP for this interface.
-    interfaces.eno1.useDHCP = false;
-  };
-
-  # Open desktop specific ports.
-  networking.firewall = {
-    allowedTCPPorts = [
-      3773 # T3 Code
-    ];
-  };
 
   sops.defaultSopsFile = ./secrets.sops.yaml;
 
