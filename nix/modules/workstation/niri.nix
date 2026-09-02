@@ -96,7 +96,7 @@ in
       }
 
       binds {
-        Mod+Space allow-inhibiting=false { spawn "${pkgs.vicinae}/bin/vicinae" "toggle"; }
+        Mod+Space allow-inhibiting=false { spawn "${pkgs.nixosUnstable.vicinae}/bin/vicinae" "toggle"; }
         Mod+Q repeat=false allow-inhibiting=false { quit; }
         Mod+W repeat=false allow-inhibiting=false { close-window; }
         ${inversePrimaryModifier}+Shift+S { screenshot; }

@@ -22,7 +22,7 @@
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/vicinae" = {
           name = "Toggle Vicinae";
-          command = "${pkgs.vicinae}/bin/vicinae toggle";
+          command = "${pkgs.nixosUnstable.vicinae}/bin/vicinae toggle";
           binding = "<${config.arilence.workstation.keybindings.primaryModifier}>space";
         };
       };
@@ -34,9 +34,8 @@
     {
       programs.vicinae = {
         enable = true;
-        themes.noctalia-light = builtins.fromTOML (
-          builtins.readFile ./vicinae-themes/noctalia-light.toml
-        );
+        package = pkgs.nixosUnstable.vicinae;
+        themes.noctalia-light = builtins.fromTOML (builtins.readFile ./vicinae-themes/noctalia-light.toml);
         settings = {
           font.normal = {
             family = "sans-serif";
@@ -47,18 +46,20 @@
             client_side_decorations.enabled = true;
             compact_mode.enabled = true;
           };
-          # Launch applications as transient user services instead of inheriting Vicinae's
-          # environment. i.e. before this change, opening any terminal emulator through Vicinae
-          # would end up putting `node` (and who know's what other tools) into the PATH.
-          providers.applications.preferences.launchPrefix = lib.concatStringsSep " " [
-            "${pkgs.systemd}/bin/systemd-run"
-            "--user"
-            "--collect"
-            "--service-type=exec"
-            "--same-dir"
-            "--expand-environment=no"
-            "--"
-          ];
+          providers.applications = {
+            # Launch applications as transient user services instead of inheriting Vicinae's
+            # environment. i.e. before this change, opening any terminal emulator through Vicinae
+            # would end up putting `node` (and who know's what other tools) into the PATH.
+            preferences.launchPrefix = lib.concatStringsSep " " [
+              "${pkgs.systemd}/bin/systemd-run"
+              "--user"
+              "--collect"
+              "--service-type=exec"
+              "--same-dir"
+              "--expand-environment=no"
+              "--"
+            ];
+          };
         };
         extensions = [
           inputs.vicinae-music-links.packages.${pkgs.stdenv.hostPlatform.system}.default
