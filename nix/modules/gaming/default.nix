@@ -12,6 +12,9 @@
     ./moonlight.nix
   ];
 
+  # Better performance in Wine and Proton applications
+  boot.kernelModules = [ "ntsync" ];
+
   programs.steam = lib.mkMerge [
     {
       enable = true;
