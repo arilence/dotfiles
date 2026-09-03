@@ -57,7 +57,7 @@ in
       }
 
       layout {
-        default-column-width { proportion 0.66666; }
+        default-column-width { proportion 0.75; }
         center-focused-column "always"
         always-center-single-column
       }
@@ -175,7 +175,6 @@ in
 
       window-rule {
         match app-id="steam" title=r#"^Steam$"#
-        open-maximized true
         open-focused true
       }
 
