@@ -25,6 +25,7 @@ in
 {
   imports = [
     ../storage/encrypted-btrfs.nix
+    ./account-avatar.nix
 
     # ./gnome.nix
     ./niri.nix

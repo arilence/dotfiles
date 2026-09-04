@@ -7,21 +7,12 @@
 
 let
   desktopWallpaper = ../../assets/wallpaper.png;
-  accountAvatar = ../../assets/avatar.png;
   primaryModifier = config.arilence.workstation.keybindings.primaryModifier;
 in
 {
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
-
-  systemd.tmpfiles.rules = [
-    # Set the account picture used by AccountsService and GDM.
-    # Files must be in PNG format to work apparently...
-    # From: https://discourse.nixos.org/t/setting-the-user-profile-image-under-gnome/36233/10
-    "f+ /var/lib/AccountsService/users/${config.users.users.anthony.name} 0600 root root - [User]\\nIcon=/var/lib/AccountsService/icons/${config.users.users.anthony.name}\\n"
-    "L+ /var/lib/AccountsService/icons/${config.users.users.anthony.name} - - - - ${accountAvatar}"
-  ];
 
   programs.dconf.profiles.user.databases = [
     {
