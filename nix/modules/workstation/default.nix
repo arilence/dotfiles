@@ -306,7 +306,7 @@ in
         "anthony-phone" = {
           id = "7OR6DQX-QLG6LKG-MGWC3CF-6HOC2RC-CN42TRC-QWW2OVM-ML7CSTN-I2F6DA5";
         };
-        "app-platform" = {
+        "apps-ovh" = {
           id = "GRZAOW2-SUEULUK-CE7IZ6S-Z7KVQG5-JU2ITIF-YP2ICKR-M46DM5F-7FVACAY";
         };
       };
@@ -318,9 +318,9 @@ in
             "anthony-desktop"
             "anthony-macbook"
             "anthony-phone"
-            # App-platform should only have an encrypted copy of this data
+            # apps-ovh should only have an encrypted copy of this data
             {
-              name = "app-platform";
+              name = "apps-ovh";
               encryptionPasswordFile = config.sops.secrets.syncthing-untrusted-device-password.path;
             }
           ];
