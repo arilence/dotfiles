@@ -132,6 +132,7 @@
         };
         profiles.default = {
           settings = {
+            "services.sync.engine.spaces" = true;
             "zen.view.sidebar-expanded" = true;
             "zen.view.use-single-toolbar" = false;
             "zen.urlbar.behavior" = "float";
