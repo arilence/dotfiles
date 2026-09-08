@@ -7,6 +7,12 @@
 
 let
   kittyThemes = "${pkgs.kitty-themes}/share/kitty-themes/themes";
+  alabasterLightOverrides = ''
+    # Override the Alabaster light theme's default colours for better contrast.
+    color7 #454545
+    color15 #303030
+    color8 #666666
+  '';
   primaryModifier = lib.strings.toLower config.arilence.workstation.keybindings.primaryModifier;
 in
 {
@@ -322,6 +328,7 @@ in
 
       "kitty/light-theme.auto.conf".text = ''
         include ${kittyThemes}/Alabaster.conf
+        ${alabasterLightOverrides}
 
         active_tab_foreground #ffffff
         active_tab_background #168eea
@@ -333,6 +340,7 @@ in
 
       "kitty/no-preference-theme.auto.conf".text = ''
         include ${kittyThemes}/Alabaster.conf
+        ${alabasterLightOverrides}
 
         active_tab_foreground #ffffff
         active_tab_background #168eea
@@ -404,6 +412,8 @@ in
         clear_all_shortcuts = true;
         cursor_shape = "block";
         disable_ligatures = "always";
+        # Keep CLI hints readable when applications use ANSI faint text.
+        dim_opacity = "0.75";
         enabled_layouts = "splits,stack";
         inactive_text_alpha = "1.0";
         remember_window_size = false;
