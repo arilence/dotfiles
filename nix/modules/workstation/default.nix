@@ -760,6 +760,10 @@ in
             diff.colorMoved = "plain";
             diff.mnemonicprefix = true;
             diff.renames = true;
+            diff.tool = "delta";
+            difftool.prompt = false;
+            # Prevent delta's inner git diff from invoking this difftool recursively.
+            difftool.delta.cmd = ''${pkgs.delta}/bin/delta --diff-args=--no-ext-diff --paging=always "$LOCAL" "$REMOTE"'';
             push.default = "simple";
             push.autoSetupRemote = true;
             push.followTags = true;
