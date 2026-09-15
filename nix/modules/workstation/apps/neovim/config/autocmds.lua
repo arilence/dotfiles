@@ -3,12 +3,22 @@ local function augroup(name)
 end
 
 -- Reload files if changed on disk
--- Is this made obsolete by `opt.autoread`?
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
   callback = function()
     if vim.o.buftype ~= "nofile" then
       vim.cmd("checktime")
+    end
+  end,
+})
+
+-- Enable Tree-sitter highlighting when a parser is available for the filetype.
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("treesitter"),
+  callback = function(event)
+    local language = vim.treesitter.language.get_lang(vim.bo[event.buf].filetype)
+    if language and vim.treesitter.language.add(language) then
+      vim.treesitter.start(event.buf, language)
     end
   end,
 })

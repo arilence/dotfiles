@@ -1,39 +1,30 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
-  # Installs the latest nightly version, faster releases than official nixos packages
-  # Requires the overlay to be added in flake.nix
-  nixpkgs.overlays = [
-    inputs.neovim-nightly-overlay.overlays.default
-  ];
-
   environment.systemPackages = with pkgs; [
     # language servers
     lua-language-server
     nixd
-    rust-analyzer
     # plugin prerequisites
-    gcc
     ripgrep
     sops
-    tree-sitter
   ];
+
+  home-manager.users.anthony.xdg.configFile."nvim/lua/config".source = ./config;
 
   home-manager.users.anthony.programs.neovim = {
     enable = true;
+    package = pkgs.nixosUnstable.neovim-unwrapped;
     defaultEditor = true;
     withRuby = true;
     withPython3 = true;
     plugins = with pkgs.vimPlugins; [
       smart-splits-nvim
+      # Nix owns parser installation; keep every language available without :TSInstall.
       nvim-treesitter.withAllGrammars
     ];
     initLua = ''
-      ${builtins.readFile ./config/init.lua}
-      ${builtins.readFile ./config/lspconfig.lua}
-      ${builtins.readFile ./config/options.lua}
-      ${builtins.readFile ./config/keymaps.lua}
-      ${builtins.readFile ./config/autocmds.lua}
+      require("config")
     '';
   };
 }

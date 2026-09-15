@@ -31,8 +31,6 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.home-manager.follows = "home-manager";
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
     # Private Internet Access VPN
     pia.url = "github:arilence/pia.nix";
     pia.inputs.nixpkgs.follows = "nixpkgs";

@@ -18,7 +18,7 @@ map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, 
 -- Clear current search with //
 map("n", "//", ":nohlsearch <CR>")
 
--- Toggle comments
+-- Toggle comments. Uses tree-sitter-aware comment mappings.
 map("n", "<C-/>", "gcc", { remap = true })
 map("v", "<C-/>", "gc", { remap = true })
 

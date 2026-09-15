@@ -1,5 +1,5 @@
--- references
--- - https://tduyng.com/blog/neovim-basic-setup/#optionslua
+-- Set options (including the leader key) before loading plugins.
+require("config.options")
 
 -- Plugins
 vim.pack.add({
@@ -12,9 +12,6 @@ vim.pack.add({
   -- Code Completion
   "git@github.com:saghen/blink.lib",
   "git@github.com:saghen/blink.cmp",
-
-  -- Better code commenting
-  "git@github.com:numToStr/Comment.nvim",
 
   -- Collection of QoL Plugins
   "git@github.com:folke/snacks.nvim",
@@ -44,10 +41,6 @@ require('blink.cmp').setup({
   fuzzy = { implementation = "lua" },
   signature = { enabled = true },
 })
-
------
--- Better code commenting
-require('Comment').setup()
 
 -----
 -- Collection of QoL Plugins
@@ -112,18 +105,6 @@ require('snacks').setup({
   },
 })
 
------
--- Syntax Highlighting
--- nvim-treesitter is deprecated, which means this won't work: require('nvim-treesitter.configs').setup()
--- This is apparently a workaround that seems to work on nvim 0.12
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function(event)
-    local filetype = vim.bo[event.buf].filetype
-    local language = vim.treesitter.language.get_lang(filetype)
-
-    if language and vim.treesitter.language.add(language) then
-      vim.treesitter.start(event.buf, language)
-    end
-  end,
-})
+require("config.lspconfig")
+require("config.keymaps")
+require("config.autocmds")
