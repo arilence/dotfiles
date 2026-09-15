@@ -110,12 +110,13 @@ in
             --nth=1 \
             --print-query \
             --expect=ctrl-n \
+            --bind='tab:transform-query(printf "%s" {1})+end-of-line' \
             --layout=default \
             --border=rounded \
             --margin=8%,10% \
             --padding=1,2 \
             --prompt="zmx> " \
-            --header="Enter: select | Ctrl-N: create new" \
+            --header="Enter: select | Tab: complete name | Ctrl-N: create new" \
             --preview='zmx history {1}' \
             --preview-window=right:60%:follow \
           )
