@@ -5,12 +5,12 @@
 }:
 
 let
-  version = "0.6.0";
+  version = "0.16.0";
 
   src = pkgs.requireFile {
     name = "delta-linux-x86_64.tar.gz";
     url = "https://delta.dev/download";
-    hash = "sha256-geR2EcmiM7CmtvaR/6AvBMft297T2ijRrDegm5tMESY=";
+    hash = "sha256-CJdYlrkxL7xK1cIp9bCxDoyU8QEImNnFAihzBEIAVTw=";
   };
 
   delta-unwrapped = pkgs.stdenvNoCC.mkDerivation {
