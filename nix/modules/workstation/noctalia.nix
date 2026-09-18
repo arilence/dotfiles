@@ -28,8 +28,32 @@ in
   home-manager.users.anthony = {
     imports = [ inputs.noctalia.homeModules.default ];
 
+    # Noctalia can fail to discover audio devices, leaving the UI to display volume at 0%, if it
+    # starts before WirePlumber discovers devices.
+    # HACK: Order startup and allow time for the default sink.
+    systemd.user.services.noctalia = {
+      Unit = {
+        Wants = [ "wireplumber.service" ];
+        After = [
+          "pipewire.service"
+          "wireplumber.service"
+        ];
+      };
+      Service.ExecStartPre = pkgs.writeShellScript "noctalia-wait-for-audio" ''
+        for attempt in {1..50}; do
+          if ${pkgs.wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ >/dev/null 2>&1; then
+            exit 0
+          fi
+          ${pkgs.coreutils}/bin/sleep 0.1
+        done
+        # Still start the desktop shell when no audio output is connected.
+        exit 0
+      '';
+    };
+
     programs.noctalia = {
       enable = true;
+      systemd.enable = true;
       settings = {
         bar.main = {
           # Disables opening the control center when right-clicking empty bar space.

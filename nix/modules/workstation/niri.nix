@@ -35,7 +35,9 @@ in
     };
 
     xdg.configFile."niri/config.kdl".text = ''
-      spawn-at-startup "noctalia"
+      // Normally this is where we'd start noctalia, but due to a race condition bug with audio, we
+      // start it through a systemd service now within noctalia.nix.
+      //spawn-at-startup "noctalia"
 
       workspace "media"
       workspace "main"
