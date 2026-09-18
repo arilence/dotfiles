@@ -8,12 +8,12 @@
 let
   agentPackages = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
   # renovate: datasource=github-release-attachments depName=pingdotgg/t3code
-  releaseVersion = "v0.0.41-nightly.20260914.1687";
+  releaseVersion = "v0.0.41-nightly.20260915.1735";
   version = lib.removePrefix "v" releaseVersion;
 
   src = pkgs.fetchurl {
     url = "https://github.com/pingdotgg/t3code/releases/download/${releaseVersion}/T3-Code-${version}-x86_64.AppImage";
-    hash = "sha256:c3540f740d26a03a1bab4ce031991a6a83205a7a9dcd359015527982eff6f5bf";
+    hash = "sha256:dd95675d861a36ba916d8f2953a5c24908587950eacc9282735fb7a6ba5cb27e";
   };
 
   appimageContents = pkgs.appimageTools.extractType2 {
