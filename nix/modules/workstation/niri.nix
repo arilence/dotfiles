@@ -166,7 +166,7 @@ in
       }
 
       window-rule {
-        match app-id="md.Obsidian"
+        match app-id="md.obsidian.Obsidian"
         open-maximized true
         open-focused true
         open-on-workspace "notes"
