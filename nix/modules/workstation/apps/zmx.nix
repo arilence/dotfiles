@@ -180,24 +180,6 @@ in
               zmx attach "$session_name"
         }
 
-        dev() {
-          if (( $# != 1 )); then
-            printf 'usage: dev <directory-name>\n' >&2
-            return 2
-          fi
-
-          local name="$1"
-          local cwd
-          cwd=$(zoxide query -- "$name") || {
-            printf 'dev: no directory found for %q\n' "$name" >&2
-            return 1
-          }
-
-          kzmx "$name.vim" "$cwd"
-          kzmx "$name.zsh" "$cwd"
-          kzmx "$name.git" "$cwd"
-        }
-
         # Ask for the zmx session name only when the terminal explicitly opts in.
         if command -v zmx &> /dev/null \
           && command -v fzf &> /dev/null \
