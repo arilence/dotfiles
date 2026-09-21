@@ -55,6 +55,9 @@ in
       enable = true;
       systemd.enable = true;
       settings = {
+        # Manage plugins through Nix instead of background Git updates.
+        plugins.auto_update = "none";
+
         bar.main = {
           # Disables opening the control center when right-clicking empty bar space.
           dead_zone.actions.right = "none";
