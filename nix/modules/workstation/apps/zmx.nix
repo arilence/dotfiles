@@ -76,12 +76,15 @@ let
       fi
 
       echo "The following zmx sessions will be killed:"
-      printf '  %s\n' "$sessions"
+      while IFS= read -r session; do
+        printf '  %s\n' "$session"
+      done <<< "$sessions"
       printf 'Continue? [y/N] '
-      IFS= read -r reply || true
+      IFS= read -r -n 1 reply || true
+      printf '\n'
 
       case "$reply" in
-        y | Y | yes | YES | Yes) ;;
+        y | Y) ;;
         *)
           echo "Cancelled."
           exit 0
