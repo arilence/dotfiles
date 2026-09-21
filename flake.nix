@@ -4,6 +4,10 @@
     # List of available versions: https://channels.nixos.org/
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
+    # Temporary Steam menu workaround: use cached xwayland-satellite 0.8.1.
+    # Remove once https://github.com/NixOS/nixpkgs/pull/564273 reaches our channel.
+    nixpkgs-xwayland-satellite.url = "github:NixOS/nixpkgs/6de8ef858b37d246936dfdddcbca9b6da43396a4";
+
     # Prefer to use nixOS-unstable when adding a package that's not yet available in stable nixpkgs.
     # nixPKGS-unstable is closer to the master branch and therefore has less rigorous testing.
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # <- prefer this one when unsure.

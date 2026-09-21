@@ -1,8 +1,16 @@
-{ config, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 
 let
   primaryModifier = config.arilence.workstation.keybindings.primaryModifier;
   inversePrimaryModifier = if primaryModifier == "Alt" then "Super" else "Alt";
+  # 0.8.2 dismisses Steam menus immediately: https://github.com/niri-wm/niri/issues/4517
+  xwaylandSatellite =
+    inputs.nixpkgs-xwayland-satellite.legacyPackages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite;
 in
 {
   programs.niri.enable = true;
@@ -22,7 +30,7 @@ in
 
   environment.systemPackages = [
     # Xwayland support for apps like Steam
-    pkgs.xwayland-satellite
+    xwaylandSatellite
   ];
 
   home-manager.users.anthony = {
