@@ -142,6 +142,32 @@ in
             return 130
           fi
 
+          local kitty_window_id="$KITTY_WINDOW_ID"
+          if [[ -n "$ZMX_SESSION" ]]; then
+            # This handles an edge case when having two kitty tabs pointed to the same zmx session.
+            # Use the ID of the client that most recently sent input to determine which kitty tab
+            # to update it's title.
+            local leader_kitty_window_id
+            leader_kitty_window_id=$(zmx print-env . KITTY_WINDOW_ID 2>/dev/null) || true
+            if [[ -n "$leader_kitty_window_id" ]]; then
+              kitty_window_id="$leader_kitty_window_id"
+            fi
+          fi
+
+          if [[ -n "$kitty_window_id" ]] && command -v kitten &> /dev/null; then
+            local session_id
+            session_id=$(printf '%s' "$session_name" | sha256sum | awk '{print $1}')
+            kitten @ set-user-vars \
+              --match "id:$kitty_window_id" \
+              "zmx_session=$session_name" \
+              "zmx_session_id=$session_id" \
+              2>/dev/null || true
+            kitten @ set-tab-title \
+              --match "window_id:$kitty_window_id" \
+              "$session_name" \
+              2>/dev/null || true
+          fi
+
           zmx attach "$session_name"
         }
 
