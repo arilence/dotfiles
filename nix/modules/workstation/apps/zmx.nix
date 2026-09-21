@@ -7,6 +7,50 @@
 let
   zmx = pkgs.nixosUnstable.zmx;
 
+  zmx-kill = pkgs.writeShellApplication {
+    name = "zmx-kill";
+    runtimeInputs = [
+      pkgs.fzf
+      zmx
+    ];
+    text = ''
+      if (( $# > 0 )); then
+        exec zmx kill "$@"
+      fi
+
+      sessions=$(zmx list --short)
+
+      if [[ -z "$sessions" ]]; then
+        echo "No active zmx sessions."
+        exit 0
+      fi
+
+      session=$(printf '%s\n' "$sessions" | fzf \
+        --no-multi \
+        --nth=1 \
+        --bind='tab:transform-query(printf "%s" {1})+end-of-line' \
+        --bind='focus:show-preview' \
+        --bind='zero:hide-preview' \
+        --height=60% \
+        --layout=reverse \
+        --highlight-line \
+        --border=top \
+        --border-label=" Select a zmx session to kill " \
+        --border-label-pos=2 \
+        --prompt="kill> " \
+        --header="Enter: select | Tab: complete name" \
+        --preview='zmx history {1}' \
+        --preview-label=" Session preview " \
+        --preview-label-pos=2 \
+        --preview-window='right:60%:follow:hidden:<80(down:60%:follow:hidden)' \
+      ) || exit 0
+
+      if [[ -n "$session" ]]; then
+        zmx kill "$session"
+      fi
+    '';
+  };
+
   zmx-kill-all-worker = pkgs.writeShellApplication {
     name = "zmx-kill-all-worker";
     runtimeInputs = [ zmx ];
@@ -59,6 +103,7 @@ in
 {
   environment.systemPackages = [
     zmx
+    zmx-kill
     zmx-kill-all
     pkgs.fzf
   ];
@@ -69,7 +114,7 @@ in
         t = "zmx";
         ta = "zmx attach";
         tl = "zmx list";
-        tk = "zmx kill";
+        tk = "zmx-kill";
         tkall = "zmx-kill-all";
       };
 
