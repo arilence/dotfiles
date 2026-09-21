@@ -7,6 +7,38 @@
 let
   zmx = pkgs.nixosUnstable.zmx;
 
+  # Used by __zmx_attach_prompt function
+  zmx-session-list = pkgs.writeShellScript "zmx-session-list" ''
+    zmx list 2>/dev/null | awk -F '\t' '
+      {
+        name = pid = clients = dir = ""
+        for (i = 1; i <= NF; i++) {
+          field = $i
+          sub(/^[^[:alpha:]_]*/, "", field)
+          key = value = field
+          sub(/=.*/, "", key)
+          sub(/^[^=]*=/, "", value)
+
+          if (key == "name" || key == "session_name") name = value
+          else if (key == "pid") pid = value
+          else if (key == "clients") clients = value
+          else if (key == "start_dir" || key == "started_in") dir = value
+        }
+
+        if (name != "") {
+          if (pid ~ /^[[:digit:]]+$/) {
+            command = "readlink -- /proc/" pid "/cwd 2>/dev/null"
+            # Display the current directory instead of the starting directory
+            if ((command | getline current_dir) > 0) dir = current_dir
+            close(command)
+          }
+
+          printf "%-20s  clients:%-2s  %s\n", name, clients, dir
+        }
+      }
+    '
+  '';
+
   zmx-kill-all-worker = pkgs.writeShellApplication {
     name = "zmx-kill-all-worker";
     runtimeInputs = [ zmx ];
@@ -76,42 +108,17 @@ in
       };
 
       initContent = lib.mkOrder 1500 ''
+        # Provide a fzf-powered zmx launcher
         __zmx_attach_prompt() {
           local display
-          display=$(zmx list 2>/dev/null | awk -F '\t' '
-            {
-              name = pid = clients = dir = ""
-              for (i = 1; i <= NF; i++) {
-                field = $i
-                sub(/^[^[:alpha:]_]*/, "", field)
-                key = value = field
-                sub(/=.*/, "", key)
-                sub(/^[^=]*=/, "", value)
-
-                if (key == "name" || key == "session_name") name = value
-                else if (key == "pid") pid = value
-                else if (key == "clients") clients = value
-                else if (key == "start_dir" || key == "started_in") dir = value
-              }
-
-              if (name != "") {
-                if (pid ~ /^[[:digit:]]+$/) {
-                  command = "readlink -- /proc/" pid "/cwd 2>/dev/null"
-                  # Display the current directory instead of the starting directory
-                  if ((command | getline current_dir) > 0) dir = current_dir
-                  close(command)
-                }
-
-                printf "%-20s  clients:%-2s  %s\n", name, clients, dir
-              }
-            }
-          ')
+          display=$(${zmx-session-list})
 
           local output query key selected session_name
           output=$({ [[ -n "$display" ]] && printf '%s\n' "$display"; } | fzf \
             --nth=1 \
             --print-query \
             --expect=ctrl-n \
+            --bind='ctrl-x:execute-silent(zmx kill {1})+reload(${zmx-session-list})' \
             --bind='tab:transform-query(printf "%s" {1})+end-of-line' \
             --bind='focus:show-preview' \
             --bind='zero:hide-preview' \
@@ -122,7 +129,7 @@ in
             --border-label=" Enter or select a zmx session " \
             --border-label-pos=2 \
             --prompt="zmx> " \
-            --header="Enter: select | Tab: complete name | Ctrl-N: create new" \
+            --header="Enter: select | Tab: complete name | Ctrl-N: create new | Ctrl-X: kill" \
             --preview='zmx history {1}' \
             --preview-label=" Session preview " \
             --preview-label-pos=2 \
@@ -175,45 +182,6 @@ in
 
         ts() {
           __zmx_attach_prompt
-        }
-
-        tk() {
-          if (( $# > 0 )); then
-            zmx kill "$@"
-            return $?
-          fi
-
-          local sessions session
-          sessions=$(zmx list --short) || return $?
-
-          if [[ -z "$sessions" ]]; then
-            echo "No active zmx sessions."
-            return 0
-          fi
-
-          session=$(printf '%s\n' "$sessions" | fzf \
-            --no-multi \
-            --nth=1 \
-            --bind='tab:transform-query(printf "%s" {1})+end-of-line' \
-            --bind='focus:show-preview' \
-            --bind='zero:hide-preview' \
-            --height=60% \
-            --layout=reverse \
-            --highlight-line \
-            --border=top \
-            --border-label=" Select a zmx session to kill " \
-            --border-label-pos=2 \
-            --prompt="kill> " \
-            --header="Enter: select | Tab: complete name" \
-            --preview='zmx history {1}' \
-            --preview-label=" Session preview " \
-            --preview-label-pos=2 \
-            --preview-window='right:60%:follow:hidden:<80(down:60%:follow:hidden)' \
-          ) || return 0
-
-          if [[ -n "$session" ]]; then
-            zmx kill "$session"
-          fi
         }
 
         # Launch a named zmx session in a new kitty tab.
