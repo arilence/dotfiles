@@ -111,14 +111,20 @@ in
             --print-query \
             --expect=ctrl-n \
             --bind='tab:transform-query(printf "%s" {1})+end-of-line' \
-            --layout=default \
-            --border=rounded \
-            --margin=8%,10% \
-            --padding=1,2 \
+            --bind='focus:show-preview' \
+            --bind='zero:hide-preview' \
+            --height=60% \
+            --layout=reverse \
+            --highlight-line \
+            --border=top \
+            --border-label=" Enter or select a zmx session " \
+            --border-label-pos=2 \
             --prompt="zmx> " \
             --header="Enter: select | Tab: complete name | Ctrl-N: create new" \
             --preview='zmx history {1}' \
-            --preview-window=right:60%:follow \
+            --preview-label=" Session preview " \
+            --preview-label-pos=2 \
+            --preview-window='right:60%:follow:hidden:<80(down:60%:follow:hidden)' \
           )
           local rc=$?
 
