@@ -103,7 +103,7 @@ in
       shellAliases = {
         t = "zmx";
         ta = "zmx attach";
-        tl = "zmx list";
+        tl = "ts";
         tkall = "zmx-kill-all";
       };
 
