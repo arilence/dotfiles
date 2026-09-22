@@ -20,6 +20,12 @@
   ],
   "packageRules": [
     {
+      "description": "Preserve the xwayland-satellite pin for the Steam menu workaround",
+      "matchManagers": ["nix"],
+      "matchDepNames": ["nixpkgs-xwayland-satellite"],
+      "enabled": false,
+    },
+    {
       "description": "Update T3Code nightlies daily after a three-day delay",
       "matchManagers": ["custom.regex"],
       "matchPackageNames": ["pingdotgg/t3code"],
