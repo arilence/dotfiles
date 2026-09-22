@@ -6,7 +6,7 @@
 
     # Temporary Steam menu workaround: use cached xwayland-satellite 0.8.1.
     # Remove once https://github.com/NixOS/nixpkgs/pull/564273 reaches our channel.
-    nixpkgs-xwayland-satellite.url = "github:NixOS/nixpkgs/6de8ef858b37d246936dfdddcbca9b6da43396a4";
+    nixpkgs-xwayland-satellite.url = "github:NixOS/nixpkgs/881a600e8806ccd5f3f885d047ea0f729b86f07e";
 
     # Prefer to use nixOS-unstable when adding a package that's not yet available in stable nixpkgs.
     # nixPKGS-unstable is closer to the master branch and therefore has less rigorous testing.

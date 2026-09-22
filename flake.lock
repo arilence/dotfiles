@@ -237,17 +237,17 @@
     },
     "nixpkgs-xwayland-satellite": {
       "locked": {
-        "lastModified": 1786729486,
-        "narHash": "sha256-i0e9QCUt+W6CIETKLTAAPklE9C9nT5ysibFgiP2uejM=",
+        "lastModified": 1790073510,
+        "narHash": "sha256-9JyM8ZUZHpmYXDDt/DJtQt7CkCqBHrXrknDN6GI4eQ8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6de8ef858b37d246936dfdddcbca9b6da43396a4",
+        "rev": "881a600e8806ccd5f3f885d047ea0f729b86f07e",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6de8ef858b37d246936dfdddcbca9b6da43396a4",
+        "rev": "881a600e8806ccd5f3f885d047ea0f729b86f07e",
         "type": "github"
       }
     },
