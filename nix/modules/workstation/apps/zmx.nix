@@ -122,7 +122,7 @@ in
             --bind='tab:transform-query(printf "%s" {1})+end-of-line' \
             --bind='focus:show-preview' \
             --bind='zero:hide-preview' \
-            --height=60% \
+            --height=100% \
             --layout=reverse \
             --highlight-line \
             --border=top \
