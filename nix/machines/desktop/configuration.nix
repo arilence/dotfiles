@@ -3,7 +3,6 @@
 {
   imports = [
     ../../modules/workstation
-    ../../modules/workstation/apps/delta.nix
     ../../modules/development/android.nix
     ../../modules/gaming
     ../../modules/virtualization

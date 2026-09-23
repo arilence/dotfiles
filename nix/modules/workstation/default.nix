@@ -35,6 +35,7 @@ in
 
     ./apps/ai.nix
     ./apps/appimage.nix
+    ./apps/delta.nix
     ./apps/direnv.nix
     ./apps/easyeffects.nix
     ./apps/gnome-text-editor.nix
