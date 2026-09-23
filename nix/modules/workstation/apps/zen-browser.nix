@@ -132,6 +132,7 @@
         };
         profiles.default = {
           settings = {
+            "media.suspend-background-video.enabled" = false;
             "services.sync.engine.spaces" = true;
             "zen.view.sidebar-expanded" = true;
             "zen.view.use-single-toolbar" = false;
