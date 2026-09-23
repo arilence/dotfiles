@@ -95,6 +95,13 @@
         pref("general.config.obscure_value", 0);
         pref("general.config.sandbox_enabled", false);
       '';
+
+      mkExtensionSettings = builtins.mapAttrs (
+        _: addonSlug: {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/${addonSlug}/latest.xpi";
+          installation_mode = "force_installed";
+        }
+      );
     in
     {
       imports = [
@@ -113,6 +120,19 @@
           DisableFirefoxStudies = true;
           DontCheckDefaultBrowser = true;
           OfferToSaveLogins = false;
+          ExtensionSettings = mkExtensionSettings {
+            "{d634138d-c276-4fc8-924b-40a0ea21d284}" = "1password-x-password-manager";
+            # "{ab779d78-7270-4ee8-9ee8-369d73508298}" = "arxiv-utils";
+            "frankerfacez@frankerfacez.com" = "frankerfacez";
+            "search@kagi.com" = "kagi-search-for-firefox";
+            # "team@readwise.io" = "readwise-highlighter";
+            "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}" = "refined-github-";
+            # "{531906d3-e22f-4a6c-a102-8057b88a1a63}" = "single-file";
+            "firefox-extension@steamdb.info" = "steam-database";
+            "uBlock0@raymondhill.net" = "ublock-origin";
+            # "{88664789-f91e-40e1-adb9-e4e9a8c48867}" = "urls-list";
+            # "{799c0914-748b-41df-a25c-22d008f9e83f}" = "web-scrobbler";
+          };
           EnableTrackingProtection = {
             Value = true;
             Locked = true;
@@ -139,6 +159,11 @@
             "zen.urlbar.behavior" = "float";
             "zen.mediacontrols.enabled" = false;
           };
+          extensionButtons."nav-bar" = [
+            "search@kagi.com" # Kagi Search for Firefox
+            "{d634138d-c276-4fc8-924b-40a0ea21d284}" # 1Password
+            "team@readwise.io" # Readwise Highlighter
+          ];
           mods = [
             "906c6915-5677-48ff-9bfc-096a02a72379" # Floating Status Bar
             "ad97bb70-0066-4e42-9b5f-173a5e42c6fc" # SuperPins
