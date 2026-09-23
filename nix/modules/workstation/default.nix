@@ -374,6 +374,7 @@ in
     ripgrep
     dig # nslookup successor
     devcontainer
+    age
 
     # Gui Apps
     kopia-ui # requires ludusavi
