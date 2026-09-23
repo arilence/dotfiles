@@ -109,8 +109,8 @@ in
 
       binds {
         Mod+Space allow-inhibiting=false { spawn "${pkgs.nixosUnstable.vicinae}/bin/vicinae" "toggle"; }
-        Mod+Q repeat=false allow-inhibiting=false { quit; }
-        Mod+W repeat=false allow-inhibiting=false { close-window; }
+        Mod+Ctrl+Shift+Q repeat=false allow-inhibiting=false { quit; }
+        Mod+Ctrl+Shift+W repeat=false allow-inhibiting=false { close-window; }
         ${inversePrimaryModifier}+Shift+S { screenshot; }
         // Specifically set as Super rather than primaryModifier
         Super+L repeat=false allow-inhibiting=false { spawn "noctalia" "msg" "session" "lock"; }
