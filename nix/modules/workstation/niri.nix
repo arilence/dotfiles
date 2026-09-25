@@ -109,7 +109,6 @@ in
 
       binds {
         Mod+Space allow-inhibiting=false { spawn "${pkgs.nixosUnstable.vicinae}/bin/vicinae" "toggle"; }
-        Mod+Ctrl+Shift+Q repeat=false allow-inhibiting=false { quit; }
         Mod+Ctrl+Shift+W repeat=false allow-inhibiting=false { close-window; }
         ${inversePrimaryModifier}+Shift+S { screenshot; }
         // Specifically set as Super rather than primaryModifier
