@@ -37,6 +37,7 @@ in
     ./apps/appimage.nix
     ./apps/delta.nix
     ./apps/direnv.nix
+    ./apps/docker.nix
     ./apps/easyeffects.nix
     ./apps/gnome-text-editor.nix
     ./apps/handy.nix
@@ -334,26 +335,6 @@ in
     nerd-fonts.geist-mono
     nerd-fonts.monaspace
   ];
-
-  virtualisation.docker = {
-    enable = true;
-    storageDriver = "btrfs";
-    daemon.settings = {
-      default-address-pools = [
-        {
-          base = "172.17.0.0/12";
-          size = 20;
-        }
-      ];
-    };
-    autoPrune = {
-      enable = true;
-      dates = "weekly";
-    };
-  };
-  # Disable docker from starting on boot
-  systemd.services.docker.wantedBy = lib.mkForce [ ];
-  systemd.sockets.docker.wantedBy = lib.mkForce [ ];
 
   ## Start Programs Section ##
 
