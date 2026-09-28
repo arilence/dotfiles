@@ -43,7 +43,26 @@ require('blink.cmp').setup({
 })
 
 -----
--- Collection of QoL Plugins
+-- Snacks.nvim: explorer navigation and quality-of-life features
+
+-- Connect Snacks Explorer's Ctrl-H/J/K/L actions to smart-splits.nvim.
+-- The explorer list floats inside a sidebar split, so smart-splits needs to
+-- navigate from that containing split to find neighboring Neovim or Kitty panes.
+local function explorer_move(direction)
+  return function(picker)
+    local current = vim.api.nvim_get_current_win()
+    local sidebar = picker.layout.root.win
+    -- Bypass Snacks' focus autocmds while selecting the containing split.
+    vim.cmd("noautocmd call win_gotoid(" .. sidebar .. ")")
+    require("smart-splits")["move_cursor_" .. direction]()
+    -- If navigation stayed in this split (including a Kitty handoff), restore
+    -- the explorer list so it remains focused when we return to Neovim.
+    if vim.api.nvim_get_current_win() == sidebar and vim.api.nvim_win_is_valid(current) then
+      vim.api.nvim_set_current_win(current)
+    end
+  end
+end
+
 require('snacks').setup({
   scroll = {
     enabled = true,
@@ -67,6 +86,12 @@ require('snacks').setup({
       explorer = {
         hidden = true,
         ignored = true,
+        actions = {
+          split_left = explorer_move("left"),
+          split_down = explorer_move("down"),
+          split_up = explorer_move("up"),
+          split_right = explorer_move("right"),
+        },
         layout = {
           cycle = false,
           layout = {
@@ -76,11 +101,12 @@ require('snacks').setup({
         win = {
           list = {
             keys = {
-              -- Snacks overwrites the Ctrl-H keybind
-              -- This restores functionality to use smart-splits.nvim
-              ["<C-h>"] = function()
-                vim.cmd("wincmd h")
-              end,
+              -- Reserve Ctrl-H/J/K/L for smart-splits navigation.
+              -- Use j/k or Ctrl-N/Ctrl-P to move through the explorer list.
+              ["<C-h>"] = "split_left",
+              ["<C-j>"] = "split_down",
+              ["<C-k>"] = "split_up",
+              ["<C-l>"] = "split_right",
             },
           },
         }
