@@ -14,6 +14,7 @@
   ];
 
   arilence.workstation.apps.handy.autoStart = true;
+  arilence.workstation.printing.autoDiscovery = true;
 
   sops.defaultSopsFile = ./secrets.sops.yaml;
 

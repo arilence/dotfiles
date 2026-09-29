@@ -32,6 +32,7 @@ in
     ./noctalia-greeter.nix
     ./noctalia.nix
     ./keybindings.nix
+    ./printing.nix
 
     ./apps/ai.nix
     ./apps/appimage.nix
@@ -190,9 +191,6 @@ in
     variant = "";
     options = "ctrl:nocaps";
   };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Explicitly enable this for environments that don't enable it by default
   security.polkit.enable = true;
