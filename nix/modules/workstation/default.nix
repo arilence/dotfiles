@@ -62,6 +62,8 @@ in
   ];
 
   nix.settings = {
+    nix-path = "nixpkgs=flake:nixpkgs";
+
     # Let's us rebuild remotely using additional users
     # Potentially dangerous
     trusted-users = [
@@ -148,6 +150,14 @@ in
   # Periodically optimises the nix store (cleans up disk usage)
   nix.optimise.automatic = true;
   #nix.optimise.dates = [ "03:45" ];
+
+  # Use the locked flake inputs instead of managing legacy channels.
+  nix.channel.enable = false;
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
+
+  # Keep builds at idle CPU and I/O priority so interactive work stays responsive.
+  nix.daemonCPUSchedPolicy = "idle";
+  nix.daemonIOSchedClass = "idle";
 
   # Allows this machine (x86-64) to build aarch64 packages
   # I primarily have this set so I can build NixOS for my Raspberry Pi
