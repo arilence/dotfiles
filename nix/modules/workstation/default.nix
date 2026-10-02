@@ -564,15 +564,13 @@ in
             # Strip away a lot of the default information that gets shown
             format = lib.concatStrings [
               "$username$hostname$directory$git_branch$git_commit$git_state$git_status$nix_shell$jobs"
-              "$fill$env_var$cmd_duration"
+              "$env_var$cmd_duration"
               "$line_break$character"
             ];
-            # Align session details on the upper line; Zsh's right prompt sits on the input line.
-            fill.symbol = " ";
             git_branch.format = "[$symbol$branch(:$remote_branch)]($style) ";
             env_var.ZMX_SESSION = {
               format = "[zmx:$env_value]($style) ";
-              style = "dimmed yellow";
+              style = "bold yellow";
             };
           };
         };
