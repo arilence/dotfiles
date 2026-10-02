@@ -16,6 +16,8 @@
   arilence.workstation.apps.handy.autoStart = true;
   arilence.workstation.printing.autoDiscovery = true;
 
+  powerManagement.cpuFreqGovernor = "performance";
+
   sops.defaultSopsFile = ./secrets.sops.yaml;
 
   # This workstation should stay awake and available for remote access.
