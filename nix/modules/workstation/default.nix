@@ -237,6 +237,10 @@ in
     shell = pkgs.zsh;
   };
 
+  # Remote builds log in as nix-ssh, and sshd reads authorized keys as that user.
+  # Keep /etc/ssh traversable so nix-ssh can read its authorized-key file.
+  systemd.tmpfiles.rules = [ "d /etc/ssh 0755 root root -" ];
+
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;

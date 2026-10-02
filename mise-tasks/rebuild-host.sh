@@ -8,11 +8,15 @@
 
 set -euo pipefail
 
+SECONDS=0
+
 # Returns the directory where the script is located.
 # We assume lib.sh is in the same directory as this script.
 # From: https://stackoverflow.com/questions/59895/how-do-i-get-the-directory-where-a-bash-script-is-located-from-within-the-script
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "${SCRIPT_DIR}/lib.sh"
+
+trap report_elapsed_time EXIT
 
 validate_host "${usage_host?}"
 require_commands nix

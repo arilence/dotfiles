@@ -2,6 +2,22 @@
 
 set -euo pipefail
 
+# Report time since the caller last reset Bash's SECONDS counter.
+report_elapsed_time() {
+  local elapsed=$SECONDS
+  local duration="$((elapsed % 60))s"
+
+  if (( elapsed >= 60 )); then
+    duration="$((elapsed / 60 % 60))m ${duration}"
+  fi
+
+  if (( elapsed >= 3600 )); then
+    duration="$((elapsed / 3600))h ${duration}"
+  fi
+
+  printf 'Elapsed time: %s\n' "$duration" >&2
+}
+
 # Return the repository root. Mise provides MISE_PROJECT_ROOT; when the script is
 # run directly, fall back to the parent directory of mise-tasks.
 project_root() {
@@ -79,7 +95,8 @@ setup_ssh_host_key() {
   temp_dir=$(mktemp -d)
   chmod 700 "$temp_dir"
 
-  install -d -m700 "$temp_dir/etc/ssh"
+  # This directory is copied to /etc/ssh; non-root SSH users need to traverse it for authorized keys
+  install -d -m755 "$temp_dir/etc/ssh"
 
   # This *should* fail if the user denies the read request
   echo "Reading SSH private key from 1Password..." >&2
