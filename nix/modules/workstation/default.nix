@@ -36,7 +36,6 @@ in
 
     ./apps/ai.nix
     ./apps/appimage.nix
-    ./apps/delta.nix
     ./apps/direnv.nix
     ./apps/docker.nix
     ./apps/easyeffects.nix
@@ -471,6 +470,13 @@ in
           createDirectories = true;
           setSessionVariables = false;
         };
+
+        home.packages = [
+          # Prefer the app's CLI over the Git diff viewer in PATH. Git and Jujutsu
+          # use the diff viewer's absolute store path through programs.delta.
+          (lib.hiPrio inputs.delta.packages.${pkgs.stdenv.hostPlatform.system}.delta)
+        ];
+
         editorconfig = {
           enable = true;
           settings = {

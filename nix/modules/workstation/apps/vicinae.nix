@@ -55,6 +55,8 @@
               "--user"
               "--collect"
               "--service-type=exec"
+              # Keep forked GUI apps alive after their launcher CLI exits. i.e. Delta
+              "--property=ExitType=cgroup"
               "--same-dir"
               "--expand-environment=no"
               "--"
