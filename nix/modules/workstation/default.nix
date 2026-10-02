@@ -654,6 +654,7 @@ in
             sudo = "sudo "; # trailing space is intentional
 
             ls = "eza --group-directories-first";
+            diff = "${pkgs.delta}/bin/delta";
             vim = "nvim";
             lg = "lazygit";
             gs = "git status";
