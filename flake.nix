@@ -37,9 +37,6 @@
 
     llm-agents.url = "github:numtide/llm-agents.nix";
 
-    delta.url = "github:zed-industries/delta-nix";
-    delta.inputs.nixpkgs.follows = "nixos-unstable";
-
     # TODO: re-enable this once it has support for Niri and not just GNOME
     # # Provides variable scroll speed using a trackpad
     # wsf.url = "github:daniel-g-carrasco/wayland-scroll-factor";
