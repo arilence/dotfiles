@@ -34,6 +34,17 @@ require('blink.cmp').setup({
     ['<C-j>'] = { 'select_next', 'fallback_to_mappings' },
     ['<Tab>'] = { 'select_and_accept', 'fallback' },
   },
+  cmdline = {
+    keymap = {
+      -- completions inside of `:` commands require their own keybinds separate from what we set
+      -- above.
+      ['<C-j>'] = { 'show_and_insert_or_accept_single', 'select_next' },
+      ['<C-k>'] = {
+        function(cmp) return cmp.show_and_insert_or_accept_single({ initial_selected_item_idx = -1 }) end,
+        'select_prev',
+      },
+    },
+  },
   completion = {
     documentation = { auto_show = true },
   },
