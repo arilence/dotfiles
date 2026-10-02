@@ -376,6 +376,7 @@ in
     ghostty
     lazygit
     meld
+    mission-center
     bottles
     tableplus
     google-chrome
