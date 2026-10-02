@@ -8,16 +8,7 @@ vim.lsp.config("lua_ls", {
   }
 })
 vim.lsp.enable('lua_ls')
-
--- Elixir
-vim.lsp.config('expert', {
-  settings = {
-    workspaceSymbols = {
-      minQueryLength = 0
-    }
-  }
-})
-
+vim.lsp.enable('expert')   -- Elixir
 vim.lsp.enable('bashls')
 vim.lsp.enable('gdscript') -- Godot Engine
 vim.lsp.enable('gopls')
