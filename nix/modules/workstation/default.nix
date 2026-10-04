@@ -426,6 +426,12 @@ in
     polkitPolicyOwners = [ "anthony" ];
   };
 
+  # For Cryptomator
+  programs.fuse = {
+    enable = true;
+    userAllowOther = true;
+  };
+
   ## End Programs Section ##
 
   ## Start Home Manager ##
