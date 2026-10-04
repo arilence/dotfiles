@@ -107,6 +107,11 @@ in
 
         shell.clipboard_enabled = true;
 
+        lockscreen = {
+          transition = [ "fade" ];
+          transition_duration = 250;
+        };
+
         idle.behavior = {
           lock = {
             enabled = true;
