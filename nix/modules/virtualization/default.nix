@@ -17,6 +17,9 @@
   users.groups.kvm.members = [ "anthony" ];
 
   environment.systemPackages = with pkgs; [
+    # RDP client for connecting to VMs
+    remmina
+
     # VM networking
     dnsmasq
   ];
