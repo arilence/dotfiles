@@ -111,6 +111,15 @@ let
     '';
   };
 
+  restart-pipewire = pkgs.writeShellApplication {
+    name = "restart-pipewire";
+    runtimeInputs = [ pkgs.systemd ];
+    text = ''
+      systemctl --user restart pipewire.service pipewire-pulse.service wireplumber.service
+      echo "PipeWire and WirePlumber restarted."
+    '';
+  };
+
   diff-remote = pkgs.writeTextFile {
     name = "diff-remote";
     destination = "/bin/diff-remote";
@@ -211,6 +220,7 @@ in
     diff-remote
     e
     firewall-port
+    restart-pipewire
     yt-audio-tracks
   ];
 }
