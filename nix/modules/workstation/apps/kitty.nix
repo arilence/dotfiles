@@ -18,6 +18,12 @@ in
 {
   home-manager.users.anthony = {
     xdg.configFile = {
+      "kitty/ssh.conf".text = ''
+        # exe.dev's shell does not support Kitty's SSH bootstrap commands.
+        hostname exe.dev
+        delegate ssh
+      '';
+
       "kitty/startup.session".text = ''
         # Show the zmx selector in the initial shell of a new kitty instance.
         launch --env ZMX_AUTO_ATTACH=1
