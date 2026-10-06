@@ -20,12 +20,12 @@
   ],
   "packageRules": [
     {
-      "description": "Update T3Code nightlies daily after a three-day delay",
+      "description": "Update T3Code stable releases daily after a three-day delay",
       "matchManagers": ["custom.regex"],
       "matchPackageNames": ["pingdotgg/t3code"],
-      "allowedVersions": "/^v\\d+\\.\\d+\\.\\d+-nightly\\.\\d{8}\\.\\d+$/",
-      "ignoreUnstable": false,
-      "respectLatest": false,
+      "allowedVersions": "/^v\\d+\\.\\d+\\.\\d+$/",
+      "ignoreUnstable": true,
+      "respectLatest": true,
       "minimumReleaseAge": "3 days",
       "schedule": ["before 6am"],
     },
