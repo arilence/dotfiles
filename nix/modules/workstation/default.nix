@@ -52,7 +52,6 @@ in
     ./apps/pia.nix
     ./apps/t3code.nix
     ./apps/vicinae.nix
-    ./apps/vlc.nix
     ./apps/vscode.nix
     # ./apps/wsf.nix # Re-enable this once it has support for Niri
     ./apps/zen-browser.nix
@@ -375,6 +374,7 @@ in
     cryptomator
     spotify
     feishin
+    vlc
     jetbrains.idea
     ghostty
     lazygit
