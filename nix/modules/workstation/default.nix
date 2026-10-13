@@ -46,6 +46,7 @@ in
     ./apps/loupe.nix
     ./apps/ludusavi.nix
     ./apps/mise.nix
+    ./apps/mission-center.nix
     ./apps/nautilus.nix
     ./apps/neovim
     ./apps/onepassword.nix
@@ -379,7 +380,6 @@ in
     ghostty
     lazygit
     meld
-    mission-center
     bottles
     tableplus
     google-chrome
