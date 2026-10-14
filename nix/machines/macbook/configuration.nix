@@ -9,6 +9,7 @@
   arilence.storage.systemDisk = lib.mkDefault "/dev/sda";
   arilence.workstation.keybindings.primaryModifier = "Super";
   arilence.workstation.printing.autoDiscovery = false;
+  arilence.workstation.apps.zen-browser.deviceName = "MacBook";
 
   powerManagement.cpuFreqGovernor = "schedutil";
 

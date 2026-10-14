@@ -1,7 +1,20 @@
-{ inputs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 
 {
-  environment.etc."1password/custom_allowed_browsers" = {
+  options.arilence.workstation.apps.zen-browser.deviceName = lib.mkOption {
+    type = lib.types.str;
+    default = config.networking.hostName;
+    defaultText = lib.literalExpression "config.networking.hostName";
+    example = "Anthony’s Computer";
+    description = "The name of this device shown in Zen's Firefox Sync settings.";
+  };
+
+  config.environment.etc."1password/custom_allowed_browsers" = {
     # Zen must be explicitly allowed to be used with 1Password
     text = ''
       zen
@@ -14,9 +27,10 @@
     mode = "0755";
   };
 
-  home-manager.users.anthony =
+  config.home-manager.users.anthony =
     {
       config,
+      osConfig,
       pkgs,
       ...
     }:
@@ -152,6 +166,8 @@
         };
         profiles.default = {
           settings = {
+            "identity.fxaccounts.account.device.name" =
+              osConfig.arilence.workstation.apps.zen-browser.deviceName;
             "media.suspend-background-video.enabled" = false;
             "services.sync.engine.spaces" = true;
             "zen.view.sidebar-expanded" = true;
