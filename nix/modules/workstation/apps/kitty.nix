@@ -108,12 +108,17 @@ in
             return get_boss().tab_for_id(tab_id)
 
         def zmx_session_for_tab(tab_id: int) -> str:
-            """Return the session from the active `zmx attach SESSION` process."""
+            """Prefer pane metadata, which also tracks switches inside zmx."""
             tab = kitty_tab(tab_id)
             window = tab.active_window if tab else None
             if not window:
                 return ""
 
+            session = window.user_vars.get("zmx_session")
+            if session:
+                return session
+
+            # Support clients started directly, without the session picker.
             for process in window.child.foreground_processes:
                 command = process.get("cmdline") or ()
                 if len(command) < 3 or os.path.basename(command[0]) != "zmx":
@@ -319,6 +324,14 @@ in
             return screen.cursor.x
       '';
 
+      "kitty/sidebar_watcher.py".text = ''
+        def on_set_user_var(boss, window, data):
+            if data["key"] == "zmx_session":
+                tab = window.tabref()
+                if tab:
+                    tab.mark_tab_bar_dirty()
+      '';
+
       # kitty.themeFile exists but doesn't allow for setting a dark and light theme separately.
       "kitty/dark-theme.auto.conf".text = ''
         include ${kittyThemes}/Alabaster_Dark.conf
@@ -430,6 +443,7 @@ in
         tab_bar_edge = "left";
         tab_bar_style = "custom";
         tab_bar_min_tabs = 1;
+        watcher = "sidebar_watcher.py";
         tab_title_max_length = 20;
         tab_bar_margin_height = "4 4";
         text_composition_strategy = "1.0 10";

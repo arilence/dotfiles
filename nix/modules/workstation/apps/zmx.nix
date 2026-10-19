@@ -108,6 +108,23 @@ in
       };
 
       initContent = lib.mkOrder 1500 ''
+        # Keep automatic sidebar titles on the Kitty pane, not on its tab.
+        __zmx_set_kitty_session() {
+          local kitty_window_id="$1" session_name="$2"
+          [[ -n "$kitty_window_id" ]] && command -v kitten &> /dev/null || return 0
+
+          local -a user_vars=(zmx_session zmx_session_id)
+          if [[ -n "$session_name" ]]; then
+            local session_id
+            session_id=$(printf '%s' "$session_name" | sha256sum | awk '{print $1}')
+            user_vars=("zmx_session=$session_name" "zmx_session_id=$session_id")
+          fi
+          kitten @ set-user-vars \
+            --match "id:$kitty_window_id" \
+            "''${user_vars[@]}" \
+            2>/dev/null || true
+        }
+
         # Provide a fzf-powered zmx launcher
         __zmx_attach_prompt() {
           local display
@@ -154,8 +171,7 @@ in
           local kitty_window_id="$KITTY_WINDOW_ID"
           if [[ -n "$ZMX_SESSION" ]]; then
             # This handles an edge case when having two kitty tabs pointed to the same zmx session.
-            # Use the ID of the client that most recently sent input to determine which kitty tab
-            # to update it's title.
+            # Update the pane of the client that most recently sent input.
             local leader_kitty_window_id
             leader_kitty_window_id=$(zmx print-env . KITTY_WINDOW_ID 2>/dev/null) || true
             if [[ -n "$leader_kitty_window_id" ]]; then
@@ -163,21 +179,22 @@ in
             fi
           fi
 
-          if [[ -n "$kitty_window_id" ]] && command -v kitten &> /dev/null; then
-            local session_id
-            session_id=$(printf '%s' "$session_name" | sha256sum | awk '{print $1}')
-            kitten @ set-user-vars \
-              --match "id:$kitty_window_id" \
-              "zmx_session=$session_name" \
-              "zmx_session_id=$session_id" \
-              2>/dev/null || true
-            kitten @ set-tab-title \
-              --match "window_id:$kitty_window_id" \
-              "$session_name" \
-              2>/dev/null || true
-          fi
+          __zmx_set_kitty_session "$kitty_window_id" "$session_name"
 
-          zmx attach "$session_name"
+          local attach_rc=130
+          {
+            zmx attach "$session_name"
+            attach_rc=$?
+          } always {
+            # An outer attach returns on detach; an in-session attach returns
+            # after switching clients, so retain its metadata on success.
+            if [[ -z "$ZMX_SESSION" ]]; then
+              __zmx_set_kitty_session "$kitty_window_id" ""
+            elif (( attach_rc != 0 )); then
+              __zmx_set_kitty_session "$kitty_window_id" "$ZMX_SESSION"
+            fi
+          }
+          return "$attach_rc"
         }
 
         ts() {
@@ -193,12 +210,12 @@ in
           fi
 
           local session_name="$1"
-          local tab_title="$session_name"
+          local -a tab_title_args=()
           local cwd="$PWD"
           if (( $# == 2 )); then
             cwd="$2"
           elif (( $# == 3 )); then
-            tab_title="$2"
+            tab_title_args=(--tab-title "$2")
             cwd="$3"
           fi
           local session_id
@@ -207,7 +224,7 @@ in
           kitten @ focus-tab --match "var:zmx_session_id=$session_id" 2>/dev/null \
             || kitten @ launch \
               --type=tab \
-              --tab-title "$tab_title" \
+              "''${tab_title_args[@]}" \
               --cwd "$cwd" \
               --env ZMX_AUTO_ATTACH=0 \
               --var "zmx_session=$session_name" \
