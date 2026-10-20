@@ -39,5 +39,6 @@
     libratbag
     lutris
     piper
+    nixosUnstable.protonup-qt
   ];
 }
