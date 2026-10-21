@@ -1,6 +1,24 @@
 { pkgs, ... }:
 
 let
+  with-command = pkgs.writeShellApplication {
+    name = "with";
+    text = ''
+      usage() {
+        echo "Usage: with <command> [args ...]" >&2
+        echo "Run a command using direnv's environment for the current directory." >&2
+        exit "$1"
+      }
+
+      if [[ "''${1:-}" == "-h" || "''${1:-}" == "--help" ]]; then
+        usage 0
+      fi
+      [[ "$#" -gt 0 ]] || usage 2
+
+      exec ${pkgs.direnv}/bin/direnv exec . "$@"
+    '';
+  };
+
   e = pkgs.writeShellApplication {
     name = "e";
     text = ''
@@ -216,6 +234,8 @@ let
   };
 in
 {
+  environment.systemPackages = [ with-command ];
+
   home-manager.users.anthony.home.packages = [
     diff-remote
     e
