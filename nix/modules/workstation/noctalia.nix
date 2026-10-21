@@ -107,6 +107,14 @@ in
 
         shell.clipboard_enabled = true;
 
+        shell.panel.open_near_click_control_center = true;
+
+        control_center = {
+          width = 720;
+          sidebar = "full";
+          sidebar_section = "full";
+        };
+
         lockscreen = {
           transition = [ "fade" ];
           transition_duration = 250;
