@@ -372,6 +372,7 @@ in
     kopia-ui # requires ludusavi
     awscli2 # for managing s3 server
     versitygw # also for s3 server
+    nwg-displays # dynamic monitor management
     cryptomator
     spotify
     feishin
