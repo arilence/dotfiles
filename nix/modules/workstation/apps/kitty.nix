@@ -6,6 +6,7 @@
 }:
 
 let
+  zmx-session = import ./zmx { inherit pkgs; };
   kittyThemes = "${pkgs.kitty-themes}/share/kitty-themes/themes";
   alabasterLightOverrides = ''
     # Override the Alabaster light theme's default colours for better contrast.
@@ -31,6 +32,10 @@ in
 
       "kitty/tab_bar.py".text = ''
         import os
+        import sys
+
+        sys.path.insert(0, "${zmx-session}/lib")
+        from zmx_kitty import title_for_tab
 
         import kitty.tab_bar as kitty_tab_bar
         from kitty.fast_data_types import Screen, get_boss, wcswidth
@@ -103,38 +108,6 @@ in
                 lines.append(line)
                 text = remainder
             return lines
-
-        def kitty_tab(tab_id: int):
-            return get_boss().tab_for_id(tab_id)
-
-        def zmx_session_for_tab(tab_id: int) -> str:
-            """Prefer pane metadata, which also tracks switches inside zmx."""
-            tab = kitty_tab(tab_id)
-            window = tab.active_window if tab else None
-            if not window:
-                return ""
-
-            session = window.user_vars.get("zmx_session")
-            if session:
-                return session
-
-            # Support clients started directly, without the session picker.
-            for process in window.child.foreground_processes:
-                command = process.get("cmdline") or ()
-                if len(command) < 3 or os.path.basename(command[0]) != "zmx":
-                    continue
-                if command[1] in ("attach", "a"):
-                    return command[2]
-            return ""
-
-        def title_for_tab(tab: TabBarData) -> str:
-            kitty_tab_data = kitty_tab(tab.tab_id)
-            # Preserve explicit Kitty tab titles (including kzmx's optional
-            # display title). Otherwise use the zmx session name instead of
-            # the inner shell's CWD-based window title.
-            if kitty_tab_data and kitty_tab_data.name:
-                return kitty_tab_data.name
-            return zmx_session_for_tab(tab.tab_id) or tab.title
 
         def cwd_for_tab(tab_id: int) -> str:
             tab = get_boss().tab_for_id(tab_id)
@@ -325,11 +298,12 @@ in
       '';
 
       "kitty/sidebar_watcher.py".text = ''
-        def on_set_user_var(boss, window, data):
-            if data["key"] == "zmx_session":
-                tab = window.tabref()
-                if tab:
-                    tab.mark_tab_bar_dirty()
+        import sys
+
+        sys.path.insert(0, "${zmx-session}/lib")
+        from zmx_kitty import install, on_set_user_var
+
+        install()
       '';
 
       # kitty.themeFile exists but doesn't allow for setting a dark and light theme separately.

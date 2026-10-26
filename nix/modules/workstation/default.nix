@@ -571,12 +571,14 @@ in
             # Strip away a lot of the default information that gets shown
             format = lib.concatStrings [
               "$username$hostname$directory$git_branch$git_commit$git_state$git_status$nix_shell$jobs"
-              "$env_var$cmd_duration"
+              "$custom$cmd_duration"
               "$line_break$character"
             ];
             git_branch.format = "[$symbol$branch(:$remote_branch)]($style) ";
-            env_var.ZMX_SESSION = {
-              format = "[zmx:$env_value]($style) ";
+            custom.zmx = {
+              command = "zmx-session display";
+              when = ''test -n "$ZMX_SESSION"'';
+              format = "[zmx:$output]($style) ";
               style = "bold yellow";
             };
           };

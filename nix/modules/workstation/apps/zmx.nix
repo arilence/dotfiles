@@ -7,37 +7,7 @@
 let
   zmx = pkgs.nixosUnstable.zmx;
 
-  # Used by __zmx_attach_prompt function
-  zmx-session-list = pkgs.writeShellScript "zmx-session-list" ''
-    zmx list 2>/dev/null | awk -F '\t' '
-      {
-        name = pid = clients = dir = ""
-        for (i = 1; i <= NF; i++) {
-          field = $i
-          sub(/^[^[:alpha:]_]*/, "", field)
-          key = value = field
-          sub(/=.*/, "", key)
-          sub(/^[^=]*=/, "", value)
-
-          if (key == "name" || key == "session_name") name = value
-          else if (key == "pid") pid = value
-          else if (key == "clients") clients = value
-          else if (key == "start_dir" || key == "started_in") dir = value
-        }
-
-        if (name != "") {
-          if (pid ~ /^[[:digit:]]+$/) {
-            command = "readlink -- /proc/" pid "/cwd 2>/dev/null"
-            # Display the current directory instead of the starting directory
-            if ((command | getline current_dir) > 0) dir = current_dir
-            close(command)
-          }
-
-          printf "%-20s  clients:%-2s  %s\n", name, clients, dir
-        }
-      }
-    '
-  '';
+  zmx-session = import ./zmx { inherit pkgs; };
 
   zmx-kill-all-worker = pkgs.writeShellApplication {
     name = "zmx-kill-all-worker";
@@ -64,9 +34,7 @@ let
       fi
 
       echo "The following zmx sessions will be killed:"
-      while IFS= read -r session; do
-        printf '  %s\n' "$session"
-      done <<< "$sessions"
+      ${zmx-session}/bin/zmx-session list
       printf 'Continue? [y/N] '
       IFS= read -r -n 1 reply || true
       printf '\n'
@@ -94,6 +62,7 @@ in
 {
   environment.systemPackages = [
     zmx
+    zmx-session
     zmx-kill-all
     pkgs.fzf
   ];
@@ -102,41 +71,29 @@ in
     programs.zsh = {
       shellAliases = {
         t = "zmx";
-        ta = "zmx attach";
+        ta = "zmx-session attach";
+        zmx-title = "zmx-session rename";
         tl = "ts";
         tkall = "zmx-kill-all";
       };
 
       initContent = lib.mkOrder 1500 ''
-        # Keep automatic sidebar titles on the Kitty pane, not on its tab.
-        __zmx_set_kitty_session() {
-          local kitty_window_id="$1" session_name="$2"
-          [[ -n "$kitty_window_id" ]] && command -v kitten &> /dev/null || return 0
-
-          local -a user_vars=(zmx_session zmx_session_id)
-          if [[ -n "$session_name" ]]; then
-            local session_id
-            session_id=$(printf '%s' "$session_name" | sha256sum | awk '{print $1}')
-            user_vars=("zmx_session=$session_name" "zmx_session_id=$session_id")
-          fi
-          kitten @ set-user-vars \
-            --match "id:$kitty_window_id" \
-            "''${user_vars[@]}" \
-            2>/dev/null || true
-        }
-
-        # Provide a fzf-powered zmx launcher
+        # Keep selection tokens separate from displayed titles. Every action
+        # resolves and validates through the shared session module.
         __zmx_attach_prompt() {
           local display
-          display=$(${zmx-session-list})
+          display=$(zmx-session rows) || return
 
-          local output query key selected session_name
+          local output query key selected
           output=$({ [[ -n "$display" ]] && printf '%s\n' "$display"; } | fzf \
+            --delimiter=$'\t' \
+            --with-nth=2.. \
             --nth=1 \
             --print-query \
             --expect=ctrl-n \
-            --bind='ctrl-x:execute-silent(zmx kill {1})+reload(${zmx-session-list})' \
-            --bind='tab:transform-query(printf "%s" {1})+end-of-line' \
+            --bind='ctrl-x:execute-silent(zmx-session kill-key {1})+reload(zmx-session rows)' \
+            --bind='ctrl-r:execute(zmx-session rename --key --session {1})+reload(zmx-session rows)' \
+            --bind='tab:transform-query(printf "%s" {2})+end-of-line' \
             --bind='focus:show-preview' \
             --bind='zero:hide-preview' \
             --height=100% \
@@ -146,90 +103,45 @@ in
             --border-label=" Enter or select a zmx session " \
             --border-label-pos=2 \
             --prompt="zmx> " \
-            --header="Enter: select | Tab: complete name | Ctrl-N: create new | Ctrl-X: kill" \
-            --preview='zmx history {1}' \
+            --header="Enter: select | Tab: complete title | Ctrl-N: create | Ctrl-R: rename | Ctrl-X: kill" \
+            --preview='zmx-session history-key {1}' \
             --preview-label=" Session preview " \
             --preview-label-pos=2 \
             --preview-window='right:60%:follow:hidden:<80(down:60%:follow:hidden)' \
           )
           local rc=$?
+          (( rc == 0 || rc == 1 )) || return "$rc"
 
           query=$(printf '%s\n' "$output" | sed -n '1p')
           key=$(printf '%s\n' "$output" | sed -n '2p')
           selected=$(printf '%s\n' "$output" | sed -n '3p')
 
           if [[ "$key" == "ctrl-n" && -n "$query" ]]; then
-            session_name="$query"
-          elif [[ $rc -eq 0 && -n "$selected" ]]; then
-            session_name=$(printf '%s\n' "$selected" | awk '{print $1}')
+            zmx-session attach --new -- "$query"
+          elif [[ -n "$selected" ]]; then
+            zmx-session attach-key "''${selected%%$'\t'*}"
           elif [[ -n "$query" ]]; then
-            session_name="$query"
+            zmx-session attach -- "$query"
           else
             return 130
           fi
-
-          local kitty_window_id="$KITTY_WINDOW_ID"
-          if [[ -n "$ZMX_SESSION" ]]; then
-            # This handles an edge case when having two kitty tabs pointed to the same zmx session.
-            # Update the pane of the client that most recently sent input.
-            local leader_kitty_window_id
-            leader_kitty_window_id=$(zmx print-env . KITTY_WINDOW_ID 2>/dev/null) || true
-            if [[ -n "$leader_kitty_window_id" ]]; then
-              kitty_window_id="$leader_kitty_window_id"
-            fi
-          fi
-
-          __zmx_set_kitty_session "$kitty_window_id" "$session_name"
-
-          local attach_rc=130
-          {
-            zmx attach "$session_name"
-            attach_rc=$?
-          } always {
-            # An outer attach returns on detach; an in-session attach returns
-            # after switching clients, so retain its metadata on success.
-            if [[ -z "$ZMX_SESSION" ]]; then
-              __zmx_set_kitty_session "$kitty_window_id" ""
-            elif (( attach_rc != 0 )); then
-              __zmx_set_kitty_session "$kitty_window_id" "$ZMX_SESSION"
-            fi
-          }
-          return "$attach_rc"
         }
 
         ts() {
           __zmx_attach_prompt
         }
 
-        # Launch a named zmx session in a new kitty tab.
-        # Swap to it if the name already exists.
+        # Launch/focus by title or internal ID. New sessions get a generated ID.
         kzmx() {
-          if (( $# < 1 || $# > 3 )); then
-            printf 'usage: kzmx <zmx-session> [cwd]\n       kzmx <zmx-session> <tab-title> <cwd>\n' >&2
+          if (( $# < 1 || $# > 2 )); then
+            printf 'usage: kzmx <title-or-id> [cwd]\n' >&2
             return 2
           fi
-
-          local session_name="$1"
-          local -a tab_title_args=()
-          local cwd="$PWD"
+          local name="$1" cwd="$PWD"
           if (( $# == 2 )); then
             cwd="$2"
-          elif (( $# == 3 )); then
-            tab_title_args=(--tab-title "$2")
-            cwd="$3"
           fi
-          local session_id
-          session_id=$(printf '%s' "$session_name" | sha256sum | awk '{print $1}')
-
-          kitten @ focus-tab --match "var:zmx_session_id=$session_id" 2>/dev/null \
-            || kitten @ launch \
-              --type=tab \
-              "''${tab_title_args[@]}" \
-              --cwd "$cwd" \
-              --env ZMX_AUTO_ATTACH=0 \
-              --var "zmx_session=$session_name" \
-              --var "zmx_session_id=$session_id" \
-              zmx attach "$session_name"
+          zmx-session launch --cwd "$cwd" -- "$name"
         }
 
         # Ask for the zmx session name only when the terminal explicitly opts in.
