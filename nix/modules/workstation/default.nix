@@ -53,7 +53,6 @@ in
     ./apps/pia.nix
     ./apps/t3code.nix
     ./apps/vicinae.nix
-    ./apps/vscode.nix
     # ./apps/wsf.nix # Re-enable this once it has support for Niri
     ./apps/zen-browser.nix
     ./apps/zmx.nix
@@ -817,7 +816,6 @@ in
           options = {
             line-numbers = true;
             hyperlinks = true;
-            hyperlinks-file-link-format = "vscode://file/{path}:{line}";
           };
         };
 
