@@ -775,7 +775,7 @@ in
             diff.tool = "delta";
             difftool.prompt = false;
             # Prevent delta's inner git diff from invoking this difftool recursively.
-            difftool.delta.cmd = ''${pkgs.delta}/bin/delta --diff-args=--no-ext-diff --paging=always "$LOCAL" "$REMOTE"'';
+            difftool.delta.cmd = ''${pkgs.delta}/bin/delta --diff-args="--no-ext-diff --no-prefix" --paging=always "$LOCAL" "$REMOTE"'';
             push.default = "simple";
             push.autoSetupRemote = true;
             push.followTags = true;
@@ -816,6 +816,7 @@ in
           options = {
             line-numbers = true;
             hyperlinks = true;
+            hyperlinks-file-link-format = "file://{path}#{line}";
           };
         };
 

@@ -19,6 +19,12 @@ in
 {
   home-manager.users.anthony = {
     xdg.configFile = {
+      "kitty/open-actions.conf".text = ''
+        protocol file
+        fragment_matches ^[0-9]+$
+        action launch --type=overlay nvim +''${FRAGMENT} -- ''${FILE_PATH}
+      '';
+
       "kitty/ssh.conf".text = ''
         # exe.dev's shell does not support Kitty's SSH bootstrap commands.
         hostname exe.dev
