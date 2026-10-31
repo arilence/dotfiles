@@ -18,7 +18,6 @@
   programs.steam = lib.mkMerge [
     {
       enable = true;
-      protontricks.enable = true;
     }
     (lib.mkIf config.programs.niri.enable {
       package = pkgs.steam.override {
