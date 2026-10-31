@@ -377,7 +377,6 @@ in
     spotify
     feishin
     vlc
-    jetbrains.idea
     ghostty
     lazygit
     meld
