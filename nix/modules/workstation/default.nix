@@ -379,7 +379,6 @@ in
     vlc
     lazygit
     meld
-    bottles
     tableplus
     google-chrome
     localsend # android airdrop
