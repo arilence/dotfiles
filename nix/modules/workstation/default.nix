@@ -377,7 +377,6 @@ in
     spotify
     feishin
     vlc
-    ghostty
     lazygit
     meld
     bottles
@@ -597,47 +596,6 @@ in
         };
         xdg.configFile."atuin/config.toml".force = lib.mkForce true;
 
-        programs.ghostty = {
-          enable = true;
-          enableZshIntegration = true;
-          clearDefaultKeybinds = true;
-          settings = {
-            theme = "dark:TokyoNight Moon,light:Catppuccin Latte";
-            font-family = "MonaspiceNe Nerd Font Mono";
-            # Disables font ligatures
-            font-feature = "-calt, -liga, -dlig";
-            # Fixes `WARNING: terminal is not fully functional` when using SSH
-            # See: https://ghostty.org/docs/help/terminfo#ssh
-            shell-integration-features = "ssh-env";
-            window-width = 120;
-            window-height = 40;
-            cursor-style = "block";
-            # Disable dimming unfocused splits
-            unfocused-split-opacity = 1;
-            keybind = [
-              "ctrl+shift+c=copy_to_clipboard"
-              "copy=copy_to_clipboard"
-              "ctrl+shift+v=paste_from_clipboard"
-              "paste=paste_from_clipboard"
-              "ctrl+|=new_split:right"
-              "ctrl+shift+-=new_split:down"
-              "ctrl+shift+t=new_tab"
-              "alt+1=goto_tab:1"
-              "alt+2=goto_tab:2"
-              "alt+3=goto_tab:3"
-              "alt+4=goto_tab:4"
-              "alt+5=goto_tab:5"
-              "alt+6=goto_tab:6"
-              # TODO: Figure out how to achieve something like
-              # smart-splits.nvim or vim-tmux-navigator within Ghostty
-              "performable:ctrl+h=goto_split:left"
-              "performable:ctrl+j=goto_split:down"
-              "performable:ctrl+k=goto_split:up"
-              "performable:ctrl+l=goto_split:right"
-            ];
-          };
-        };
-
         programs.lazygit = {
           enable = true;
           enableZshIntegration = true;
@@ -735,7 +693,6 @@ in
             '';
 
             # Fixes "'xterm-kitty': unknown terminal type" on remote SSH sessions.
-            # Similar to Ghostty's "shell-integration-features = ssh-env"
             # See: https://sw.kovidgoyal.net/kitty/faq/#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-or-functional-keys-like-arrow-keys-don-t-work
             ssh = ''
               if [[ "$TERM" == "xterm-kitty" ]]; then
