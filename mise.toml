@@ -1,2 +1,5 @@
+[settings]
+experimental = true
+
 [env]
 NIX_CONFIG = "extra-experimental-features = nix-command flakes"

@@ -45,7 +45,6 @@ in
     ./apps/kopia.nix
     ./apps/loupe.nix
     ./apps/ludusavi.nix
-    ./apps/mise.nix
     ./apps/mission-center.nix
     ./apps/nautilus.nix
     ./apps/neovim
@@ -366,6 +365,8 @@ in
     dig # nslookup successor
     devcontainer
     age
+    yq-go
+    unzip
 
     # Gui Apps
     kopia-ui # requires ludusavi

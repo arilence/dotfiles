@@ -6,9 +6,11 @@ Host-specific configurations live in `nix/machines`, while shared system and app
 
 ## Usage
 
-With [Nix](https://nixos.org/) and [mise](https://mise.jdx.dev/) installed:
+With [Nix](https://nixos.org/) installed, enter the project shell to make [mise](https://mise.jdx.dev/) available:
 
 ```bash
+nix develop
+
 # Check a host configuration
 mise run test-host desktop
 

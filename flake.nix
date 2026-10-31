@@ -56,6 +56,27 @@
       ...
     }@inputs:
     {
+      devShells =
+        nixpkgs.lib.genAttrs
+          [
+            "x86_64-linux"
+            "aarch64-linux"
+            "x86_64-darwin"
+            "aarch64-darwin"
+          ]
+          (system: {
+            default =
+              let
+                pkgs = nixpkgs.legacyPackages.${system};
+              in
+              pkgs.mkShellNoCC {
+                packages = with pkgs; [
+                  mise
+                  usage
+                ];
+              };
+          });
+
       nixosConfigurations =
         let
           system = "x86_64-linux";
