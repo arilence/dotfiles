@@ -41,6 +41,7 @@ in
     ./apps/easyeffects.nix
     ./apps/gnome-text-editor.nix
     ./apps/handy.nix
+    ./apps/hex.nix
     ./apps/kitty.nix
     ./apps/kopia.nix
     ./apps/loupe.nix

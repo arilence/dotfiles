@@ -12,6 +12,10 @@
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    hex.url = "github:anomalyco/hex";
+    hex.inputs.nixpkgs.follows = "nixpkgs";
+    hex.inputs.home-manager.follows = "home-manager";
+
     vicinae-extensions.url = "github:vicinaehq/extensions";
     vicinae-extensions.inputs.nixpkgs.follows = "nixpkgs";
 

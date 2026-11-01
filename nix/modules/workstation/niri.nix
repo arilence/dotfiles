@@ -10,6 +10,10 @@ let
 in
 {
   programs.niri.enable = true;
+
+  # GNOME's shortcut portal needs GNOME Shell; let apps use Niri command bindings instead.
+  xdg.portal.config.niri."org.freedesktop.impl.portal.GlobalShortcuts" = "none";
+
   services.greetd = {
     enable = true;
     settings.default_session.user = "greeter";
@@ -110,8 +114,8 @@ in
         // Specifically set as Super rather than primaryModifier
         Super+L repeat=false allow-inhibiting=false { spawn "noctalia" "msg" "session" "lock"; }
 
-        // Handy speech-to-text. Press once to record and again to transcribe.
-        Mod+Shift+Space repeat=false allow-inhibiting=false { spawn "handy-toggle"; }
+        // Hex speech-to-text. Press once to record and again to transcribe.
+        Mod+Shift+Space repeat=false allow-inhibiting=false { spawn "hex" "dictation" "toggle"; }
 
         // Window management
         Mod+Ctrl+H allow-inhibiting=false { focus-column-left; }
