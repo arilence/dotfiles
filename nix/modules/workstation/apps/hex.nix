@@ -27,7 +27,10 @@ in
       model = "parakeet_unified_en";
       language = "en";
       installModel = true;
-      settings.shortcut_mode = "toggle";
+      settings = {
+        shortcut_mode = "toggle";
+        "labs.unload_idle" = true;
+      };
     };
   };
 }
