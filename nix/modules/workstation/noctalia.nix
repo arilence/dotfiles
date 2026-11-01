@@ -113,6 +113,7 @@ in
           width = 720;
           sidebar = "full";
           sidebar_section = "full";
+          hidden_tabs = [ "monitor" ];
         };
 
         lockscreen = {
