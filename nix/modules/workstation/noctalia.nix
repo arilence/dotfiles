@@ -58,6 +58,28 @@ in
         # Manage plugins through Nix instead of background Git updates.
         plugins.auto_update = "none";
 
+        dock = {
+          enabled = true;
+          smart_auto_hide = true;
+          position = "bottom";
+          active_monitor_only = false;
+          pinned = [
+            "zen-beta"
+            "kitty"
+            "t3code"
+            "obsidian"
+            "spotify"
+          ];
+          show_running = true;
+          launcher_position = "none";
+          magnification = false;
+          reserve_space = false;
+          concave_edge_corners = false;
+          radius_bottom_left = 0;
+          radius_bottom_right = 0;
+          show_dots = true;
+        };
+
         bar.main = {
           # Disables opening the control center when right-clicking empty bar space.
           dead_zone.actions.right = "none";
