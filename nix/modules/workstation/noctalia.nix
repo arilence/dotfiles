@@ -64,6 +64,7 @@ in
           position = "bottom";
           active_monitor_only = false;
           pinned = [
+            "org.gnome.Nautilus"
             "zen-beta"
             "kitty"
             "t3code"
