@@ -11,6 +11,9 @@ let
   # This is available to access the global value while nested inside of home-manager.
   nixosConfig = config;
 
+  # Interactive staging with Delta requires Lazygit >= 0.66.0 and Delta >= 0.20.0.
+  delta = pkgs.nixosUnstable.delta;
+
   prismLauncherWithExtraJdks =
     extraJdks:
     pkgs.prismlauncher.overrideAttrs (oldAttrs: {
@@ -378,7 +381,7 @@ in
     spotify
     feishin
     vlc
-    lazygit
+    nixosUnstable.lazygit
     meld
     tableplus
     google-chrome
@@ -598,9 +601,16 @@ in
 
         programs.lazygit = {
           enable = true;
+          # Return this and the systemPackages entry to stable once Lazygit >= 0.66.0 is available.
+          package = pkgs.nixosUnstable.lazygit;
           enableZshIntegration = true;
           settings = {
             promptToReturnFromSubprocess = false;
+            git.diffRenderers = [
+              {
+                command = ''${delta}/bin/delta --{{colorScheme}} --paging=never --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"'';
+              }
+            ];
             gui = {
               mainPanelSplitMode = "horizontal";
               sidePanelWidth = 0.3;
@@ -625,7 +635,7 @@ in
             sudo = "sudo "; # trailing space is intentional
 
             ls = "eza --group-directories-first";
-            diff = "${pkgs.delta}/bin/delta";
+            diff = "${delta}/bin/delta";
             vim = "nvim";
             lg = "lazygit";
             gs = "git status";
@@ -732,7 +742,7 @@ in
             diff.tool = "delta";
             difftool.prompt = false;
             # Prevent delta's inner git diff from invoking this difftool recursively.
-            difftool.delta.cmd = ''${pkgs.delta}/bin/delta --diff-args="--no-ext-diff --no-prefix" --paging=always "$LOCAL" "$REMOTE"'';
+            difftool.delta.cmd = ''${delta}/bin/delta --diff-args="--no-ext-diff --no-prefix" --paging=always "$LOCAL" "$REMOTE"'';
             push.default = "simple";
             push.autoSetupRemote = true;
             push.followTags = true;
@@ -768,6 +778,7 @@ in
         # "Better" Git diff viewer
         programs.delta = {
           enable = true;
+          package = delta;
           enableGitIntegration = true;
           enableJujutsuIntegration = true;
           options = {
