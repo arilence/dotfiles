@@ -13,7 +13,6 @@
     ./modules/nvidia-gpu.nix
   ];
 
-  arilence.workstation.apps.handy.autoStart = true;
   arilence.workstation.printing.autoDiscovery = true;
   arilence.workstation.apps.zen-browser.deviceName = "Desktop";
 
