@@ -436,12 +436,12 @@ in
         "ctrl+insert" = "copy_to_clipboard";
         "ctrl+shift+v" = "paste_from_clipboard";
         "shift+insert" = "paste_from_clipboard";
-        "ctrl+shift+backslash" = "launch --cwd=current --location=vsplit --env ZMX_AUTO_ATTACH=1";
-        "ctrl+shift+minus" = "launch --cwd=current --location=hsplit --env ZMX_AUTO_ATTACH=1";
+        "ctrl+shift+backslash" = "launch --cwd=last_reported --location=vsplit --env ZMX_AUTO_ATTACH=1";
+        "ctrl+shift+minus" = "launch --cwd=last_reported --location=hsplit --env ZMX_AUTO_ATTACH=1";
         "ctrl+shift+z" = "toggle_layout stack";
         "ctrl+[" = "kitten toggle_tab_bar.py";
         # Only terminals opened with this shortcut should show the zmx selector.
-        "ctrl+shift+t" = "launch --type=tab --cwd=current --env ZMX_AUTO_ATTACH=1";
+        "ctrl+shift+t" = "launch --type=tab --cwd=last_reported --env ZMX_AUTO_ATTACH=1";
         "${primaryModifier}+1" = "goto_tab 1";
         "${primaryModifier}+2" = "goto_tab 2";
         "${primaryModifier}+3" = "goto_tab 3";
