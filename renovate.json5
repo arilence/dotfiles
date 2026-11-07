@@ -3,6 +3,7 @@
   "extends": [
     "config:best-practices",
   ],
+  "timezone": "America/Vancouver",
   "nix": {
     "enabled": true,
   },
