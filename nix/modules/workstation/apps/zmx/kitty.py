@@ -67,6 +67,10 @@ def title_for_tab(data):
     # While renaming, the ask overlay must not replace the session's title.
     if tab and tab.renaming_in_window == getattr(window, "id", None):
         window = get_boss().window_id_map.get(window.overlay_for)
+    return title_for_window(window, (tab.name if tab else "") or data.title)
+
+
+def title_for_window(window, fallback=None):
     name = session_for_window(window)
     if name:
         if "zmx_session_id" not in window.user_vars:
@@ -79,13 +83,22 @@ def title_for_tab(data):
             except SessionError:
                 return name
         return window.user_vars.get("zmx_title") or name
-    return (tab.name if tab else "") or data.title
+    return fallback if fallback is not None else (window.title if window else "")
 
 
 def on_set_user_var(boss, window, data):
     if data["key"] in ("zmx_session", "zmx_title", "zmx_dir"):
         if tab := window.tabref():
             tab.mark_tab_bar_dirty()
+
+
+def on_title_change(boss, window, data):
+    # Native tab updates ignore titles from inactive panes, now visible as children.
+    if tab := window.tabref():
+        tab.mark_tab_bar_dirty()
+
+
+on_cmd_startstop = on_title_change
 
 
 def install():
