@@ -266,6 +266,12 @@ original_mouse = getattr(
 original_drop = getattr(
     TabManager.on_window_drop, "sidebar_original", TabManager.on_window_drop
 )
+original_tab_drop_move = getattr(
+    TabManager.on_tab_drop_move, "sidebar_original", TabManager.on_tab_drop_move
+)
+original_tab_drop = getattr(
+    TabManager.on_tab_drop, "sidebar_original", TabManager.on_tab_drop
+)
 
 
 def handle_tab_bar_mouse(self, x, y, button, modifiers, action):
@@ -310,12 +316,68 @@ def on_window_drop(self, x, y, window_id):
     return original_drop(self, x, y, window_id)
 
 
+def on_tab_drop_move(self, tab_id=0, is_dest=False, x=0, y=0):
+    from kitty.fast_data_types import viewport_for_window
+
+    self.sidebar_merge_target = 0
+    self._set_drag_target_tab(0)
+    original_tab_drop_move(self, tab_id, is_dest, x, y)
+    if not is_dest or self.tab_being_dropped is None:
+        return
+    region = viewport_for_window(self.os_window_id)[1]
+    if not (region.left <= x < region.right and region.top <= y < region.bottom):
+        return
+    target = self.tab_bar.window_drop_target_at(x, y)
+    if target.before_tab_id is None and self.tab_for_id(target.tab_id) is not None:
+        # Retain the native pending drop so Wayland can finish the merge even
+        # when its source-finished callback arrives before the drop data.
+        self.sidebar_merge_target = target.tab_id
+        self.tab_bar.tab_drop_insert_before = None
+        self._cancel_drag_hover()
+        self._set_drag_target_tab(target.tab_id if target.tab_id != tab_id else 0)
+        self.mark_tab_bar_dirty()
+
+
+def on_tab_drop(self, x, y, bypass_move=False):
+    pending = self.tab_being_dropped
+    if pending is None:
+        return
+    if not bypass_move:
+        self.on_tab_drop_move(pending.tab_id, True, x, y)
+    target_id = getattr(self, "sidebar_merge_target", 0)
+    if not target_id:
+        return original_tab_drop(self, x, y, bypass_move=True)
+
+    boss = get_boss()
+    source = boss.tab_for_id(pending.tab_id)
+    destination = self.tab_for_id(target_id)
+    self.on_tab_drop_move()
+    set_tab_being_dragged()
+    if source is None or destination is None or source is destination:
+        return
+    active_window = source.active_window
+    windows = [
+        boss.window_id_map[group.main_window_id]
+        for group in source.windows.iter_all_layoutable_groups()
+    ]
+    self.finish_tab_drag_hover(restore_focus=False)
+    with boss.suppress_focus_change_events():
+        for window in windows:
+            boss._move_window_to(window, target_tab_id=destination.id)
+        if active_window is not None:
+            boss.set_active_window(active_window, switch_os_window_if_needed=True)
+
+
 TabBar.update_vertical = update_vertical
 TabBar.window_drop_target_at = window_drop_target_at
 handle_tab_bar_mouse.sidebar_original = original_mouse
 on_window_drop.sidebar_original = original_drop
+on_tab_drop_move.sidebar_original = original_tab_drop_move
+on_tab_drop.sidebar_original = original_tab_drop
 TabManager.handle_tab_bar_mouse = handle_tab_bar_mouse
 TabManager.on_window_drop = on_window_drop
+TabManager.on_tab_drop_move = on_tab_drop_move
+TabManager.on_tab_drop = on_tab_drop
 
 
 def draw_tab(

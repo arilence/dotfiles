@@ -151,7 +151,8 @@ in
         disable_ligatures = "always";
         # Keep CLI hints readable when applications use ANSI faint text.
         dim_opacity = "0.75";
-        enabled_layouts = "splits,stack";
+        # Kitty's vertical split axis arranges panes above and below each other.
+        enabled_layouts = "splits:split_axis=vertical,stack";
         inactive_text_alpha = "1.0";
         remember_window_size = false;
         initial_window_width = "140c";
