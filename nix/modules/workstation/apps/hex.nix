@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -15,7 +16,7 @@ in
     programs.hex = {
       enable = true;
       package = pkgs.nixosUnstable.anomaly-hex;
-      autostart = true;
+      autostart = lib.mkDefault true;
       shortcut = "${modifier}+shift+space";
       model = "parakeet_unified_en";
       language = "en";

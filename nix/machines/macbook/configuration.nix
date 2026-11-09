@@ -11,6 +11,8 @@
   arilence.workstation.printing.autoDiscovery = false;
   arilence.workstation.apps.zen-browser.deviceName = "MacBook";
 
+  home-manager.users.anthony.programs.hex.autostart = false;
+
   powerManagement.cpuFreqGovernor = "schedutil";
 
   # Let Niri and Noctalia handle lid-close locking and suspension without racing systemd-logind's
