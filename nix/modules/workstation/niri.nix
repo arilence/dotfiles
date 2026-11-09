@@ -11,6 +11,17 @@ in
 {
   programs.niri.enable = true;
 
+  programs.uwsm = {
+    enable = true;
+    waylandCompositors.niri = {
+      prettyName = "Niri";
+      comment = "Niri managed by UWSM";
+      binPath = "/run/current-system/sw/bin/niri";
+      # Retain Niri's portal, accessibility, and logind integration.
+      extraArgs = [ "--session" ];
+    };
+  };
+
   # GNOME's shortcut portal needs GNOME Shell; let apps use Niri command bindings instead.
   xdg.portal.config.niri."org.freedesktop.impl.portal.GlobalShortcuts" = "none";
 

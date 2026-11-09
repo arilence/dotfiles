@@ -47,20 +47,8 @@
             compact_mode.enabled = true;
           };
           providers.applications = {
-            # Launch applications as transient user services instead of inheriting Vicinae's
-            # environment. i.e. before this change, opening any terminal emulator through Vicinae
-            # would end up putting `node` (and who know's what other tools) into the PATH.
-            preferences.launchPrefix = lib.concatStringsSep " " [
-              "${pkgs.systemd}/bin/systemd-run"
-              "--user"
-              "--collect"
-              "--service-type=exec"
-              # Keep forked GUI apps alive after their launcher CLI exits. i.e. Delta
-              "--property=ExitType=cgroup"
-              "--same-dir"
-              "--expand-environment=no"
-              "--"
-            ];
+            # Services use the session environment rather than Vicinae's modified PATH.
+            preferences.launchPrefix = "${config.programs.uwsm.package}/bin/uwsm app -t service --";
           };
         };
         extensions = [

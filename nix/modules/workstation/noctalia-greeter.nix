@@ -36,8 +36,8 @@ in
   services.displayManager.noctalia-greeter = {
     enable = true;
 
-    # Preselect Niri.
-    greeter-args = "--session niri";
+    # Preselect the UWSM-managed Niri session.
+    greeter-args = "--session niri-uwsm";
 
     # Preselect the primary user.
     settings = {

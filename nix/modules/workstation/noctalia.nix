@@ -130,6 +130,9 @@ in
 
         shell.clipboard_enabled = true;
 
+        shell.launch_apps_as_systemd_services = false;
+        shell.launch_apps_custom_command = "${config.programs.uwsm.package}/bin/uwsm app -t service -- $CMD";
+
         shell.panel.open_near_click_control_center = true;
 
         control_center = {
