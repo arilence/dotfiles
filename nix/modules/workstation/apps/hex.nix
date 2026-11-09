@@ -14,7 +14,7 @@ in
     imports = [ inputs.hex.homeManagerModules.hex ];
     programs.hex = {
       enable = true;
-      package = inputs.nixpkgs-hex.legacyPackages.${pkgs.stdenv.hostPlatform.system}.anomaly-hex;
+      package = pkgs.nixosUnstable.anomaly-hex;
       autostart = true;
       shortcut = "${modifier}+shift+space";
       model = "parakeet_unified_en";

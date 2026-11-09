@@ -9,11 +9,6 @@
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # <- prefer this one when unsure.
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    # Hex reached this channel before the regular unstable channels.
-    # TODO: Remove this input once anomaly-hex is available in nixos-unstable,
-    # and use pkgs.nixosUnstable.anomaly-hex in apps/hex.nix.
-    nixpkgs-hex.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
