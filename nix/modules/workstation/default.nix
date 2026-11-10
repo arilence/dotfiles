@@ -171,6 +171,10 @@ in
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   sops.age.generateKey = false;
   sops.secrets.user-password.neededForUsers = true;
+  sops.secrets.ssh-config = {
+    owner = "anthony";
+    mode = "0600";
+  };
   sops.secrets.git-options = {
     mode = "0444";
   };
@@ -534,6 +538,7 @@ in
               IdentityAgent ~/.1password/agent.sock
           '';
           includes = [
+            nixosConfig.sops.secrets.ssh-config.path
             # 1Password automatically manages host *.pub files to avoid the [Six-Key
             # Limit](https://www.1password.dev/ssh/agent/advanced#ssh-server-six-key-limit)
             "~/.ssh/1Password/config"
