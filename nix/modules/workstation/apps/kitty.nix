@@ -26,6 +26,9 @@ in
       '';
 
       "kitty/ssh.conf".text = ''
+        # Keeps Ctrl+C working while connecting to unreachable hosts.
+        askpass ssh
+
         # exe.dev's shell does not support Kitty's SSH bootstrap commands.
         hostname exe.dev
         delegate ssh
