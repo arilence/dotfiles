@@ -77,6 +77,7 @@
                 packages = with pkgs; [
                   mise
                   usage
+                  yaml-language-server
                 ];
               };
           });

@@ -6,11 +6,11 @@ keys:
 creation_rules:
   - path_regex: nix/machines/desktop/.*\.sops\.(ya?ml|json|env|ini|bin)$
     key_groups:
-    - age:
-      - *arilence
-      - *desktop
+      - age:
+          - *arilence
+          - *desktop
   - path_regex: nix/machines/macbook/.*\.sops\.(ya?ml|json|env|ini|bin)$
     key_groups:
-    - age:
-      - *arilence
-      - *macbook
+      - age:
+          - *arilence
+          - *macbook
