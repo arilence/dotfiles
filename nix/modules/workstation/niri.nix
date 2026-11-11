@@ -234,6 +234,8 @@ in
         match app-id=r#"(?i)\.exe$"#
         match app-id=r#"^steam_app_[0-9]+$"#
         open-floating false
+        // Avoid Wine Wayland resize loops triggered by the tiled-state hint.
+        tiled-state false
       }
     '';
   };
