@@ -5,7 +5,7 @@ import sys
 from dataclasses import dataclass
 
 sys.path.insert(0, "@zmx_session@/lib")
-from zmx_kitty import title_for_tab, title_for_window
+from zmx_kitty import title_for_window
 
 from kitty.fast_data_types import (
     GLFW_MOUSE_BUTTON_LEFT,
@@ -23,9 +23,37 @@ from kitty.tabs import TabManager
 from kitty.utils import color_as_int, path_from_osc7_url, sanitize_title
 
 INDENT = "  "
+JUMP_MODIFIER = "@primary_modifier@"
 ACTIVITY_MARKER = "● "
 ACCENT = as_rgb(0x168EEA)
 MAX_ENTRY_LINES = 4
+
+
+def blend(foreground, background, opacity):
+    return as_rgb(
+        color_as_int(
+            alpha_blend(
+                color_from_int(foreground >> 8),
+                color_from_int(background >> 8),
+                opacity,
+            )
+        )
+    )
+
+
+def group_title(index):
+    return f"{JUMP_MODIFIER}+{index}" if index <= 9 else f"Group {index}"
+
+
+def draw_heading(screen, text, width):
+    text = fit(text, width)
+    # The tab-bar screen has no child writer, so its parser can safely handle OSC 66.
+    for start in range(0, len(text), 5):
+        chunk = text[start : start + 5]
+        cells = (len(chunk) * 4 + 4) // 5
+        screen.restore_scrollback(
+            f"\x1b]66;n=4:d=5:w={cells}:v=2;{chunk}\a".encode()
+        )
 
 
 def fit(text, width):
@@ -100,13 +128,13 @@ class Entry:
 
     @property
     def indent(self):
-        return INDENT * (2 if self.window_id else 1)
+        return INDENT if self.window_id else ""
 
 
 def entries_for_tabs(data):
     boss = get_boss()
     entries = []
-    for item in data:
+    for index, item in enumerate(data, 1):
         tab = boss.tab_for_id(item.tab_id)
         # Overlays belong to their underlying pane, not to a new child entry.
         windows = (
@@ -121,25 +149,23 @@ def entries_for_tabs(data):
             Entry(
                 item,
                 0,
-                title_for_tab(item),
-                cwd_for_window(tab.active_window) if tab and len(windows) <= 1 else "",
-                item.is_active,
-                item.needs_attention or item.has_activity_since_last_focus,
+                group_title(index),
+                "",
+                False,
             )
         )
-        if len(windows) > 1:
-            for window in windows:
-                entries.append(
-                    Entry(
-                        item,
-                        window.id,
-                        title_for_window(window),
-                        cwd_for_window(window),
-                        item.is_active
-                        and window.id == tab.windows.active_group.main_window_id,
-                        window.needs_attention or window.has_activity_since_last_focus,
-                    )
+        for window in windows:
+            entries.append(
+                Entry(
+                    item,
+                    window.id,
+                    title_for_window(window),
+                    cwd_for_window(window),
+                    item.is_active
+                    and window.id == tab.windows.active_group.main_window_id,
+                    window.needs_attention or window.has_activity_since_last_focus,
                 )
+            )
     return entries
 
 
@@ -174,32 +200,42 @@ def update_vertical(self, data):
     )
     extents, panes = [], []
     for entry, height in zip(visible, heights):
-        tab = entry.tab._replace(is_active=entry.active)
-        foreground = as_rgb(self.draw_data.tab_fg(tab))
-        background = as_rgb(self.draw_data.tab_bg(tab))
+        tab = entry.tab._replace(is_active=False)
+        normal_fg = as_rgb(self.draw_data.tab_fg(tab))
+        normal_bg = as_rgb(self.draw_data.tab_bg(tab))
+        background = blend(ACCENT, normal_bg, 0.18) if entry.active else normal_bg
+        foreground = normal_fg
+        if entry.active:
+            foreground = blend(ACCENT, normal_fg, 0.5)
+        elif not entry.window_id:
+            foreground = blend(normal_fg, normal_bg, 0.78)
         for offset in range(height):
             screen.cursor.x, screen.cursor.y = 0, row + offset
             screen.cursor.fg, screen.cursor.bg = foreground, background
             screen.cursor.bold, screen.cursor.italic = False, False
             screen.draw(" " * screen.columns)
-            screen.cursor.x = 0
-            screen.draw(entry.indent)
+            if entry.window_id:
+                screen.cursor.x = 0
+                screen.cursor.fg = (
+                    ACCENT if entry.active else blend(normal_fg, normal_bg, 0.3)
+                )
+                screen.draw("│")
+                screen.cursor.fg = foreground
+            screen.cursor.x = wcswidth(entry.indent)
             width = screen.columns - 1 - wcswidth(entry.indent)
             if offset == 0:
-                screen.cursor.bold = not entry.window_id or entry.active
+                screen.cursor.bold = entry.active
                 if entry.attention:
                     screen.cursor.fg = ACCENT
                     screen.draw(ACTIVITY_MARKER)
                     screen.cursor.fg = foreground
                     width -= wcswidth(ACTIVITY_MARKER)
-                screen.draw(fit(entry.title, width))
+                if entry.window_id:
+                    screen.draw(fit(entry.title, width))
+                else:
+                    draw_heading(screen, entry.title, width)
             else:
-                muted = alpha_blend(
-                    color_from_int(foreground >> 8),
-                    color_from_int(background >> 8),
-                    0.68,
-                )
-                screen.cursor.fg = as_rgb(color_as_int(muted))
+                screen.cursor.fg = blend(foreground, background, 0.68)
                 screen.draw(wrap_cwd(entry.cwd, width, height - 1)[offset - 1])
         extent = TabExtent(
             entry.tab.tab_id,
@@ -384,5 +420,5 @@ def draw_tab(
     draw_data, screen, tab, before, max_tab_length, index, is_last, extra_data
 ):
     # Kitty requires this entry point even though update_vertical draws groups.
-    screen.draw(fit(title_for_tab(tab), max_tab_length))
+    draw_heading(screen, group_title(index), max_tab_length)
     return screen.cursor.x

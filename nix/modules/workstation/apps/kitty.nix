@@ -41,6 +41,7 @@ in
 
       "kitty/tab_bar.py".source = pkgs.replaceVars ./kitty/sidebar.py {
         zmx_session = zmx-session;
+        primary_modifier = primaryModifier;
       };
 
       "kitty/sidebar_watcher.py".text = ''
