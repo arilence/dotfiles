@@ -15,6 +15,9 @@ vim.pack.add({
 
   -- Collection of QoL Plugins
   "git@github.com:folke/snacks.nvim",
+
+  -- Git line markers and hunk actions
+  "git@github.com:lewis6991/gitsigns.nvim",
 })
 
 -----
