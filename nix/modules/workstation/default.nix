@@ -368,6 +368,7 @@ in
     fd
     starship
     wl-clipboard
+    glib # Provides gio for Electron's system trash support.
     fzf
     ripgrep
     dig # nslookup successor
