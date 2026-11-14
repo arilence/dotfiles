@@ -4,6 +4,12 @@ keys:
   - &macbook age1z5cdaqqa35a0xe2rs8j789mmw2vrenlhvac6alewjtw5679scdnqxe20l3
 
 creation_rules:
+  - path_regex: nix/secrets/.*\.sops\.(ya?ml|json|env|ini|bin)$
+    key_groups:
+      - age:
+          - *arilence
+          - *desktop
+          - *macbook
   - path_regex: nix/machines/desktop/.*\.sops\.(ya?ml|json|env|ini|bin)$
     key_groups:
       - age:

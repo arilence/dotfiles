@@ -62,6 +62,11 @@ in
     ./scripts.nix
   ];
 
+  # The token is decrypted at activation, keeping it out of the Nix store.
+  nix.extraOptions = ''
+    !include ${config.sops.templates.github-access-tokens.path}
+  '';
+
   nix.settings = {
     nix-path = "nixpkgs=flake:nixpkgs";
 
@@ -189,6 +194,17 @@ in
   };
   sops.secrets.syncthing-untrusted-device-password = {
     mode = "0444";
+  };
+  sops.secrets.github-token = {
+    sopsFile = ../../secrets/github.sops.yaml;
+  };
+  sops.templates.github-access-tokens = {
+    content = ''
+      access-tokens = github.com=${config.sops.placeholder.github-token}
+    '';
+    owner = "anthony";
+    mode = "0400";
+    restartUnits = [ "nix-daemon.service" ];
   };
 
   # Enable networking
