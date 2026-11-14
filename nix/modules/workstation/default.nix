@@ -177,7 +177,7 @@ in
   sops.age.generateKey = false;
   sops.secrets.user-password.neededForUsers = true;
   sops.secrets.ssh-config = {
-    sopsFile = ../../secrets/ssh.sops.yaml;
+    sopsFile = ../../secrets/ssh-config.sops.yaml;
     owner = "anthony";
     mode = "0600";
   };
