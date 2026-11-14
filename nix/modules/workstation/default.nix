@@ -182,6 +182,7 @@ in
     mode = "0600";
   };
   sops.secrets.git-options = {
+    sopsFile = ../../secrets/git-options.sops.yaml;
     mode = "0444";
   };
   sops.secrets.syncthing-gui-password = {
