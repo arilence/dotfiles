@@ -88,7 +88,7 @@ in
       }
 
       layout {
-        default-column-width { proportion 0.75; }
+        default-column-width { proportion 0.85; }
         center-focused-column "on-overflow"
         always-center-single-column
       }
