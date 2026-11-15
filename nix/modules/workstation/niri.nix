@@ -7,6 +7,16 @@
 let
   primaryModifier = config.arilence.workstation.keybindings.primaryModifier;
   inversePrimaryModifier = if primaryModifier == "Alt" then "Super" else "Alt";
+  togglePair = pkgs.writeShellApplication {
+    name = "niri-toggle-pair";
+    runtimeInputs = [
+      config.programs.niri.package
+      pkgs.coreutils
+      pkgs.jq
+      pkgs.util-linux
+    ];
+    text = builtins.readFile ./niri-toggle-pair.sh;
+  };
 in
 {
   programs.niri.enable = true;
@@ -79,7 +89,7 @@ in
 
       layout {
         default-column-width { proportion 0.75; }
-        center-focused-column "always"
+        center-focused-column "on-overflow"
         always-center-single-column
       }
 
@@ -134,6 +144,7 @@ in
         Mod+Ctrl+K allow-inhibiting=false { focus-workspace-up; }
         Mod+Ctrl+J allow-inhibiting=false { focus-workspace-down; }
         Mod+Ctrl+Space allow-inhibiting=false { center-column; }
+        Mod+Ctrl+P repeat=false allow-inhibiting=false { spawn "${togglePair}/bin/niri-toggle-pair"; }
         Mod+Ctrl+Shift+K allow-inhibiting=false { maximize-column; }
         Mod+Ctrl+Shift+F allow-inhibiting=false { fullscreen-window; }
 
