@@ -405,7 +405,7 @@ in
     spotify
     feishin
     vlc
-    nixosUnstable.lazygit
+    lazygit
     meld
     tableplus
     google-chrome
@@ -626,8 +626,6 @@ in
 
         programs.lazygit = {
           enable = true;
-          # Return this and the systemPackages entry to stable once Lazygit >= 0.66.0 is available.
-          package = pkgs.nixosUnstable.lazygit;
           enableZshIntegration = true;
           settings = {
             promptToReturnFromSubprocess = false;
