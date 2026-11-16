@@ -182,11 +182,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1794870077,
-        "narHash": "sha256-DZXZOR2c3NN7/nmxJURbop2aaFdwi4xNTBG81dkzIlk=",
+        "lastModified": 1794872904,
+        "narHash": "sha256-72gNp+BfmnRHNhr4NIfSU8lHXBzIhLHarL990V+siFA=",
         "owner": "arilence",
         "repo": "nix-host-updater",
-        "rev": "3d6ff028be811f14e057ccbad40c710eb93297b0",
+        "rev": "bdf89b24ca5dee7bb85173b54ec2aa2abe93dd6c",
         "type": "github"
       },
       "original": {
