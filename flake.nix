@@ -41,6 +41,8 @@
 
     llm-agents.url = "github:numtide/llm-agents.nix";
 
+    nix-host-updater.url = "github:arilence/nix-host-updater";
+
     # TODO: re-enable this once it has support for Niri and not just GNOME
     # # Provides variable scroll speed using a trackpad
     # wsf.url = "github:daniel-g-carrasco/wayland-scroll-factor";
@@ -92,10 +94,10 @@
           configurationRevision = inputs.self.rev or inputs.self.dirtyRev or "dirty";
 
           mkWorkstation =
-            hostModules:
+            configurationName: hostModules:
             nixpkgs.lib.nixosSystem {
               inherit system;
-              specialArgs = { inherit inputs; };
+              specialArgs = { inherit inputs configurationName configurationRepository; };
               modules = [
                 {
                   system.configurationRevision = configurationRevision;
@@ -128,13 +130,13 @@
             };
         in
         {
-          desktop = mkWorkstation [
+          desktop = mkWorkstation "desktop" [
             ./nix/machines/desktop/configuration.nix
             # Use nixos-facter instead of nixos-generate-config.
             { hardware.facter.reportPath = ./nix/machines/desktop/facter.json; }
           ];
 
-          macbook = mkWorkstation [
+          macbook = mkWorkstation "macbook" [
             nixos-hardware.nixosModules.apple-macbook-pro-11-1
             ./nix/machines/macbook/configuration.nix
           ];

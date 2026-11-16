@@ -52,6 +52,7 @@ in
     ./apps/mission-center.nix
     ./apps/nautilus.nix
     ./apps/neovim
+    ./apps/nix-host-updater.nix
     ./apps/onepassword.nix
     ./apps/pia.nix
     ./apps/t3code.nix
