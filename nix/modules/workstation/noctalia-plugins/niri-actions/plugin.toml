@@ -1,0 +1,22 @@
+id = "arilence/niri-actions"
+name = "Niri actions"
+version = "1.0.0"
+plugin_api = 42
+author = "arilence"
+description = "Quick access to occasional Niri window actions."
+icon = "layout-columns"
+
+[[widget]]
+id = "button"
+entry = "widget.luau"
+
+[[panel]]
+id = "menu"
+entry = "panel.luau"
+width = 300
+height = "content"
+max_height = 420
+placement = "attached"
+open_near_click = true
+keyboard_focus = "on_demand"
+dismiss_on_outside_click = true

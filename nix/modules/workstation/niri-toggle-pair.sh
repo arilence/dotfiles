@@ -4,7 +4,9 @@ exec 9>"$state_dir/lock"
 flock --nonblock 9 || exit 0
 
 windows=$(niri msg --json windows)
-focused=$(jq -ce '.[] | select(.is_focused and (.is_floating | not)
+# A shell panel can hold keyboard focus while the workspace still has an active window.
+active_window_id=$(niri msg --json workspaces | jq -er '.[] | select(.is_focused) | .active_window_id') || exit 0
+focused=$(jq -ce --argjson id "$active_window_id" '.[] | select(.id == $id and (.is_floating | not)
   and .layout.pos_in_scrolling_layout != null)' <<< "$windows") || exit 0
 read -r focused_id workspace_id column < <(
   jq -r '[.id, .workspace_id, .layout.pos_in_scrolling_layout[0]] | @tsv' <<< "$focused"

@@ -50,6 +50,7 @@ in
   };
 
   environment.systemPackages = [
+    togglePair
     # Xwayland support for apps like Steam
     pkgs.xwayland-satellite
   ];

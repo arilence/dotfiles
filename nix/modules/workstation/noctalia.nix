@@ -57,6 +57,15 @@ in
       settings = {
         # Manage plugins through Nix instead of background Git updates.
         plugins.auto_update = "none";
+        plugins.enabled = [ "arilence/niri-actions" ];
+        plugins.source = [
+          {
+            name = "dotfiles";
+            kind = "path";
+            location = "${./noctalia-plugins}";
+            enabled = true;
+          }
+        ];
 
         dock = {
           enabled = true;
@@ -100,6 +109,7 @@ in
             "clock"
           ];
           end = [
+            "niri-actions"
             "tray"
             "network"
             "volume"
@@ -109,6 +119,8 @@ in
         };
 
         widget.clock.format = "{:%a %b %-d %H:%M}";
+
+        widget.niri-actions.type = "arilence/niri-actions:button";
 
         widget.media.hide_when_no_media = true;
 
