@@ -92,21 +92,19 @@ in
           margin_ends = 0;
           widget_spacing = 12;
           start = [
+            "control-center"
             "workspaces"
-            "weather"
             "media"
           ];
           center = [
             "clock"
-            "notifications"
           ];
           end = [
             "tray"
             "network"
             "volume"
             "battery"
-            "control-center"
-            "session"
+            "notifications"
           ];
         };
 
@@ -178,14 +176,8 @@ in
           "${pkgs.systemd}/bin/systemctl --user start handy.service"
         ];
 
-        location = {
-          auto_locate = true;
-        };
-
-        weather = {
-          enabled = true;
-          unit = "metric";
-        };
+        location.auto_locate = false;
+        weather.enabled = false;
 
         wallpaper = {
           enabled = true;
