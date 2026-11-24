@@ -90,6 +90,10 @@ in
 
       layout {
         default-column-width { proportion 0.85; }
+        preset-column-widths {
+          proportion 0.5
+          proportion 0.85
+        }
         center-focused-column "on-overflow"
         always-center-single-column
       }
