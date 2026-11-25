@@ -109,8 +109,8 @@ in
             "clock"
           ];
           end = [
-            "niri-actions"
             "tray"
+            "niri-actions"
             "network"
             "volume"
             "battery"
