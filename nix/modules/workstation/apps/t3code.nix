@@ -40,6 +40,7 @@ let
     nativeBuildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/t3code \
+        --set T3CODE_TELEMETRY_ENABLED false \
         --prefix PATH : ${
           lib.makeBinPath [
             agentPackages.claude-code
