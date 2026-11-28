@@ -88,6 +88,12 @@ in
         skip-at-startup
       }
 
+      gestures {
+        hot-corners {
+          bottom-right
+        }
+      }
+
       layout {
         default-column-width { proportion 0.85; }
         preset-column-widths {
