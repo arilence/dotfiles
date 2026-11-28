@@ -36,7 +36,16 @@
   services.ratbagd.enable = true;
   environment.systemPackages = with pkgs; [
     libratbag
-    lutris
+    (lutris.override {
+      # Runtime dependencies for Ahwoo Launcher and Gruntz.
+      extraPkgs =
+        pkgs': with pkgs'; [
+          dotnet-runtime_10 # Gruntz
+          icu
+          libsecret
+          openssl
+        ];
+    })
     piper
     nixosUnstable.protonup-qt
   ];
